@@ -4,7 +4,7 @@
         {
             "Chapter": 1,
             "Index": "001",
-            "Name": "Al-Fatiha",
+            "Name": "Al-Fatihah",
             "TranslatedName": "The Opening",
             "ArabicName": "سُوْرَةُ الْفَاتِحَةِ",
             "Revelation": "Mecca",
@@ -20,29 +20,23 @@
             "RukuEnd": 1,
             "MaqraStart": 1,
             "MaqraEnd": 1,
+            "PageStart": 1,
+            "PageEnd": 1,
             "SearchTerms": [
                 "1",
                 "001",
-                "Al-Faatiha",
+                "Al-Fatihah",
                 "The Opening",
-                "Al Faatiha",
-                "AlFaatiha",
-                "AlFatiha",
+                "Al Fatihah",
+                "Al Fatihah",
                 "fatihah",
-                "fathiah",
-                "alfatiah",
-                "alfatiha",
-                "fata",
-                "fatiya",
-                "fatya",
-                "fatyah",
-                "fatiyah"
+                "Mecca"
             ]
         },
         {
             "Chapter": 2,
             "Index": "002",
-            "Name": "Al-Baqara",
+            "Name": "Al-Baqarah",
             "TranslatedName": "The Cow",
             "ArabicName": "سُوْرَةُ البَقَرَةِ",
             "Revelation": "Madina",
@@ -58,24 +52,23 @@
             "RukuEnd": 41,
             "MaqraStart": 1,
             "MaqraEnd": 20,
+            "PageStart": 2,
+            "PageEnd": 49,
             "SearchTerms": [
                 "2",
                 "002",
-                "Al-Baqara",
+                "Al-Baqarah",
                 "The Cow",
-                "Al Baqara",
-                "AlBaqara",
-                "baqarah",
-                "baqara",
-                "bakra",
-                "buq",
-                "buk"
+                "Al Baqarah",
+                "Al Baqarah",
+                "baqah",
+                "Madina"
             ]
         },
         {
             "Chapter": 3,
             "Index": "003",
-            "Name": "Aal-i-Imraan",
+            "Name": "Ali-Imran",
             "TranslatedName": "The Family of Imraan",
             "ArabicName": "سُوْرَةُ اٰلِ عِمْرٰنَ",
             "Revelation": "Madina",
@@ -91,19 +84,23 @@
             "RukuEnd": 61,
             "MaqraStart": 20,
             "MaqraEnd": 30,
+            "PageStart": 50,
+            "PageEnd": 76,
             "SearchTerms": [
                 "3",
                 "003",
-                "Aal-i-Imraan",
+                "Ali-Imran",
                 "The Family of Imraan",
-                "Aal i Imraan",
-                "AaliImraan"
+                "Ali Imran",
+                "Ali Imran",
+                "iimr",
+                "Madina"
             ]
         },
         {
             "Chapter": 4,
             "Index": "004",
-            "Name": "An-Nisaa",
+            "Name": "An-Nisa",
             "TranslatedName": "The Women",
             "ArabicName": "سُوْرَةُ النِّسَآءِ",
             "Revelation": "Madina",
@@ -119,19 +116,23 @@
             "RukuEnd": 85,
             "MaqraStart": 31,
             "MaqraEnd": 42,
+            "PageStart": 77,
+            "PageEnd": 106,
             "SearchTerms": [
                 "4",
                 "004",
-                "An-Nisaa",
+                "An-Nisa",
                 "The Women",
-                "An Nisaa",
-                "AnNisaa"
+                "An Nisa",
+                "An Nisa",
+                "nisa",
+                "Madina"
             ]
         },
         {
             "Chapter": 5,
             "Index": "005",
-            "Name": "Al-Maaida",
+            "Name": "Al-Ma'idah",
             "TranslatedName": "The Table",
             "ArabicName": "سُوْرَةُ المَآئِدَةِ",
             "Revelation": "Madina",
@@ -147,13 +148,17 @@
             "RukuEnd": 101,
             "MaqraStart": 43,
             "MaqraEnd": 51,
+            "PageStart": 106,
+            "PageEnd": 127,
             "SearchTerms": [
                 "5",
                 "005",
-                "Al-Maaida",
+                "Al-Ma'idah",
                 "The Table",
-                "Al Maaida",
-                "AlMaaida"
+                "Al Ma'idah",
+                "Al Maidah",
+                "maidah",
+                "Madina"
             ]
         },
         {
@@ -175,19 +180,23 @@
             "RukuEnd": 121,
             "MaqraStart": 51,
             "MaqraEnd": 60,
+            "PageStart": 128,
+            "PageEnd": 150,
             "SearchTerms": [
                 "6",
                 "006",
                 "Al-An'aam",
                 "The Cattle",
                 "Al An'aam",
-                "AlAn'aam"
+                "Al Anaam",
+                "aam",
+                "Mecca"
             ]
         },
         {
             "Chapter": 7,
             "Index": "007",
-            "Name": "Al-A'raaf",
+            "Name": "Al-A'raf",
             "TranslatedName": "The Heights",
             "ArabicName": "سُوْرَةُ الْاَعْرَافِ",
             "Revelation": "Mecca",
@@ -203,19 +212,23 @@
             "RukuEnd": 145,
             "MaqraStart": 61,
             "MaqraEnd": 70,
+            "PageStart": 151,
+            "PageEnd": 176,
             "SearchTerms": [
                 "7",
                 "007",
-                "Al-A'raaf",
+                "Al-A'raf",
                 "The Heights",
-                "Al A'raaf",
-                "AlA'raaf"
+                "Al A'raf",
+                "Al Araf",
+                "af",
+                "Mecca"
             ]
         },
         {
             "Chapter": 8,
             "Index": "008",
-            "Name": "Al-Anfaal",
+            "Name": "Al-Anfal",
             "TranslatedName": "The Spoils of War",
             "ArabicName": "سُوْرَةُ الْاَنْفَالِ",
             "Revelation": "Madina",
@@ -231,19 +244,23 @@
             "RukuEnd": 155,
             "MaqraStart": 71,
             "MaqraEnd": 74,
+            "PageStart": 177,
+            "PageEnd": 186,
             "SearchTerms": [
                 "8",
                 "008",
-                "Al-Anfaal",
+                "Al-Anfal",
                 "The Spoils of War",
-                "Al Anfaal",
-                "AlAnfaal"
+                "Al Anfal",
+                "Al Anfal",
+                "f",
+                "Madina"
             ]
         },
         {
             "Chapter": 9,
             "Index": "009",
-            "Name": "At-Tawba",
+            "Name": "At-Tawbah",
             "TranslatedName": "The Repentance",
             "ArabicName": "سُوْرَةُ التَّوْبَةِ",
             "Revelation": "Madina",
@@ -259,13 +276,17 @@
             "RukuEnd": 171,
             "MaqraStart": 75,
             "MaqraEnd": 83,
+            "PageStart": 187,
+            "PageEnd": 207,
             "SearchTerms": [
                 "9",
                 "009",
-                "At-Tawba",
+                "At-Tawbah",
                 "The Repentance",
-                "At Tawba",
-                "AtTawba"
+                "At Tawbah",
+                "At Tawbah",
+                "attawbah",
+                "Madina"
             ]
         },
         {
@@ -287,13 +308,17 @@
             "RukuEnd": 182,
             "MaqraStart": 83,
             "MaqraEnd": 88,
+            "PageStart": 208,
+            "PageEnd": 221,
             "SearchTerms": [
                 "10",
                 "010",
                 "Yunus",
                 "Jonas",
                 "Yunus",
-                "Yunus"
+                "Yunus",
+                "yunus",
+                "Mecca"
             ]
         },
         {
@@ -315,13 +340,17 @@
             "RukuEnd": 192,
             "MaqraStart": 88,
             "MaqraEnd": 94,
+            "PageStart": 221,
+            "PageEnd": 235,
             "SearchTerms": [
                 "11",
                 "011",
                 "Hud",
                 "Hud",
                 "Hud",
-                "Hud"
+                "Hud",
+                "hud",
+                "Mecca"
             ]
         },
         {
@@ -343,13 +372,17 @@
             "RukuEnd": 204,
             "MaqraStart": 94,
             "MaqraEnd": 99,
+            "PageStart": 235,
+            "PageEnd": 248,
             "SearchTerms": [
                 "12",
                 "012",
                 "Yusuf",
                 "Joseph",
                 "Yusuf",
-                "Yusuf"
+                "Yusuf",
+                "yusuf",
+                "Mecca"
             ]
         },
         {
@@ -371,13 +404,17 @@
             "RukuEnd": 210,
             "MaqraStart": 99,
             "MaqraEnd": 102,
+            "PageStart": 249,
+            "PageEnd": 255,
             "SearchTerms": [
                 "13",
                 "013",
                 "Ar-Ra'd",
                 "The Thunder",
                 "Ar Ra'd",
-                "ArRa'd"
+                "Ar Rad",
+                "rad",
+                "Madina"
             ]
         },
         {
@@ -399,13 +436,17 @@
             "RukuEnd": 217,
             "MaqraStart": 102,
             "MaqraEnd": 104,
+            "PageStart": 255,
+            "PageEnd": 261,
             "SearchTerms": [
                 "14",
                 "014",
                 "Ibrahim",
                 "Abraham",
                 "Ibrahim",
-                "Ibrahim"
+                "Ibrahim",
+                "ibrahim",
+                "Mecca"
             ]
         },
         {
@@ -427,13 +468,17 @@
             "RukuEnd": 223,
             "MaqraStart": 105,
             "MaqraEnd": 106,
+            "PageStart": 262,
+            "PageEnd": 267,
             "SearchTerms": [
                 "15",
                 "015",
                 "Al-Hijr",
                 "The Rock",
                 "Al Hijr",
-                "AlHijr"
+                "Al Hijr",
+                "hijr",
+                "Mecca"
             ]
         },
         {
@@ -455,19 +500,23 @@
             "RukuEnd": 239,
             "MaqraStart": 107,
             "MaqraEnd": 112,
+            "PageStart": 267,
+            "PageEnd": 281,
             "SearchTerms": [
                 "16",
                 "016",
                 "An-Nahl",
                 "The Bee",
                 "An Nahl",
-                "AnNahl"
+                "An Nahl",
+                "nahl",
+                "Mecca"
             ]
         },
         {
             "Chapter": 17,
             "Index": "017",
-            "Name": "Al-Israa",
+            "Name": "Al-Isra",
             "TranslatedName": "The Night Journey",
             "ArabicName": "سُوْرَةُ الإِسۡرَاءِ",
             "Revelation": "Mecca",
@@ -483,13 +532,17 @@
             "RukuEnd": 251,
             "MaqraStart": 113,
             "MaqraEnd": 117,
+            "PageStart": 282,
+            "PageEnd": 293,
             "SearchTerms": [
                 "17",
                 "017",
-                "Al-Israa",
+                "Al-Isra",
                 "The Night Journey",
-                "Al Israa",
-                "AlIsraa"
+                "Al Isra",
+                "Al Isra",
+                "isra",
+                "Mecca"
             ]
         },
         {
@@ -511,13 +564,17 @@
             "RukuEnd": 263,
             "MaqraStart": 117,
             "MaqraEnd": 122,
+            "PageStart": 293,
+            "PageEnd": 304,
             "SearchTerms": [
                 "18",
                 "018",
                 "Al-Kahf",
                 "The Cave",
                 "Al Kahf",
-                "AlKahf"
+                "Al Kahf",
+                "kahf",
+                "Mecca"
             ]
         },
         {
@@ -539,19 +596,23 @@
             "RukuEnd": 269,
             "MaqraStart": 122,
             "MaqraEnd": 124,
+            "PageStart": 305,
+            "PageEnd": 312,
             "SearchTerms": [
                 "19",
                 "019",
                 "Maryam",
                 "Mary",
                 "Maryam",
-                "Maryam"
+                "Maryam",
+                "myam",
+                "Mecca"
             ]
         },
         {
             "Chapter": 20,
             "Index": "020",
-            "Name": "Taa-Haa",
+            "Name": "Taha",
             "TranslatedName": "Taa-Haa",
             "ArabicName": "سُوْرَةُ طٰهٰ",
             "Revelation": "Mecca",
@@ -567,13 +628,17 @@
             "RukuEnd": 277,
             "MaqraStart": 125,
             "MaqraEnd": 128,
+            "PageStart": 312,
+            "PageEnd": 321,
             "SearchTerms": [
                 "20",
                 "020",
+                "Taha",
                 "Taa-Haa",
-                "Taa-Haa",
-                "Taa Haa",
-                "TaaHaa"
+                "Taha",
+                "Taha",
+                "taha",
+                "Mecca"
             ]
         },
         {
@@ -595,13 +660,17 @@
             "RukuEnd": 284,
             "MaqraStart": 129,
             "MaqraEnd": 132,
+            "PageStart": 322,
+            "PageEnd": 331,
             "SearchTerms": [
                 "21",
                 "021",
                 "Al-Anbiyaa",
                 "The Prophets",
                 "Al Anbiyaa",
-                "AlAnbiyaa"
+                "Al Anbiyaa",
+                "biyaa",
+                "Mecca"
             ]
         },
         {
@@ -623,19 +692,23 @@
             "RukuEnd": 294,
             "MaqraStart": 133,
             "MaqraEnd": 136,
+            "PageStart": 332,
+            "PageEnd": 341,
             "SearchTerms": [
                 "22",
                 "022",
                 "Al-Hajj",
                 "The Pilgrimage",
                 "Al Hajj",
-                "AlHajj"
+                "Al Hajj",
+                "hajj",
+                "Madina"
             ]
         },
         {
             "Chapter": 23,
             "Index": "023",
-            "Name": "Al-Muminoon",
+            "Name": "Al-Mu'minun",
             "TranslatedName": "The Believers",
             "ArabicName": "سُوْرَةُ الْمُؤْمِنُوْنَ",
             "Revelation": "Mecca",
@@ -651,19 +724,23 @@
             "RukuEnd": 300,
             "MaqraStart": 137,
             "MaqraEnd": 139,
+            "PageStart": 342,
+            "PageEnd": 349,
             "SearchTerms": [
                 "23",
                 "023",
-                "Al-Muminoon",
+                "Al-Mu'minun",
                 "The Believers",
-                "Al Muminoon",
-                "AlMuminoon"
+                "Al Mu'minun",
+                "Al Muminun",
+                "muminun",
+                "Mecca"
             ]
         },
         {
             "Chapter": 24,
             "Index": "024",
-            "Name": "An-Noor",
+            "Name": "An-Nur",
             "TranslatedName": "The Light",
             "ArabicName": "سُوْرَةُ النُّوْرِ",
             "Revelation": "Madina",
@@ -679,13 +756,17 @@
             "RukuEnd": 309,
             "MaqraStart": 140,
             "MaqraEnd": 143,
+            "PageStart": 350,
+            "PageEnd": 359,
             "SearchTerms": [
                 "24",
                 "024",
-                "An-Noor",
+                "An-Nur",
                 "The Light",
-                "An Noor",
-                "AnNoor"
+                "An Nur",
+                "An Nur",
+                "nur",
+                "Madina"
             ]
         },
         {
@@ -707,19 +788,23 @@
             "RukuEnd": 315,
             "MaqraStart": 144,
             "MaqraEnd": 146,
+            "PageStart": 359,
+            "PageEnd": 366,
             "SearchTerms": [
                 "25",
                 "025",
                 "Al-Furqaan",
                 "The Criterion",
                 "Al Furqaan",
-                "AlFurqaan"
+                "Al Furqaan",
+                "furqa",
+                "Mecca"
             ]
         },
         {
             "Chapter": 26,
             "Index": "026",
-            "Name": "Ash-Shu'araa",
+            "Name": "Ash-Shu'ara",
             "TranslatedName": "The Poets",
             "ArabicName": "سُوْرَةُ الشُّعَرَآءِ",
             "Revelation": "Mecca",
@@ -735,13 +820,17 @@
             "RukuEnd": 326,
             "MaqraStart": 147,
             "MaqraEnd": 150,
+            "PageStart": 367,
+            "PageEnd": 376,
             "SearchTerms": [
                 "26",
                 "026",
-                "Ash-Shu'araa",
+                "Ash-Shu'ara",
                 "The Poets",
-                "Ash Shu'araa",
-                "AshShu'araa"
+                "Ash Shu'ara",
+                "Ash Shuara",
+                "shua",
+                "Mecca"
             ]
         },
         {
@@ -763,13 +852,17 @@
             "RukuEnd": 333,
             "MaqraStart": 151,
             "MaqraEnd": 154,
+            "PageStart": 377,
+            "PageEnd": 385,
             "SearchTerms": [
                 "27",
                 "027",
                 "An-Naml",
                 "The Ant",
                 "An Naml",
-                "AnNaml"
+                "An Naml",
+                "naml",
+                "Mecca"
             ]
         },
         {
@@ -791,19 +884,23 @@
             "RukuEnd": 341,
             "MaqraStart": 154,
             "MaqraEnd": 158,
+            "PageStart": 385,
+            "PageEnd": 396,
             "SearchTerms": [
                 "28",
                 "028",
                 "Al-Qasas",
                 "The Stories",
                 "Al Qasas",
-                "AlQasas"
+                "Al Qasas",
+                "qasas",
+                "Mecca"
             ]
         },
         {
             "Chapter": 29,
             "Index": "029",
-            "Name": "Al-Ankaboot",
+            "Name": "Al-Ankabut",
             "TranslatedName": "The Spider",
             "ArabicName": "سُوْرَةُ الْعَنْكَبُوْتِ",
             "Revelation": "Mecca",
@@ -819,19 +916,23 @@
             "RukuEnd": 348,
             "MaqraStart": 159,
             "MaqraEnd": 161,
+            "PageStart": 396,
+            "PageEnd": 404,
             "SearchTerms": [
                 "29",
                 "029",
-                "Al-Ankaboot",
+                "Al-Ankabut",
                 "The Spider",
-                "Al Ankaboot",
-                "AlAnkaboot"
+                "Al Ankabut",
+                "Al Ankabut",
+                "kabut",
+                "Mecca"
             ]
         },
         {
             "Chapter": 30,
             "Index": "030",
-            "Name": "Ar-Room",
+            "Name": "Ar-Rum",
             "TranslatedName": "The Romans",
             "ArabicName": "سُوْرَةُ الرُّوْمِ",
             "Revelation": "Mecca",
@@ -847,13 +948,17 @@
             "RukuEnd": 354,
             "MaqraStart": 162,
             "MaqraEnd": 164,
+            "PageStart": 404,
+            "PageEnd": 410,
             "SearchTerms": [
                 "30",
                 "030",
-                "Ar-Room",
+                "Ar-Rum",
                 "The Romans",
-                "Ar Room",
-                "ArRoom"
+                "Ar Rum",
+                "Ar Rum",
+                "rum",
+                "Mecca"
             ]
         },
         {
@@ -875,13 +980,17 @@
             "RukuEnd": 357,
             "MaqraStart": 164,
             "MaqraEnd": 165,
+            "PageStart": 411,
+            "PageEnd": 414,
             "SearchTerms": [
                 "31",
                 "031",
                 "Luqman",
                 "Luqman",
                 "Luqman",
-                "Luqman"
+                "Luqman",
+                "luqm",
+                "Mecca"
             ]
         },
         {
@@ -903,19 +1012,23 @@
             "RukuEnd": 360,
             "MaqraStart": 165,
             "MaqraEnd": 166,
+            "PageStart": 415,
+            "PageEnd": 417,
             "SearchTerms": [
                 "32",
                 "032",
                 "As-Sajda",
                 "The Prostration",
                 "As Sajda",
-                "AsSajda"
+                "As Sajda",
+                "assajda",
+                "Mecca"
             ]
         },
         {
             "Chapter": 33,
             "Index": "033",
-            "Name": "Al-Ahzaab",
+            "Name": "Al-Ahzab",
             "TranslatedName": "The Clans",
             "ArabicName": "سُوْرَةُ الْاَحْزَابِ",
             "Revelation": "Madina",
@@ -931,13 +1044,17 @@
             "RukuEnd": 369,
             "MaqraStart": 167,
             "MaqraEnd": 171,
+            "PageStart": 418,
+            "PageEnd": 427,
             "SearchTerms": [
                 "33",
                 "033",
-                "Al-Ahzaab",
+                "Al-Ahzab",
                 "The Clans",
-                "Al Ahzaab",
-                "AlAhzaab"
+                "Al Ahzab",
+                "Al Ahzab",
+                "ahzab",
+                "Madina"
             ]
         },
         {
@@ -959,19 +1076,23 @@
             "RukuEnd": 375,
             "MaqraStart": 171,
             "MaqraEnd": 174,
+            "PageStart": 428,
+            "PageEnd": 434,
             "SearchTerms": [
                 "34",
                 "034",
                 "Saba",
                 "Sheba",
                 "Saba",
-                "Saba"
+                "Saba",
+                "saba",
+                "Mecca"
             ]
         },
         {
             "Chapter": 35,
             "Index": "035",
-            "Name": "Faatir",
+            "Name": "Fatir",
             "TranslatedName": "The Originator",
             "ArabicName": "سُوْرَةُ فَاطِرٍ",
             "Revelation": "Mecca",
@@ -987,13 +1108,17 @@
             "RukuEnd": 380,
             "MaqraStart": 174,
             "MaqraEnd": 176,
+            "PageStart": 434,
+            "PageEnd": 440,
             "SearchTerms": [
                 "35",
                 "035",
-                "Faatir",
+                "Fatir",
                 "The Originator",
-                "Faatir",
-                "Faatir"
+                "Fatir",
+                "Fatir",
+                "fatir",
+                "Mecca"
             ]
         },
         {
@@ -1015,19 +1140,23 @@
             "RukuEnd": 385,
             "MaqraStart": 176,
             "MaqraEnd": 178,
+            "PageStart": 440,
+            "PageEnd": 445,
             "SearchTerms": [
                 "36",
                 "036",
                 "Yaseen",
                 "Yaseen",
                 "Yaseen",
-                "Yaseen"
+                "Yaseen",
+                "yaseen",
+                "Mecca"
             ]
         },
         {
             "Chapter": 37,
             "Index": "037",
-            "Name": "As-Saaffaat",
+            "Name": "As-Saffat",
             "TranslatedName": "Those drawn up in Ranks",
             "ArabicName": "سُوْرَةُ الصَّافَّاتِ",
             "Revelation": "Mecca",
@@ -1043,19 +1172,23 @@
             "RukuEnd": 390,
             "MaqraStart": 178,
             "MaqraEnd": 181,
+            "PageStart": 446,
+            "PageEnd": 452,
             "SearchTerms": [
                 "37",
                 "037",
-                "As-Saaffaat",
+                "As-Saffat",
                 "Those drawn up in Ranks",
-                "As Saaffaat",
-                "AsSaaffaat"
+                "As Saffat",
+                "As Saffat",
+                "assaffat",
+                "Mecca"
             ]
         },
         {
             "Chapter": 38,
             "Index": "038",
-            "Name": "Saad",
+            "Name": "Sad",
             "TranslatedName": "The letter Saad",
             "ArabicName": "سُوْرَةُ صٓ",
             "Revelation": "Mecca",
@@ -1071,13 +1204,17 @@
             "RukuEnd": 395,
             "MaqraStart": 181,
             "MaqraEnd": 183,
+            "PageStart": 453,
+            "PageEnd": 458,
             "SearchTerms": [
                 "38",
                 "038",
-                "Saad",
+                "Sad",
                 "The letter Saad",
-                "Saad",
-                "Saad"
+                "Sad",
+                "Sad",
+                "sad",
+                "Mecca"
             ]
         },
         {
@@ -1099,13 +1236,17 @@
             "RukuEnd": 403,
             "MaqraStart": 183,
             "MaqraEnd": 186,
+            "PageStart": 458,
+            "PageEnd": 467,
             "SearchTerms": [
                 "39",
                 "039",
                 "Az-Zumar",
                 "The Groups",
                 "Az Zumar",
-                "AzZumar"
+                "Az Zumar",
+                "zum",
+                "Mecca"
             ]
         },
         {
@@ -1127,13 +1268,17 @@
             "RukuEnd": 412,
             "MaqraStart": 187,
             "MaqraEnd": 190,
+            "PageStart": 467,
+            "PageEnd": 476,
             "SearchTerms": [
                 "40",
                 "040",
                 "Ghafir",
                 "The Forgiver",
                 "Ghafir",
-                "Ghafir"
+                "Ghafir",
+                "ghafir",
+                "Mecca"
             ]
         },
         {
@@ -1155,13 +1300,17 @@
             "RukuEnd": 418,
             "MaqraStart": 190,
             "MaqraEnd": 193,
+            "PageStart": 477,
+            "PageEnd": 482,
             "SearchTerms": [
                 "41",
                 "041",
                 "Fussilat",
                 "Explained in detail",
                 "Fussilat",
-                "Fussilat"
+                "Fussilat",
+                "fussilat",
+                "Mecca"
             ]
         },
         {
@@ -1183,13 +1332,17 @@
             "RukuEnd": 423,
             "MaqraStart": 193,
             "MaqraEnd": 196,
+            "PageStart": 483,
+            "PageEnd": 489,
             "SearchTerms": [
                 "42",
                 "042",
                 "Ash-Shura",
                 "Consultation",
                 "Ash Shura",
-                "AshShura"
+                "Ash Shura",
+                "shura",
+                "Mecca"
             ]
         },
         {
@@ -1211,19 +1364,23 @@
             "RukuEnd": 430,
             "MaqraStart": 196,
             "MaqraEnd": 198,
+            "PageStart": 489,
+            "PageEnd": 495,
             "SearchTerms": [
                 "43",
                 "043",
                 "Az-Zukhruf",
                 "Ornaments of gold",
                 "Az Zukhruf",
-                "AzZukhruf"
+                "Az Zukhruf",
+                "zukhruf",
+                "Mecca"
             ]
         },
         {
             "Chapter": 44,
             "Index": "044",
-            "Name": "Ad-Dukhaan",
+            "Name": "Ad-Dukhan",
             "TranslatedName": "The Smoke",
             "ArabicName": "سُوْرَةُ الدُّخَانِ",
             "Revelation": "Mecca",
@@ -1239,19 +1396,23 @@
             "RukuEnd": 433,
             "MaqraStart": 198,
             "MaqraEnd": 199,
+            "PageStart": 496,
+            "PageEnd": 498,
             "SearchTerms": [
                 "44",
                 "044",
-                "Ad-Dukhaan",
+                "Ad-Dukhan",
                 "The Smoke",
-                "Ad Dukhaan",
-                "AdDukhaan"
+                "Ad Dukhan",
+                "Ad Dukhan",
+                "addukh",
+                "Mecca"
             ]
         },
         {
             "Chapter": 45,
             "Index": "045",
-            "Name": "Al-Jaathiya",
+            "Name": "Al-Jathiya",
             "TranslatedName": "Crouching",
             "ArabicName": "سُوْرَةُ الْجَاثِيَةِ",
             "Revelation": "Mecca",
@@ -1267,13 +1428,17 @@
             "RukuEnd": 437,
             "MaqraStart": 199,
             "MaqraEnd": 200,
+            "PageStart": 499,
+            "PageEnd": 502,
             "SearchTerms": [
                 "45",
                 "045",
-                "Al-Jaathiya",
+                "Al-Jathiya",
                 "Crouching",
-                "Al Jaathiya",
-                "AlJaathiya"
+                "Al Jathiya",
+                "Al Jathiya",
+                "jathiya",
+                "Mecca"
             ]
         },
         {
@@ -1295,13 +1460,17 @@
             "RukuEnd": 441,
             "MaqraStart": 201,
             "MaqraEnd": 202,
+            "PageStart": 502,
+            "PageEnd": 506,
             "SearchTerms": [
                 "46",
                 "046",
                 "Al-Ahqaf",
                 "The Dunes",
                 "Al Ahqaf",
-                "AlAhqaf"
+                "Al Ahqaf",
+                "ahqaf",
+                "Mecca"
             ]
         },
         {
@@ -1323,13 +1492,17 @@
             "RukuEnd": 445,
             "MaqraStart": 202,
             "MaqraEnd": 204,
+            "PageStart": 507,
+            "PageEnd": 510,
             "SearchTerms": [
                 "47",
                 "047",
                 "Muhammad",
                 "Muhammad",
                 "Muhammad",
-                "Muhammad"
+                "Muhammad",
+                "muhammad",
+                "Madina"
             ]
         },
         {
@@ -1351,19 +1524,23 @@
             "RukuEnd": 449,
             "MaqraStart": 204,
             "MaqraEnd": 205,
+            "PageStart": 511,
+            "PageEnd": 515,
             "SearchTerms": [
                 "48",
                 "048",
                 "Al-Fath",
                 "The Victory",
                 "Al Fath",
-                "AlFath"
+                "Al Fath",
+                "fath",
+                "Madina"
             ]
         },
         {
             "Chapter": 49,
             "Index": "049",
-            "Name": "Al-Hujuraat",
+            "Name": "Al-Hujurat",
             "TranslatedName": "The Inner Apartments",
             "ArabicName": "سُوْرَةُ الْحُجُراتِ",
             "Revelation": "Madina",
@@ -1379,19 +1556,23 @@
             "RukuEnd": 451,
             "MaqraStart": 206,
             "MaqraEnd": 207,
+            "PageStart": 515,
+            "PageEnd": 517,
             "SearchTerms": [
                 "49",
                 "049",
-                "Al-Hujuraat",
+                "Al-Hujurat",
                 "The Inner Apartments",
-                "Al Hujuraat",
-                "AlHujuraat"
+                "Al Hujurat",
+                "Al Hujurat",
+                "hujurat",
+                "Madina"
             ]
         },
         {
             "Chapter": 50,
             "Index": "050",
-            "Name": "Qaaf",
+            "Name": "Qaf",
             "TranslatedName": "The letter Qaaf",
             "ArabicName": "سُوْرَةُ قٓ",
             "Revelation": "Mecca",
@@ -1407,19 +1588,23 @@
             "RukuEnd": 454,
             "MaqraStart": 207,
             "MaqraEnd": 208,
+            "PageStart": 518,
+            "PageEnd": 520,
             "SearchTerms": [
                 "50",
                 "050",
-                "Qaaf",
+                "Qaf",
                 "The letter Qaaf",
-                "Qaaf",
-                "Qaaf"
+                "Qaf",
+                "Qaf",
+                "qaf",
+                "Mecca"
             ]
         },
         {
             "Chapter": 51,
             "Index": "051",
-            "Name": "Adh-Dhaariyat",
+            "Name": "Adh-Dhariyat",
             "TranslatedName": "The Winnowing Winds",
             "ArabicName": "سُوْرَةُ الذَّارِياتِ",
             "Revelation": "Mecca",
@@ -1435,13 +1620,17 @@
             "RukuEnd": 457,
             "MaqraStart": 208,
             "MaqraEnd": 209,
+            "PageStart": 520,
+            "PageEnd": 523,
             "SearchTerms": [
                 "51",
                 "051",
-                "Adh-Dhaariyat",
+                "Adh-Dhariyat",
                 "The Winnowing Winds",
-                "Adh Dhaariyat",
-                "AdhDhaariyat"
+                "Adh Dhariyat",
+                "Adh Dhariyat",
+                "adhdhiyat",
+                "Mecca"
             ]
         },
         {
@@ -1463,13 +1652,17 @@
             "RukuEnd": 459,
             "MaqraStart": 209,
             "MaqraEnd": 210,
+            "PageStart": 523,
+            "PageEnd": 525,
             "SearchTerms": [
                 "52",
                 "052",
                 "At-Tur",
                 "The Mount",
                 "At Tur",
-                "AtTur"
+                "At Tur",
+                "attur",
+                "Mecca"
             ]
         },
         {
@@ -1491,13 +1684,17 @@
             "RukuEnd": 462,
             "MaqraStart": 210,
             "MaqraEnd": 211,
+            "PageStart": 526,
+            "PageEnd": 528,
             "SearchTerms": [
                 "53",
                 "053",
                 "An-Najm",
                 "The Star",
                 "An Najm",
-                "AnNajm"
+                "An Najm",
+                "najm",
+                "Mecca"
             ]
         },
         {
@@ -1519,13 +1716,17 @@
             "RukuEnd": 465,
             "MaqraStart": 211,
             "MaqraEnd": 212,
+            "PageStart": 528,
+            "PageEnd": 531,
             "SearchTerms": [
                 "54",
                 "054",
                 "Al-Qamar",
                 "The Moon",
                 "Al Qamar",
-                "AlQamar"
+                "Al Qamar",
+                "qam",
+                "Mecca"
             ]
         },
         {
@@ -1547,19 +1748,23 @@
             "RukuEnd": 468,
             "MaqraStart": 213,
             "MaqraEnd": 213,
+            "PageStart": 531,
+            "PageEnd": 534,
             "SearchTerms": [
                 "55",
                 "055",
                 "Ar-Rahmaan",
                 "The Beneficent",
                 "Ar Rahmaan",
-                "ArRahmaan"
+                "Ar Rahmaan",
+                "rahma",
+                "Madina"
             ]
         },
         {
             "Chapter": 56,
             "Index": "056",
-            "Name": "Al-Waaqia",
+            "Name": "Al-Waqia",
             "TranslatedName": "The Inevitable",
             "ArabicName": "سُوْرَةُ الْوَاقِعَةِ",
             "Revelation": "Mecca",
@@ -1575,13 +1780,17 @@
             "RukuEnd": 471,
             "MaqraStart": 214,
             "MaqraEnd": 215,
+            "PageStart": 534,
+            "PageEnd": 537,
             "SearchTerms": [
                 "56",
                 "056",
-                "Al-Waaqia",
+                "Al-Waqia",
                 "The Inevitable",
-                "Al Waaqia",
-                "AlWaaqia"
+                "Al Waqia",
+                "Al Waqia",
+                "waqia",
+                "Mecca"
             ]
         },
         {
@@ -1603,19 +1812,23 @@
             "RukuEnd": 475,
             "MaqraStart": 215,
             "MaqraEnd": 216,
+            "PageStart": 537,
+            "PageEnd": 541,
             "SearchTerms": [
                 "57",
                 "057",
                 "Al-Hadid",
                 "The Iron",
                 "Al Hadid",
-                "AlHadid"
+                "Al Hadid",
+                "hadid",
+                "Madina"
             ]
         },
         {
             "Chapter": 58,
             "Index": "058",
-            "Name": "Al-Mujaadila",
+            "Name": "Al-Mujadila",
             "TranslatedName": "The Pleading Woman",
             "ArabicName": "سُوْرَةُ الْمُجَادَلَةِ",
             "Revelation": "Madina",
@@ -1631,13 +1844,17 @@
             "RukuEnd": 478,
             "MaqraStart": 217,
             "MaqraEnd": 218,
+            "PageStart": 542,
+            "PageEnd": 545,
             "SearchTerms": [
                 "58",
                 "058",
-                "Al-Mujaadila",
+                "Al-Mujadila",
                 "The Pleading Woman",
-                "Al Mujaadila",
-                "AlMujaadila"
+                "Al Mujadila",
+                "Al Mujadila",
+                "mujadila",
+                "Madina"
             ]
         },
         {
@@ -1659,13 +1876,17 @@
             "RukuEnd": 481,
             "MaqraStart": 218,
             "MaqraEnd": 219,
+            "PageStart": 545,
+            "PageEnd": 548,
             "SearchTerms": [
                 "59",
                 "059",
                 "Al-Hashr",
                 "The Exile",
                 "Al Hashr",
-                "AlHashr"
+                "Al Hashr",
+                "hr",
+                "Madina"
             ]
         },
         {
@@ -1687,19 +1908,23 @@
             "RukuEnd": 483,
             "MaqraStart": 219,
             "MaqraEnd": 220,
+            "PageStart": 549,
+            "PageEnd": 551,
             "SearchTerms": [
                 "60",
                 "060",
                 "Al-Mumtahana",
                 "She that is to be examined",
                 "Al Mumtahana",
-                "AlMumtahana"
+                "Al Mumtahana",
+                "mumtaha",
+                "Madina"
             ]
         },
         {
             "Chapter": 61,
             "Index": "061",
-            "Name": "As-Saff",
+            "Name": "As-Saf",
             "TranslatedName": "The Ranks",
             "ArabicName": "سُوْرَةُ الصَّفِّ",
             "Revelation": "Madina",
@@ -1715,19 +1940,23 @@
             "RukuEnd": 485,
             "MaqraStart": 220,
             "MaqraEnd": 220,
+            "PageStart": 551,
+            "PageEnd": 552,
             "SearchTerms": [
                 "61",
                 "061",
-                "As-Saff",
+                "As-Saf",
                 "The Ranks",
-                "As Saff",
-                "AsSaff"
+                "As Saf",
+                "As Saf",
+                "assaf",
+                "Madina"
             ]
         },
         {
             "Chapter": 62,
             "Index": "062",
-            "Name": "Al-Jumu'a",
+            "Name": "Al-Jumu'ah",
             "TranslatedName": "Friday",
             "ArabicName": "سُوْرَةُ الْجُمُعَةِ",
             "Revelation": "Madina",
@@ -1743,19 +1972,23 @@
             "RukuEnd": 487,
             "MaqraStart": 221,
             "MaqraEnd": 221,
+            "PageStart": 553,
+            "PageEnd": 554,
             "SearchTerms": [
                 "62",
                 "062",
-                "Al-Jumu'a",
+                "Al-Jumu'ah",
                 "Friday",
-                "Al Jumu'a",
-                "AlJumu'a"
+                "Al Jumu'ah",
+                "Al Jumuah",
+                "jumuah",
+                "Madina"
             ]
         },
         {
             "Chapter": 63,
             "Index": "063",
-            "Name": "Al-Munaafiqoon",
+            "Name": "Al-Munafiqun",
             "TranslatedName": "The Hypocrites",
             "ArabicName": "سُوْرَةُ الْمُنَافِقُوْنَ",
             "Revelation": "Madina",
@@ -1771,19 +2004,23 @@
             "RukuEnd": 489,
             "MaqraStart": 221,
             "MaqraEnd": 222,
+            "PageStart": 554,
+            "PageEnd": 555,
             "SearchTerms": [
                 "63",
                 "063",
-                "Al-Munaafiqoon",
+                "Al-Munafiqun",
                 "The Hypocrites",
-                "Al Munaafiqoon",
-                "AlMunaafiqoon"
+                "Al Munafiqun",
+                "Al Munafiqun",
+                "munafiqun",
+                "Madina"
             ]
         },
         {
             "Chapter": 64,
             "Index": "064",
-            "Name": "At-Taghaabun",
+            "Name": "At-Taghabun",
             "TranslatedName": "Mutual Disillusion",
             "ArabicName": "سُوْرَةُ التَّغَابُنِ",
             "Revelation": "Madina",
@@ -1799,19 +2036,23 @@
             "RukuEnd": 491,
             "MaqraStart": 222,
             "MaqraEnd": 222,
+            "PageStart": 556,
+            "PageEnd": 557,
             "SearchTerms": [
                 "64",
                 "064",
-                "At-Taghaabun",
+                "At-Taghabun",
                 "Mutual Disillusion",
-                "At Taghaabun",
-                "AtTaghaabun"
+                "At Taghabun",
+                "At Taghabun",
+                "attaghabun",
+                "Madina"
             ]
         },
         {
             "Chapter": 65,
             "Index": "065",
-            "Name": "At-Talaaq",
+            "Name": "At-Talaq",
             "TranslatedName": "Divorce",
             "ArabicName": "سُوْرَةُ الطَّلَاقِ",
             "Revelation": "Madina",
@@ -1827,13 +2068,17 @@
             "RukuEnd": 493,
             "MaqraStart": 223,
             "MaqraEnd": 223,
+            "PageStart": 558,
+            "PageEnd": 559,
             "SearchTerms": [
                 "65",
                 "065",
-                "At-Talaaq",
+                "At-Talaq",
                 "Divorce",
-                "At Talaaq",
-                "AtTalaaq"
+                "At Talaq",
+                "At Talaq",
+                "attaq",
+                "Madina"
             ]
         },
         {
@@ -1855,13 +2100,17 @@
             "RukuEnd": 495,
             "MaqraStart": 224,
             "MaqraEnd": 224,
+            "PageStart": 560,
+            "PageEnd": 561,
             "SearchTerms": [
                 "66",
                 "066",
                 "At-Tahrim",
                 "The Prohibition",
                 "At Tahrim",
-                "AtTahrim"
+                "At Tahrim",
+                "attahrim",
+                "Madina"
             ]
         },
         {
@@ -1883,13 +2132,17 @@
             "RukuEnd": 497,
             "MaqraStart": 225,
             "MaqraEnd": 225,
+            "PageStart": 562,
+            "PageEnd": 564,
             "SearchTerms": [
                 "67",
                 "067",
                 "Al-Mulk",
                 "The Sovereignty",
                 "Al Mulk",
-                "AlMulk"
+                "Al Mulk",
+                "mulk",
+                "Mecca"
             ]
         },
         {
@@ -1911,19 +2164,23 @@
             "RukuEnd": 499,
             "MaqraStart": 226,
             "MaqraEnd": 226,
+            "PageStart": 564,
+            "PageEnd": 566,
             "SearchTerms": [
                 "68",
                 "068",
                 "Al-Qalam",
                 "The Pen",
                 "Al Qalam",
-                "AlQalam"
+                "Al Qalam",
+                "qam",
+                "Mecca"
             ]
         },
         {
             "Chapter": 69,
             "Index": "069",
-            "Name": "Al-Haaqqa",
+            "Name": "Al-Haqqah",
             "TranslatedName": "The Reality",
             "ArabicName": "سُوْرَةُ الْحَآقَّةِ",
             "Revelation": "Mecca",
@@ -1939,19 +2196,23 @@
             "RukuEnd": 501,
             "MaqraStart": 227,
             "MaqraEnd": 227,
+            "PageStart": 566,
+            "PageEnd": 568,
             "SearchTerms": [
                 "69",
                 "069",
-                "Al-Haaqqa",
+                "Al-Haqqah",
                 "The Reality",
-                "Al Haaqqa",
-                "AlHaaqqa"
+                "Al Haqqah",
+                "Al Haqqah",
+                "haqqah",
+                "Mecca"
             ]
         },
         {
             "Chapter": 70,
             "Index": "070",
-            "Name": "Al-Ma'aarij",
+            "Name": "Al-Ma'arij",
             "TranslatedName": "The Ascending Stairways",
             "ArabicName": "سُوْرَةُ الْمَعَارِجِ",
             "Revelation": "Mecca",
@@ -1967,19 +2228,23 @@
             "RukuEnd": 503,
             "MaqraStart": 227,
             "MaqraEnd": 228,
+            "PageStart": 568,
+            "PageEnd": 570,
             "SearchTerms": [
                 "70",
                 "070",
-                "Al-Ma'aarij",
+                "Al-Ma'arij",
                 "The Ascending Stairways",
-                "Al Ma'aarij",
-                "AlMa'aarij"
+                "Al Ma'arij",
+                "Al Maarij",
+                "maij",
+                "Mecca"
             ]
         },
         {
             "Chapter": 71,
             "Index": "071",
-            "Name": "Nooh",
+            "Name": "Nuh",
             "TranslatedName": "Noah",
             "ArabicName": "سُوْرَةُ نُوْحٍ",
             "Revelation": "Mecca",
@@ -1995,13 +2260,17 @@
             "RukuEnd": 505,
             "MaqraStart": 228,
             "MaqraEnd": 228,
+            "PageStart": 570,
+            "PageEnd": 571,
             "SearchTerms": [
                 "71",
                 "071",
-                "Nooh",
+                "Nuh",
                 "Noah",
-                "Nooh",
-                "Nooh"
+                "Nuh",
+                "Nuh",
+                "nuh",
+                "Mecca"
             ]
         },
         {
@@ -2023,13 +2292,17 @@
             "RukuEnd": 507,
             "MaqraStart": 229,
             "MaqraEnd": 229,
+            "PageStart": 572,
+            "PageEnd": 573,
             "SearchTerms": [
                 "72",
                 "072",
                 "Al-Jinn",
                 "The Jinn",
                 "Al Jinn",
-                "AlJinn"
+                "Al Jinn",
+                "jinn",
+                "Mecca"
             ]
         },
         {
@@ -2051,13 +2324,17 @@
             "RukuEnd": 509,
             "MaqraStart": 229,
             "MaqraEnd": 230,
+            "PageStart": 574,
+            "PageEnd": 575,
             "SearchTerms": [
                 "73",
                 "073",
                 "Al-Muzzammil",
                 "The Enshrouded One",
                 "Al Muzzammil",
-                "AlMuzzammil"
+                "Al Muzzammil",
+                "muzzammil",
+                "Mecca"
             ]
         },
         {
@@ -2079,19 +2356,23 @@
             "RukuEnd": 511,
             "MaqraStart": 230,
             "MaqraEnd": 230,
+            "PageStart": 575,
+            "PageEnd": 577,
             "SearchTerms": [
                 "74",
                 "074",
                 "Al-Muddaththir",
                 "The Cloaked One",
                 "Al Muddaththir",
-                "AlMuddaththir"
+                "Al Muddaththir",
+                "muddaththir",
+                "Mecca"
             ]
         },
         {
             "Chapter": 75,
             "Index": "075",
-            "Name": "Al-Qiyaama",
+            "Name": "Al-Qiyamah",
             "TranslatedName": "The Resurrection",
             "ArabicName": "سُوْرَةُ الْقِيَامَةِ",
             "Revelation": "Mecca",
@@ -2107,19 +2388,23 @@
             "RukuEnd": 513,
             "MaqraStart": 231,
             "MaqraEnd": 231,
+            "PageStart": 577,
+            "PageEnd": 578,
             "SearchTerms": [
                 "75",
                 "075",
-                "Al-Qiyaama",
+                "Al-Qiyamah",
                 "The Resurrection",
-                "Al Qiyaama",
-                "AlQiyaama"
+                "Al Qiyamah",
+                "Al Qiyamah",
+                "qiyamah",
+                "Mecca"
             ]
         },
         {
             "Chapter": 76,
             "Index": "076",
-            "Name": "Al-Insaan",
+            "Name": "Al-Insan",
             "TranslatedName": "Man",
             "ArabicName": "سُوْرَةُ الدَّهْرِ",
             "Revelation": "Madina",
@@ -2135,19 +2420,23 @@
             "RukuEnd": 515,
             "MaqraStart": 231,
             "MaqraEnd": 232,
+            "PageStart": 578,
+            "PageEnd": 580,
             "SearchTerms": [
                 "76",
                 "076",
-                "Al-Insaan",
+                "Al-Insan",
                 "Man",
-                "Al Insaan",
-                "AlInsaan"
+                "Al Insan",
+                "Al Insan",
+                "ins",
+                "Madina"
             ]
         },
         {
             "Chapter": 77,
             "Index": "077",
-            "Name": "Al-Mursalaat",
+            "Name": "Al-Mursalat",
             "TranslatedName": "The Emissaries",
             "ArabicName": "سُوْرَةُ الْمُرْسَلَاتِ",
             "Revelation": "Mecca",
@@ -2163,13 +2452,17 @@
             "RukuEnd": 517,
             "MaqraStart": 232,
             "MaqraEnd": 232,
+            "PageStart": 580,
+            "PageEnd": 581,
             "SearchTerms": [
                 "77",
                 "077",
-                "Al-Mursalaat",
+                "Al-Mursalat",
                 "The Emissaries",
-                "Al Mursalaat",
-                "AlMursalaat"
+                "Al Mursalat",
+                "Al Mursalat",
+                "mursat",
+                "Mecca"
             ]
         },
         {
@@ -2191,19 +2484,23 @@
             "RukuEnd": 519,
             "MaqraStart": 233,
             "MaqraEnd": 233,
+            "PageStart": 582,
+            "PageEnd": 583,
             "SearchTerms": [
                 "78",
                 "078",
                 "An-Naba",
                 "The Announcement",
                 "An Naba",
-                "AnNaba"
+                "An Naba",
+                "naba",
+                "Mecca"
             ]
         },
         {
             "Chapter": 79,
             "Index": "079",
-            "Name": "An-Naazi'aat",
+            "Name": "An-Nazi'at",
             "TranslatedName": "Those who drag forth",
             "ArabicName": "سُوْرَةُ النَّازِعَاتِ",
             "Revelation": "Mecca",
@@ -2219,13 +2516,17 @@
             "RukuEnd": 521,
             "MaqraStart": 233,
             "MaqraEnd": 233,
+            "PageStart": 583,
+            "PageEnd": 584,
             "SearchTerms": [
                 "79",
                 "079",
-                "An-Naazi'aat",
+                "An-Nazi'at",
                 "Those who drag forth",
-                "An Naazi'aat",
-                "AnNaazi'aat"
+                "An Nazi'at",
+                "An Naziat",
+                "niat",
+                "Mecca"
             ]
         },
         {
@@ -2247,13 +2548,17 @@
             "RukuEnd": 522,
             "MaqraStart": 234,
             "MaqraEnd": 234,
+            "PageStart": 585,
+            "PageEnd": 585,
             "SearchTerms": [
                 "80",
                 "080",
                 "Abasa",
                 "He frowned",
                 "Abasa",
-                "Abasa"
+                "Abasa",
+                "abasa",
+                "Mecca"
             ]
         },
         {
@@ -2275,19 +2580,23 @@
             "RukuEnd": 523,
             "MaqraStart": 234,
             "MaqraEnd": 234,
+            "PageStart": 586,
+            "PageEnd": 586,
             "SearchTerms": [
                 "81",
                 "081",
                 "At-Takwir",
                 "The Overthrowing",
                 "At Takwir",
-                "AtTakwir"
+                "At Takwir",
+                "attakwir",
+                "Mecca"
             ]
         },
         {
             "Chapter": 82,
             "Index": "082",
-            "Name": "Al-Infitaar",
+            "Name": "Al-Infitar",
             "TranslatedName": "The Cleaving",
             "ArabicName": "سُوْرَةُ الْاِنْفِطَارِ",
             "Revelation": "Mecca",
@@ -2303,13 +2612,17 @@
             "RukuEnd": 524,
             "MaqraStart": 235,
             "MaqraEnd": 235,
+            "PageStart": 587,
+            "PageEnd": 587,
             "SearchTerms": [
                 "82",
                 "082",
-                "Al-Infitaar",
+                "Al-Infitar",
                 "The Cleaving",
-                "Al Infitaar",
-                "AlInfitaar"
+                "Al Infitar",
+                "Al Infitar",
+                "infit",
+                "Mecca"
             ]
         },
         {
@@ -2331,19 +2644,23 @@
             "RukuEnd": 525,
             "MaqraStart": 235,
             "MaqraEnd": 235,
+            "PageStart": 587,
+            "PageEnd": 589,
             "SearchTerms": [
                 "83",
                 "083",
                 "Al-Mutaffifin",
                 "Defrauding",
                 "Al Mutaffifin",
-                "AlMutaffifin"
+                "Al Mutaffifin",
+                "mutaffifin",
+                "Mecca"
             ]
         },
         {
             "Chapter": 84,
             "Index": "084",
-            "Name": "Al-Inshiqaaq",
+            "Name": "Al-Inshiqaq",
             "TranslatedName": "The Splitting Open",
             "ArabicName": "سُوْرَةُ الاِنْشِقَاقِ",
             "Revelation": "Mecca",
@@ -2359,19 +2676,23 @@
             "RukuEnd": 526,
             "MaqraStart": 236,
             "MaqraEnd": 236,
+            "PageStart": 589,
+            "PageEnd": 589,
             "SearchTerms": [
                 "84",
                 "084",
-                "Al-Inshiqaaq",
+                "Al-Inshiqaq",
                 "The Splitting Open",
-                "Al Inshiqaaq",
-                "AlInshiqaaq"
+                "Al Inshiqaq",
+                "Al Inshiqaq",
+                "inshiqaq",
+                "Mecca"
             ]
         },
         {
             "Chapter": 85,
             "Index": "085",
-            "Name": "Al-Burooj",
+            "Name": "Al-Buruj",
             "TranslatedName": "The Constellations",
             "ArabicName": "سُوْرَةُ الْبُرُوْجِ",
             "Revelation": "Mecca",
@@ -2387,19 +2708,23 @@
             "RukuEnd": 527,
             "MaqraStart": 236,
             "MaqraEnd": 236,
+            "PageStart": 590,
+            "PageEnd": 590,
             "SearchTerms": [
                 "85",
                 "085",
-                "Al-Burooj",
+                "Al-Buruj",
                 "The Constellations",
-                "Al Burooj",
-                "AlBurooj"
+                "Al Buruj",
+                "Al Buruj",
+                "buruj",
+                "Mecca"
             ]
         },
         {
             "Chapter": 86,
             "Index": "086",
-            "Name": "At-Taariq",
+            "Name": "At-Tariq",
             "TranslatedName": "The Morning Star",
             "ArabicName": "سُوْرَةُ الطَّارِقِ",
             "Revelation": "Mecca",
@@ -2415,19 +2740,23 @@
             "RukuEnd": 528,
             "MaqraStart": 236,
             "MaqraEnd": 236,
+            "PageStart": 591,
+            "PageEnd": 591,
             "SearchTerms": [
                 "86",
                 "086",
-                "At-Taariq",
+                "At-Tariq",
                 "The Morning Star",
-                "At Taariq",
-                "AtTaariq"
+                "At Tariq",
+                "At Tariq",
+                "attiq",
+                "Mecca"
             ]
         },
         {
             "Chapter": 87,
             "Index": "087",
-            "Name": "Al-A'laa",
+            "Name": "Al-A'la",
             "TranslatedName": "The Most High",
             "ArabicName": "سُوْرَةُ الْاَعْلٰي",
             "Revelation": "Mecca",
@@ -2443,19 +2772,23 @@
             "RukuEnd": 529,
             "MaqraStart": 237,
             "MaqraEnd": 237,
+            "PageStart": 591,
+            "PageEnd": 592,
             "SearchTerms": [
                 "87",
                 "087",
-                "Al-A'laa",
+                "Al-A'la",
                 "The Most High",
-                "Al A'laa",
-                "AlA'laa"
+                "Al A'la",
+                "Al Ala",
+                "a",
+                "Mecca"
             ]
         },
         {
             "Chapter": 88,
             "Index": "088",
-            "Name": "Al-Ghaashiya",
+            "Name": "Al-Ghashiyah",
             "TranslatedName": "The Overwhelming",
             "ArabicName": "سُوْرَةُ الْغَاشِيَةِ",
             "Revelation": "Mecca",
@@ -2471,13 +2804,17 @@
             "RukuEnd": 530,
             "MaqraStart": 237,
             "MaqraEnd": 237,
+            "PageStart": 592,
+            "PageEnd": 592,
             "SearchTerms": [
                 "88",
                 "088",
-                "Al-Ghaashiya",
+                "Al-Ghashiyah",
                 "The Overwhelming",
-                "Al Ghaashiya",
-                "AlGhaashiya"
+                "Al Ghashiyah",
+                "Al Ghashiyah",
+                "ghiyah",
+                "Mecca"
             ]
         },
         {
@@ -2499,13 +2836,17 @@
             "RukuEnd": 531,
             "MaqraStart": 237,
             "MaqraEnd": 237,
+            "PageStart": 593,
+            "PageEnd": 594,
             "SearchTerms": [
                 "89",
                 "089",
                 "Al-Fajr",
                 "The Dawn",
                 "Al Fajr",
-                "AlFajr"
+                "Al Fajr",
+                "fajr",
+                "Mecca"
             ]
         },
         {
@@ -2527,13 +2868,17 @@
             "RukuEnd": 532,
             "MaqraStart": 238,
             "MaqraEnd": 238,
+            "PageStart": 594,
+            "PageEnd": 594,
             "SearchTerms": [
                 "90",
                 "090",
                 "Al-Balad",
                 "The City",
                 "Al Balad",
-                "AlBalad"
+                "Al Balad",
+                "bad",
+                "Mecca"
             ]
         },
         {
@@ -2555,19 +2900,23 @@
             "RukuEnd": 533,
             "MaqraStart": 238,
             "MaqraEnd": 238,
+            "PageStart": 595,
+            "PageEnd": 595,
             "SearchTerms": [
                 "91",
                 "091",
                 "Ash-Shams",
                 "The Sun",
                 "Ash Shams",
-                "AshShams"
+                "Ash Shams",
+                "shams",
+                "Mecca"
             ]
         },
         {
             "Chapter": 92,
             "Index": "092",
-            "Name": "Al-Lail",
+            "Name": "Al-Layl",
             "TranslatedName": "The Night",
             "ArabicName": "سُوْرَةُ الَّيْلِ",
             "Revelation": "Mecca",
@@ -2583,19 +2932,23 @@
             "RukuEnd": 534,
             "MaqraStart": 238,
             "MaqraEnd": 238,
+            "PageStart": 595,
+            "PageEnd": 596,
             "SearchTerms": [
                 "92",
                 "092",
-                "Al-Lail",
+                "Al-Layl",
                 "The Night",
-                "Al Lail",
-                "AlLail"
+                "Al Layl",
+                "Al Layl",
+                "layl",
+                "Mecca"
             ]
         },
         {
             "Chapter": 93,
             "Index": "093",
-            "Name": "Ad-Dhuhaa",
+            "Name": "Ad-Duhaa",
             "TranslatedName": "The Morning Hours",
             "ArabicName": "سُوْرَةُ الضُّحٰي",
             "Revelation": "Mecca",
@@ -2611,13 +2964,17 @@
             "RukuEnd": 535,
             "MaqraStart": 238,
             "MaqraEnd": 238,
+            "PageStart": 596,
+            "PageEnd": 596,
             "SearchTerms": [
                 "93",
                 "093",
-                "Ad-Dhuhaa",
+                "Ad-Duhaa",
                 "The Morning Hours",
-                "Ad Dhuhaa",
-                "AdDhuhaa"
+                "Ad Duhaa",
+                "Ad Duhaa",
+                "adduhaa",
+                "Mecca"
             ]
         },
         {
@@ -2639,13 +2996,17 @@
             "RukuEnd": 536,
             "MaqraStart": 239,
             "MaqraEnd": 239,
+            "PageStart": 596,
+            "PageEnd": 596,
             "SearchTerms": [
                 "94",
                 "094",
                 "Ash-Sharh",
                 "The Consolation",
                 "Ash Sharh",
-                "AshSharh"
+                "Ash Sharh",
+                "shh",
+                "Mecca"
             ]
         },
         {
@@ -2667,13 +3028,17 @@
             "RukuEnd": 537,
             "MaqraStart": 239,
             "MaqraEnd": 239,
+            "PageStart": 597,
+            "PageEnd": 597,
             "SearchTerms": [
                 "95",
                 "095",
                 "At-Tin",
                 "The Fig",
                 "At Tin",
-                "AtTin"
+                "At Tin",
+                "attin",
+                "Mecca"
             ]
         },
         {
@@ -2695,13 +3060,17 @@
             "RukuEnd": 538,
             "MaqraStart": 239,
             "MaqraEnd": 239,
+            "PageStart": 597,
+            "PageEnd": 597,
             "SearchTerms": [
                 "96",
                 "096",
                 "Al-Alaq",
                 "The Clot",
                 "Al Alaq",
-                "AlAlaq"
+                "Al Alaq",
+                "aq",
+                "Mecca"
             ]
         },
         {
@@ -2723,19 +3092,23 @@
             "RukuEnd": 539,
             "MaqraStart": 239,
             "MaqraEnd": 239,
+            "PageStart": 598,
+            "PageEnd": 598,
             "SearchTerms": [
                 "97",
                 "097",
                 "Al-Qadr",
                 "The Power, Fate",
                 "Al Qadr",
-                "AlQadr"
+                "Al Qadr",
+                "qadr",
+                "Mecca"
             ]
         },
         {
             "Chapter": 98,
             "Index": "098",
-            "Name": "Al-Bayyina",
+            "Name": "Al-Bayyinah",
             "TranslatedName": "The Evidence",
             "ArabicName": "سُوْرَةُ الْبَيِّنَةِ",
             "Revelation": "Madina",
@@ -2751,19 +3124,23 @@
             "RukuEnd": 540,
             "MaqraStart": 239,
             "MaqraEnd": 239,
+            "PageStart": 598,
+            "PageEnd": 599,
             "SearchTerms": [
                 "98",
                 "098",
-                "Al-Bayyina",
+                "Al-Bayyinah",
                 "The Evidence",
-                "Al Bayyina",
-                "AlBayyina"
+                "Al Bayyinah",
+                "Al Bayyinah",
+                "bayyinah",
+                "Madina"
             ]
         },
         {
             "Chapter": 99,
             "Index": "099",
-            "Name": "Az-Zalzala",
+            "Name": "Az-Zalzalah",
             "TranslatedName": "The Earthquake",
             "ArabicName": "سُوْرَةُ الزِّلْزَالِ",
             "Revelation": "Madina",
@@ -2779,19 +3156,23 @@
             "RukuEnd": 541,
             "MaqraStart": 239,
             "MaqraEnd": 239,
+            "PageStart": 599,
+            "PageEnd": 599,
             "SearchTerms": [
                 "99",
                 "099",
-                "Az-Zalzala",
+                "Az-Zalzalah",
                 "The Earthquake",
-                "Az Zalzala",
-                "AzZalzala"
+                "Az Zalzalah",
+                "Az Zalzalah",
+                "zzah",
+                "Madina"
             ]
         },
         {
             "Chapter": 100,
             "Index": "100",
-            "Name": "Al-Aadiyaat",
+            "Name": "Al-Aadiyat",
             "TranslatedName": "The Chargers",
             "ArabicName": "سُوْرَةُ العٰدِيٰتِ",
             "Revelation": "Mecca",
@@ -2807,19 +3188,23 @@
             "RukuEnd": 542,
             "MaqraStart": 239,
             "MaqraEnd": 240,
+            "PageStart": 599,
+            "PageEnd": 600,
             "SearchTerms": [
                 "100",
                 "100",
-                "Al-Aadiyaat",
+                "Al-Aadiyat",
                 "The Chargers",
-                "Al Aadiyaat",
-                "AlAadiyaat"
+                "Al Aadiyat",
+                "Al Aadiyat",
+                "aadiyat",
+                "Mecca"
             ]
         },
         {
             "Chapter": 101,
             "Index": "101",
-            "Name": "Al-Qaari'a",
+            "Name": "Al-Qari'ah",
             "TranslatedName": "The Calamity",
             "ArabicName": "سُوْرَةُ الْقَارِعَةِ",
             "Revelation": "Mecca",
@@ -2835,19 +3220,23 @@
             "RukuEnd": 543,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 600,
+            "PageEnd": 600,
             "SearchTerms": [
                 "101",
                 "101",
-                "Al-Qaari'a",
+                "Al-Qari'ah",
                 "The Calamity",
-                "Al Qaari'a",
-                "AlQaari'a"
+                "Al Qari'ah",
+                "Al Qariah",
+                "qiah",
+                "Mecca"
             ]
         },
         {
             "Chapter": 102,
             "Index": "102",
-            "Name": "At-Takaathur",
+            "Name": "At-Takathur",
             "TranslatedName": "Competition",
             "ArabicName": "سُوْرَةُ التَّكَاثُرِ",
             "Revelation": "Mecca",
@@ -2863,13 +3252,17 @@
             "RukuEnd": 544,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 600,
+            "PageEnd": 600,
             "SearchTerms": [
                 "102",
                 "102",
-                "At-Takaathur",
+                "At-Takathur",
                 "Competition",
-                "At Takaathur",
-                "AtTakaathur"
+                "At Takathur",
+                "At Takathur",
+                "attakathur",
+                "Mecca"
             ]
         },
         {
@@ -2891,19 +3284,23 @@
             "RukuEnd": 545,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 601,
+            "PageEnd": 601,
             "SearchTerms": [
                 "103",
                 "103",
                 "Al-Asr",
                 "The Declining Day, Epoch",
                 "Al Asr",
-                "AlAsr"
+                "Al Asr",
+                "asr",
+                "Mecca"
             ]
         },
         {
             "Chapter": 104,
             "Index": "104",
-            "Name": "Al-Humaza",
+            "Name": "Al-Humazah",
             "TranslatedName": "The Traducer",
             "ArabicName": "سُوْرَةُ الْهُمَزَةِ",
             "Revelation": "Mecca",
@@ -2919,13 +3316,17 @@
             "RukuEnd": 546,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 601,
+            "PageEnd": 601,
             "SearchTerms": [
                 "104",
                 "104",
-                "Al-Humaza",
+                "Al-Humazah",
                 "The Traducer",
-                "Al Humaza",
-                "AlHumaza"
+                "Al Humazah",
+                "Al Humazah",
+                "humah",
+                "Mecca"
             ]
         },
         {
@@ -2947,19 +3348,23 @@
             "RukuEnd": 547,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 601,
+            "PageEnd": 601,
             "SearchTerms": [
                 "105",
                 "105",
                 "Al-Fil",
                 "The Elephant",
                 "Al Fil",
-                "AlFil"
+                "Al Fil",
+                "fil",
+                "Mecca"
             ]
         },
         {
             "Chapter": 106,
             "Index": "106",
-            "Name": "Quraish",
+            "Name": "Quraysh",
             "TranslatedName": "Quraysh",
             "ArabicName": "سُوْرَةُ قُرَيْشٍ",
             "Revelation": "Mecca",
@@ -2975,19 +3380,23 @@
             "RukuEnd": 548,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 602,
+            "PageEnd": 602,
             "SearchTerms": [
                 "106",
                 "106",
-                "Quraish",
                 "Quraysh",
-                "Quraish",
-                "Quraish"
+                "Quraysh",
+                "Quraysh",
+                "Quraysh",
+                "quraysh",
+                "Mecca"
             ]
         },
         {
             "Chapter": 107,
             "Index": "107",
-            "Name": "Al-Maa'un",
+            "Name": "Al-Ma'un",
             "TranslatedName": "Almsgiving",
             "ArabicName": "سُوْرَةُ الْمَاعُوْنِ",
             "Revelation": "Mecca",
@@ -3003,13 +3412,17 @@
             "RukuEnd": 549,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 602,
+            "PageEnd": 602,
             "SearchTerms": [
                 "107",
                 "107",
-                "Al-Maa'un",
+                "Al-Ma'un",
                 "Almsgiving",
-                "Al Maa'un",
-                "AlMaa'un"
+                "Al Ma'un",
+                "Al Maun",
+                "maun",
+                "Mecca"
             ]
         },
         {
@@ -3031,19 +3444,23 @@
             "RukuEnd": 550,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 602,
+            "PageEnd": 602,
             "SearchTerms": [
                 "108",
                 "108",
                 "Al-Kawthar",
                 "Abundance",
                 "Al Kawthar",
-                "AlKawthar"
+                "Al Kawthar",
+                "kawth",
+                "Mecca"
             ]
         },
         {
             "Chapter": 109,
             "Index": "109",
-            "Name": "Al-Kaafiroon",
+            "Name": "Al-Kafirun",
             "TranslatedName": "The Disbelievers",
             "ArabicName": "سُوْرَةُ الْكَافِرُوْنَ",
             "Revelation": "Mecca",
@@ -3059,13 +3476,17 @@
             "RukuEnd": 551,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 603,
+            "PageEnd": 603,
             "SearchTerms": [
                 "109",
                 "109",
-                "Al-Kaafiroon",
+                "Al-Kafirun",
                 "The Disbelievers",
-                "Al Kaafiroon",
-                "AlKaafiroon"
+                "Al Kafirun",
+                "Al Kafirun",
+                "kafirun",
+                "Mecca"
             ]
         },
         {
@@ -3087,13 +3508,17 @@
             "RukuEnd": 552,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 603,
+            "PageEnd": 603,
             "SearchTerms": [
                 "110",
                 "110",
                 "An-Nasr",
                 "Divine Support",
                 "An Nasr",
-                "AnNasr"
+                "An Nasr",
+                "nasr",
+                "Madina"
             ]
         },
         {
@@ -3115,19 +3540,23 @@
             "RukuEnd": 553,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 603,
+            "PageEnd": 603,
             "SearchTerms": [
                 "111",
                 "111",
                 "Al-Masad",
                 "The Palm Fibre",
                 "Al Masad",
-                "AlMasad"
+                "Al Masad",
+                "masad",
+                "Mecca"
             ]
         },
         {
             "Chapter": 112,
             "Index": "112",
-            "Name": "Al-Ikhlaas",
+            "Name": "Al-Ikhlas",
             "TranslatedName": "Sincerity",
             "ArabicName": "سُوْرَةُ الْاِخْلَاصِ",
             "Revelation": "Mecca",
@@ -3143,13 +3572,17 @@
             "RukuEnd": 554,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 604,
+            "PageEnd": 604,
             "SearchTerms": [
                 "112",
                 "112",
-                "Al-Ikhlaas",
+                "Al-Ikhlas",
                 "Sincerity",
-                "Al Ikhlaas",
-                "AlIkhlaas"
+                "Al Ikhlas",
+                "Al Ikhlas",
+                "ikhlas",
+                "Mecca"
             ]
         },
         {
@@ -3171,19 +3604,23 @@
             "RukuEnd": 555,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 604,
+            "PageEnd": 604,
             "SearchTerms": [
                 "113",
                 "113",
                 "Al-Falaq",
                 "The Dawn",
                 "Al Falaq",
-                "AlFalaq"
+                "Al Falaq",
+                "faq",
+                "Mecca"
             ]
         },
         {
             "Chapter": 114,
             "Index": "114",
-            "Name": "An-Naas",
+            "Name": "An-Nas",
             "TranslatedName": "Mankind",
             "ArabicName": "سُوْرَةُ النَّاسِ",
             "Revelation": "Mecca",
@@ -3199,13 +3636,17 @@
             "RukuEnd": 556,
             "MaqraStart": 240,
             "MaqraEnd": 240,
+            "PageStart": 604,
+            "PageEnd": 604,
             "SearchTerms": [
                 "114",
                 "114",
-                "An-Naas",
+                "An-Nas",
                 "Mankind",
-                "An Naas",
-                "AnNaas"
+                "An Nas",
+                "An Nas",
+                "nas",
+                "Mecca"
             ]
         }
     ]
