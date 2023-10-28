@@ -6,8 +6,8 @@ namespace QuranApi.Controllers;
 [Route("[controller]")]
 public class SurahController : ControllerBase
 {
-    [HttpGet]
-    public async Task<IActionResult> Get()
+    [HttpGet("{languageCode}")]
+    public async Task<IActionResult> Get([FromRoute] string languageCode)
     {
         var surahsText = await System.IO.File.ReadAllTextAsync("Resources/Surahs/surahs.json");
         
