@@ -19,7 +19,8 @@ public class CachingWorker : BackgroundService
     
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-
+        // TODO stuff all cache items here !
+        
         await Task.Delay(1000, stoppingToken);
         
         // while (!stoppingToken.IsCancellationRequested)

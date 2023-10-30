@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 
@@ -22,15 +23,15 @@ public class SurahController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
 
-        var surahsText = await _cache.GetStringAsync($"surahs-{languageCode}");
+        var surahsText = await _cache.GetAsync($"surahs-{languageCode}");
         if (surahsText is null)
         {
-            surahsText = await System.IO.File.ReadAllTextAsync($"Resources/Surahs/surahs-{languageCode}.json");
-            await _cache.SetStringAsync($"surahs-{languageCode}", surahsText);
+            surahsText = await System.IO.File.ReadAllBytesAsync($"Resources/Surahs/surahs-{languageCode}.json");
+            await _cache.SetAsync($"surahs-{languageCode}", surahsText);
         }
 
         _logger.LogInformation("Surahs text loaded in {Elapsed} ms", sw.Elapsed);
         
-        return Ok(surahsText);
+        return Ok(Encoding.UTF8.GetString(surahsText));
     }
 }
