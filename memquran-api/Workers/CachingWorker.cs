@@ -19,9 +19,13 @@ public class CachingWorker : BackgroundService
     
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        // TODO stuff all cache items here !
-        
-        await Task.Delay(1000, stoppingToken);
+        // Cache stuff on start
+        foreach (var languageCode in new[] { "en" })
+        {
+            var surahsBytes = await File.ReadAllBytesAsync($"Resources/Surahs/surahs-{languageCode}.json", stoppingToken);
+            await _cache.SetAsync($"surahs-{languageCode}", surahsBytes, token: stoppingToken);
+            _logger.LogInformation("{Name} - Cached: surahs-{LanguageCode}", nameof(CachingWorker), languageCode);
+        }
         
         // while (!stoppingToken.IsCancellationRequested)
         // {
