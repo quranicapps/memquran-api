@@ -23,15 +23,18 @@ public class SurahInfoController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
 
-        var surahsText = await _cache.GetAsync($"surahs-{languageCode}");
+        var surahsText = await _cache.GetStringAsync($"{languageCode}_surahInfos");
+        
         if (surahsText is null)
         {
-            surahsText = await System.IO.File.ReadAllBytesAsync($"Resources/surahInfos/{languageCode}_surahInfos.json");
-            await _cache.SetAsync($"surahInfos-{languageCode}", surahsText);
+            _logger.LogInformation("Cache miss for {LanguageCode}_surahInfos", languageCode);
+            using var streamReader = System.IO.File.OpenText($"Resources/surahInfos/{languageCode}_surahInfos.json");
+            surahsText = await streamReader.ReadToEndAsync();
+            await _cache.SetStringAsync($"{languageCode}_surahInfos", surahsText);
         }
 
         _logger.LogInformation("SurahInfos text loaded in {Elapsed} ms", sw.Elapsed);
         
-        return Ok(Encoding.UTF8.GetString(surahsText));
+        return Ok(surahsText);
     }
 }
