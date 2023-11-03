@@ -22,9 +22,9 @@ public class CachingWorker : BackgroundService
         // Cache stuff on start
         foreach (var languageCode in new[] { "en" })
         {
-            var surahsBytes = await File.ReadAllBytesAsync($"Resources/Surahs/surahs-{languageCode}.json", stoppingToken);
-            await _cache.SetAsync($"surahs-{languageCode}", surahsBytes, token: stoppingToken);
-            _logger.LogInformation("{Name} - Cached: surahs-{LanguageCode}", nameof(CachingWorker), languageCode);
+            var surahsBytes = await File.ReadAllBytesAsync($"Resources/surahInfo/{languageCode}_surahInfos.json", stoppingToken);
+            await _cache.SetAsync($"surahInfos-{languageCode}", surahsBytes, token: stoppingToken);
+            _logger.LogInformation("{Name} - Cached: surahInfos-{LanguageCode}", nameof(CachingWorker), languageCode);
         }
         
         // while (!stoppingToken.IsCancellationRequested)

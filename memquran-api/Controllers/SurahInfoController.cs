@@ -7,12 +7,12 @@ namespace QuranApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class SurahController : ControllerBase
+public class SurahInfoController : ControllerBase
 {
     private readonly IDistributedCache _cache;
-    private readonly ILogger<SurahController> _logger;
+    private readonly ILogger<SurahInfoController> _logger;
 
-    public SurahController(IDistributedCache cache, ILogger<SurahController> logger)
+    public SurahInfoController(IDistributedCache cache, ILogger<SurahInfoController> logger)
     {
         _cache = cache;
         _logger = logger;
@@ -26,11 +26,11 @@ public class SurahController : ControllerBase
         var surahsText = await _cache.GetAsync($"surahs-{languageCode}");
         if (surahsText is null)
         {
-            surahsText = await System.IO.File.ReadAllBytesAsync($"Resources/Surahs/surahs-{languageCode}.json");
-            await _cache.SetAsync($"surahs-{languageCode}", surahsText);
+            surahsText = await System.IO.File.ReadAllBytesAsync($"Resources/surahInfo/{languageCode}_surahInfos.json");
+            await _cache.SetAsync($"surahInfos-{languageCode}", surahsText);
         }
 
-        _logger.LogInformation("Surahs text loaded in {Elapsed} ms", sw.Elapsed);
+        _logger.LogInformation("SurahInfos text loaded in {Elapsed} ms", sw.Elapsed);
         
         return Ok(Encoding.UTF8.GetString(surahsText));
     }
