@@ -26,7 +26,7 @@ public class SurahInfoController : ControllerBase
         var surahsText = await _cache.GetAsync($"surahs-{languageCode}");
         if (surahsText is null)
         {
-            surahsText = await System.IO.File.ReadAllBytesAsync($"Resources/surahInfo/{languageCode}_surahInfos.json");
+            surahsText = await System.IO.File.ReadAllBytesAsync($"Resources/surahInfos/{languageCode}_surahInfos.json");
             await _cache.SetAsync($"surahInfos-{languageCode}", surahsText);
         }
 
