@@ -35,7 +35,7 @@ public class CachingWorker : BackgroundService
             var surahsBytes = await File.ReadAllBytesAsync(surahInfoFile, stoppingToken);
             var cacheKey = Path.GetFileNameWithoutExtension(surahInfoFile);
             await _cache.SetAsync($"{cacheKey}", surahsBytes, token: stoppingToken);
-            _logger.LogInformation("{Name} - Cached: {CacheKey}", nameof(CachingWorker), cacheKey);
+            // _logger.LogInformation("{Name} - Cached: {CacheKey}", nameof(CachingWorker), cacheKey);
         }
         _logger.LogInformation("{Name} - Cached: surahs", nameof(CachingWorker));
     }

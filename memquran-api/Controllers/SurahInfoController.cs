@@ -33,7 +33,7 @@ public class SurahInfoController : ControllerBase
             await _cache.SetStringAsync($"{locale}_surahInfo", surahsText);
         }
 
-        _logger.LogInformation("SurahInfo text loaded in {Elapsed} ms", sw.Elapsed);
+        // _logger.LogInformation("SurahInfo text loaded in {Elapsed} ms", sw.Elapsed);
         
         return Ok(surahsText);
     }
