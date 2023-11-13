@@ -37,6 +37,6 @@ public class CachingWorker : BackgroundService
             await _cache.SetAsync($"{cacheKey}", surahsBytes, token: stoppingToken);
             _logger.LogInformation("{Name} - Cached: {CacheKey}", nameof(CachingWorker), cacheKey);
         }
-        _logger.LogInformation("{Name} - Cached: {{locale}}_surahs", nameof(CachingWorker));
+        _logger.LogInformation("{Name} - Cached: surahs", nameof(CachingWorker));
     }
 }

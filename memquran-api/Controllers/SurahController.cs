@@ -18,22 +18,22 @@ public class SurahController : ControllerBase
         _logger = logger;
     }
     
-    [HttpGet("{locale}/{surahNumber}")]
-    public async Task<IActionResult> Get([FromRoute] string locale, string surahNumber)
+    [HttpGet("{surahNumber}")]
+    public async Task<IActionResult> Get([FromRoute] int surahNumber)
     {
         var sw = Stopwatch.StartNew();
 
-        var surahsText = await _cache.GetStringAsync($"{locale}_surah_{surahNumber}");
+        var surahsText = await _cache.GetStringAsync($"{surahNumber}");
         
         if (surahsText is null)
         {
-            _logger.LogInformation("Cache miss for {Locale}_surah_{SurahNumber}", locale, surahNumber);
-            using var streamReader = System.IO.File.OpenText($"Resources/surahs/{locale}/{locale}_surah_{surahNumber}.json");
+            _logger.LogInformation("Cache miss for Surah: {SurahNumber}", surahNumber);
+            using var streamReader = System.IO.File.OpenText($"Resources/surahs/{surahNumber}.json");
             surahsText = await streamReader.ReadToEndAsync();
-            await _cache.SetStringAsync($"{locale}_surah_{surahNumber}", surahsText);
+            await _cache.SetStringAsync($"{surahNumber}", surahsText);
         }
 
-        _logger.LogInformation("Surah {Locale}_surah_{SurahNumber} text loaded in {Elapsed} ms", locale, surahNumber, sw.Elapsed);
+        _logger.LogInformation("Surah {SurahNumber} text loaded in {Elapsed} ms", surahNumber, sw.Elapsed);
         
         return Ok(surahsText);
     }
