@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using Microsoft.Extensions.Caching.Distributed;
 using QuranApi.Settings;
 
@@ -19,24 +20,32 @@ public class CachingWorker : BackgroundService
     
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        // Cache Surah Infos files
-        foreach (var surahInfoFile in Directory.GetFiles("Resources/surahInfos"))
-        {
-            var surahsBytes = await File.ReadAllBytesAsync(surahInfoFile, stoppingToken);
-            var cacheKey = Path.GetFileNameWithoutExtension(surahInfoFile);
-            await _cache.SetAsync($"{cacheKey}", surahsBytes, token: stoppingToken);
-        }
-        _logger.LogInformation("{Name} - Cached: {{locale}}_surahInfos", nameof(CachingWorker));
-
+        var sw = Stopwatch.StartNew();
         
-        // Cache Surah files
-        foreach (var surahInfoFile in Directory.GetFiles("Resources/surahs", "*.json", SearchOption.AllDirectories))
+        var filePaths = new List<string>{ "Resources/surahInfos", "Resources/surahs"};
+
+        await Parallel.ForEachAsync(filePaths, stoppingToken, async (path, cancellationToken) =>
         {
-            var surahsBytes = await File.ReadAllBytesAsync(surahInfoFile, stoppingToken);
+            await CacheFiles(path, "*.json", SearchOption.AllDirectories, cancellationToken);
+        });
+        
+        _logger.LogInformation("Finished all Caching in {Time}", sw.Elapsed);
+    }
+
+    private async Task CacheFiles(string path,
+        string fileExtensionGlob = "*.json",
+        SearchOption searchOption = SearchOption.AllDirectories,
+        CancellationToken cancellationToken = default)
+    {
+        var sw = Stopwatch.StartNew();
+        
+        var files = Directory.GetFiles(path, fileExtensionGlob, searchOption).ToList();
+        foreach (var surahInfoFile in files)
+        {
+            var surahsBytes = await File.ReadAllBytesAsync(surahInfoFile, cancellationToken);
             var cacheKey = Path.GetFileNameWithoutExtension(surahInfoFile);
-            await _cache.SetAsync($"{cacheKey}", surahsBytes, token: stoppingToken);
-            // _logger.LogInformation("{Name} - Cached: {CacheKey}", nameof(CachingWorker), cacheKey);
+            await _cache.SetAsync($"{cacheKey}", surahsBytes, token: cancellationToken);
         }
-        _logger.LogInformation("{Name} - Cached: surahs", nameof(CachingWorker));
+        _logger.LogInformation("Cached {Count} {Glob} files: {{locale}}_surahInfos files from {Path} in {Time}", files.Count, fileExtensionGlob, path, sw.Elapsed);
     }
 }

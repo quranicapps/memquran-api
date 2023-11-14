@@ -27,7 +27,7 @@ public class SurahController : ControllerBase
         
         if (surahsText is null)
         {
-            _logger.LogInformation("Cache miss for Surah: {SurahNumber}", surahNumber);
+            _logger.LogInformation("***** Cache miss for Surah: {SurahNumber}", surahNumber);
             using var streamReader = System.IO.File.OpenText($"Resources/surahs/{surahNumber}.json");
             surahsText = await streamReader.ReadToEndAsync();
             await _cache.SetStringAsync($"{surahNumber}", surahsText);

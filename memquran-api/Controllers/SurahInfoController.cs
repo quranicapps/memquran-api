@@ -27,7 +27,7 @@ public class SurahInfoController : ControllerBase
         
         if (surahsText is null)
         {
-            _logger.LogInformation("Cache miss for {Locale}_surahInfo", locale);
+            _logger.LogInformation("***** Cache miss for {Locale}_surahInfo", locale);
             using var streamReader = System.IO.File.OpenText($"Resources/surahInfos/{locale}_surahInfo.json");
             surahsText = await streamReader.ReadToEndAsync();
             await _cache.SetStringAsync($"{locale}_surahInfo", surahsText);
