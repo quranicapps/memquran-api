@@ -26,21 +26,13 @@ public class SurahController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
 
-        var translations = new List<int>(); // Get from queryString
-        var sb = new StringBuilder($"surah_{surahNumber}");
-        if (translations.Any())
-        {
-            sb.Append($"&tr={string.Join(",", translations.OrderBy(x => x))}");
-        }
-
-        var fileNameWithoutExtension = _hashingService.ToHashString(sb.ToString());
-        
-        var surahsText = await _cache.GetStringAsync(fileNameWithoutExtension);
+        var fileName = $"surah_{surahNumber}";
+        var surahsText = await _cache.GetStringAsync(fileName);
         
         if (surahsText is null)
         {
             _logger.LogInformation("***** Cache miss for Surah: {SurahNumber}", surahNumber);
-            using var streamReader = System.IO.File.OpenText($"Resources/surahs/{fileNameWithoutExtension}.json");
+            using var streamReader = System.IO.File.OpenText($"Resources/surahs/{fileName}.json");
             surahsText = await streamReader.ReadToEndAsync();
             await _cache.SetStringAsync($"{surahNumber}", surahsText);
         }
