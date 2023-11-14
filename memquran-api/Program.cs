@@ -1,4 +1,5 @@
 using Microsoft.Extensions.Caching.Distributed;
+using QuranApi.Contracts;
 using QuranApi.Settings;
 using QuranApi.Workers;
 
@@ -24,6 +25,9 @@ builder.Services.AddDistributedMemoryCache();
 
 // Workers
 builder.Services.AddHostedService<CachingWorker>();
+
+// Services
+builder.Services.AddSingleton<IHashingService, HashingService>();
 
 builder.Services.Configure<HostOptions>(options =>
 {

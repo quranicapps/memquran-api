@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Text;
 using Microsoft.Extensions.Caching.Distributed;
 using QuranApi.Settings;
 
@@ -17,18 +16,24 @@ public class CachingWorker : BackgroundService
         _cachingSettings = cachingSettings;
         _logger = logger;
     }
-    
+
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        var sw = Stopwatch.StartNew();
-        
-        var filePaths = new List<string>{ "Resources/surahInfos", "Resources/surahs"};
-
-        await Parallel.ForEachAsync(filePaths, stoppingToken, async (path, cancellationToken) =>
+        if (!_cachingSettings.Enabled)
         {
-            await CacheFiles(path, "*.json", SearchOption.AllDirectories, cancellationToken);
-        });
-        
+            _logger.LogInformation("Caching is disabled in settings");
+            return;
+        }
+
+        var sw = Stopwatch.StartNew();
+
+        var filePaths = new List<string>
+        {
+            "Resources/surahInfos", "Resources/surahs"
+        };
+
+        await Parallel.ForEachAsync(filePaths, stoppingToken, async (path, cancellationToken) => { await CacheFiles(path, "*.json", SearchOption.AllDirectories, cancellationToken); });
+
         _logger.LogInformation("Finished all Caching in {Time}", sw.Elapsed);
     }
 
@@ -38,7 +43,7 @@ public class CachingWorker : BackgroundService
         CancellationToken cancellationToken = default)
     {
         var sw = Stopwatch.StartNew();
-        
+
         var files = Directory.GetFiles(path, fileExtensionGlob, searchOption).ToList();
         foreach (var surahInfoFile in files)
         {
@@ -46,6 +51,7 @@ public class CachingWorker : BackgroundService
             var cacheKey = Path.GetFileNameWithoutExtension(surahInfoFile);
             await _cache.SetAsync($"{cacheKey}", surahsBytes, token: cancellationToken);
         }
-        _logger.LogInformation("Cached {Count} {Glob} files: {{locale}}_surahInfos files from {Path} in {Time}", files.Count, fileExtensionGlob, path, sw.Elapsed);
+
+        _logger.LogInformation("Cached {Count} {Glob} files from {Path} in {Time}", files.Count, fileExtensionGlob, path, sw.Elapsed);
     }
 }

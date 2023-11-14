@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
-using System.Text.Json.Serialization;
+using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
+using QuranApi.Contracts;
 
 namespace QuranApi.Controllers;
 
@@ -10,11 +11,13 @@ namespace QuranApi.Controllers;
 public class SurahController : ControllerBase
 {
     private readonly IDistributedCache _cache;
+    private readonly IHashingService _hashingService;
     private readonly ILogger<SurahController> _logger;
 
-    public SurahController(IDistributedCache cache, ILogger<SurahController> logger)
+    public SurahController(IDistributedCache cache, IHashingService hashingService, ILogger<SurahController> logger)
     {
         _cache = cache;
+        _hashingService = hashingService;
         _logger = logger;
     }
     
@@ -23,12 +26,21 @@ public class SurahController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
 
-        var surahsText = await _cache.GetStringAsync($"{surahNumber}");
+        var translations = new List<int>(); // Get from queryString
+        var sb = new StringBuilder($"surah_{surahNumber}");
+        if (translations.Any())
+        {
+            sb.Append($"&tr={string.Join(",", translations.OrderBy(x => x))}");
+        }
+
+        var fileNameWithoutExtension = _hashingService.ToHashString(sb.ToString());
+        
+        var surahsText = await _cache.GetStringAsync(fileNameWithoutExtension);
         
         if (surahsText is null)
         {
             _logger.LogInformation("***** Cache miss for Surah: {SurahNumber}", surahNumber);
-            using var streamReader = System.IO.File.OpenText($"Resources/surahs/{surahNumber}.json");
+            using var streamReader = System.IO.File.OpenText($"Resources/surahs/{fileNameWithoutExtension}.json");
             surahsText = await streamReader.ReadToEndAsync();
             await _cache.SetStringAsync($"{surahNumber}", surahsText);
         }
