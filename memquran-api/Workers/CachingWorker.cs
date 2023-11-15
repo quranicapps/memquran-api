@@ -27,9 +27,11 @@ public class CachingWorker : BackgroundService
 
         var sw = Stopwatch.StartNew();
 
+        
         var filePaths = new List<string>
         {
-            "Resources/surahInfos", "Resources/surahs"
+            Path.Combine("..", "..", "Data/QuranData/surahInfos"),
+            Path.Combine("..", "..", "Data/QuranData/surahs"),
         };
 
         await Parallel.ForEachAsync(filePaths, stoppingToken, async (path, cancellationToken) => { await CacheFiles(path, "*.json", SearchOption.AllDirectories, cancellationToken); });
@@ -44,14 +46,15 @@ public class CachingWorker : BackgroundService
     {
         var sw = Stopwatch.StartNew();
 
-        var files = Directory.GetFiles(path, fileExtensionGlob, searchOption).ToList();
-        foreach (var surahInfoFile in files)
+        var filePaths = Directory.GetFiles(path, fileExtensionGlob, searchOption).ToList();
+        
+        await Parallel.ForEachAsync(filePaths, cancellationToken, async (filePath, ct) =>
         {
-            var surahsBytes = await File.ReadAllBytesAsync(surahInfoFile, cancellationToken);
-            var cacheKey = Path.GetFileNameWithoutExtension(surahInfoFile);
-            await _cache.SetAsync($"{cacheKey}", surahsBytes, token: cancellationToken);
-        }
+            var surahsBytes = await File.ReadAllBytesAsync(filePath, ct);
+            var cacheKey = Path.GetFileNameWithoutExtension(filePath);
+            await _cache.SetAsync($"{cacheKey}", surahsBytes, token: ct);
+        });
 
-        _logger.LogInformation("Cached {Count} {Glob} files from {Path} in {Time}", files.Count, fileExtensionGlob, path, sw.Elapsed);
+        _logger.LogInformation("Cached {Count} {Glob} files from {Path} in {Time}", filePaths.Count, fileExtensionGlob, path, sw.Elapsed);
     }
 }

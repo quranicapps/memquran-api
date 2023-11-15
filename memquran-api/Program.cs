@@ -21,7 +21,10 @@ var cachingSettings = builder.Configuration.GetSection(CachingSettings.SectionNa
 if (cachingSettings == null) throw new Exception("Could not bind the caching settings, please check configuration");
 
 builder.Services.AddSingleton(cachingSettings);
-builder.Services.AddDistributedMemoryCache();
+builder.Services.AddDistributedMemoryCache(options =>
+{
+    options.SizeLimit = long.MaxValue;
+});
 
 // Workers
 builder.Services.AddHostedService<CachingWorker>();

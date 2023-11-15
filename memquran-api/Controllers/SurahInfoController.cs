@@ -21,6 +21,7 @@ public class SurahInfoController : ControllerBase
     [HttpGet("{locale}")]
     public async Task<IActionResult> Get([FromRoute] string locale)
     {
+        var rootFolder = Path.Combine("..", "..", "Data/QuranData/surahInfos");
         var sw = Stopwatch.StartNew();
 
         var surahsText = await _cache.GetStringAsync($"{locale}_surahInfo");
@@ -28,7 +29,7 @@ public class SurahInfoController : ControllerBase
         if (surahsText is null)
         {
             _logger.LogInformation("***** Cache miss for {Locale}_surahInfo", locale);
-            using var streamReader = System.IO.File.OpenText($"Resources/surahInfos/{locale}_surahInfo.json");
+            using var streamReader = System.IO.File.OpenText($"{rootFolder}/{locale}_surahInfo.json");
             surahsText = await streamReader.ReadToEndAsync();
             await _cache.SetStringAsync($"{locale}_surahInfo", surahsText);
         }
