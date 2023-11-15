@@ -22,7 +22,7 @@ public class SurahController : ControllerBase
     }
     
     [HttpGet("{surahNumber}")]
-    public async Task<IActionResult> Get([FromRoute] int surahNumber)
+    public async Task<IActionResult> GetSurah([FromRoute] int surahNumber)
     {
         var sw = Stopwatch.StartNew();
 
@@ -31,7 +31,40 @@ public class SurahController : ControllerBase
         
         if (surahsText is null)
         {
-            _logger.LogInformation("***** Cache miss for Surah: {SurahNumber}", surahNumber);
+            _logger.LogInformation("***** Cache miss for GetSurah: {SurahNumber}", surahNumber);
+            
+            if (!System.IO.File.Exists($"Resources/surahs/{fileName}.json"))
+            {
+                return NotFound();
+            }
+            
+            using var streamReader = System.IO.File.OpenText($"Resources/surahs/{fileName}.json");
+            surahsText = await streamReader.ReadToEndAsync();
+            await _cache.SetStringAsync($"{surahNumber}", surahsText);
+        }
+
+        // _logger.LogInformation("Surah {SurahNumber} text loaded in {Elapsed} ms", surahNumber, sw.Elapsed);
+        
+        return Ok(surahsText);
+    }
+    
+    [HttpGet("{surahNumber}/translation/{translationId}")]
+    public async Task<IActionResult> GetTranslation([FromRoute] int surahNumber, [FromRoute] int translationId)
+    {
+        var sw = Stopwatch.StartNew();
+
+        var fileName = $"translation_{surahNumber}_{translationId}";
+        var surahsText = await _cache.GetStringAsync(fileName);
+        
+        if (surahsText is null)
+        {
+            _logger.LogInformation("***** Cache miss for GetTranslation: {SurahNumber}", surahNumber);
+            
+            if (!System.IO.File.Exists($"Resources/surahs/{fileName}.json"))
+            {
+                return NotFound();
+            }
+            
             using var streamReader = System.IO.File.OpenText($"Resources/surahs/{fileName}.json");
             surahsText = await streamReader.ReadToEndAsync();
             await _cache.SetStringAsync($"{surahNumber}", surahsText);
