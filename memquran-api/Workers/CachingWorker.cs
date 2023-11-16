@@ -30,8 +30,8 @@ public class CachingWorker : BackgroundService
         
         var filePaths = new List<string>
         {
-            Path.Combine("..", "..", "Data/QuranData/surahInfos"),
-            Path.Combine("..", "..", "Data/QuranData/surahs"),
+            Path.Combine("..", "..", "memquran-files/json/surahInfos"),
+            Path.Combine("..", "..", "memquran-files/json/surahs"),
         };
 
         await Parallel.ForEachAsync(filePaths, stoppingToken, async (path, cancellationToken) => { await CacheFiles(path, "*.json", SearchOption.AllDirectories, cancellationToken); });
