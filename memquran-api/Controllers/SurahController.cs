@@ -24,27 +24,27 @@ public class SurahController : ControllerBase
     [HttpGet("{surahNumber}")]
     public async Task<IActionResult> GetSurah([FromRoute] int surahNumber)
     {
-        var rootFolder = Path.Combine("..", "..", "Data/QuranData/surahs");
         var sw = Stopwatch.StartNew();
-
-        var fileName = $"surah_{surahNumber}";
-        var surahsText = await _cache.GetStringAsync(fileName);
+        
+        var rootFolder = Path.Combine("..", "..", "memquran-files/json/surahs");
+        var fileNameWithoutExtension = $"surah_{surahNumber}";
+        var surahsText = await _cache.GetStringAsync(fileNameWithoutExtension);
         
         if (surahsText is null)
         {
-            _logger.LogInformation("***** Cache miss for GetSurah: {FileName}", fileName);
+            _logger.LogInformation("***** Cache miss for GetSurah: {FileName}", fileNameWithoutExtension);
             
-            if (!System.IO.File.Exists($"{rootFolder}/{fileName}.json"))
+            if (!System.IO.File.Exists($"{rootFolder}/{fileNameWithoutExtension}.json"))
             {
                 return NotFound();
             }
             
-            using var streamReader = System.IO.File.OpenText($"{rootFolder}/{fileName}.json");
+            using var streamReader = System.IO.File.OpenText($"{rootFolder}/{fileNameWithoutExtension}.json");
             surahsText = await streamReader.ReadToEndAsync();
             await _cache.SetStringAsync($"{surahNumber}", surahsText);
         }
 
-        _logger.LogInformation("Surah {FileName} text loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        _logger.LogInformation("Surah {FileName} text loaded in {Elapsed} ms", fileNameWithoutExtension, sw.Elapsed);
         
         return Ok(surahsText);
     }
@@ -52,27 +52,27 @@ public class SurahController : ControllerBase
     [HttpGet("{surahNumber}/translation/{translationId}")]
     public async Task<IActionResult> GetTranslation([FromRoute] int surahNumber, [FromRoute] int translationId)
     {
-        var rootFolder = Path.Combine("..", "..", "Data/QuranData/surahs");
         var sw = Stopwatch.StartNew();
-
-        var fileName = $"translation_{surahNumber}_{translationId}";
-        var surahsText = await _cache.GetStringAsync(fileName);
+        
+        var rootFolder = Path.Combine("..", "..", "memquran-files/json/surahs");
+        var fileNameWithoutExtension = $"translation_{surahNumber}_{translationId}";
+        var surahsText = await _cache.GetStringAsync(fileNameWithoutExtension);
         
         if (surahsText is null)
         {
-            _logger.LogInformation("***** Cache miss for GetTranslation: {FileName}", fileName);
+            _logger.LogInformation("***** Cache miss for GetTranslation: {FileName}", fileNameWithoutExtension);
             
-            if (!System.IO.File.Exists($"{rootFolder}/{fileName}.json"))
+            if (!System.IO.File.Exists($"{rootFolder}/{fileNameWithoutExtension}.json"))
             {
                 return NotFound();
             }
             
-            using var streamReader = System.IO.File.OpenText($"{rootFolder}/{fileName}.json");
+            using var streamReader = System.IO.File.OpenText($"{rootFolder}/{fileNameWithoutExtension}.json");
             surahsText = await streamReader.ReadToEndAsync();
-            await _cache.SetStringAsync($"{surahNumber}", surahsText);
+            await _cache.SetStringAsync(fileNameWithoutExtension, surahsText);
         }
 
-        _logger.LogInformation("Translation {FileName} text loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        _logger.LogInformation("Translation {FileName} text loaded in {Elapsed} ms", fileNameWithoutExtension, sw.Elapsed);
         
         return Ok(surahsText);
     }

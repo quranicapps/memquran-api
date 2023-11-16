@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
 
@@ -21,17 +20,18 @@ public class SurahInfoController : ControllerBase
     [HttpGet("{locale}")]
     public async Task<IActionResult> Get([FromRoute] string locale)
     {
-        var rootFolder = Path.Combine("..", "..", "Data/QuranData/surahInfos");
         var sw = Stopwatch.StartNew();
-
-        var surahsText = await _cache.GetStringAsync($"{locale}_surahInfo");
+        
+        var rootFolder = Path.Combine("..", "..", "memquran-files/json/surahInfos");
+        var fileNameWithoutExtension = $"{locale}_surahInfo";
+        var surahsText = await _cache.GetStringAsync(fileNameWithoutExtension);
         
         if (surahsText is null)
         {
             _logger.LogInformation("***** Cache miss for {Locale}_surahInfo", locale);
             using var streamReader = System.IO.File.OpenText($"{rootFolder}/{locale}_surahInfo.json");
             surahsText = await streamReader.ReadToEndAsync();
-            await _cache.SetStringAsync($"{locale}_surahInfo", surahsText);
+            await _cache.SetStringAsync(fileNameWithoutExtension, surahsText);
         }
 
         // _logger.LogInformation("SurahInfo text loaded in {Elapsed} ms", sw.Elapsed);
