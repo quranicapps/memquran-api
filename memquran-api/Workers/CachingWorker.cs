@@ -4,24 +4,13 @@ using QuranApi.Settings;
 
 namespace QuranApi.Workers;
 
-public class CachingWorker : BackgroundService
+public class CachingWorker(IDistributedCache cache, CachingSettings cachingSettings, ILogger<CachingWorker> logger) : BackgroundService
 {
-    private readonly IDistributedCache _cache;
-    private readonly CachingSettings _cachingSettings;
-    private readonly ILogger<CachingWorker> _logger;
-
-    public CachingWorker(IDistributedCache cache, CachingSettings cachingSettings, ILogger<CachingWorker> logger)
-    {
-        _cache = cache;
-        _cachingSettings = cachingSettings;
-        _logger = logger;
-    }
-
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        if (!_cachingSettings.Enabled)
+        if (!cachingSettings.Enabled)
         {
-            _logger.LogInformation("Caching is disabled in settings");
+            logger.LogInformation("Caching is disabled in settings");
             return;
         }
 
@@ -36,7 +25,7 @@ public class CachingWorker : BackgroundService
 
         await Parallel.ForEachAsync(filePaths, stoppingToken, async (path, cancellationToken) => { await CacheFiles(path, "*.json", SearchOption.AllDirectories, cancellationToken); });
 
-        _logger.LogInformation("Finished all Caching in {Time}", sw.Elapsed);
+        logger.LogInformation("Finished all Caching in {Time}", sw.Elapsed);
     }
 
     private async Task CacheFiles(string path,
@@ -52,9 +41,9 @@ public class CachingWorker : BackgroundService
         {
             var surahsBytes = await File.ReadAllBytesAsync(filePath, ct);
             var cacheKey = Path.GetFileNameWithoutExtension(filePath);
-            await _cache.SetAsync($"{cacheKey}", surahsBytes, token: ct);
+            await cache.SetAsync($"{cacheKey}", surahsBytes, token: ct);
         });
 
-        _logger.LogInformation("Cached {Count} {Glob} files from {Path} in {Time}", filePaths.Count, fileExtensionGlob, path, sw.Elapsed);
+        logger.LogInformation("Cached {Count} {Glob} files from {Path} in {Time}", filePaths.Count, fileExtensionGlob, path, sw.Elapsed);
     }
 }

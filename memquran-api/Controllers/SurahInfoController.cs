@@ -6,35 +6,32 @@ namespace QuranApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class SurahInfoController : ControllerBase
+public class SurahInfoController(IDistributedCache cache, ILogger<SurahInfoController> logger) : ControllerBase
 {
-    private readonly IDistributedCache _cache;
-    private readonly ILogger<SurahInfoController> _logger;
-
-    public SurahInfoController(IDistributedCache cache, ILogger<SurahInfoController> logger)
-    {
-        _cache = cache;
-        _logger = logger;
-    }
-    
-    [HttpGet("{locale}")]
-    public async Task<IActionResult> Get([FromRoute] string locale)
+    [HttpGet("/json/surahInfos/{fileName}")]
+    public async Task<IActionResult> Get([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
         
         var rootFolder = Path.Combine("..", "..", "memquran-files/json/surahInfos");
-        var fileNameWithoutExtension = $"{locale}_surahInfo";
-        var surahsText = await _cache.GetStringAsync(fileNameWithoutExtension);
+        var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
+        var surahsText = await cache.GetStringAsync(fileNameWithoutExtension);
         
         if (surahsText is null)
         {
-            _logger.LogInformation("***** Cache miss for {Locale}_surahInfo", locale);
-            using var streamReader = System.IO.File.OpenText($"{rootFolder}/{locale}_surahInfo.json");
+            logger.LogInformation("***** Cache miss for {FileNameWithoutExtension}", fileNameWithoutExtension);
+            
+            if (!System.IO.File.Exists($"{rootFolder}/{fileNameWithoutExtension}.json"))
+            {
+                return NotFound();
+            }
+            
+            using var streamReader = System.IO.File.OpenText($"{rootFolder}/{fileName}");
             surahsText = await streamReader.ReadToEndAsync();
-            await _cache.SetStringAsync(fileNameWithoutExtension, surahsText);
+            await cache.SetStringAsync(fileNameWithoutExtension, surahsText);
         }
 
-        // _logger.LogInformation("SurahInfo text loaded in {Elapsed} ms", sw.Elapsed);
+        logger.LogInformation("SurahInfo text loaded in {Elapsed} ms", sw.Elapsed);
         
         return Ok(surahsText);
     }
