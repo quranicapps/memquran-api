@@ -1,5 +1,6 @@
-using Microsoft.Extensions.Caching.Distributed;
+using QuranApi.Clients.Local;
 using QuranApi.Contracts;
+using QuranApi.Models;
 using QuranApi.Settings;
 using QuranApi.Workers;
 
@@ -11,31 +12,52 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin());
-});
+builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin()); });
 
 // Configuration
-var cachingSettings = builder.Configuration.GetSection(CachingSettings.SectionName).Get<CachingSettings>();
-if (cachingSettings == null) throw new Exception("Could not bind the caching settings, please check configuration");
+var contentDeliverySettings = builder.Configuration.GetSection(ContentDeliverySettings.SectionName).Get<ContentDeliverySettings>();
+if (contentDeliverySettings == null) throw new Exception("Could not bind the Content Delivery Settings, please check configuration");
+builder.Services.AddSingleton(contentDeliverySettings);
 
-builder.Services.AddSingleton(cachingSettings);
-builder.Services.AddDistributedMemoryCache(options =>
-{
-    options.SizeLimit = long.MaxValue;
-});
+var clientsSettings = builder.Configuration.GetSection(ClientsSettings.SectionName).Get<ClientsSettings>();
+if (clientsSettings == null) throw new Exception("Could not bind the Clients Settings, please check configuration");
+builder.Services.AddSingleton(clientsSettings);
+
+// Caching
+builder.Services.AddDistributedMemoryCache(options => { options.SizeLimit = long.MaxValue; });
+builder.Services.AddSingleton<ICachingProviderFactory, CachingProviderFactory>();
+builder.Services.AddSingleton<ICachingProvider, NullCachingProvider>();
+builder.Services.AddSingleton<ICachingProvider, MemoryCachingProvider>();
 
 // Workers
-builder.Services.AddHostedService<CachingWorker>();
+builder.Services.AddHostedService<LocalFilesCachingWorker>();
 
 // Services
 builder.Services.AddSingleton<IHashingService, HashingService>();
+builder.Services.AddSingleton<IStaticFileService, StaticFileService>();
+builder.Services.AddScoped<JsDelivrDelegatingHandler>();
 
-builder.Services.Configure<HostOptions>(options =>
+var logger = builder.Services.BuildServiceProvider().GetService<ILoggerFactory>().CreateLogger("Program");
+
+// If local, just use the local service client else Add other HTTP clients
+if (contentDeliverySettings.Type == ContentDeliveryType.Local)
 {
-    options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore;
-});
+    builder.Services.AddSingleton<ICdnClient, LocalFileClient>();
+    logger.LogInformation("Local Files used for Content Delivery");
+}
+else
+{
+    builder.Services.AddHttpClient<ICdnClient, JsDelivrClient>(httpClient =>
+        {
+            httpClient.BaseAddress = new Uri(clientsSettings.JsDelivrService.BaseUrl);
+            httpClient.Timeout = clientsSettings.JsDelivrService.DefaultTimeout;
+        })
+        .AddHttpMessageHandler(() => new JsDelivrDelegatingHandler()); 
+    logger.LogInformation("JsDelivrClient used for Content Delivery");
+}
+
+// Host Options
+builder.Services.Configure<HostOptions>(options => { options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore; });
 
 var app = builder.Build();
 

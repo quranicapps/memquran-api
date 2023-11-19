@@ -1,37 +1,35 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
+using QuranApi.Contracts;
 
 namespace QuranApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class SurahInfoController(IDistributedCache cache, ILogger<SurahInfoController> logger) : ControllerBase
+public class SurahInfoController : ControllerBase
 {
+    private readonly IStaticFileService _staticFileService;
+    private readonly ILogger<SurahInfoController> _logger;
+
+    public SurahInfoController(IStaticFileService staticFileService, ILogger<SurahInfoController> logger)
+    {
+        _staticFileService = staticFileService;
+        _logger = logger;
+    }
+
     [HttpGet("/json/surahInfos/{fileName}")]
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
         
-        var rootFolder = Path.Combine("..", "..", "static/json/surahInfos");
-        var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
-        var surahsText = await cache.GetStringAsync(fileNameWithoutExtension);
+        var surahsText = await _staticFileService.GetFileCommentAsync($"json/surahInfos/{fileName}");
         
         if (surahsText is null)
         {
-            logger.LogInformation("***** Cache miss for {FileNameWithoutExtension}", fileNameWithoutExtension);
-            
-            if (!System.IO.File.Exists($"{rootFolder}/{fileNameWithoutExtension}.json"))
-            {
-                return NotFound();
-            }
-            
-            using var streamReader = System.IO.File.OpenText($"{rootFolder}/{fileName}");
-            surahsText = await streamReader.ReadToEndAsync();
-            await cache.SetStringAsync(fileNameWithoutExtension, surahsText);
+            return NotFound();
         }
 
-        logger.LogInformation("SurahInfo text loaded in {Elapsed} ms", sw.Elapsed);
+        _logger.LogInformation("SurahInfo text loaded in {Elapsed} ms", sw.Elapsed);
         
         return Ok(surahsText);
     }

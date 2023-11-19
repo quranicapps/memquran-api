@@ -6,9 +6,17 @@ namespace QuranApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class SurahController(IDistributedCache cache, ILogger<SurahController> logger)
-    : ControllerBase
+public class SurahController : ControllerBase
 {
+    private readonly IDistributedCache _cache;
+    private readonly ILogger<SurahController> _logger;
+
+    public SurahController(IDistributedCache cache, ILogger<SurahController> logger)
+    {
+        _cache = cache;
+        _logger = logger;
+    }
+
     [HttpGet("/json/surahs/{fileName}")]
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {
@@ -16,11 +24,11 @@ public class SurahController(IDistributedCache cache, ILogger<SurahController> l
 
         var rootFolder = Path.Combine("..", "..", "static/json/surahs");
         var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
-        var surahsText = await cache.GetStringAsync(fileNameWithoutExtension);
+        var surahsText = await _cache.GetStringAsync(fileNameWithoutExtension);
 
         if (surahsText is null)
         {
-            logger.LogInformation("***** Cache miss for: {FileNameWithoutExtension}", fileNameWithoutExtension);
+            _logger.LogInformation("***** Cache miss for: {FileNameWithoutExtension}", fileNameWithoutExtension);
 
             if (!System.IO.File.Exists($"{rootFolder}/{fileNameWithoutExtension}.json"))
             {
@@ -29,10 +37,10 @@ public class SurahController(IDistributedCache cache, ILogger<SurahController> l
 
             using var streamReader = System.IO.File.OpenText($"{rootFolder}/{fileNameWithoutExtension}.json");
             surahsText = await streamReader.ReadToEndAsync();
-            await cache.SetStringAsync(fileNameWithoutExtension, surahsText);
+            await _cache.SetStringAsync(fileNameWithoutExtension, surahsText);
         }
 
-        logger.LogInformation("{FileName} text loaded in {Elapsed} ms", fileNameWithoutExtension, sw.Elapsed);
+        _logger.LogInformation("{FileName} text loaded in {Elapsed} ms", fileNameWithoutExtension, sw.Elapsed);
 
         return Ok(surahsText);
     }

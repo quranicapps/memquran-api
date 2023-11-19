@@ -2,5 +2,5 @@
 
 public enum CacheType
 {
-    Unknown, Memory, Redis      
+    None, Memory, Redis      
 }
