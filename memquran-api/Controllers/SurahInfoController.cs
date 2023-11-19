@@ -22,15 +22,15 @@ public class SurahInfoController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
         
-        var surahsText = await _staticFileService.GetFileCommentAsync($"json/surahInfos/{fileName}");
+        var text = await _staticFileService.GetFileCommentAsync($"json/surahInfos/{fileName}");
         
-        if (surahsText is null)
+        if (text is null)
         {
             return NotFound();
         }
 
         _logger.LogInformation("SurahInfo text loaded in {Elapsed} ms", sw.Elapsed);
         
-        return Ok(surahsText);
+        return Ok(text);
     }
 }
