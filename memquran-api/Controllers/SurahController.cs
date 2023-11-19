@@ -14,7 +14,7 @@ public class SurahController(IDistributedCache cache, ILogger<SurahController> l
     {
         var sw = Stopwatch.StartNew();
 
-        var rootFolder = Path.Combine("..", "..", "memquran-files/json/surahs");
+        var rootFolder = Path.Combine("..", "..", "static/json/surahs");
         var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
         var surahsText = await cache.GetStringAsync(fileNameWithoutExtension);
 

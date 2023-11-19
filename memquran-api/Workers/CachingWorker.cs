@@ -19,8 +19,8 @@ public class CachingWorker(IDistributedCache cache, CachingSettings cachingSetti
         
         var filePaths = new List<string>
         {
-            Path.Combine("..", "..", "memquran-files/json/surahInfos"),
-            Path.Combine("..", "..", "memquran-files/json/surahs"),
+            Path.Combine("..", "..", "static/json/surahInfos"),
+            Path.Combine("..", "..", "static/json/surahs"),
         };
 
         await Parallel.ForEachAsync(filePaths, stoppingToken, async (path, cancellationToken) => { await CacheFiles(path, "*.json", SearchOption.AllDirectories, cancellationToken); });

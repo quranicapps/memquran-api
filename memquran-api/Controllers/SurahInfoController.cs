@@ -13,7 +13,7 @@ public class SurahInfoController(IDistributedCache cache, ILogger<SurahInfoContr
     {
         var sw = Stopwatch.StartNew();
         
-        var rootFolder = Path.Combine("..", "..", "memquran-files/json/surahInfos");
+        var rootFolder = Path.Combine("..", "..", "static/json/surahInfos");
         var fileNameWithoutExtension = Path.GetFileNameWithoutExtension(fileName);
         var surahsText = await cache.GetStringAsync(fileNameWithoutExtension);
         
