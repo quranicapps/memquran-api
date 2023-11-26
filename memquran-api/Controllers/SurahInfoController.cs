@@ -29,7 +29,7 @@ public class SurahInfoController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("SurahInfo text loaded in {Elapsed} ms", sw.Elapsed);
+        _logger.LogInformation("{fileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
         
         return Ok(text);
     }
