@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using QuranApi.Contracts;
 
 namespace QuranApi.Controllers;
@@ -18,6 +17,8 @@ public class SurahController : ControllerBase
         _logger = logger;
     }
 
+    // http://localhost:3000/json/surahs/surah_1.json
+    // http://localhost:3000/json/surahs/translation_1_10.json
     [HttpGet("/json/surahs/{fileName}")]
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {

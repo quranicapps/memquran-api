@@ -6,24 +6,24 @@ namespace QuranApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class SurahInfoController : ControllerBase
+public class JuzInfoController : ControllerBase
 {
     private readonly IStaticFileService _staticFileService;
-    private readonly ILogger<SurahInfoController> _logger;
+    private readonly ILogger<JuzInfoController> _logger;
 
-    public SurahInfoController(IStaticFileService staticFileService, ILogger<SurahInfoController> logger)
+    public JuzInfoController(IStaticFileService staticFileService, ILogger<JuzInfoController> logger)
     {
         _staticFileService = staticFileService;
         _logger = logger;
     }
 
-    // http://localhost:3000/json/surahInfos/en_surahInfo.json
-    [HttpGet("/json/surahInfos/{fileName}")]
+    // http://localhost:3000/json/juzInfos/en_juzInfo.json
+    [HttpGet("/json/juzInfos/{fileName}")]
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
         
-        var text = await _staticFileService.GetFileCommentAsync($"json/surahInfos/{fileName}");
+        var text = await _staticFileService.GetFileCommentAsync($"json/juzInfos/{fileName}");
         
         if (text is null)
         {

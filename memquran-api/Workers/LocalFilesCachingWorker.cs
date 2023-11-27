@@ -43,6 +43,7 @@ public class LocalFilesCachingWorker : BackgroundService
         var filePaths = new List<string>
         {
             Path.Combine("..", "..", "static/json/surahInfos"),
+            Path.Combine("..", "..", "static/json/juzInfos"),
             Path.Combine("..", "..", "static/json/surahs"),
         };
 
