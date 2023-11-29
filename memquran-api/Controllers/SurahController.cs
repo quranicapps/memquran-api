@@ -30,13 +30,13 @@ public class SurahController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("{fileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        _logger.LogInformation("/json/surahInfos/{fileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
         
         return Ok(text);
     }
 
     // http://localhost:3000/json/surahs/surah_{chapter}.json
-    // http://localhost:3000/json/surahs/translation_{chapter}_{translationId}.json
+    // http://localhost:3000/json/surahs/surah_translation_{chapter}_{translationId}.json
     [HttpGet("/json/surahs/{fileName}")]
     public async Task<IActionResult> GetSurah([FromRoute] string fileName)
     {
@@ -49,7 +49,7 @@ public class SurahController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        _logger.LogInformation("/json/surahs/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
         
         return Ok(text);
     }

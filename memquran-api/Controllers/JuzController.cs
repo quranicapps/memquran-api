@@ -30,13 +30,13 @@ public class JuzController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("{fileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        _logger.LogInformation("/json/juzInfos/{fileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
         
         return Ok(text);
     }
 
     // http://localhost:3000/json/juzs/juz_{chapter}.json
-    // http://localhost:3000/json/juzs/translation_{juz}_{translationId}.json
+    // http://localhost:3000/json/juzs/juz_translation_{juz}_{translationId}.json
     [HttpGet("/json/juzs/{fileName}")]
     public async Task<IActionResult> GetJuz([FromRoute] string fileName)
     {
@@ -49,7 +49,7 @@ public class JuzController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        _logger.LogInformation("/json/juzs/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
         
         return Ok(text);
     }
