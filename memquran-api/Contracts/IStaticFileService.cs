@@ -2,5 +2,5 @@
 
 public interface IStaticFileService
 {
-    Task<string> GetFileCommentAsync(string filePath, CancellationToken cancellationToken = default);
+    Task<string> GetFileContentAsync(string filePath, CancellationToken cancellationToken = default);
 }

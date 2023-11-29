@@ -15,7 +15,7 @@ public class StaticFileService : IStaticFileService
         _logger = logger;
     }
 
-    public async Task<string> GetFileCommentAsync(string filePath, CancellationToken cancellationToken = default)
+    public async Task<string> GetFileContentAsync(string filePath, CancellationToken cancellationToken = default)
     {
         var cacheKey = Path.GetFileName(filePath);
         var text = await _cachingProvider.GetStringAsync(cacheKey, cancellationToken);

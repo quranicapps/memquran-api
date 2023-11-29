@@ -23,7 +23,7 @@ public class JuzInfoController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
         
-        var text = await _staticFileService.GetFileCommentAsync($"json/juzInfos/{fileName}");
+        var text = await _staticFileService.GetFileContentAsync($"json/juzInfos/{fileName}");
         
         if (text is null)
         {
