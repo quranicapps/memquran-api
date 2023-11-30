@@ -19,7 +19,7 @@ public class JuzController : ControllerBase
     
     // http://localhost:3000/json/juzInfos/{locale}_juzInfo.json
     [HttpGet("/json/juzInfos/{fileName}")]
-    public async Task<IActionResult> GetSurahInfos([FromRoute] string fileName)
+    public async Task<IActionResult> GetJuzInfos([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
         
@@ -35,8 +35,8 @@ public class JuzController : ControllerBase
         return Ok(text);
     }
 
-    // http://localhost:3000/json/juzs/juz_{chapter}.json
-    // http://localhost:3000/json/juzs/juz_translation_{juz}_{translationId}.json
+    // http://localhost:3000/json/juzs/juz_{juzNumber}.json
+    // http://localhost:3000/json/juzs/juz_translation_{juzNumber}_{translationId}.json
     [HttpGet("/json/juzs/{fileName}")]
     public async Task<IActionResult> GetJuz([FromRoute] string fileName)
     {
