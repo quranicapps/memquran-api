@@ -73,6 +73,6 @@ public class LocalFilesCachingWorker : BackgroundService
             await _cachingProvider.SetAsync($"{cacheKey}", surahsBytes, ct);
         });
 
-        _logger.LogInformation("Cached {Count} {Glob} files from {Path} in {Time}", filePaths.Count, fileExtensionGlob, path, sw.Elapsed);
+        _logger.LogInformation("Cached: {PathFileName} - {Count} ({Glob}) files in {Time}", Path.GetFileName(path), filePaths.Count, fileExtensionGlob, sw.Elapsed);
     }
 }
