@@ -23,7 +23,7 @@ public class JsDelivrClient : BaseHttpClient, ICdnClient
         
         var httpRequest = new HttpRequestMessage
         {
-            RequestUri = new Uri($"gh/qurancore/static@{_clientsSettings.JsDelivrService.Version}/{filePath}", UriKind.Relative),
+            RequestUri = new Uri($"gh/quranstatic/static@{_clientsSettings.JsDelivrService.Version}/{filePath}", UriKind.Relative),
             Method = HttpMethod.Get
         };
         

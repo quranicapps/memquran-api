@@ -4,7 +4,7 @@ public class LocalFileClient : ICdnClient
 {
     public async Task<string> GetFileContentAsync(string filePath, CancellationToken cancellationToken = default)
     {
-        var fullFilePath = Path.Combine("..", "..", $"static/{filePath}");
+        var fullFilePath = Path.Combine("..", "..", "..", "..", $"QuranStatic/static/{filePath}");
         
         if (!File.Exists(fullFilePath))
         {

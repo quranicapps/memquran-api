@@ -42,16 +42,16 @@ public class LocalFilesCachingWorker : BackgroundService
         
         var filePaths = new List<string>
         {
-            Path.Combine("..", "..", "static/json/surahInfos"),
-            Path.Combine("..", "..", "static/json/juzInfos"),
-            Path.Combine("..", "..", "static/json/pageInfos"),
-            Path.Combine("..", "..", "static/json/rukuInfos"),
-            Path.Combine("..", "..", "static/json/maqraInfos"),
-            Path.Combine("..", "..", "static/json/surahs"),
-            Path.Combine("..", "..", "static/json/juzs"),
-            Path.Combine("..", "..", "static/json/pages"),
-            Path.Combine("..", "..", "static/json/rukus"),
-            Path.Combine("..", "..", "static/json/maqras"),
+            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/surahInfos"),
+            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/juzInfos"),
+            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/pageInfos"),
+            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/rukuInfos"),
+            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/maqraInfos"),
+            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/surahs"),
+            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/juzs"),
+            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/pages"),
+            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/rukus"),
+            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/maqras"),
         };
 
         await Parallel.ForEachAsync(filePaths, stoppingToken, async (path, cancellationToken) => { await CacheFiles(path, "*.json", SearchOption.AllDirectories, cancellationToken); });
