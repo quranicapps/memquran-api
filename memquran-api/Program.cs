@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Logging.Console;
 using QuranApi.Clients.Local;
 using QuranApi.Contracts;
 using QuranApi.Models;
@@ -37,7 +38,17 @@ builder.Services.AddSingleton<IHashingService, HashingService>();
 builder.Services.AddSingleton<IStaticFileService, StaticFileService>();
 builder.Services.AddScoped<JsDelivrDelegatingHandler>();
 
-var logger = builder.Services.BuildServiceProvider().GetService<ILoggerFactory>().CreateLogger("Program");
+var logger = LoggerFactory.Create(loggingBuilder => loggingBuilder
+        .AddSimpleConsole(options =>
+        {
+            options.SingleLine = true;
+            options.IncludeScopes = true;
+            options.TimestampFormat = "yyyy-MM-dd HH:mm:ss.ffff ";
+        })
+        .AddFilter(level => level >= LogLevel.Information))
+    .CreateLogger("Program");
+
+// var logger = builder.Services.BuildServiceProvider().GetService<ILoggerFactory>().CreateLogger("Program");
 
 // If local, just use the local service client else Add other HTTP clients
 if (contentDeliverySettings.Type == ContentDeliveryType.Local)
@@ -52,7 +63,7 @@ else
             httpClient.BaseAddress = new Uri(clientsSettings.JsDelivrService.BaseUrl);
             httpClient.Timeout = clientsSettings.JsDelivrService.DefaultTimeout;
         })
-        .AddHttpMessageHandler(() => new JsDelivrDelegatingHandler()); 
+        .AddHttpMessageHandler(() => new JsDelivrDelegatingHandler());
     logger.LogInformation("JsDelivrClient used for Content Delivery");
 }
 
