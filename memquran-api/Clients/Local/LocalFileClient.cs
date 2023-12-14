@@ -2,7 +2,7 @@
 
 public class LocalFileClient : ICdnClient
 {
-    public async Task<string> GetFileContentAsync(string filePath, CancellationToken cancellationToken = default)
+    public async Task<string> GetFileContentStringAsync(string filePath, CancellationToken cancellationToken = default)
     {
         var fullFilePath = Path.Combine("..", "..", "..", "..", $"QuranStatic/static/{filePath}");
         
@@ -13,5 +13,17 @@ public class LocalFileClient : ICdnClient
         
         using var streamReader = File.OpenText(fullFilePath);
         return await streamReader.ReadToEndAsync(cancellationToken);
+    }
+
+    public async Task<byte[]> GetFileContentBytesAsync(string filePath, CancellationToken cancellationToken = default)
+    {
+        var fullFilePath = Path.Combine("..", "..", "..", "..", $"QuranStatic/static/{filePath}");
+        
+        if (!File.Exists(fullFilePath))
+        {
+            return null;
+        }
+        
+        return await File.ReadAllBytesAsync(fullFilePath, cancellationToken);
     }
 }

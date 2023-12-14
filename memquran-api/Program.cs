@@ -1,4 +1,3 @@
-using Microsoft.Extensions.Logging.Console;
 using QuranApi.Clients.Local;
 using QuranApi.Contracts;
 using QuranApi.Models;
@@ -83,6 +82,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 // app.UseHttpsRedirection();
 app.UseAuthorization();

@@ -15,14 +15,14 @@ public class StaticFileService : IStaticFileService
         _logger = logger;
     }
 
-    public async Task<string> GetFileContentAsync(string filePath, CancellationToken cancellationToken = default)
+    public async Task<string> GetFileContentStringAsync(string filePath, CancellationToken cancellationToken = default)
     {
         var cacheKey = Path.GetFileName(filePath);
         var text = await _cachingProvider.GetStringAsync(cacheKey, cancellationToken);
 
         if (text is not null) return text;
         
-        text = await _cdnClient.GetFileContentAsync(filePath, cancellationToken);
+        text = await _cdnClient.GetFileContentStringAsync(filePath, cancellationToken);
             
         if(text is not null)
         {
@@ -30,5 +30,10 @@ public class StaticFileService : IStaticFileService
         }
         
         return text;
+    }
+
+    public async Task<byte[]> GetFileContentBytesAsync(string filePath, CancellationToken cancellationToken = default)
+    {
+        return await _cdnClient.GetFileContentBytesAsync(filePath, cancellationToken);  
     }
 }

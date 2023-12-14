@@ -23,7 +23,7 @@ public class PageController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
         
-        var text = await _staticFileService.GetFileContentAsync($"json/pageInfos/{fileName}");
+        var text = await _staticFileService.GetFileContentStringAsync($"json/pageInfos/{fileName}");
         
         if (text is null)
         {
@@ -42,7 +42,7 @@ public class PageController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
         
-        var text = await _staticFileService.GetFileContentAsync($"json/pages/{fileName}");
+        var text = await _staticFileService.GetFileContentStringAsync($"json/pages/{fileName}");
         
         if (text is null)
         {

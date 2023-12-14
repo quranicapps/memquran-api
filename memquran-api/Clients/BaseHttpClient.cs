@@ -55,4 +55,39 @@ public abstract class BaseHttpClient
         
         return JsonSerializer.Deserialize<T>(responseContent);
     }
+
+    protected async Task<byte[]> GetBytesAsync(HttpRequestMessage request, CancellationToken cancellationToken = default)
+    {
+        HttpResponseMessage response;
+
+        try
+        {
+            _logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), request.RequestUri);
+            response = await _httpClient.SendAsync(request, cancellationToken);
+        }
+        catch (HttpRequestException ex)
+        {
+            throw new HttpServiceException(ServiceName, request, ex, HttpStatusCode.InternalServerError);
+        }
+        catch (TaskCanceledException ex)
+        {
+            throw new HttpServiceException(ServiceName, request, ex, HttpStatusCode.RequestTimeout);
+        }
+        catch (Exception ex)
+        {
+            throw new HttpServiceException(ServiceName, request, ex, HttpStatusCode.InternalServerError);
+        }
+
+        var responseContent = await response.Content.ReadAsStringAsync(cancellationToken);
+
+        if (response.IsSuccessStatusCode)
+        {
+            using var content = response.Content;
+            return await content.ReadAsByteArrayAsync(cancellationToken);
+        }
+
+        _logger.LogError("Received status code {StatusCode} ({StatusCodeInt}) when calling endpoint {RequestUri}", response.StatusCode, (int)response.StatusCode, request.RequestUri);
+        
+        throw new HttpServiceException(ServiceName, request, response.StatusCode, responseContent);
+    }
 }

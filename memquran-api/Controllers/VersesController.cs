@@ -25,7 +25,7 @@ public class VersesController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
         
-        var text = await _staticFileService.GetFileContentAsync($"json/verses/{fileName}");
+        var text = await _staticFileService.GetFileContentStringAsync($"json/verses/{fileName}");
         
         if (text is null)
         {

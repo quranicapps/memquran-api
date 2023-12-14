@@ -17,11 +17,9 @@ public class MemoryCachingProvider : ICachingProvider
     
     public CacheType CacheType => CacheType.Memory;
     
-    public async Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default)
+    public async Task<byte[]> GetAsync(string key, CancellationToken cancellationToken = default)
     {
-        var item = await _distributedCache.GetStringAsync(key, token: cancellationToken).ConfigureAwait(false);
-
-        return item == null ? default : JsonSerializer.Deserialize<T>(item);
+        return await _distributedCache.GetAsync(key, token: cancellationToken).ConfigureAwait(false);
     }
 
     public async Task<string> GetStringAsync(string key, CancellationToken cancellationToken = default)

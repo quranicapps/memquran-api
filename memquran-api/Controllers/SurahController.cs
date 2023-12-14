@@ -23,7 +23,7 @@ public class SurahController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
         
-        var text = await _staticFileService.GetFileContentAsync($"json/surahInfos/{fileName}");
+        var text = await _staticFileService.GetFileContentStringAsync($"json/surahInfos/{fileName}");
         
         if (text is null)
         {
@@ -42,7 +42,7 @@ public class SurahController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
         
-        var text = await _staticFileService.GetFileContentAsync($"json/surahs/{fileName}");
+        var text = await _staticFileService.GetFileContentStringAsync($"json/surahs/{fileName}");
         
         if (text is null)
         {

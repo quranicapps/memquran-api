@@ -12,6 +12,11 @@ public class NullCachingProvider : ICachingProvider
         return default;
     }
 
+    public Task<byte[]> GetAsync(string key, CancellationToken cancellationToken = default)
+    {
+        return Task.FromResult((byte[])null);
+    }
+
     public Task<string> GetStringAsync(string key, CancellationToken cancellationToken = default)
     {
         return Task.FromResult((string)null);

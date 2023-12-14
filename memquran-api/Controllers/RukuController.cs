@@ -23,7 +23,7 @@ public class RukuController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
         
-        var text = await _staticFileService.GetFileContentAsync($"json/rukuInfos/{fileName}");
+        var text = await _staticFileService.GetFileContentStringAsync($"json/rukuInfos/{fileName}");
         
         if (text is null)
         {
@@ -42,7 +42,7 @@ public class RukuController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
         
-        var text = await _staticFileService.GetFileContentAsync($"json/rukus/{fileName}");
+        var text = await _staticFileService.GetFileContentStringAsync($"json/rukus/{fileName}");
         
         if (text is null)
         {

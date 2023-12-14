@@ -23,7 +23,7 @@ public class MaqraController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
         
-        var text = await _staticFileService.GetFileContentAsync($"json/maqraInfos/{fileName}");
+        var text = await _staticFileService.GetFileContentStringAsync($"json/maqraInfos/{fileName}");
         
         if (text is null)
         {
@@ -42,7 +42,7 @@ public class MaqraController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
         
-        var text = await _staticFileService.GetFileContentAsync($"json/maqras/{fileName}");
+        var text = await _staticFileService.GetFileContentStringAsync($"json/maqras/{fileName}");
         
         if (text is null)
         {
