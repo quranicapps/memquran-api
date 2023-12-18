@@ -53,6 +53,8 @@ public class LocalFilesCachingWorker : BackgroundService
             Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/rukus"),
             Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/maqras"),
             Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/verses"),
+            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/reciterInfos"),
+            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/audio"),
         };
 
         await Parallel.ForEachAsync(filePaths, stoppingToken, async (path, cancellationToken) => { await CacheFiles(path, "*.json", SearchOption.AllDirectories, cancellationToken); });
