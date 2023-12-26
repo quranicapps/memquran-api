@@ -17,7 +17,7 @@ public class AudioController : ControllerBase
         _logger = logger;
     }
     
-    // http://localhost:3000/json/audio/ab_abdallah-al-matroud-1/timings/surah/abdallah-al-matroud-1_timings_surah_1.json
+    // http://localhost:3000/json/audio/abderahmane-eloosi-1/timings/surah/abderahmane-eloosi-1_timings_surah_1.json
     [HttpGet("/json/audio/{reciterId}/timings/surah/{fileName}")]
     public async Task<IActionResult> GetAudioJson([FromRoute] string reciterId, [FromRoute] string fileName)
     {
