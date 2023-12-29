@@ -52,4 +52,40 @@ public class AudioController : ControllerBase
         
         return Ok(text);
     }
+    
+    // http://127.0.0.1:3000/json/audio/khalifah-al-tunaiji-161-3/timings/page/khalifah-al-tunaiji-161-3_timings_page_604.json
+    [HttpGet("/json/audio/{reciterId}/timings/page/{fileName}")]
+    public async Task<IActionResult> GetPageAudioJson([FromRoute] string reciterId, [FromRoute] string fileName)
+    {
+        var sw = Stopwatch.StartNew();
+        
+        var text = await _staticFileService.GetFileContentStringAsync($"json/audio/{reciterId}/timings/page/{fileName}");
+        
+        if (text is null)
+        {
+            return NotFound();
+        }
+
+        _logger.LogInformation("/json/audio/{ReciterId}/timings/page/{FileName} loaded in {Elapsed} ms", reciterId, fileName, sw.Elapsed);
+        
+        return Ok(text);
+    }
+    
+    // http://127.0.0.1:3000/json/audio/khalifah-al-tunaiji-161-3/timings/ruku/khalifah-al-tunaiji-161-3_timings_ruku_300.json
+    [HttpGet("/json/audio/{reciterId}/timings/ruku/{fileName}")]
+    public async Task<IActionResult> GetRukuAudioJson([FromRoute] string reciterId, [FromRoute] string fileName)
+    {
+        var sw = Stopwatch.StartNew();
+        
+        var text = await _staticFileService.GetFileContentStringAsync($"json/audio/{reciterId}/timings/ruku/{fileName}");
+        
+        if (text is null)
+        {
+            return NotFound();
+        }
+
+        _logger.LogInformation("/json/audio/{ReciterId}/timings/ruku/{FileName} loaded in {Elapsed} ms", reciterId, fileName, sw.Elapsed);
+        
+        return Ok(text);
+    }
 }
