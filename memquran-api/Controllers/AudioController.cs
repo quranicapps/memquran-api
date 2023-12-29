@@ -88,4 +88,22 @@ public class AudioController : ControllerBase
         
         return Ok(text);
     }
+    
+    // http://127.0.0.1:3000/json/audio/khalifah-al-tunaiji-161-3/timings/maqra/khalifah-al-tunaiji-161-3_timings_maqra_300.json
+    [HttpGet("/json/audio/{reciterId}/timings/maqra/{fileName}")]
+    public async Task<IActionResult> GetMaqraAudioJson([FromRoute] string reciterId, [FromRoute] string fileName)
+    {
+        var sw = Stopwatch.StartNew();
+        
+        var text = await _staticFileService.GetFileContentStringAsync($"json/audio/{reciterId}/timings/maqra/{fileName}");
+        
+        if (text is null)
+        {
+            return NotFound();
+        }
+
+        _logger.LogInformation("/json/audio/{ReciterId}/timings/maqra/{FileName} loaded in {Elapsed} ms", reciterId, fileName, sw.Elapsed);
+        
+        return Ok(text);
+    }
 }
