@@ -106,4 +106,22 @@ public class AudioController : ControllerBase
         
         return Ok(text);
     }
+    
+    // http://localhost:3000/audio/tajweed/samples/ikhfa.mp3
+    [HttpGet("/audio/tajweed/samples/{fileName}")]
+    public async Task<IActionResult> GetTajweedAudio([FromRoute] string fileName)
+    {
+        var sw = Stopwatch.StartNew();
+
+        var data = await _staticFileService.GetFileContentBytesAsync($"audio/tajweed/samples/{fileName}");
+        
+        if (data is null)
+        {
+            return NotFound();
+        }
+
+        _logger.LogInformation("/audio/tajweed/samples/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        
+        return File(data, "audio/mp3");
+    }
 }
