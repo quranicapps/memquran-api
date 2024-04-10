@@ -30,7 +30,7 @@ public class JuzController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("/json/juzInfos/{fileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        _logger.LogInformation("/json/juzInfos/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
         
         return Ok(text);
     }

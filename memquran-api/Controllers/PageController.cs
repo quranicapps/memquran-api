@@ -30,7 +30,7 @@ public class PageController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("/json/pageInfos/{fileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        _logger.LogInformation("/json/pageInfos/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
         
         return Ok(text);
     }

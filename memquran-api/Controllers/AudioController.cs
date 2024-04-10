@@ -124,4 +124,22 @@ public class AudioController : ControllerBase
         
         return File(data, "audio/mp3");
     }
+    
+    // http://localhost:3000/audio/duas/1_1.mp3
+    [HttpGet("/audio/duas/{fileName}")]
+    public async Task<IActionResult> GetDuasAudio([FromRoute] string fileName)
+    {
+        var sw = Stopwatch.StartNew();
+
+        var data = await _staticFileService.GetFileContentBytesAsync($"audio/duas/{fileName}");
+        
+        if (data is null)
+        {
+            return NotFound();
+        }
+
+        _logger.LogInformation("/audio/duas/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        
+        return File(data, "audio/mp3");
+    }
 }

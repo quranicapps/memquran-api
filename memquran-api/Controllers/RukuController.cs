@@ -30,7 +30,7 @@ public class RukuController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("/json/rukuInfos/{fileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        _logger.LogInformation("/json/rukuInfos/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
         
         return Ok(text);
     }

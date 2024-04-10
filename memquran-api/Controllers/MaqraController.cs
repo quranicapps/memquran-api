@@ -30,7 +30,7 @@ public class MaqraController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("/json/maqraInfos/{fileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        _logger.LogInformation("/json/maqraInfos/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
         
         return Ok(text);
     }

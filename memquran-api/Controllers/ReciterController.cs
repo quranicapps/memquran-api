@@ -30,7 +30,7 @@ public class ReciterController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("/json/reciterInfos/{fileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        _logger.LogInformation("/json/reciterInfos/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
         
         return Ok(text);
     }
