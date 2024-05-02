@@ -17,7 +17,7 @@ public class ImagesController : ControllerBase
         _logger = logger;
     }
     
-    // http://localhost:3000/images/tajweed/1/1/1.png
+    // http://localhost:3123/images/tajweed/1/1/1.png
     [HttpGet("/images/{imageType}/{surahNumber}/{verseNumber}/{fileName}")]
     public async Task<IActionResult> GetTajweedWord([FromRoute] string imageType, string surahNumber, string verseNumber, string fileName)
     {
@@ -35,9 +35,28 @@ public class ImagesController : ControllerBase
         return File(data, "image/png");
     }
     
-    // http://localhost:3000/images/common/numbers/1.png
-    [HttpGet("/images/common/numbers/{fileName}")]
+    // http://localhost:3123/images/tajweed/1.png
+    [HttpGet("/images/tajweed/{fileName}")]
     public async Task<IActionResult> GetTajweedNumber([FromRoute] string fileName)
+    {
+        var sw = Stopwatch.StartNew();
+
+        var data = await _staticFileService.GetFileContentBytesAsync($"images/tajweed/{fileName}");
+        
+        if (data is null)
+        {
+            return NotFound();
+        }
+
+        _logger.LogInformation("/images/tajweed/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        
+        return File(data, "image/png");
+    }
+    
+    // Todo remove once changed web to point to e.g. http://localhost:3123/images/tajweed/1.png
+    // http://localhost:3123/images/common/numbers/1.png
+    [HttpGet("/images/common/numbers/{fileName}")]
+    public async Task<IActionResult> GetTajweedCommonNumber([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
 
@@ -53,7 +72,7 @@ public class ImagesController : ControllerBase
         return File(data, "image/png");
     }
     
-    // http://localhost:3000/images/reciters/abdallah-al-matroud-1.png
+    // http://localhost:3123/images/reciters/abdallah-al-matroud-1.png
     [HttpGet("/images/reciters/{fileName}")]
     public async Task<IActionResult> GetReciter([FromRoute] string fileName)
     {

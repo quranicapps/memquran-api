@@ -17,7 +17,7 @@ public class SurahController : ControllerBase
         _logger = logger;
     }
     
-    // http://localhost:3000/json/surahInfos/{locale}_surahInfo.json
+    // http://localhost:3123/json/surahInfos/{locale}_surahInfo.json
     [HttpGet("/json/surahInfos/{fileName}")]
     public async Task<IActionResult> GetSurahInfos([FromRoute] string fileName)
     {
@@ -35,9 +35,9 @@ public class SurahController : ControllerBase
         return Ok(text);
     }
 
-    // http://localhost:3000/json/surahs/surah_{surahNumber}.json
-    // http://localhost:3000/json/surahs/surah_translation_{surahNumber}_{translationId}.json
-    // http://localhost:3000/json/surahs/surah_wbw_{locale}_{surahNumber}.json
+    // http://localhost:3123/json/surahs/surah_{surahNumber}.json
+    // http://localhost:3123/json/surahs/surah_translation_{surahNumber}_{translationId}.json
+    // http://localhost:3123/json/surahs/surah_wbw_{locale}_{surahNumber}.json
     [HttpGet("/json/surahs/{fileName}")]
     public async Task<IActionResult> GetSurah([FromRoute] string fileName)
     {

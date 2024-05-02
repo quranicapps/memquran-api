@@ -17,7 +17,7 @@ public class ReciterController : ControllerBase
         _logger = logger;
     }
     
-    // http://localhost:3000/json/reciterInfos/ab_abdallah-al-matroud-1.json
+    // http://localhost:3123/json/reciterInfos/ab_abdallah-al-matroud-1.json
     [HttpGet("/json/reciterInfos/{fileName}")]
     public async Task<IActionResult> GetReciterInfos([FromRoute] string fileName)
     {
@@ -35,7 +35,7 @@ public class ReciterController : ControllerBase
         return Ok(text);
     }
 
-    // http://localhost:3000/json/reciters/en_reciters.json
+    // http://localhost:3123/json/reciters/en_reciters.json
     [HttpGet("/json/reciters/{fileName}")]
     public async Task<IActionResult> GetReciters([FromRoute] string fileName)
     {

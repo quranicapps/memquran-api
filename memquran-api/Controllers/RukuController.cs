@@ -17,7 +17,7 @@ public class RukuController : ControllerBase
         _logger = logger;
     }
     
-    // http://localhost:3000/json/rukuInfos/{locale}_rukuInfo.json
+    // http://localhost:3123/json/rukuInfos/{locale}_rukuInfo.json
     [HttpGet("/json/rukuInfos/{fileName}")]
     public async Task<IActionResult> GetRukuInfos([FromRoute] string fileName)
     {
@@ -35,8 +35,8 @@ public class RukuController : ControllerBase
         return Ok(text);
     }
 
-    // http://localhost:3000/json/rukus/ruku_{rukuNumber}.json
-    // http://localhost:3000/json/rukus/ruku_translation_{rukuNumber}_{translationId}.json
+    // http://localhost:3123/json/rukus/ruku_{rukuNumber}.json
+    // http://localhost:3123/json/rukus/ruku_translation_{rukuNumber}_{translationId}.json
     [HttpGet("/json/rukus/{fileName}")]
     public async Task<IActionResult> GetRuku([FromRoute] string fileName)
     {

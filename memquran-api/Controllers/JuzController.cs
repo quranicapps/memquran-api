@@ -17,7 +17,7 @@ public class JuzController : ControllerBase
         _logger = logger;
     }
     
-    // http://localhost:3000/json/juzInfos/{locale}_juzInfo.json
+    // http://localhost:3123/json/juzInfos/{locale}_juzInfo.json
     [HttpGet("/json/juzInfos/{fileName}")]
     public async Task<IActionResult> GetJuzInfos([FromRoute] string fileName)
     {
@@ -35,8 +35,8 @@ public class JuzController : ControllerBase
         return Ok(text);
     }
 
-    // http://localhost:3000/json/juzs/juz_{juzNumber}.json
-    // http://localhost:3000/json/juzs/juz_translation_{juzNumber}_{translationId}.json
+    // http://localhost:3123/json/juzs/juz_{juzNumber}.json
+    // http://localhost:3123/json/juzs/juz_translation_{juzNumber}_{translationId}.json
     [HttpGet("/json/juzs/{fileName}")]
     public async Task<IActionResult> GetJuz([FromRoute] string fileName)
     {

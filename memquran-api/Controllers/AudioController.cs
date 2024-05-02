@@ -17,7 +17,7 @@ public class AudioController : ControllerBase
         _logger = logger;
     }
     
-    // http://localhost:3000/json/audio/abderahmane-eloosi-1/timings/surah/abderahmane-eloosi-1_timings_surah_1.json
+    // http://localhost:3123/json/audio/abderahmane-eloosi-1/timings/surah/abderahmane-eloosi-1_timings_surah_1.json
     [HttpGet("/json/audio/{reciterId}/timings/surah/{fileName}")]
     public async Task<IActionResult> GetSurahAudioJson([FromRoute] string reciterId, [FromRoute] string fileName)
     {
@@ -35,7 +35,7 @@ public class AudioController : ControllerBase
         return Ok(text);
     }
     
-    // http://localhost:3000/json/audio/abu-bakr-ash-shaatree-1/timings/juz/abu-bakr-ash-shaatree-1_timings_juz_1.json
+    // http://localhost:3123/json/audio/abu-bakr-ash-shaatree-1/timings/juz/abu-bakr-ash-shaatree-1_timings_juz_1.json
     [HttpGet("/json/audio/{reciterId}/timings/juz/{fileName}")]
     public async Task<IActionResult> GetJuzAudioJson([FromRoute] string reciterId, [FromRoute] string fileName)
     {
@@ -53,7 +53,7 @@ public class AudioController : ControllerBase
         return Ok(text);
     }
     
-    // http://127.0.0.1:3000/json/audio/khalifah-al-tunaiji-161-3/timings/page/khalifah-al-tunaiji-161-3_timings_page_604.json
+    // http://127.0.0.1:3123/json/audio/khalifah-al-tunaiji-161-3/timings/page/khalifah-al-tunaiji-161-3_timings_page_604.json
     [HttpGet("/json/audio/{reciterId}/timings/page/{fileName}")]
     public async Task<IActionResult> GetPageAudioJson([FromRoute] string reciterId, [FromRoute] string fileName)
     {
@@ -71,7 +71,7 @@ public class AudioController : ControllerBase
         return Ok(text);
     }
     
-    // http://127.0.0.1:3000/json/audio/khalifah-al-tunaiji-161-3/timings/ruku/khalifah-al-tunaiji-161-3_timings_ruku_300.json
+    // http://127.0.0.1:3123/json/audio/khalifah-al-tunaiji-161-3/timings/ruku/khalifah-al-tunaiji-161-3_timings_ruku_300.json
     [HttpGet("/json/audio/{reciterId}/timings/ruku/{fileName}")]
     public async Task<IActionResult> GetRukuAudioJson([FromRoute] string reciterId, [FromRoute] string fileName)
     {
@@ -89,7 +89,7 @@ public class AudioController : ControllerBase
         return Ok(text);
     }
     
-    // http://127.0.0.1:3000/json/audio/khalifah-al-tunaiji-161-3/timings/maqra/khalifah-al-tunaiji-161-3_timings_maqra_300.json
+    // http://127.0.0.1:3123/json/audio/khalifah-al-tunaiji-161-3/timings/maqra/khalifah-al-tunaiji-161-3_timings_maqra_300.json
     [HttpGet("/json/audio/{reciterId}/timings/maqra/{fileName}")]
     public async Task<IActionResult> GetMaqraAudioJson([FromRoute] string reciterId, [FromRoute] string fileName)
     {
@@ -107,7 +107,7 @@ public class AudioController : ControllerBase
         return Ok(text);
     }
     
-    // http://localhost:3000/audio/tajweed/samples/ikhfa.mp3
+    // http://localhost:3123/audio/tajweed/samples/ikhfa.mp3
     [HttpGet("/audio/tajweed/samples/{fileName}")]
     public async Task<IActionResult> GetTajweedAudio([FromRoute] string fileName)
     {
@@ -125,7 +125,7 @@ public class AudioController : ControllerBase
         return File(data, "audio/mp3");
     }
     
-    // http://localhost:3000/audio/duas/1_1.mp3
+    // http://localhost:3123/audio/duas/1_1.mp3
     [HttpGet("/audio/duas/{fileName}")]
     public async Task<IActionResult> GetDuasAudio([FromRoute] string fileName)
     {
@@ -139,6 +139,42 @@ public class AudioController : ControllerBase
         }
 
         _logger.LogInformation("/audio/duas/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        
+        return File(data, "audio/mp3");
+    }
+    
+    // http://localhost:3123/audio/99NamesOfAllah/1.m4a
+    [HttpGet("/audio/99NamesOfAllah/{fileName}")]
+    public async Task<IActionResult> GetNamesOfAllahAudio([FromRoute] string fileName)
+    {
+        var sw = Stopwatch.StartNew();
+
+        var data = await _staticFileService.GetFileContentBytesAsync($"audio/99NamesOfAllah/{fileName}");
+        
+        if (data is null)
+        {
+            return NotFound();
+        }
+
+        _logger.LogInformation("/audio/99NamesOfAllah/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        
+        return File(data, "audio/mp3");
+    }
+    
+    // http://localhost:3123/audio/wbw/001_001_001.m4a
+    [HttpGet("/audio/wbw/{fileName}")]
+    public async Task<IActionResult> GetWbwAudio([FromRoute] string fileName)
+    {
+        var sw = Stopwatch.StartNew();
+
+        var data = await _staticFileService.GetFileContentBytesAsync($"audio/wbw/{fileName}");
+        
+        if (data is null)
+        {
+            return NotFound();
+        }
+
+        _logger.LogInformation("/audio/wbw/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
         
         return File(data, "audio/mp3");
     }

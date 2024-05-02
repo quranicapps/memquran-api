@@ -17,9 +17,9 @@ public class DuasController : ControllerBase
         _logger = logger;
     }
     
-    // http://localhost:3000/json/duas/en_duas.json 
+    // http://localhost:3123/json/duas/en_duas.json 
     [HttpGet("/json/duas/{fileName}")]
-    public async Task<IActionResult> GetReciterInfos([FromRoute] string fileName)
+    public async Task<IActionResult> GetDuas([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
         

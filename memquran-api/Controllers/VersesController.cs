@@ -17,9 +17,9 @@ public class VersesController : ControllerBase
         _logger = logger;
     }
 
-    // http://localhost:3000/json/verses/verses.json
-    // http://localhost:3000/json/verses/{locale}_verses.json
-    // http://localhost:3000/json/verses/verses_translation_{translationId}.json
+    // http://localhost:3123/json/verses/verses.json
+    // http://localhost:3123/json/verses/{locale}_verses.json
+    // http://localhost:3123/json/verses/verses_translation_{translationId}.json
     [HttpGet("/json/verses/{fileName}")]
     public async Task<IActionResult> GetVerses([FromRoute] string fileName)
     {

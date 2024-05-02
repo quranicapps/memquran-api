@@ -17,7 +17,7 @@ public class MaqraController : ControllerBase
         _logger = logger;
     }
     
-    // http://localhost:3000/json/maqraInfos/{locale}_maqraInfo.json
+    // http://localhost:3123/json/maqraInfos/{locale}_maqraInfo.json
     [HttpGet("/json/maqraInfos/{fileName}")]
     public async Task<IActionResult> GetMaqraInfos([FromRoute] string fileName)
     {
@@ -35,8 +35,8 @@ public class MaqraController : ControllerBase
         return Ok(text);
     }
 
-    // http://localhost:3000/json/maqras/maqra_{maqraNumber}.json
-    // http://localhost:3000/json/maqras/maqra_translation_{maqraNumber}_{translationId}.json
+    // http://localhost:3123/json/maqras/maqra_{maqraNumber}.json
+    // http://localhost:3123/json/maqras/maqra_translation_{maqraNumber}_{translationId}.json
     [HttpGet("/json/maqras/{fileName}")]
     public async Task<IActionResult> GetMaqra([FromRoute] string fileName)
     {

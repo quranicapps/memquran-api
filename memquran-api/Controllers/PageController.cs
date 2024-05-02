@@ -17,7 +17,7 @@ public class PageController : ControllerBase
         _logger = logger;
     }
     
-    // http://localhost:3000/json/pageInfos/{locale}_pageInfo.json
+    // http://localhost:3123/json/pageInfos/{locale}_pageInfo.json
     [HttpGet("/json/pageInfos/{fileName}")]
     public async Task<IActionResult> GetPageInfos([FromRoute] string fileName)
     {
@@ -35,8 +35,8 @@ public class PageController : ControllerBase
         return Ok(text);
     }
 
-    // http://localhost:3000/json/pages/page_{pageNumber}.json
-    // http://localhost:3000/json/pages/page_translation_{pageNumber}_{translationId}.json
+    // http://localhost:3123/json/pages/page_{pageNumber}.json
+    // http://localhost:3123/json/pages/page_translation_{pageNumber}_{translationId}.json
     [HttpGet("/json/pages/{fileName}")]
     public async Task<IActionResult> GetPage([FromRoute] string fileName)
     {
