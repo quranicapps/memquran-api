@@ -178,4 +178,22 @@ public class AudioController : ControllerBase
         
         return File(data, "audio/mp3");
     }
+    
+        // http://localhost:3123/audio/memorise/0A5639E55EA4CF708D349C6FC8D95BE7CED289AFC0875F5F306CA3D3ECDA3CE9.mp3
+        [HttpGet("/audio/memorise/{fileName}")]
+        public async Task<IActionResult> GetMemoriseAudio([FromRoute] string fileName)
+        {
+            var sw = Stopwatch.StartNew();
+    
+            var data = await _staticFileService.GetFileContentBytesAsync($"audio/memorise/{fileName}");
+            
+            if (data is null)
+            {
+                return NotFound();
+            }
+    
+            _logger.LogInformation("/audio/memorise/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+            
+            return File(data, "audio/mp3");
+        }
 }
