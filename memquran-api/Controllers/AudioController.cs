@@ -196,4 +196,22 @@ public class AudioController : ControllerBase
             
             return File(data, "audio/mp3");
         }
+        
+        // http://localhost:3123/audio/common/correct.mp3
+        [HttpGet("/audio/common/{fileName}")]
+        public async Task<IActionResult> GetCommonAudio([FromRoute] string fileName)
+        {
+            var sw = Stopwatch.StartNew();
+    
+            var data = await _staticFileService.GetFileContentBytesAsync($"audio/common/{fileName}");
+            
+            if (data is null)
+            {
+                return NotFound();
+            }
+    
+            _logger.LogInformation("/audio/common/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+            
+            return File(data, "audio/mp3");
+        }
 }
