@@ -124,7 +124,7 @@ public class AudioController : ControllerBase
     // http://localhost:3123/audio/memorise/0A5639E55EA4CF708D349C6FC8D95BE7CED289AFC0875F5F306CA3D3ECDA3CE9.mp3
     // http://localhost:3123/audio/common/correct.mp3
     [HttpGet("/audio/{type}/{fileName}")]
-    public async Task<IActionResult> GetTajweedAudio([FromRoute] string type, [FromRoute] string fileName)
+    public async Task<IActionResult> GetAudioByType([FromRoute] string type, [FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
 
