@@ -17,26 +17,8 @@ public class SurahController : ControllerBase
         _logger = logger;
     }
     
-    // http://localhost:3123/json/surahInfos/{locale}_surahInfo.json
-    [HttpGet("/json/surahInfos/{fileName}")]
-    public async Task<IActionResult> GetSurahInfos([FromRoute] string fileName)
-    {
-        var sw = Stopwatch.StartNew();
-        
-        var text = await _staticFileService.GetFileContentStringAsync($"json/surahInfos/{fileName}");
-        
-        if (text is null)
-        {
-            return NotFound();
-        }
-
-        _logger.LogInformation("/json/surahInfos/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
-        
-        return Ok(text);
-    }
-
+    // http://localhost:3123/json/surahs/{locale}_surahInfo.json
     // http://localhost:3123/json/surahs/surah_{surahNumber}.json
-    // http://localhost:3123/json/surahs/surah_translation_{surahNumber}_{translationId}.json
     // http://localhost:3123/json/surahs/surah_wbw_{locale}_{surahNumber}.json
     [HttpGet("/json/surahs/{fileName}")]
     public async Task<IActionResult> GetSurah([FromRoute] string fileName)
@@ -51,6 +33,24 @@ public class SurahController : ControllerBase
         }
 
         _logger.LogInformation("/json/surahs/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
+        
+        return Ok(text);
+    }
+    
+    // http://localhost:3123/json/surahTranslations/surah_wbw_{locale}_{surahNumber}.json
+    [HttpGet("/json/surahTranslations/{fileName}")]
+    public async Task<IActionResult> GetSurahTranslations([FromRoute] string fileName)
+    {
+        var sw = Stopwatch.StartNew();
+        
+        var text = await _staticFileService.GetFileContentStringAsync($"json/surahTranslations/{fileName}");
+        
+        if (text is null)
+        {
+            return NotFound();
+        }
+
+        _logger.LogInformation("/json/surahTranslations/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
         
         return Ok(text);
     }
