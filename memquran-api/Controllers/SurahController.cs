@@ -37,7 +37,7 @@ public class SurahController : ControllerBase
         return Ok(text);
     }
     
-    // http://localhost:3123/json/surahTranslations/surah_wbw_{locale}_{surahNumber}.json
+    // http://localhost:3123/json/surahTranslations/surah_translation_{surahNumber}_{translationId}.json
     [HttpGet("/json/surahTranslations/{fileName}")]
     public async Task<IActionResult> GetSurahTranslations([FromRoute] string fileName)
     {
