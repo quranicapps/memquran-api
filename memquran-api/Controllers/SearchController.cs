@@ -11,7 +11,7 @@ public class SearchController(IStaticFileService staticFileService, ILogger<Vers
 {
     // http://localhost:3123/json/search/en_search.json
     [HttpGet("/json/search/{fileName}")]
-    public async Task<IActionResult> GetSearch([FromRoute] string fileName)
+    public async Task<IActionResult> Get([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
 

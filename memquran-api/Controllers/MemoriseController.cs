@@ -21,7 +21,7 @@ public class MemoriseController : ControllerBase
     // http://localhost:3123/json/memorise/en_questions_2_3.json 
     // http://localhost:3123/json/memorise/en_reviews_2_3.json 
     [HttpGet("/json/memorise/{fileName}")]
-    public async Task<IActionResult> GetMemorise([FromRoute] string fileName)
+    public async Task<IActionResult> Get([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
         

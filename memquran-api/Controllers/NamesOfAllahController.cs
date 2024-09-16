@@ -11,7 +11,7 @@ public class NamesOfAllahController(IStaticFileService staticFileService, ILogge
 {
     // http://localhost:3123/json/namesOfAllah/en_names.json 
     [HttpGet("/json/namesOfAllah/{fileName}")]
-    public async Task<IActionResult> GetNamesOfAllah([FromRoute] string fileName)
+    public async Task<IActionResult> Get([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
         

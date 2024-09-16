@@ -11,7 +11,7 @@ public class ConfigurationController(IStaticFileService staticFileService, ILogg
 {
     // http://localhost:3123/local/json/settings/recitersOverride.json 
     [HttpGet("/local/json/settings/{fileName}")]
-    public async Task<IActionResult> GetSettingsAsync([FromRoute] string fileName)
+    public async Task<IActionResult> Get([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
 

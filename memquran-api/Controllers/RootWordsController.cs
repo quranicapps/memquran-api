@@ -11,7 +11,7 @@ public class RootWordsController(IStaticFileService staticFileService, ILogger<N
 {
     // http://localhost:3123/json/rootWords/en_rootWords.json 
     [HttpGet("/json/rootWords/{fileName}")]
-    public async Task<IActionResult> GetRootWords([FromRoute] string fileName)
+    public async Task<IActionResult> Get([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
         

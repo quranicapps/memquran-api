@@ -11,7 +11,7 @@ public class EditionsController(IStaticFileService staticFileService, ILogger<Ve
 {
     // http://localhost:3123/json/editions/editions.json
     [HttpGet("/json/editions/{fileName}")]
-    public async Task<IActionResult> GetEditions([FromRoute] string fileName)
+    public async Task<IActionResult> Get([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
 
