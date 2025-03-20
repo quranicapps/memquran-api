@@ -6,24 +6,16 @@ namespace QuranApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class AudioController : ControllerBase
+public class AudioController(IStaticFileService staticFileService, ILogger<AudioController> logger)
+    : ControllerBase
 {
-    private readonly IStaticFileService _staticFileService;
-    private readonly ILogger<AudioController> _logger;
-
-    public AudioController(IStaticFileService staticFileService, ILogger<AudioController> logger)
-    {
-        _staticFileService = staticFileService;
-        _logger = logger;
-    }
-
     // http://localhost:3123/json/audio/abderahmane-eloosi-1/timings/surah/abderahmane-eloosi-1_timings_surah_1.json
     [HttpGet("/json/audio/{reciterId}/timings/surah/{fileName}")]
     public async Task<IActionResult> GetSurahAudioJson([FromRoute] string reciterId, [FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
 
-        var text = await _staticFileService.GetFileContentStringAsync(
+        var text = await staticFileService.GetFileContentStringAsync(
             $"json/audio/{reciterId}/timings/surah/{fileName}");
 
         if (text is null)
@@ -31,7 +23,7 @@ public class AudioController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("/json/audio/{ReciterId}/timings/surah/{FileName} loaded in {Elapsed} ms", reciterId,
+        logger.LogInformation("/json/audio/{ReciterId}/timings/surah/{FileName} loaded in {Elapsed} ms", reciterId,
             fileName, sw.Elapsed);
 
         return Ok(text);
@@ -43,14 +35,14 @@ public class AudioController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
 
-        var text = await _staticFileService.GetFileContentStringAsync($"json/audio/{reciterId}/timings/juz/{fileName}");
+        var text = await staticFileService.GetFileContentStringAsync($"json/audio/{reciterId}/timings/juz/{fileName}");
 
         if (text is null)
         {
             return NotFound();
         }
 
-        _logger.LogInformation("/json/audio/{ReciterId}/timings/juz/{FileName} loaded in {Elapsed} ms", reciterId,
+        logger.LogInformation("/json/audio/{ReciterId}/timings/juz/{FileName} loaded in {Elapsed} ms", reciterId,
             fileName, sw.Elapsed);
 
         return Ok(text);
@@ -62,7 +54,7 @@ public class AudioController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
 
-        var text = await _staticFileService.GetFileContentStringAsync(
+        var text = await staticFileService.GetFileContentStringAsync(
             $"json/audio/{reciterId}/timings/page/{fileName}");
 
         if (text is null)
@@ -70,7 +62,7 @@ public class AudioController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("/json/audio/{ReciterId}/timings/page/{FileName} loaded in {Elapsed} ms", reciterId,
+        logger.LogInformation("/json/audio/{ReciterId}/timings/page/{FileName} loaded in {Elapsed} ms", reciterId,
             fileName, sw.Elapsed);
 
         return Ok(text);
@@ -82,7 +74,7 @@ public class AudioController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
 
-        var text = await _staticFileService.GetFileContentStringAsync(
+        var text = await staticFileService.GetFileContentStringAsync(
             $"json/audio/{reciterId}/timings/ruku/{fileName}");
 
         if (text is null)
@@ -90,7 +82,7 @@ public class AudioController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("/json/audio/{ReciterId}/timings/ruku/{FileName} loaded in {Elapsed} ms", reciterId,
+        logger.LogInformation("/json/audio/{ReciterId}/timings/ruku/{FileName} loaded in {Elapsed} ms", reciterId,
             fileName, sw.Elapsed);
 
         return Ok(text);
@@ -102,7 +94,7 @@ public class AudioController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
 
-        var text = await _staticFileService.GetFileContentStringAsync(
+        var text = await staticFileService.GetFileContentStringAsync(
             $"json/audio/{reciterId}/timings/maqra/{fileName}");
 
         if (text is null)
@@ -110,7 +102,7 @@ public class AudioController : ControllerBase
             return NotFound();
         }
 
-        _logger.LogInformation("/json/audio/{ReciterId}/timings/maqra/{FileName} loaded in {Elapsed} ms", reciterId,
+        logger.LogInformation("/json/audio/{ReciterId}/timings/maqra/{FileName} loaded in {Elapsed} ms", reciterId,
             fileName, sw.Elapsed);
 
         return Ok(text);
@@ -128,14 +120,14 @@ public class AudioController : ControllerBase
     {
         var sw = Stopwatch.StartNew();
 
-        var data = await _staticFileService.GetFileContentBytesAsync($"audio/{type}/{fileName}");
+        var data = await staticFileService.GetFileContentBytesAsync($"audio/{type}/{fileName}");
 
         if (data is null)
         {
             return NotFound();
         }
 
-        _logger.LogInformation("/audio/{Type}/{FileName} loaded in {Elapsed} ms", type, fileName, sw.Elapsed);
+        logger.LogInformation("/audio/{Type}/{FileName} loaded in {Elapsed} ms", type, fileName, sw.Elapsed);
 
         return File(data, "audio/mp3");
     }

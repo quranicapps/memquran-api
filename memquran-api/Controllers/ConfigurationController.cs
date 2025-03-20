@@ -16,12 +16,12 @@ public class ConfigurationController(IStaticFileService staticFileService, ILogg
         var sw = Stopwatch.StartNew();
 
         var fullFilePath = Path.Combine("..", "..", $"raw/json/settings/{fileName}");
-        
+
         if (!System.IO.File.Exists(fullFilePath))
         {
             return null;
         }
-        
+
         using var streamReader = System.IO.File.OpenText(fullFilePath);
         var text = await streamReader.ReadToEndAsync();
 

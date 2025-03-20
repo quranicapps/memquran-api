@@ -14,16 +14,16 @@ public class NamesOfAllahController(IStaticFileService staticFileService, ILogge
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {
         var sw = Stopwatch.StartNew();
-        
+
         var text = await staticFileService.GetFileContentStringAsync($"json/namesOfAllah/{fileName}");
-        
+
         if (text is null)
         {
             return NotFound();
         }
 
         logger.LogInformation("/json/namesOfAllah/{FileName} loaded in {Elapsed} ms", fileName, sw.Elapsed);
-        
+
         return Ok(text);
     }
 }
