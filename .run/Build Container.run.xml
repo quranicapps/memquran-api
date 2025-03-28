@@ -12,7 +12,7 @@
             </DockerEnvVarImpl>
             <DockerEnvVarImpl>
               <option name="name" value="ASPNETCORE_URLS" />
-              <option name="value" value="'http://*:3123'" />
+              <option name="value" value="http://*:3123" />
             </DockerEnvVarImpl>
           </list>
         </option>
@@ -24,7 +24,6 @@
             </DockerPortBindingImpl>
           </list>
         </option>
-        <option name="commandLineOptions" value="-d" />
         <option name="showCommandPreview" value="true" />
       </settings>
     </deployment>
