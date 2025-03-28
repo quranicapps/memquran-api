@@ -47,6 +47,8 @@ var logger = LoggerFactory.Create(loggingBuilder => loggingBuilder
         .AddFilter(level => level >= LogLevel.Information))
     .CreateLogger("Program");
 
+logger.LogInformation("Starting Env: {Env} on port {Port}", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "?", Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "?");
+
 // var logger = builder.Services.BuildServiceProvider().GetService<ILoggerFactory>().CreateLogger("Program");
 
 // If local, just use the local service client else Add other HTTP clients
