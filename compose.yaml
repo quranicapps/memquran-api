@@ -1,0 +1,12 @@
+﻿services:
+  memquran-api:
+    image: memquran-api:1.0.9
+    container_name: memquran-api
+    ports:
+      - "3123:3123"
+    environment:
+        ASPNETCORE_ENVIRONMENT: Development
+        ASPNETCORE_URLS: http://*:3123
+    build:
+      context: .
+      dockerfile: memquran-api/Dockerfile
