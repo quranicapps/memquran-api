@@ -48,7 +48,7 @@ public class ImagesController(IStaticFileService staticFileService, ILogger<Imag
         return File(data, "image/png");
     }
 
-    // Todo remove once changed web to point to e.g. http://localhost:3123/images/tajweed/1.png
+    // Todo remove as we now get numbers from http://localhost:3123/images/tajweed/1.png
     // http://localhost:3123/images/common/numbers/1.png
     [HttpGet("/images/common/numbers/{fileName}")]
     public async Task<IActionResult> GetTajweedCommonNumber([FromRoute] string fileName)

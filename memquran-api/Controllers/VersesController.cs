@@ -11,7 +11,6 @@ public class VersesController(IStaticFileService staticFileService, ILogger<Vers
 {
     // http://localhost:3123/json/verses/verses.json
     // http://localhost:3123/json/verses/{locale}_verses.json
-    // http://localhost:3123/json/verses/verses_translation_{translationId}.json
     [HttpGet("/json/verses/{fileName}")]
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {

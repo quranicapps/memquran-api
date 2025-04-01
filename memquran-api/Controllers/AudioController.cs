@@ -111,8 +111,8 @@ public class AudioController(IStaticFileService staticFileService, ILogger<Audio
     // http://localhost:3123/audio/tajweed/ikhfa.mp3
     // http://localhost:3123/audio/tajweed/tajweed_must_stop_6-36.mp3
     // http://localhost:3123/audio/duas/1_1.mp3
-    // http://localhost:3123/audio/namesOfAllah/1.m4a
-    // http://localhost:3123/audio/wbw/001_001_001.m4a
+    // http://localhost:3123/audio/namesOfAllah/1.mp3
+    // http://localhost:3123/audio/wbw/001_001_001.mp3
     // http://localhost:3123/audio/memorise/0A5639E55EA4CF708D349C6FC8D95BE7CED289AFC0875F5F306CA3D3ECDA3CE9.mp3
     // http://localhost:3123/audio/common/correct.mp3
     [HttpGet("/audio/{type}/{fileName}")]
