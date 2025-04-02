@@ -1,9 +1,9 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Build Container" type="docker-deploy" factoryName="docker-image" server-name="Dockerhost">
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Build Container Dev" type="docker-deploy" factoryName="docker-image" server-name="localhost">
     <deployment type="docker-image">
       <settings>
-        <option name="imageTag" value="memquran-api:1.0.5" />
-        <option name="containerName" value="memquran-api" />
+        <option name="imageTag" value="ghcr.io/quranicapps/memquran-api:dev" />
+        <option name="containerName" value="memquran-api-dev" />
         <option name="envVars">
           <list>
             <DockerEnvVarImpl>

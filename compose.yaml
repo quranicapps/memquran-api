@@ -1,7 +1,7 @@
 ﻿services:
   memquran-api:
-    image: memquran-api:1.0.9
-    container_name: memquran-api
+    image: ghcr.io/quranicapps/memquran-api:dev
+    container_name: memquran-api-dev
     ports:
       - "3123:3123"
     environment:
