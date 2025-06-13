@@ -56,21 +56,27 @@ logger.LogInformation("Starting Env: {Env} on port {Port}", Environment.GetEnvir
 
 // var logger = builder.Services.BuildServiceProvider().GetService<ILoggerFactory>().CreateLogger("Program");
 
-// If local, just use the local service client else Add other HTTP clients
-if (contentDeliverySettings.Type == ContentDeliveryType.Local)
+switch (contentDeliverySettings.Type)
 {
-    builder.Services.AddSingleton<ICdnClient, LocalFileClient>();
-    logger.LogInformation("Local Files used for Content Delivery");
-}
-else
-{
-    builder.Services.AddHttpClient<ICdnClient, JsDelivrClient>(httpClient =>
-        {
-            httpClient.BaseAddress = new Uri(clientsSettings.JsDelivrService.BaseUrl);
-            httpClient.Timeout = clientsSettings.JsDelivrService.DefaultTimeout;
-        })
-        .AddHttpMessageHandler(() => new JsDelivrDelegatingHandler());
-    logger.LogInformation("JsDelivrClient used for Content Delivery");
+    // If local, just use the local service client else Add other HTTP clients
+    case ContentDeliveryType.Unknown:
+    case ContentDeliveryType.Local:
+        builder.Services.AddSingleton<ICdnClient, LocalFileClient>();
+        logger.LogInformation("Local Files used for Content Delivery");
+        break;
+    case ContentDeliveryType.JsDelivr:
+        builder.Services.AddHttpClient<ICdnClient, JsDelivrClient>(httpClient =>
+            {
+                httpClient.BaseAddress = new Uri(clientsSettings.JsDelivrService.BaseUrl);
+                httpClient.Timeout = clientsSettings.JsDelivrService.DefaultTimeout;
+            })
+            .AddHttpMessageHandler(() => new JsDelivrDelegatingHandler());
+        logger.LogInformation("JsDelivrClient used for Content Delivery");
+        break;
+    case ContentDeliveryType.JsDelivrFallback:
+        throw new Exception("Content Delivery Type is not set or is not supported. Please check configuration.");
+    default:
+        throw new Exception("No Content Delivery Type is set. Please check configuration.");
 }
 
 // Host Options
