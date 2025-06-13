@@ -9,4 +9,4 @@
         ASPNETCORE_URLS: http://*:3123
     build:
       context: .
-      dockerfile: memquran-api/Dockerfile
+      dockerfile: MemQuran.Api/Dockerfile
