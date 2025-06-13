@@ -1,4 +1,4 @@
-﻿namespace MemQuran.Api.Models;
+﻿namespace MemQuran.Core.Models;
 
 public class ResultError(int statusCode, string message, string? reference = null)
 {

@@ -1,5 +1,5 @@
-using MemQuran.Api.Contracts;
 using MemQuran.Api.Settings;
+using MemQuran.Core.Contracts;
 
 namespace MemQuran.Api.Clients.JsDelivr;
 

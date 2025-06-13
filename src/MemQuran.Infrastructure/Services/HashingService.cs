@@ -1,8 +1,8 @@
 using System.Security.Cryptography;
 using System.Text;
-using MemQuran.Api.Contracts;
+using MemQuran.Core.Contracts;
 
-namespace MemQuran.Api.Services;
+namespace MemQuran.Infrastructure.Services;
 
 public class HashingService : IHashingService
 {

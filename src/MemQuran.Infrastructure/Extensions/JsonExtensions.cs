@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace MemQuran.Api.Extensions;
+namespace MemQuran.Infrastructure.Extensions;
 
 public static class JsonExtensions
 {

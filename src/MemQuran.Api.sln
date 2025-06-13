@@ -11,6 +11,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemQuran.Api", "MemQuran.Ap
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemQuran.Api.Unit.Tests", "MemQuran.Api.Unit.Tests\MemQuran.Api.Unit.Tests.csproj", "{A98004E8-FDDF-452E-BD24-4FBB7CD1EA9C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemQuran.Api.Integration.Tests", "MemQuran.Api.Integration.Tests\MemQuran.Api.Integration.Tests.csproj", "{EB2862ED-7151-4C7C-810F-17F77DAF854E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{0BB0A1B2-0BB3-4281-90E2-54DD26451039}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemQuran.Core", "MemQuran.Core\MemQuran.Core.csproj", "{AE18738D-4F61-415F-B7F9-2AEEDA151D51}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{D4F7F994-C155-425C-A104-467CFAD96D2D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemQuran.Infrastructure", "MemQuran.Infrastructure\MemQuran.Infrastructure.csproj", "{9D81FC86-EEF6-41A4-A923-46301BE10948}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,5 +35,22 @@ Global
 		{A98004E8-FDDF-452E-BD24-4FBB7CD1EA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A98004E8-FDDF-452E-BD24-4FBB7CD1EA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A98004E8-FDDF-452E-BD24-4FBB7CD1EA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB2862ED-7151-4C7C-810F-17F77DAF854E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB2862ED-7151-4C7C-810F-17F77DAF854E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB2862ED-7151-4C7C-810F-17F77DAF854E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB2862ED-7151-4C7C-810F-17F77DAF854E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE18738D-4F61-415F-B7F9-2AEEDA151D51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE18738D-4F61-415F-B7F9-2AEEDA151D51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE18738D-4F61-415F-B7F9-2AEEDA151D51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE18738D-4F61-415F-B7F9-2AEEDA151D51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D81FC86-EEF6-41A4-A923-46301BE10948}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D81FC86-EEF6-41A4-A923-46301BE10948}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D81FC86-EEF6-41A4-A923-46301BE10948}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D81FC86-EEF6-41A4-A923-46301BE10948}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{AE18738D-4F61-415F-B7F9-2AEEDA151D51} = {0BB0A1B2-0BB3-4281-90E2-54DD26451039}
+		{43FF8E38-0F7E-4562-B598-D2DD7F60C5FD} = {D4F7F994-C155-425C-A104-467CFAD96D2D}
+		{9D81FC86-EEF6-41A4-A923-46301BE10948} = {0BB0A1B2-0BB3-4281-90E2-54DD26451039}
 	EndGlobalSection
 EndGlobal

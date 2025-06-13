@@ -1,4 +1,4 @@
-﻿using MemQuran.Api.Models;
+﻿using MemQuran.Core.Models;
 
 namespace MemQuran.Api.Settings;
 

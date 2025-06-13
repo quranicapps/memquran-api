@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using MemQuran.Api.Contracts;
+using MemQuran.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MemQuran.Api.Controllers;

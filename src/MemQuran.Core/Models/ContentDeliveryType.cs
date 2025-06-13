@@ -1,4 +1,4 @@
-﻿namespace MemQuran.Api.Models;
+﻿namespace MemQuran.Core.Models;
 
 public enum ContentDeliveryType
 {

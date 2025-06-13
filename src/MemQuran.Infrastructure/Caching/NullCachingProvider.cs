@@ -1,7 +1,7 @@
-using MemQuran.Api.Contracts;
-using MemQuran.Api.Models;
+using MemQuran.Core.Contracts;
+using MemQuran.Core.Models;
 
-namespace MemQuran.Api.Caching;
+namespace MemQuran.Infrastructure.Caching;
 
 public class NullCachingProvider : ICachingProvider
 {

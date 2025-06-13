@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
-using MemQuran.Api.Contracts;
-using MemQuran.Api.Models;
 using MemQuran.Api.Settings;
+using MemQuran.Core.Contracts;
+using MemQuran.Core.Models;
 
 namespace MemQuran.Api.Workers;
 

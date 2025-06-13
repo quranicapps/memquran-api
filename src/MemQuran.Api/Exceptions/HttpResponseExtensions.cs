@@ -3,7 +3,7 @@ using System.Net.Mime;
 using System.Text.Json;
 using System.Xml;
 using System.Xml.Serialization;
-using MemQuran.Api.Models;
+using MemQuran.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 

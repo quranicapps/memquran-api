@@ -1,4 +1,4 @@
-﻿using MemQuran.Api.Contracts;
+﻿using MemQuran.Core.Contracts;
 
 namespace MemQuran.Api.Clients.Local;
 

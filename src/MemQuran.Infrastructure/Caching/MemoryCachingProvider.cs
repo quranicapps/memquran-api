@@ -1,8 +1,9 @@
-using MemQuran.Api.Contracts;
-using MemQuran.Api.Models;
+using MemQuran.Core.Contracts;
+using MemQuran.Core.Models;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Logging;
 
-namespace MemQuran.Api.Caching;
+namespace MemQuran.Infrastructure.Caching;
 
 public class MemoryCachingProvider(IDistributedCache distributedCache, ILogger<MemoryCachingProvider> logger) : ICachingProvider
 {

@@ -1,5 +1,5 @@
 ﻿services:
-  memquran-api:
+  memquran.api:
     image: memquran.api:latest
     container_name: memquran.api
     ports:

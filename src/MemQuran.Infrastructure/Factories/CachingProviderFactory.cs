@@ -1,7 +1,9 @@
-using MemQuran.Api.Contracts;
-using MemQuran.Api.Models;
+using MemQuran.Core.Contracts;
+using MemQuran.Core.Models;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
-namespace MemQuran.Api.Factories;
+namespace MemQuran.Infrastructure.Factories;
 
 public class CachingProviderFactory(IServiceProvider serviceProvider, ILogger<CachingProviderFactory> logger) : ICachingProviderFactory
 {

@@ -1,6 +1,6 @@
-﻿using MemQuran.Api.Models;
+﻿using MemQuran.Core.Models;
 
-namespace MemQuran.Api.Contracts;
+namespace MemQuran.Core.Contracts;
 
 public interface ICachingProviderFactory
 {

@@ -1,4 +1,4 @@
-﻿namespace MemQuran.Api.Contracts;
+﻿namespace MemQuran.Core.Contracts;
 
 public interface IHashingService
 {

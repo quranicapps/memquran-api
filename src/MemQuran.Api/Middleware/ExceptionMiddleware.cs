@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using MemQuran.Api.Exceptions;
-using MemQuran.Api.Extensions;
-using MemQuran.Api.Models;
+using MemQuran.Core.Models;
+using MemQuran.Infrastructure.Extensions;
 
 namespace MemQuran.Api.Middleware;
 

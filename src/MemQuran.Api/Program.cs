@@ -1,13 +1,14 @@
-using MemQuran.Api.Caching;
 using MemQuran.Api.Clients.JsDelivr;
 using MemQuran.Api.Clients.Local;
-using MemQuran.Api.Contracts;
-using MemQuran.Api.Factories;
 using MemQuran.Api.Middleware;
-using MemQuran.Api.Models;
 using MemQuran.Api.Services;
 using MemQuran.Api.Settings;
 using MemQuran.Api.Workers;
+using MemQuran.Core.Contracts;
+using MemQuran.Core.Models;
+using MemQuran.Infrastructure.Caching;
+using MemQuran.Infrastructure.Factories;
+using MemQuran.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder();
 

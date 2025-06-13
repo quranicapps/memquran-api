@@ -4,17 +4,8 @@ using MemQuran.Api.Exceptions;
 
 namespace MemQuran.Api.Clients;
 
-public abstract class BaseHttpClient
+public abstract class BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClient> logger)
 {
-    private readonly HttpClient _httpClient;
-    private readonly ILogger<BaseHttpClient> _logger;
-
-    protected BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClient> logger)
-    {
-        _httpClient = httpClient;
-        _logger = logger;
-    }
-
     protected abstract string ServiceName { get; }
 
     protected async Task<string> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken = default)
@@ -23,8 +14,8 @@ public abstract class BaseHttpClient
 
         try
         {
-            _logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), request.RequestUri);
-            response = await _httpClient.SendAsync(request, cancellationToken);
+            logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), request.RequestUri);
+            response = await httpClient.SendAsync(request, cancellationToken);
         }
         catch (HttpRequestException ex)
         {
@@ -46,7 +37,7 @@ public abstract class BaseHttpClient
             return responseContent;
         }
 
-        _logger.LogError("Received status code {StatusCode} ({StatusCodeInt}) when calling endpoint {RequestUri}", response.StatusCode, (int)response.StatusCode, request.RequestUri);
+        logger.LogError("Received status code {StatusCode} ({StatusCodeInt}) when calling endpoint {RequestUri}", response.StatusCode, (int)response.StatusCode, request.RequestUri);
 
 
         throw new HttpServiceException(ServiceName, request, response.StatusCode, responseContent);
@@ -65,8 +56,8 @@ public abstract class BaseHttpClient
 
         try
         {
-            _logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), request.RequestUri);
-            response = await _httpClient.SendAsync(request, cancellationToken);
+            logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), request.RequestUri);
+            response = await httpClient.SendAsync(request, cancellationToken);
         }
         catch (HttpRequestException ex)
         {
@@ -89,7 +80,7 @@ public abstract class BaseHttpClient
             return await content.ReadAsByteArrayAsync(cancellationToken);
         }
 
-        _logger.LogError("Received status code {StatusCode} ({StatusCodeInt}) when calling endpoint {RequestUri}", response.StatusCode, (int)response.StatusCode, request.RequestUri);
+        logger.LogError("Received status code {StatusCode} ({StatusCodeInt}) when calling endpoint {RequestUri}", response.StatusCode, (int)response.StatusCode, request.RequestUri);
         
         throw new HttpServiceException(ServiceName, request, response.StatusCode, responseContent);
     }
