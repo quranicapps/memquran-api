@@ -1,16 +1,15 @@
-﻿# buid and run from the src folder using cmd
-# docker build -f MemQuran.Api\Dockerfile -t memquran.api:latest . && docker run -p 3123:3123 --env ASPNETCORE_ENVIRONMENT=Development --env ASPNETCORE_URLS=http://*:3123 --name memquran.api memquran.api:latest
-
-FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+﻿FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
 USER $APP_UID
 WORKDIR /app
-EXPOSE 80
-EXPOSE 443
+EXPOSE 8080
+EXPOSE 8081
 
 FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["MemQuran.Api/MemQuran.Api.csproj", "MemQuran.Api/"]
+COPY ["MemQuran.Core/MemQuran.Core.csproj", "MemQuran.Core/"]
+COPY ["MemQuran.Infrastructure/MemQuran.Infrastructure.csproj", "MemQuran.Infrastructure/"]
 RUN dotnet restore "MemQuran.Api/MemQuran.Api.csproj"
 COPY . .
 WORKDIR "/src/MemQuran.Api"
