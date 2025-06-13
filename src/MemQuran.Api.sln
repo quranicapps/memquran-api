@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{28C575A4-96DC-4374-94F6-6988E7261F7B}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\README.md = ..\README.md
+		..\docker-compose.yaml = ..\docker-compose.yaml
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemQuran.Api", "MemQuran.Api\MemQuran.Api.csproj", "{43FF8E38-0F7E-4562-B598-D2DD7F60C5FD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemQuran.Api.Tests", "MemQuran.Api.Tests\MemQuran.Api.Tests.csproj", "{A98004E8-FDDF-452E-BD24-4FBB7CD1EA9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{43FF8E38-0F7E-4562-B598-D2DD7F60C5FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43FF8E38-0F7E-4562-B598-D2DD7F60C5FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43FF8E38-0F7E-4562-B598-D2DD7F60C5FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43FF8E38-0F7E-4562-B598-D2DD7F60C5FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A98004E8-FDDF-452E-BD24-4FBB7CD1EA9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A98004E8-FDDF-452E-BD24-4FBB7CD1EA9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A98004E8-FDDF-452E-BD24-4FBB7CD1EA9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A98004E8-FDDF-452E-BD24-4FBB7CD1EA9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
