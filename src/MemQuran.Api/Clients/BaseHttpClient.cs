@@ -36,6 +36,12 @@ public abstract class BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClie
         {
             return responseContent;
         }
+        
+        if(response.StatusCode == HttpStatusCode.NotFound)
+        {
+            logger.LogWarning("Received 404 Not Found when calling endpoint {RequestUri}", request.RequestUri);
+            return null; // Return empty string for 404 Not Found
+        }
 
         logger.LogError("Received status code {StatusCode} ({StatusCodeInt}) when calling endpoint {RequestUri}", response.StatusCode, (int)response.StatusCode, request.RequestUri);
 

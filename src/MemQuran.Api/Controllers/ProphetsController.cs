@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using MemQuran.Api.Settings;
 using MemQuran.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,7 +7,9 @@ namespace MemQuran.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class ProphetsController(IStaticFileService staticFileService, ILogger<ProphetsController> logger)
+public class ProphetsController(
+    IStaticFileService staticFileService,
+    ILogger<ProphetsController> logger)
     : ControllerBase
 {
     // http://localhost:3123/json/prophets/en_prophets.json 

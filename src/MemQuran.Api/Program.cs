@@ -10,7 +10,7 @@ using MemQuran.Infrastructure.Caching;
 using MemQuran.Infrastructure.Factories;
 using MemQuran.Infrastructure.Services;
 
-var builder = WebApplication.CreateBuilder();
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -114,3 +114,7 @@ app.MapControllers();
 // });
 
 app.Run();
+
+// used for integration tests, need to reference the Program class in tests for WebApplicationFactory
+// Can not reference the Program because it is top-level in the file, so we need to declare it as partial
+public partial class Program;
