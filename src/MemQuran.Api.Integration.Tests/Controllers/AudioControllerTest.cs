@@ -10,7 +10,6 @@ public class AudioControllerTest(CustomApiFactory customApiFactory, ITestOutputH
     [Fact]
     public async Task GetSurahAudioJson_Returns_NotFound()
     {
-        await Task.Delay(1000);
         Assert.True(true);
         // Logger.WriteLine(content);
     }
@@ -18,7 +17,6 @@ public class AudioControllerTest(CustomApiFactory customApiFactory, ITestOutputH
     [Fact]
     public async Task GetSurahAudioJson_Returns_NotFound2()
     {
-        await Task.Delay(1000);
         Assert.True(true);
         // Logger.WriteLine(content);
     }

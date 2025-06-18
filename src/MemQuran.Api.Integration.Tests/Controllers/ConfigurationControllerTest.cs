@@ -10,21 +10,18 @@ public class ConfigurationControllerTest(CustomApiFactory customApiFactory, ITes
     [Fact]
     public async Task Test1()
     {
-        await Task.Delay(1000);
         Assert.True(true);
     } 
     
     [Fact]
     public async Task Test2()
     {
-        await Task.Delay(1000);
         Assert.True(true);
     } 
     
     [Fact]
     public async Task Test3()
     {
-        await Task.Delay(1000);
         Assert.True(true);
     } 
 }

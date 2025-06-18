@@ -18,7 +18,7 @@ public class CustomApiFactory(SharedFixture sharedFixture) : WebApplicationFacto
         builder.UseEnvironment("integration-test");
 
         var configuration = new ConfigurationBuilder()
-            .AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "override.json"))
+            .AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json"))
             .Build();
 
         ClientsSettings = configuration.GetSection(ClientsSettings.SectionName).Get<ClientsSettings>()!;
@@ -27,6 +27,6 @@ public class CustomApiFactory(SharedFixture sharedFixture) : WebApplicationFacto
             .UseConfiguration(configuration)
             .ConfigureAppConfiguration(configurationBuilder =>
                 configurationBuilder
-                    .AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "override.json")));
+                    .AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json")));
     }
 }
