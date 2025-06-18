@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using MemQuran.Api.Clients.JsDelivr;
 using MemQuran.Api.Clients.Local;
 using MemQuran.Api.Middleware;
@@ -9,10 +10,45 @@ using MemQuran.Core.Models;
 using MemQuran.Infrastructure.Caching;
 using MemQuran.Infrastructure.Factories;
 using MemQuran.Infrastructure.Services;
+using Microsoft.AspNetCore.Diagnostics;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddProblemDetails(opts => // built-in problem details support
+    opts.CustomizeProblemDetails = ctx =>
+    {
+        if (!ctx.ProblemDetails.Extensions.ContainsKey("traceId"))
+        {
+            var traceId = Activity.Current?.Id ?? ctx.HttpContext.TraceIdentifier;
+            ctx.ProblemDetails.Extensions.Add(new KeyValuePair<string, object?>("traceId", traceId));
+        }
+
+        if (!ctx.ProblemDetails.Extensions.ContainsKey("instance"))
+        {
+            ctx.ProblemDetails.Extensions.Add("instance", $"{ctx.HttpContext.Request.Method} {ctx.HttpContext.Request.Path}");
+        }
+        
+        var exception = ctx.HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
+
+        if (ctx.ProblemDetails.Status != 500) return;
+        
+        ctx.ProblemDetails.Detail = "An error occurred in our API. Use the trace id when contacting us.";
+        
+        if (builder.Environment.IsProduction()) return;
+        
+        if (!ctx.ProblemDetails.Extensions.ContainsKey("errorMessage"))
+        {
+            ctx.ProblemDetails.Extensions.Add("errorMessage", exception?.Message);
+        }
+        
+        if (!ctx.ProblemDetails.Extensions.ContainsKey("stackTrace"))
+        {
+            ctx.ProblemDetails.Extensions.Add("stackTrace", exception?.StackTrace);
+        }
+    }
+);
+builder.Services.AddExceptionHandler<ExceptionToProblemDetailsHandler>();
+builder.Services.AddProblemDetails();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -97,7 +133,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseMiddleware<ExceptionMiddleware>();
+// app.UseMiddleware<ExceptionMiddleware>(); // Old way: Custom middleware for handling exceptions
+app.UseExceptionHandler(); // New Way: Use built-in exception handler middleware
 
 // app.UseHttpsRedirection();
 app.UseAuthorization();
