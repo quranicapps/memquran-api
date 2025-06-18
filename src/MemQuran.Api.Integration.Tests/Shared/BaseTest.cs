@@ -1,5 +1,4 @@
-﻿using WireMock.Server;
-using Xunit.Abstractions;
+﻿using Xunit.Abstractions;
 
 namespace MemQuran.Api.Integration.Tests.Shared;
 
@@ -9,5 +8,4 @@ public class BaseTest(CustomApiFactory customApiFactory, ITestOutputHelper testO
 {
     protected ITestOutputHelper Logger { get; } = testOutputHelper;
     protected HttpClient Client { get; private set; } = customApiFactory.CreateClient();
-    protected WireMockServer Server { get; private set; } = customApiFactory.SharedFixture.Server;
 }

@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/gh/quranstatic/static@AnyVersionForTestingPurposes/json/prophets/en_prophets.json"
+  },
+  "response": {
+    "status": 404,
+	"bodyFileName": "default/default_file.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}
