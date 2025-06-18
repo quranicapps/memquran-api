@@ -4,7 +4,7 @@ using WireMock.Server;
 
 namespace MemQuran.Api.Integration.Tests.Shared;
 
-public static class WireMockSingleton
+public class WireMockSingleton : IDisposable
 {
     private static readonly Lazy<WireMockServer> LazyInstance = new(() =>
     {
@@ -24,4 +24,10 @@ public static class WireMockSingleton
     }
 
     public static WireMockServer Instance => LazyInstance.Value;
+    
+    public void Dispose()
+    {
+        if(Instance.IsStarted) Instance.Stop();
+        Instance.Dispose();
+    }
 }
