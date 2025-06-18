@@ -1,34 +1,17 @@
-﻿using DotNet.Testcontainers.Builders;
-using DotNet.Testcontainers.Containers;
+﻿using WireMock.Server;
 
 namespace MemQuran.Api.Integration.Tests.Shared.WireMock;
 
-public class WireMockSingleton : IAsyncDisposable
+public class WireMockSingleton : IDisposable
 {
-    private static IContainer _container = null!;
+    private static readonly Lazy<WireMockServer> LazyInstance = new(() => WireMockServer.Start(8080));
+
+    public static WireMockServer Instance => LazyInstance.Value;
     
-    private static readonly Lazy<Task<string>> LazyInstance = new(async () =>
+    public void Dispose()
     {
-        var wiremockConfigFolder = Path.Join(AppDomain.CurrentDomain.BaseDirectory, "Shared", "WireMock", "wiremock.org.stubs");
-
-        _container = new ContainerBuilder()
-            .WithImage("wiremock/wiremock:3.13.1")
-            .WithName($"wiremock.org-{Guid.NewGuid()}")
-            .WithPortBinding(8080, true)
-            .WithBindMount(wiremockConfigFolder, "/home/wiremock")
-            .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(8080))
-            .Build();
-
-        await _container.StartAsync();
-        
-        return $"http://127.0.0.1:{_container.GetMappedPublicPort(8080)}";
-    });
-
-    public static Task<string> Instance => LazyInstance.Value;
-
-    public async ValueTask DisposeAsync()
-    {
-        await _container.DisposeAsync();
+        if(Instance.IsStarted) Instance.Stop();
+        Instance.Dispose();
         GC.SuppressFinalize(this);
     }
 }

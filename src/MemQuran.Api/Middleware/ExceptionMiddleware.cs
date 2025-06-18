@@ -5,6 +5,7 @@ using MemQuran.Infrastructure.Extensions;
 
 namespace MemQuran.Api.Middleware;
 
+[Obsolete("Using new ProblemDetails instead")]
 public class ExceptionMiddleware(RequestDelegate next, ILoggerFactory loggerFactory)
 {
     public async Task InvokeAsync(HttpContext httpContext)

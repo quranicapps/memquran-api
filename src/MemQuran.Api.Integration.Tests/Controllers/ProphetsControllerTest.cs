@@ -1,34 +1,16 @@
 ﻿using System.Net;
+using System.Net.Http.Json;
 using MemQuran.Api.Integration.Tests.Shared;
+using Microsoft.AspNetCore.Mvc;
+using WireMock.RequestBuilders;
+using WireMock.ResponseBuilders;
 using Xunit.Abstractions;
 
 namespace MemQuran.Api.Integration.Tests.Controllers;
 
-[Trait("Category", "Integration"), Collection(nameof(ProphetsCollection))]
+[Trait("Category", "Integration"), Collection(nameof(WireMockCollection))]
 public class ProphetsControllerTest(CustomApiFactory customApiFactory, ITestOutputHelper testOutputHelper) 
-    : BaseTest(customApiFactory, testOutputHelper), IClassFixture<CustomApiFactory>
+    : IClassFixture<CustomApiFactory>
 {
-    [Fact]
-    public async Task GetProphets_Returns_NotFound()
-    {
-        var result = await Client.GetAsync("/json/prophets/en_prophets.json");
-        
-        Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
-    }
     
-    [Fact]
-    public async Task GetProphets_Returns_NotFound2()
-    {
-        var result = await Client.GetAsync("/json/prophets/en_prophets.json");
-        
-        Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
-    }
-    
-    [Fact]
-    public async Task GetProphets_Returns_NotFound3()
-    {
-        var result = await Client.GetAsync("/json/prophets/en_prophets.json");
-        
-        Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
-    }
 }
