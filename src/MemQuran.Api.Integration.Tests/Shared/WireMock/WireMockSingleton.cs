@@ -16,10 +16,10 @@ public class WireMockSingleton : IAsyncDisposable
             .WithName($"wiremock.org-{Guid.NewGuid()}")
             .WithPortBinding(8080, true)
             .WithBindMount(wiremockConfigFolder, "/home/wiremock")
+            .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(8080))
             .Build();
 
         await _container.StartAsync();
-        await Task.Delay(600);
         
         return $"http://127.0.0.1:{_container.GetMappedPublicPort(8080)}";
     });

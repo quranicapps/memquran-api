@@ -1,4 +1,5 @@
-﻿using MemQuran.Api.Integration.Tests.Shared;
+﻿using System.Net;
+using MemQuran.Api.Integration.Tests.Shared;
 using Xunit.Abstractions;
 
 namespace MemQuran.Api.Integration.Tests.Controllers;
@@ -8,20 +9,26 @@ public class ConfigurationControllerTest(CustomApiFactory customApiFactory, ITes
     : BaseTest(customApiFactory, testOutputHelper), IClassFixture<CustomApiFactory>
 {
     [Fact]
-    public async Task Test1()
+    public async Task GetProphets_Returns_NotFound()
     {
-        Assert.True(true);
-    } 
+        var result = await Client.GetAsync("/json/prophets/en_prophets.json");
+        
+        Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
+    }
     
     [Fact]
-    public async Task Test2()
+    public async Task GetProphets_Returns_NotFound2()
     {
-        Assert.True(true);
-    } 
+        var result = await Client.GetAsync("/json/prophets/en_prophets.json");
+        
+        Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
+    }
     
     [Fact]
-    public async Task Test3()
+    public async Task GetProphets_Returns_NotFound3()
     {
-        Assert.True(true);
-    } 
+        var result = await Client.GetAsync("/json/prophets/en_prophets.json");
+        
+        Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
+    }
 }

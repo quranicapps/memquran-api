@@ -15,4 +15,20 @@ public class ProphetsControllerTest(CustomApiFactory customApiFactory, ITestOutp
         
         Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
     }
+    
+    [Fact]
+    public async Task GetProphets_Returns_NotFound2()
+    {
+        var result = await Client.GetAsync("/json/prophets/en_prophets.json");
+        
+        Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
+    }
+    
+    [Fact]
+    public async Task GetProphets_Returns_NotFound3()
+    {
+        var result = await Client.GetAsync("/json/prophets/en_prophets.json");
+        
+        Assert.Equal(HttpStatusCode.NotFound, result.StatusCode);
+    }
 }
