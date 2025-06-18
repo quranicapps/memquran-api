@@ -1,10 +1,10 @@
 ﻿using MemQuran.Api.Integration.Tests.Shared;
 using Xunit.Abstractions;
 
-namespace MemQuran.Api.Integration.Tests;
+namespace MemQuran.Api.Integration.Tests.Controllers;
 
-[Trait("Category", "Integration"), Collection(nameof(MemQuranCollection))]
-public class ConfigurationControllerTest(CustomApiFactory customApiFactory, ITestOutputHelper testOutputHelper) 
+[Trait("Category", "Integration"), Collection(nameof(DuaCollection))]
+public class DuasControllerTest(CustomApiFactory customApiFactory, ITestOutputHelper testOutputHelper) 
     : BaseTest(customApiFactory, testOutputHelper), IClassFixture<CustomApiFactory>
 {
     [Fact]

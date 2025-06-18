@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using MemQuran.Api.Settings;
 using MemQuran.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,43 +1,13 @@
 {
-  "ContentDeliverySettings": {
-    "Type": "JsDelivr", // Unknown, Local, JsDelivr, JsDelivrFallback
-    "CachingSettings": {
-      "CacheType": "None", // None, Memory, Redis
-      "InitialCachingEnabled": false,
-      "SlidingExpiration": false,
-      "CacheDurationTimeSpan": "02:00:00:00"
-    }
-  },
   "Clients": {
     "JsDelivrService": {
       "Enabled": true,
       "BaseUrl": "http://localhost:8383",
-      "Version": "v0.0.62",
+      "Version": "AnyVersionForTestingPurposes",
       "DefaultTimeout": "00:00:05",
       "IncrementalBackoffFactorSeconds": 5,
       "UserName": "",
       "Password": ""
     }
-  },
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning",
-      "Microsoft.Hosting.Lifetime": "Warning",
-      "System.Net.Http": "Warning"
-    },
-    "Console": {
-      "FormatterName": "CustomTimePrefixingFormatter",
-      "FormatterOptions": {
-        "SingleLine": true,
-        "IncludeScopes": false,
-        "TimestampFormat": "yyyy-MM-dd HH:mm:ss.ffff ",
-        "UseUtcTimestamp": true,
-        "JsonWriterOptions": {
-          "Indented": true
-        }
-      }
-    }
-  },
-  "AllowedHosts": "*"
+  }
 }

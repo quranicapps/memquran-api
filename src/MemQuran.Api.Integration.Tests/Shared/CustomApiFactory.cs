@@ -2,8 +2,6 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.Configuration;
-using WireMock.RequestBuilders;
-using WireMock.ResponseBuilders;
 
 namespace MemQuran.Api.Integration.Tests.Shared;
 
@@ -24,20 +22,11 @@ public class CustomApiFactory(SharedFixture sharedFixture) : WebApplicationFacto
             .Build();
 
         ClientsSettings = configuration.GetSection(ClientsSettings.SectionName).Get<ClientsSettings>()!;
-
-        AddWireMockStubs();
         
         builder
             .UseConfiguration(configuration)
             .ConfigureAppConfiguration(configurationBuilder =>
                 configurationBuilder
                     .AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "override.json")));
-    }
-
-    private void AddWireMockStubs()
-    {
-        SharedFixture.Server
-            .Given(Request.Create().WithPath($"/gh/quranstatic/static@{ClientsSettings.JsDelivrService.Version}/json/prophets/en_prophets.json").UsingGet())
-            .RespondWith(Response.Create().WithStatusCode(404));
     }
 }

@@ -1,4 +1,5 @@
-﻿using WireMock.RequestBuilders;
+﻿using MemQuran.Api.Settings;
+using WireMock.RequestBuilders;
 using WireMock.ResponseBuilders;
 using WireMock.Server;
 
@@ -9,20 +10,17 @@ namespace MemQuran.Api.Integration.Tests.Shared;
 
 public class SharedFixture : IAsyncLifetime
 {
-    public WireMockServer Server { get; set; } = null!;
+    public WireMockServer Server { get; private set; } = null!;
 
     public async Task InitializeAsync()
     {
-        Server = WireMockServer.Start(8383);
+        Server = WireMockSingleton.Instance;
 
         await Task.CompletedTask;
     }
 
     public async Task DisposeAsync()
     {
-        Server.Stop();    
-        Server.Dispose();
-        
         await Task.CompletedTask;
     }
 }

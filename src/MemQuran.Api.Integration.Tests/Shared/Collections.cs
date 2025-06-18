@@ -12,5 +12,14 @@
 // Having one collection for all tests in the project, SharedFixture is created once for all tests in the same collection.
 // This single SharedFixture is responsible for setting up resources for all tests in the collection
 
-[CollectionDefinition(nameof(MemQuranCollection))]
-public class MemQuranCollection : ICollectionFixture<SharedFixture>;
+[CollectionDefinition(nameof(AudioCollection))]
+public class AudioCollection : ICollectionFixture<SharedFixture>;
+
+[CollectionDefinition(nameof(ConfigurationCollection))]
+public class ConfigurationCollection : ICollectionFixture<SharedFixture>;
+
+[CollectionDefinition(nameof(DuaCollection))]
+public class DuaCollection : ICollectionFixture<SharedFixture>;
+
+[CollectionDefinition(nameof(ProphetsCollection))]
+public class ProphetsCollection : ICollectionFixture<SharedFixture>;
