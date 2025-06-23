@@ -9,18 +9,7 @@ public class CachingProviderFactory(IServiceProvider serviceProvider, ILogger<Ca
 {
     public ICachingProvider GetCachingProvider(CacheType cacheType)
     {
-        var providers = serviceProvider.GetServices<ICachingProvider>();
-        
-        var cachingProvider = cacheType switch
-        {
-            CacheType.None => providers.FirstOrDefault(x => x.CacheType == CacheType.None),
-            CacheType.Memory => providers.FirstOrDefault(x => x.CacheType == CacheType.Memory),
-            CacheType.Redis => providers.FirstOrDefault(x => x.CacheType == CacheType.Redis),
-            _ => throw new ArgumentOutOfRangeException(nameof(cacheType), cacheType, null)
-        };
-
-        logger.LogInformation("{Name} used as caching provider", cachingProvider?.GetType().Name);
-
-        return cachingProvider;
+        var cachingProviders = serviceProvider.GetServices<ICachingProvider>().ToList();
+        return cachingProviders.FirstOrDefault(x => x.Name == cacheType) ?? throw new InvalidOperationException($"No caching provider found for cache type {cacheType}. Available types: {string.Join(", ", cachingProviders.Select(c => c.Name))}");
     }
 }

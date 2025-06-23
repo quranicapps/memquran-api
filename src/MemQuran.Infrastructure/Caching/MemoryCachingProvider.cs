@@ -7,7 +7,7 @@ namespace MemQuran.Infrastructure.Caching;
 
 public class MemoryCachingProvider(IDistributedCache distributedCache, ILogger<MemoryCachingProvider> logger) : ICachingProvider
 {
-    public CacheType CacheType => CacheType.Memory;
+    public CacheType Name => CacheType.Memory;
     
     public async Task<byte[]> GetAsync(string key, CancellationToken cancellationToken = default)
     {

@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using MemQuran.Api.Clients.JsDelivr;
 using MemQuran.Api.Clients.Local;
+using MemQuran.Api.Extensions;
+using MemQuran.Api.HealthChecks;
 using MemQuran.Api.Middleware;
 using MemQuran.Api.Services;
 using MemQuran.Api.Settings;
@@ -11,6 +13,7 @@ using MemQuran.Infrastructure.Caching;
 using MemQuran.Infrastructure.Factories;
 using MemQuran.Infrastructure.Services;
 using Microsoft.AspNetCore.Diagnostics;
+using static Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,20 +30,20 @@ builder.Services.AddProblemDetails(opts => // built-in problem details support
         {
             ctx.ProblemDetails.Extensions.Add("instance", $"{ctx.HttpContext.Request.Method} {ctx.HttpContext.Request.Path}");
         }
-        
+
         var exception = ctx.HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
 
         if (ctx.ProblemDetails.Status != 500) return;
-        
+
         ctx.ProblemDetails.Detail = "An error occurred in our API. Use the trace id when contacting us.";
-        
+
         if (builder.Environment.IsProduction()) return;
-        
+
         if (!ctx.ProblemDetails.Extensions.ContainsKey("errorMessage"))
         {
             ctx.ProblemDetails.Extensions.Add("errorMessage", exception?.Message);
         }
-        
+
         if (!ctx.ProblemDetails.Extensions.ContainsKey("stackTrace"))
         {
             ctx.ProblemDetails.Extensions.Add("stackTrace", exception?.StackTrace);
@@ -55,6 +58,15 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin()); });
+
+// Health Checks and Health Checks UI (https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)
+builder.Services.AddHealthChecks()
+    .AddCheck("API Running", () => Healthy(), tags: ["health"])
+    .AddCheck<JsDelivrHealthCheck>("Call JsDelivr", timeout: TimeSpan.FromSeconds(5), tags: new List<string> { "services", "cdn" })
+    .AddCheck<LocalCdnHealthCheck>("Call Local CDN", timeout: TimeSpan.FromSeconds(5), tags: new List<string> { "services", "cdn" })
+    .AddUrlGroup(new Uri("http://httpbin.org/status/200"), name: "http connection check", tags: new List<string> { "services", "http", "internet" })
+    .AddUrlGroup(new Uri("https://httpbin.org/status/200"), name: "https connection check", tags: new List<string> { "services", "https", "internet" });
+builder.Services.AddHealthChecksUI().AddInMemoryStorage();
 
 // Configuration
 var contentDeliverySettings = builder.Configuration.GetSection(ContentDeliverySettings.SectionName).Get<ContentDeliverySettings>();
@@ -78,6 +90,14 @@ builder.Services.AddHostedService<LocalFilesCachingWorker>();
 builder.Services.AddSingleton<IHashingService, HashingService>();
 builder.Services.AddSingleton<IStaticFileService, StaticFileService>();
 builder.Services.AddScoped<JsDelivrDelegatingHandler>();
+builder.Services.AddSingleton<ICdnClient, LocalFileClient>();
+builder.Services.AddHttpClient<ICdnClient, JsDelivrClient>(httpClient =>
+    {
+        httpClient.BaseAddress = new Uri(clientsSettings.JsDelivrService.BaseUrl);
+        httpClient.Timeout = clientsSettings.JsDelivrService.DefaultTimeout;
+    })
+    .AddHttpMessageHandler(() => new JsDelivrDelegatingHandler());
+builder.Services.AddSingleton<ICdnClientFactory, CdnClientFactory>();
 
 var logger = LoggerFactory.Create(loggingBuilder => loggingBuilder
         .AddSimpleConsole(options =>
@@ -90,31 +110,6 @@ var logger = LoggerFactory.Create(loggingBuilder => loggingBuilder
     .CreateLogger("Program");
 
 logger.LogInformation("Starting Env: {Env} on port {Port}", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "?", Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "?");
-
-// var logger = builder.Services.BuildServiceProvider().GetService<ILoggerFactory>().CreateLogger("Program");
-
-switch (contentDeliverySettings.Type)
-{
-    // If local, just use the local service client else Add other HTTP clients
-    case ContentDeliveryType.Unknown:
-    case ContentDeliveryType.Local:
-        builder.Services.AddSingleton<ICdnClient, LocalFileClient>();
-        logger.LogInformation("Local Files used for Content Delivery");
-        break;
-    case ContentDeliveryType.JsDelivr:
-        builder.Services.AddHttpClient<ICdnClient, JsDelivrClient>(httpClient =>
-            {
-                httpClient.BaseAddress = new Uri(clientsSettings.JsDelivrService.BaseUrl);
-                httpClient.Timeout = clientsSettings.JsDelivrService.DefaultTimeout;
-            })
-            .AddHttpMessageHandler(() => new JsDelivrDelegatingHandler());
-        logger.LogInformation("JsDelivrClient used for Content Delivery");
-        break;
-    case ContentDeliveryType.JsDelivrFallback:
-        throw new Exception("Content Delivery Type is not set or is not supported. Please check configuration.");
-    default:
-        throw new Exception("No Content Delivery Type is set. Please check configuration.");
-}
 
 // Host Options
 builder.Services.Configure<HostOptions>(options => { options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore; });
@@ -140,6 +135,17 @@ app.UseExceptionHandler(); // New Way: Use built-in exception handler middleware
 app.UseAuthorization();
 app.MapControllers();
 
+// Custom Middleware for Health Checks
+app.MapCustomHealthCheck();
+app.MapHealthChecksUI(options =>
+{
+    options.UIPath = "/health";
+    options.ApiPath = "/healthapi";
+    options.WebhookPath = "/healthwebhook";
+    options.AddCustomStylesheet("HealthChecks/css/healthchecksui.css");
+});
+
+// Startup when application starts
 // app.Lifetime.ApplicationStarted.Register(() =>
 // {
 //     var currentTimeUtc = DateTime.UtcNow.ToString();

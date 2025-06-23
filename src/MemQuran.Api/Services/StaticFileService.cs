@@ -5,13 +5,14 @@ namespace MemQuran.Api.Services;
 
 public class StaticFileService(
     ICachingProviderFactory cachingProviderFactory, 
-    ICdnClient cdnClient, 
+    ICdnClientFactory cdnClientFactory, 
     ContentDeliverySettings contentDeliverySettings, 
     ILogger<StaticFileService> logger)
     : IStaticFileService
 {
     private readonly ICachingProvider _cachingProvider = cachingProviderFactory.GetCachingProvider(contentDeliverySettings.CachingSettings.CacheType);
     private readonly ILogger<StaticFileService> _logger = logger;
+    private readonly ICdnClient _cdnClient = cdnClientFactory.Create(contentDeliverySettings.Type);
 
     public async Task<string?> GetFileContentStringAsync(string filePath, CancellationToken cancellationToken = default)
     {
@@ -20,7 +21,7 @@ public class StaticFileService(
 
         if (text is not null) return text;
         
-        text = await cdnClient.GetFileContentStringAsync(filePath, cancellationToken);
+        text = await _cdnClient.GetFileContentStringAsync(filePath, cancellationToken);
             
         if(text is not null)
         {
@@ -32,6 +33,6 @@ public class StaticFileService(
 
     public async Task<byte[]> GetFileContentBytesAsync(string filePath, CancellationToken cancellationToken = default)
     {
-        return await cdnClient.GetFileContentBytesAsync(filePath, cancellationToken);  
+        return await _cdnClient.GetFileContentBytesAsync(filePath, cancellationToken);  
     }
 }

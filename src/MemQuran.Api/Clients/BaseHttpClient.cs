@@ -8,6 +8,38 @@ public abstract class BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClie
 {
     protected abstract string ServiceName { get; }
 
+    protected async Task<HttpResponseMessage> GetAsync(string url, CancellationToken cancellationToken = default)
+    {
+        var request = new HttpRequestMessage(HttpMethod.Get, url);
+        
+        return await GetAsync(request, cancellationToken);
+    }
+    
+    protected async Task<HttpResponseMessage> GetAsync(HttpRequestMessage request, CancellationToken cancellationToken = default)
+    {
+        HttpResponseMessage response;
+
+        try
+        {
+            logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), request.RequestUri);
+            response = await httpClient.SendAsync(request, cancellationToken);
+        }
+        catch (HttpRequestException ex)
+        {
+            throw new HttpServiceException(ServiceName, request, ex, HttpStatusCode.InternalServerError);
+        }
+        catch (TaskCanceledException ex)
+        {
+            throw new HttpServiceException(ServiceName, request, ex, HttpStatusCode.RequestTimeout);
+        }
+        catch (Exception ex)
+        {
+            throw new HttpServiceException(ServiceName, request, ex, HttpStatusCode.InternalServerError);
+        }
+
+        return response;
+    }
+    
     protected async Task<string> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken = default)
     {
         HttpResponseMessage response;

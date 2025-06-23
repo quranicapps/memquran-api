@@ -5,7 +5,7 @@ namespace MemQuran.Infrastructure.Caching;
 
 public class NullCachingProvider : ICachingProvider
 {
-    public CacheType CacheType => CacheType.None;
+    public CacheType Name => CacheType.None;
     
     public async Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default)
     {

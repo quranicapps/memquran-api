@@ -4,7 +4,7 @@ namespace MemQuran.Core.Contracts;
 
 public interface ICachingProvider
 {
-    CacheType CacheType { get; }
+    CacheType Name { get; }
     
     Task<byte[]> GetAsync(string key, CancellationToken cancellationToken = default);
     Task<string?> GetStringAsync(string key, CancellationToken cancellationToken = default);
