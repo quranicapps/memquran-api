@@ -32,9 +32,4 @@
       <ProjectReference Include="..\MemQuran.Core\MemQuran.Core.csproj" />
       <ProjectReference Include="..\MemQuran.Infrastructure\MemQuran.Infrastructure.csproj" />
     </ItemGroup>
-
-    <ItemGroup>
-      <Folder Include="Factories\" />
-    </ItemGroup>
-
 </Project>

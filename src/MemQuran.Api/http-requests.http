@@ -1,8 +1,310 @@
+# MemQuran-API
+
 ###
+# @name Health Json
+GET {{BaseUrl}}/health.json
 
-### health check
-GET {{baseUrl}}/health.json
-Content-Type: application/json
+###
+# group: Audio / Timings
+# @name timings/surah/<ReciterTimingFileName>
+GET {{BaseUrl}}/json/audio/abderahmane-eloosi-1/timings/surah/abderahmane-eloosi-1_timings_surah_1.json
 
-// How to output the response to a file
->> .\http-response\health.response.json
+###
+# group: Audio / Timings
+# @name timings/juz/<ReciterTimingFileName>
+GET {{BaseUrl}}/json/audio/abdulbaset-mujawwad-2/timings/juz/abdulbaset-mujawwad-2_timings_juz_1.json
+
+###
+# group: Audio / Timings
+# @name timings/page/<ReciterTimingFileName>
+GET {{BaseUrl}}/json/audio/abdulbaset-mujawwad-2/timings/page/abdulbaset-mujawwad-2_timings_page_1.json
+
+###
+# group: Audio / Timings
+# @name timings/ruku/<ReciterTimingFileName>
+GET {{BaseUrl}}/json/audio/abdulbaset-mujawwad-2/timings/ruku/abdulbaset-mujawwad-2_timings_ruku_1.json
+
+###
+# group: Audio / Timings
+# @name timings/maqra/<ReciterTimingFileName>
+GET {{BaseUrl}}/json/audio/abdulbaset-mujawwad-2/timings/maqra/abdulbaset-mujawwad-2_timings_maqra_1.json
+
+###
+# group: Audio
+# @name Dua
+GET {{BaseUrl}}/audio/duas/1_1.mp3
+
+> {%
+    // TODO: you can add here Response handler
+%}
+
+###
+# group: Audio
+# @name Tajweed
+GET {{BaseUrl}}/audio/tajweed/ikhfa.mp3
+
+> {%
+    // TODO: you can add here Response handler
+%}
+
+###
+# group: Audio
+# @name WBW
+GET {{BaseUrl}}/audio/wbw/001_001_001.mp3
+
+> {%
+    // TODO: you can add here Response handler
+%}
+
+###
+# group: Audio
+# @name Memorise
+GET {{BaseUrl}}/audio/memorise/0A5639E55EA4CF708D349C6FC8D95BE7CED289AFC0875F5F306CA3D3ECDA3CE9.mp3
+
+> {%
+    // TODO: you can add here Response handler
+%}
+
+###
+# group: Audio
+# @name Correct Sound
+GET {{BaseUrl}}/audio/common/correct.mp3
+
+> {%
+    // TODO: you can add here Response handler
+%}
+
+###
+# group: Audio
+# @name Incorrect Sound
+GET {{BaseUrl}}/audio/common/incorrect.mp3
+
+> {%
+    // TODO: you can add here Response handler
+%}
+
+###
+# group: Audio
+# @name namesOfAllah
+GET {{BaseUrl}}/audio/namesOfAllah/1.mp3
+
+> {%
+    // TODO: you can add here Response handler
+%}
+
+###
+# group: Duas
+# @name Duas Locale
+GET {{BaseUrl}}/json/duas/en_duas.json
+
+###
+# group: Editions
+# @name tafsirEditions
+GET {{BaseUrl}}/json/editions/tafsirEditions.json
+
+###
+# group: Editions
+# @name translationEditions
+GET {{BaseUrl}}/json/editions/translationEditions.json
+
+###
+# group: Images
+# @name Tajweed Word
+GET {{BaseUrl}}/images/tajweed/1/1/1.png
+
+###
+# group: Images
+# @name Tajweed Number
+GET {{BaseUrl}}/images/tajweed/1.png
+
+###
+# group: Images
+# @name Reciter
+GET {{BaseUrl}}/images/reciters/abdallah-al-matroud-1.png
+
+###
+# group: Surahs
+# @name Surah Info Locale
+GET {{BaseUrl}}/json/surahs/en_surahInfo.json
+
+###
+# group: Surahs
+# @name Surah Info With Summary Locale
+GET {{BaseUrl}}/json/surahs/en_surahInfoWithSummary.json
+
+###
+# group: Surahs
+# @name Surah
+GET {{BaseUrl}}/json/surahs/surah_1.json
+
+###
+# group: Surahs
+# @name Surah Wbw Locale
+GET {{BaseUrl}}/json/surahs/surah_wbw_en_1.json
+
+###
+# group: Surahs
+# @name Surah Translation
+GET {{BaseUrl}}/json/surahTranslations/surah_translation_1_490.json
+
+###
+# group: Juzs
+# @name Juz Info Locale
+GET {{BaseUrl}}/json/juzs/en_juzInfo.json
+
+###
+# group: Juzs
+# @name Juz Info With Summary Locale
+GET {{BaseUrl}}/json/juzs/en_juzInfoWithSummary.json
+
+###
+# group: Juzs
+# @name Juz
+GET {{BaseUrl}}/json/juzs/juz_1.json
+
+###
+# group: Juzs
+# @name Juz Wbw Locale
+GET {{BaseUrl}}/json/juzs/juz_wbw_en_1.json
+
+###
+# group: Juzs
+# @name Juz Translation
+GET {{BaseUrl}}/json/juzTranslations/juz_translation_1_490.json
+
+###
+# group: Pages
+# @name Page Info Locale
+GET {{BaseUrl}}/json/pages/en_pageInfo.json
+
+###
+# group: Pages
+# @name Page
+GET {{BaseUrl}}/json/pages/page_1.json
+
+###
+# group: Pages
+# @name Page Wbw Locale
+GET {{BaseUrl}}/json/pages/page_wbw_en_1.json
+
+###
+# group: Pages
+# @name Page Translation
+GET {{BaseUrl}}/json/pageTranslations/page_translation_1_490.json
+
+###
+# group: Rukus
+# @name Ruku Info Locale
+GET {{BaseUrl}}/json/rukus/en_rukuInfo.json
+
+###
+# group: Rukus
+# @name Ruku
+GET {{BaseUrl}}/json/rukus/ruku_1.json
+
+###
+# group: Rukus
+# @name Ruku Wbw Locale
+GET {{BaseUrl}}/json/rukus/ruku_wbw_en_1.json
+
+###
+# group: Rukus
+# @name Ruku Translation
+GET {{BaseUrl}}/json/rukuTranslations/ruku_translation_1_490.json
+
+###
+# group: Maqra
+# @name MaqraInfo Locale
+GET {{BaseUrl}}/json/maqras/en_maqraInfo.json
+
+###
+# group: Maqra
+# @name Maqraz
+GET {{BaseUrl}}/json/maqras/maqra_1.json
+
+###
+# group: Maqra
+# @name Maqra Wbw Locale
+GET {{BaseUrl}}/json/maqras/maqra_wbw_en_1.json
+
+###
+# group: Maqra
+# @name Maqra Translation
+GET {{BaseUrl}}/json/maqraTranslations/maqra_translation_1_490.json
+
+###
+# group: Memorise
+# @name Courses Locale
+GET {{BaseUrl}}/json/memorise/en_courses.json
+
+###
+# group: Memorise
+# @name Questions Locale
+GET {{BaseUrl}}/json/memorise/en_questions_2_3.json
+
+###
+# group: Memorise
+# @name Reviews Locale
+GET {{BaseUrl}}/json/memorise/en_reviews_2_3.json
+
+###
+# group: NamesOfAllah
+# @name Names Locale
+GET {{BaseUrl}}/json/namesOfAllah/en_names.json
+
+###
+# group: Prophets
+# @name Prophets Locale
+GET {{BaseUrl}}/json/prophets/en_prophets.json
+
+###
+# group: Reciters
+# @name ReciterInfo Locale
+GET {{BaseUrl}}/json/reciterInfos/en_abderahmane-eloosi-1.json
+
+###
+# group: Reciters
+# @name Reciters Locale
+GET {{BaseUrl}}/json/reciters/en_reciters.json
+
+>> http-response/reciters/en_reciters.response.json
+
+###
+# group: Root Words
+# @name RoorWords Locale
+GET {{BaseUrl}}/json/rootWords/en_rootWords.json
+
+###
+# group: Search
+# @name SearchIndex Locale
+GET {{BaseUrl}}/json/search/en_search.json
+
+###
+# group: Tafsirs
+# @name Tafsir
+GET {{BaseUrl}}/json/tafsirs/tafsir_1_14.json
+
+###
+# group: Verses
+# @name Verses Arabic
+GET {{BaseUrl}}/json/verses/verses.json
+
+###
+# group: Verses
+# @name Verses Locale
+GET {{BaseUrl}}/json/verses/en_verses.json
+
+###
+# group: Health Checks
+# @name Health Check Endpoint
+GET {{BaseUrl}}/api/health
+
+###
+# group: Health Checks
+# @name Ready Check Endpoint
+GET {{BaseUrl}}/api/health/ready
+
+###
+# group: Health Checks
+# @name Health Check UI API
+GET {{BaseUrl}}/healthapi
