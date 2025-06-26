@@ -8,7 +8,6 @@ using MemQuran.Api.Services;
 using MemQuran.Api.Settings;
 using MemQuran.Api.Workers;
 using MemQuran.Core.Contracts;
-using MemQuran.Core.Models;
 using MemQuran.Infrastructure.Caching;
 using MemQuran.Infrastructure.Factories;
 using MemQuran.Infrastructure.Services;
@@ -17,6 +16,8 @@ using static Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult;
 
 var builder = WebApplication.CreateBuilder(args);
 
+////////////////////////////
+// Configure Services
 builder.Services.AddProblemDetails(opts => // built-in problem details support
     opts.CustomizeProblemDetails = ctx =>
     {
@@ -54,9 +55,6 @@ builder.Services.AddExceptionHandler<ExceptionToProblemDetailsHandler>();
 builder.Services.AddProblemDetails();
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin()); });
 
 // Health Checks and Health Checks UI (https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)
@@ -67,6 +65,12 @@ builder.Services.AddHealthChecks()
     .AddUrlGroup(new Uri("http://httpbin.org/status/200"), name: "http connection check", tags: new List<string> { "services", "http", "internet" })
     .AddUrlGroup(new Uri("https://httpbin.org/status/200"), name: "https connection check", tags: new List<string> { "services", "https", "internet" });
 builder.Services.AddHealthChecksUI().AddInMemoryStorage();
+
+// Open API / Swagger
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 // Configuration
 var contentDeliverySettings = builder.Configuration.GetSection(ContentDeliverySettings.SectionName).Get<ContentDeliverySettings>();
@@ -114,6 +118,9 @@ logger.LogInformation("Starting Env: {Env} on port {Port}", Environment.GetEnvir
 // Host Options
 builder.Services.Configure<HostOptions>(options => { options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore; });
 
+
+//////////////////////////
+// Configure App
 var app = builder.Build();
 
 app.UseCors(x => x
@@ -121,11 +128,14 @@ app.UseCors(x => x
     .AllowAnyMethod()
     .AllowAnyHeader());
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.MapOpenApi();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/openapi/v1.json", "MemQuran API V1");
+    });
 }
 
 // app.UseMiddleware<ExceptionMiddleware>(); // Old way: Custom middleware for handling exceptions
