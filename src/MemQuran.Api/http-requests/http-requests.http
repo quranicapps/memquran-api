@@ -1,0 +1,8 @@
+###
+
+### health check
+GET {{baseUrl}}/health.json
+Content-Type: application/json
+
+// How to output the response to a file
+>> .\http-response\health.response.json
