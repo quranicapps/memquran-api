@@ -26,9 +26,6 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
-      <Content Update="http-requests\http-client.env.json">
-        <DependentUpon>http-requests.http</DependentUpon>
-      </Content>
     </ItemGroup>
 
     <ItemGroup>
