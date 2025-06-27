@@ -24,12 +24,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D3EE3844
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docker", "Docker", "{5816DE00-669F-4FCE-8849-F691D8FC794C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service", "Service", "{BE344869-5E94-44F5-804D-A97EBDC20584}"
-	ProjectSection(SolutionItems) = preProject
-		..\.docker\docker-compose-redis.yml = ..\.docker\docker-compose-redis.yml
-		..\.docker\docker-compose-seq.yml = ..\.docker\docker-compose-seq.yml
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MemQuran", "MemQuran", "{EF93C547-F64A-45CE-9DA3-FBCD4A2F3569}"
 	ProjectSection(SolutionItems) = preProject
 		..\.docker\docker-compose.yaml = ..\.docker\docker-compose.yaml
@@ -69,7 +63,6 @@ Global
 		{EB2862ED-7151-4C7C-810F-17F77DAF854E} = {D3EE3844-F242-456E-882B-BD14252D2F38}
 		{A98004E8-FDDF-452E-BD24-4FBB7CD1EA9C} = {D3EE3844-F242-456E-882B-BD14252D2F38}
 		{5816DE00-669F-4FCE-8849-F691D8FC794C} = {28C575A4-96DC-4374-94F6-6988E7261F7B}
-		{BE344869-5E94-44F5-804D-A97EBDC20584} = {5816DE00-669F-4FCE-8849-F691D8FC794C}
 		{EF93C547-F64A-45CE-9DA3-FBCD4A2F3569} = {5816DE00-669F-4FCE-8849-F691D8FC794C}
 	EndGlobalSection
 EndGlobal
