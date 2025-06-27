@@ -11,22 +11,18 @@ public class StaticFileService(
     : IStaticFileService
 {
     private readonly ICachingProvider _cachingProvider = cachingProviderFactory.GetCachingProvider(contentDeliverySettings.CachingSettings.CacheType);
-    private readonly ILogger<StaticFileService> _logger = logger;
     private readonly ICdnClient _cdnClient = cdnClientFactory.Create(contentDeliverySettings.Type);
 
     public async Task<string?> GetFileContentStringAsync(string filePath, CancellationToken cancellationToken = default)
     {
         var cacheKey = Path.GetFileName(filePath);
-        var text = await _cachingProvider.GetStringAsync(cacheKey, cancellationToken);
-
-        if (text is not null) return text;
         
-        text = await _cdnClient.GetFileContentStringAsync(filePath, cancellationToken);
-            
-        if(text is not null)
-        {
-            await _cachingProvider.SetStringAsync(cacheKey, text, cancellationToken);
-        }
+        var text = await _cachingProvider.GetOrCreateStringAsync
+        (
+            cacheKey, 
+            ct => _cdnClient.GetFileContentStringAsync(filePath, ct), 
+            cancellationToken
+        );
         
         return text;
     }

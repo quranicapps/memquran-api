@@ -8,10 +8,14 @@ using MemQuran.Api.Services;
 using MemQuran.Api.Settings;
 using MemQuran.Api.Workers;
 using MemQuran.Core.Contracts;
+using MemQuran.Core.Models;
 using MemQuran.Infrastructure.Caching;
 using MemQuran.Infrastructure.Factories;
 using MemQuran.Infrastructure.Services;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.Caching.Hybrid;
+using StackExchange.Redis;
 using static Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -58,13 +62,13 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin()); });
 
 // Health Checks and Health Checks UI (https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)
-builder.Services.AddHealthChecks()
-    .AddCheck("API Running", () => Healthy(), tags: ["health"])
-    .AddCheck<JsDelivrHealthCheck>("Call JsDelivr", timeout: TimeSpan.FromSeconds(5), tags: new List<string> { "services", "cdn" })
-    .AddCheck<LocalCdnHealthCheck>("Call Local CDN", timeout: TimeSpan.FromSeconds(5), tags: new List<string> { "services", "cdn" })
-    .AddUrlGroup(new Uri("http://httpbin.org/status/200"), name: "http connection check", tags: new List<string> { "services", "http", "internet" })
-    .AddUrlGroup(new Uri("https://httpbin.org/status/200"), name: "https connection check", tags: new List<string> { "services", "https", "internet" });
-builder.Services.AddHealthChecksUI().AddInMemoryStorage();
+// builder.Services.AddHealthChecks()
+//     .AddCheck("API Running", () => Healthy(), tags: ["health"])
+//     .AddCheck<JsDelivrHealthCheck>("Call JsDelivr", timeout: TimeSpan.FromSeconds(5), tags: new List<string> { "services", "cdn" })
+//     .AddCheck<LocalCdnHealthCheck>("Call Local CDN", timeout: TimeSpan.FromSeconds(5), tags: new List<string> { "services", "cdn" })
+//     .AddUrlGroup(new Uri("http://httpbin.org/status/200"), name: "http connection check", tags: new List<string> { "services", "http", "internet" })
+//     .AddUrlGroup(new Uri("https://httpbin.org/status/200"), name: "https connection check", tags: new List<string> { "services", "https", "internet" });
+// builder.Services.AddHealthChecksUI().AddInMemoryStorage();
 
 // Open API / Swagger
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -82,10 +86,40 @@ if (clientsSettings == null) throw new Exception("Could not bind the Clients Set
 builder.Services.AddSingleton(clientsSettings);
 
 // Caching
-builder.Services.AddDistributedMemoryCache(options => { options.SizeLimit = long.MaxValue; });
 builder.Services.AddSingleton<ICachingProviderFactory, CachingProviderFactory>();
 builder.Services.AddSingleton<ICachingProvider, NullCachingProvider>();
 builder.Services.AddSingleton<ICachingProvider, MemoryCachingProvider>();
+if (contentDeliverySettings.CachingSettings.CacheType == CacheType.Hybrid)
+{
+    // Caching - Hybrid Cache will use both local in-memory cache and distributed cache (any IDistributedCache implementation, i.e. AddStackExchangeRedisCache)
+    builder.Services.AddStackExchangeRedisCache(options =>
+    {
+        options.Configuration = builder.Configuration.GetConnectionString("Redis");
+        options.InstanceName = "memquranapi:";
+        options.ConfigurationOptions = new ConfigurationOptions
+        {
+            AsyncTimeout = 5000, // 5 seconds
+            SyncTimeout = 5000, // 5 seconds
+            AbortOnConnectFail = false, // Do not throw an exception if the connection fails
+            ConnectTimeout = 5000, // 5 seconds
+        };
+    });
+    builder.Services.AddHybridCache(options =>
+    {
+        options.DefaultEntryOptions = new HybridCacheEntryOptions
+        {
+            Expiration = TimeSpan.FromDays(7), // Distributed cache expiration
+            LocalCacheExpiration = TimeSpan.FromDays(7) // Local cache expiration
+        };
+        options.MaximumPayloadBytes = 1024 * 1024 * 100; // 100 MB
+    });
+    builder.Services.AddSingleton<ICachingProvider, HybridCachingProvider>();
+}
+else
+{
+    // Caching - Memory Cache will use in-memory cache only
+    builder.Services.AddDistributedMemoryCache(options => { options.SizeLimit = long.MaxValue; }); 
+}
 
 // Workers
 builder.Services.AddHostedService<LocalFilesCachingWorker>();
@@ -146,7 +180,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Custom Middleware for Health Checks
-app.MapCustomHealthCheck();
+// app.MapCustomHealthCheck();
 app.MapHealthChecksUI(options =>
 {
     options.UIPath = "/health";
@@ -158,12 +192,7 @@ app.MapHealthChecksUI(options =>
 // Startup when application starts
 // app.Lifetime.ApplicationStarted.Register(() =>
 // {
-//     var currentTimeUtc = DateTime.UtcNow.ToString();
-//     var encodedCurrentTimeUtc = System.Text.Encoding.UTF8.GetBytes(currentTimeUtc);
-//     var options = new DistributedCacheEntryOptions()
-//         .SetSlidingExpiration(TimeSpan.FromSeconds(20));
-//     app.Services.GetService<IDistributedCache>()
-//         .Set("cachedTimeUTC", encodedCurrentTimeUtc, options);
+//
 // });
 
 app.Run();

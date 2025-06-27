@@ -6,8 +6,6 @@ public interface ICachingProvider
 {
     CacheType Name { get; }
     
-    Task<byte[]> GetAsync(string key, CancellationToken cancellationToken = default);
-    Task<string?> GetStringAsync(string key, CancellationToken cancellationToken = default);
-    Task SetAsync(string key, byte[] value, CancellationToken cancellationToken = default);
+    Task<string> GetOrCreateStringAsync(string key, Func<CancellationToken, Task<string?>> func, CancellationToken cancellationToken = default);
     Task SetStringAsync(string key, string value, CancellationToken cancellationToken = default);
 }

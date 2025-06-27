@@ -33,22 +33,17 @@ public class LocalFilesCachingWorker(ICachingProviderFactory cachingProviderFact
         
         var filePaths = new List<string>
         {
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/surahInfos"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/juzInfos"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/pageInfos"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/rukuInfos"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/maqraInfos"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/surahs"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/juzs"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/pages"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/rukus"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/maqras"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/verses"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/reciterInfos"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/audio"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/duas"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/namesOfAllah"),
-            Path.Combine("..", "..", "..", "..", "QuranStatic/static/json/memorise"),
+            Path.Combine("..", "..", "..", "..", "..", "QuranStatic/static/json/surahs"),
+            Path.Combine("..", "..", "..", "..", "..", "QuranStatic/static/json/juzs"),
+            Path.Combine("..", "..", "..", "..", "..", "QuranStatic/static/json/pages"),
+            Path.Combine("..", "..", "..", "..", "..", "QuranStatic/static/json/rukus"),
+            Path.Combine("..", "..", "..", "..", "..", "QuranStatic/static/json/maqras"),
+            Path.Combine("..", "..", "..", "..", "..", "QuranStatic/static/json/verses"),
+            Path.Combine("..", "..", "..", "..", "..", "QuranStatic/static/json/reciterInfos"),
+            Path.Combine("..", "..", "..", "..", "..", "QuranStatic/static/json/audio"),
+            Path.Combine("..", "..", "..", "..", "..", "QuranStatic/static/json/duas"),
+            Path.Combine("..", "..", "..", "..", "..", "QuranStatic/static/json/namesOfAllah"),
+            Path.Combine("..", "..", "..", "..", "..", "QuranStatic/static/json/memorise"),
         };
 
         await Parallel.ForEachAsync(filePaths, stoppingToken, async (path, cancellationToken) => { await CacheFiles(path, "*.json", SearchOption.AllDirectories, cancellationToken); });
@@ -67,9 +62,9 @@ public class LocalFilesCachingWorker(ICachingProviderFactory cachingProviderFact
         
         await Parallel.ForEachAsync(filePaths, cancellationToken, async (filePath, ct) =>
         {
-            var surahsBytes = await File.ReadAllBytesAsync(filePath, ct);
+            var item = await File.ReadAllTextAsync(filePath, ct);
             var cacheKey = Path.GetFileName(filePath);
-            await _cachingProvider.SetAsync($"{cacheKey}", surahsBytes, ct);
+            await _cachingProvider.SetStringAsync($"{cacheKey}", item, ct);
         });
 
         logger.LogInformation("Cached: {PathFileName} - {Count} ({Glob}) files in {Time}", Path.GetFileName(path), filePaths.Count, fileExtensionGlob, sw.Elapsed);

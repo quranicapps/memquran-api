@@ -1,0 +1,13 @@
+#  docker-compose -f .docker/docker-compose-redis.yml -p redis up -d
+#  docker-compose -f .docker/docker-compose-redis.yml -p redis down
+
+networks:
+  redis:
+    driver: bridge
+services:
+  redis:
+    container_name: redis01
+    image: redis:8.0.2
+    ports:
+      - "6379:6379"
+    restart: unless-stopped

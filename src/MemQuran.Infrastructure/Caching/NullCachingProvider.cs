@@ -7,25 +7,13 @@ public class NullCachingProvider : ICachingProvider
 {
     public CacheType Name => CacheType.None;
     
-    public async Task<T> GetAsync<T>(string key, CancellationToken cancellationToken = default)
+    public async Task<string> GetOrCreateStringAsync(string key, Func<CancellationToken, Task<string?>> func, CancellationToken cancellationToken = default)
     {
-        await Task.CompletedTask;
-        return default;
-    }
-
-    public Task<byte[]> GetAsync(string key, CancellationToken cancellationToken = default)
-    {
-        return Task.FromResult((byte[])null);
-    }
-
-    public Task<string> GetStringAsync(string key, CancellationToken cancellationToken = default)
-    {
-        return Task.FromResult((string)null);
-    }
-
-    public async Task SetAsync(string key, byte[] value, CancellationToken cancellationToken = default)
-    {
-        await Task.CompletedTask;
+        var text = await func(cancellationToken);
+        
+        if (text is null)throw new InvalidOperationException("CDN returned null for key: " + key);
+        
+        return text;
     }
 
     public async Task SetStringAsync(string key, string value, CancellationToken cancellationToken = default)

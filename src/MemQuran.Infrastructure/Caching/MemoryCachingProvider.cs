@@ -9,26 +9,21 @@ public class MemoryCachingProvider(IDistributedCache distributedCache, ILogger<M
 {
     public CacheType Name => CacheType.Memory;
     
-    public async Task<byte[]> GetAsync(string key, CancellationToken cancellationToken = default)
+    public async Task<string> GetOrCreateStringAsync(string key, Func<CancellationToken, Task<string?>> func, CancellationToken cancellationToken = default)
     {
-        return await distributedCache.GetAsync(key, token: cancellationToken).ConfigureAwait(false);
-    }
+        var text = await distributedCache.GetStringAsync(key, cancellationToken);
 
-    public async Task<string?> GetStringAsync(string key, CancellationToken cancellationToken = default)
-    {
-        var item = await distributedCache.GetStringAsync(key, token: cancellationToken).ConfigureAwait(false);
-
-        if (item is null)
-        {
-            logger.LogInformation("***** Cache miss for {Key}", key);
-        }
+        if (text is not null) return text;
         
-        return item;
-    }
+        logger.LogInformation("***** Cache miss for {Key}", key);
 
-    public async Task SetAsync(string key, byte[] value, CancellationToken cancellationToken = default)
-    {
-        await distributedCache.SetAsync(key, value, cancellationToken);
+        var item = await func(cancellationToken);
+        
+        if (item is null) throw new InvalidOperationException("CDN returned null for key: " + key);
+        
+        await distributedCache.SetStringAsync(key, item, cancellationToken);
+
+        return item;
     }
 
     public async Task SetStringAsync(string key, string value, CancellationToken cancellationToken = default)
