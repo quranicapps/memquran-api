@@ -9,7 +9,7 @@ namespace MemQuran.Api.Controllers;
 public class ImagesController(IStaticFileService staticFileService, ILogger<ImagesController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/images/tajweed/1/1/1.png
+    // https://localhost:3123/images/tajweed/1/1/1.png
     [HttpGet("/images/{imageType}/{surahNumber}/{verseNumber}/{fileName}")]
     public async Task<IActionResult> GetTajweedWord([FromRoute] string imageType, string surahNumber,
         string verseNumber, string fileName)
@@ -30,7 +30,7 @@ public class ImagesController(IStaticFileService staticFileService, ILogger<Imag
         return File(data, "image/png");
     }
 
-    // http://localhost:3123/images/tajweed/1.png
+    // https://localhost:3123/images/tajweed/1.png
     [HttpGet("/images/tajweed/{fileName}")]
     public async Task<IActionResult> GetTajweedNumber([FromRoute] string fileName)
     {
@@ -48,8 +48,8 @@ public class ImagesController(IStaticFileService staticFileService, ILogger<Imag
         return File(data, "image/png");
     }
 
-    // Todo remove as we now get numbers from http://localhost:3123/images/tajweed/1.png
-    // http://localhost:3123/images/common/numbers/1.png
+    // Todo remove as we now get numbers from https://localhost:3123/images/tajweed/1.png
+    // https://localhost:3123/images/common/numbers/1.png
     [HttpGet("/images/common/numbers/{fileName}")]
     public async Task<IActionResult> GetTajweedCommonNumber([FromRoute] string fileName)
     {
@@ -67,7 +67,7 @@ public class ImagesController(IStaticFileService staticFileService, ILogger<Imag
         return File(data, "image/png");
     }
 
-    // http://localhost:3123/images/reciters/abdallah-al-matroud-1.png
+    // https://localhost:3123/images/reciters/abdallah-al-matroud-1.png
     [HttpGet("/images/reciters/{fileName}")]
     public async Task<IActionResult> GetReciter([FromRoute] string fileName)
     {

@@ -9,7 +9,7 @@ namespace MemQuran.Api.Controllers;
 public class DuasController(IStaticFileService staticFileService, ILogger<DuasController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/json/duas/en_duas.json 
+    // https://localhost:3123/json/duas/en_duas.json 
     [HttpGet("/json/duas/{fileName}")]
     public async Task<IActionResult> GetDuas([FromRoute] string fileName)
     {

@@ -9,7 +9,7 @@ namespace MemQuran.Api.Controllers;
 public class HealthController(IStaticFileService staticFileService, ILogger<HealthController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/health.json 
+    // https://localhost:3123/health.json 
     [HttpGet("/health.json")]
     public async Task<IActionResult> Get()
     {

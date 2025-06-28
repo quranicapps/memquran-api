@@ -9,9 +9,9 @@ namespace MemQuran.Api.Controllers;
 public class SurahController(IStaticFileService staticFileService, ILogger<SurahController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/json/surahs/{locale}_surahInfo.json
-    // http://localhost:3123/json/surahs/surah_{surahNumber}.json
-    // http://localhost:3123/json/surahs/surah_wbw_{locale}_{surahNumber}.json
+    // https://localhost:3123/json/surahs/{locale}_surahInfo.json
+    // https://localhost:3123/json/surahs/surah_{surahNumber}.json
+    // https://localhost:3123/json/surahs/surah_wbw_{locale}_{surahNumber}.json
     [HttpGet("/json/surahs/{fileName}")]
     public async Task<IActionResult> GetSurah([FromRoute] string fileName)
     {
@@ -29,7 +29,7 @@ public class SurahController(IStaticFileService staticFileService, ILogger<Surah
         return Ok(text);
     }
 
-    // http://localhost:3123/json/surahTranslations/surah_translation_{surahNumber}_{translationId}.json
+    // https://localhost:3123/json/surahTranslations/surah_translation_{surahNumber}_{translationId}.json
     [HttpGet("/json/surahTranslations/{fileName}")]
     public async Task<IActionResult> GetSurahTranslations([FromRoute] string fileName)
     {

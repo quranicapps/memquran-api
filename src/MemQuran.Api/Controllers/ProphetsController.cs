@@ -11,7 +11,7 @@ public class ProphetsController(
     ILogger<ProphetsController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/json/prophets/en_prophets.json 
+    // https://localhost:3123/json/prophets/en_prophets.json 
     [HttpGet("/json/prophets/{fileName}")]
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {

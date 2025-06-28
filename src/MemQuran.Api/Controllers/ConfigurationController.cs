@@ -9,7 +9,7 @@ namespace MemQuran.Api.Controllers;
 public class ConfigurationController(IStaticFileService staticFileService, ILogger<ConfigurationController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/local/json/settings/recitersOverride.json 
+    // https://localhost:3123/local/json/settings/recitersOverride.json 
     [HttpGet("/local/json/settings/{fileName}")]
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {

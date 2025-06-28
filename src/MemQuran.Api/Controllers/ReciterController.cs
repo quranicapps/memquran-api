@@ -9,7 +9,7 @@ namespace MemQuran.Api.Controllers;
 public class ReciterController(IStaticFileService staticFileService, ILogger<ReciterController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/json/reciterInfos/ab_abdallah-al-matroud-1.json
+    // https://localhost:3123/json/reciterInfos/ab_abdallah-al-matroud-1.json
     [HttpGet("/json/reciterInfos/{fileName}")]
     public async Task<IActionResult> GetReciterInfos([FromRoute] string fileName)
     {
@@ -27,7 +27,7 @@ public class ReciterController(IStaticFileService staticFileService, ILogger<Rec
         return Ok(text);
     }
 
-    // http://localhost:3123/json/reciters/en_reciters.json
+    // https://localhost:3123/json/reciters/en_reciters.json
     [HttpGet("/json/reciters/{fileName}")]
     public async Task<IActionResult> GetReciters([FromRoute] string fileName)
     {

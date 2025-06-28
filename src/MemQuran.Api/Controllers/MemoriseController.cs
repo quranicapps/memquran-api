@@ -9,9 +9,9 @@ namespace MemQuran.Api.Controllers;
 public class MemoriseController(IStaticFileService staticFileService, ILogger<MemoriseController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/json/memorise/en_courses.json 
-    // http://localhost:3123/json/memorise/en_questions_2_3.json 
-    // http://localhost:3123/json/memorise/en_reviews_2_3.json 
+    // https://localhost:3123/json/memorise/en_courses.json 
+    // https://localhost:3123/json/memorise/en_questions_2_3.json 
+    // https://localhost:3123/json/memorise/en_reviews_2_3.json 
     [HttpGet("/json/memorise/{fileName}")]
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {

@@ -9,7 +9,7 @@ namespace MemQuran.Api.Controllers;
 public class NamesOfAllahController(IStaticFileService staticFileService, ILogger<NamesOfAllahController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/json/namesOfAllah/en_names.json 
+    // https://localhost:3123/json/namesOfAllah/en_names.json 
     [HttpGet("/json/namesOfAllah/{fileName}")]
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {

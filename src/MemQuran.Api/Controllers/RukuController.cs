@@ -9,9 +9,9 @@ namespace MemQuran.Api.Controllers;
 public class RukuController(IStaticFileService staticFileService, ILogger<RukuController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/json/rukus/{locale}_rukuInfo.json
-    // http://localhost:3123/json/rukus/ruku_{rukuNumber}.json
-    // http://localhost:3123/json/rukus/ruku_wbw_{locale}_{rukuNumber}.json
+    // https://localhost:3123/json/rukus/{locale}_rukuInfo.json
+    // https://localhost:3123/json/rukus/ruku_{rukuNumber}.json
+    // https://localhost:3123/json/rukus/ruku_wbw_{locale}_{rukuNumber}.json
     [HttpGet("/json/rukus/{fileName}")]
     public async Task<IActionResult> GetRuku([FromRoute] string fileName)
     {
@@ -29,7 +29,7 @@ public class RukuController(IStaticFileService staticFileService, ILogger<RukuCo
         return Ok(text);
     }
 
-    // http://localhost:3123/json/rukuTranslations/ruku_translation_{rukuNumber}_{translationId}.json
+    // https://localhost:3123/json/rukuTranslations/ruku_translation_{rukuNumber}_{translationId}.json
     [HttpGet("/json/rukuTranslations/{fileName}")]
     public async Task<IActionResult> GetRukuTranslations([FromRoute] string fileName)
     {

@@ -9,7 +9,7 @@ namespace MemQuran.Api.Controllers;
 public class AudioController(IStaticFileService staticFileService, ILogger<AudioController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/json/audio/abderahmane-eloosi-1/timings/surah/abderahmane-eloosi-1_timings_surah_1.json
+    // https://localhost:3123/json/audio/abderahmane-eloosi-1/timings/surah/abderahmane-eloosi-1_timings_surah_1.json
     [EndpointName("GetSurahAudioJson")]
     [EndpointDescription("Get Surah audio timings in JSON format")]
     [EndpointSummary("Get Surah audio timings in JSON format")]
@@ -30,7 +30,7 @@ public class AudioController(IStaticFileService staticFileService, ILogger<Audio
         return Ok(text);
     }
 
-    // http://localhost:3123/json/audio/abu-bakr-ash-shaatree-1/timings/juz/abu-bakr-ash-shaatree-1_timings_juz_1.json
+    // https://localhost:3123/json/audio/abu-bakr-ash-shaatree-1/timings/juz/abu-bakr-ash-shaatree-1_timings_juz_1.json
     [EndpointName("GetJuzAudioJson")]
     [EndpointDescription("Get Juz audio timings in JSON format")]
     [EndpointSummary("Get Juz audio timings in JSON format")]
@@ -52,7 +52,7 @@ public class AudioController(IStaticFileService staticFileService, ILogger<Audio
         return Ok(text);
     }
 
-    // http://127.0.0.1:3123/json/audio/khalifah-al-tunaiji-161-3/timings/page/khalifah-al-tunaiji-161-3_timings_page_604.json
+    // https://127.0.0.1:3123/json/audio/khalifah-al-tunaiji-161-3/timings/page/khalifah-al-tunaiji-161-3_timings_page_604.json
     [EndpointName("GetPageAudioJson")]
     [EndpointDescription("Get Page audio timings in JSON format")]
     [EndpointSummary("Get Page audio timings in JSON format")]
@@ -73,7 +73,7 @@ public class AudioController(IStaticFileService staticFileService, ILogger<Audio
         return Ok(text);
     }
 
-    // http://127.0.0.1:3123/json/audio/khalifah-al-tunaiji-161-3/timings/ruku/khalifah-al-tunaiji-161-3_timings_ruku_300.json
+    // https://127.0.0.1:3123/json/audio/khalifah-al-tunaiji-161-3/timings/ruku/khalifah-al-tunaiji-161-3_timings_ruku_300.json
     [EndpointName("GetRukuAudioJson")]
     [EndpointDescription("Get Ruku audio timings in JSON format")]
     [EndpointSummary("Get Ruku audio timings in JSON format")]
@@ -94,7 +94,7 @@ public class AudioController(IStaticFileService staticFileService, ILogger<Audio
         return Ok(text);
     }
 
-    // http://127.0.0.1:3123/json/audio/khalifah-al-tunaiji-161-3/timings/maqra/khalifah-al-tunaiji-161-3_timings_maqra_300.json
+    // https://127.0.0.1:3123/json/audio/khalifah-al-tunaiji-161-3/timings/maqra/khalifah-al-tunaiji-161-3_timings_maqra_300.json
     [EndpointName("GetMaqraAudioJson")]
     [EndpointDescription("Get Maqra audio timings in JSON format")]
     [EndpointSummary("Get Maqra audio timings in JSON format")]
@@ -115,13 +115,13 @@ public class AudioController(IStaticFileService staticFileService, ILogger<Audio
         return Ok(text);
     }
 
-    // http://localhost:3123/audio/tajweed/ikhfa.mp3
-    // http://localhost:3123/audio/tajweed/tajweed_must_stop_6-36.mp3
-    // http://localhost:3123/audio/duas/1_1.mp3
-    // http://localhost:3123/audio/namesOfAllah/1.mp3
-    // http://localhost:3123/audio/wbw/001_001_001.mp3
-    // http://localhost:3123/audio/memorise/0A5639E55EA4CF708D349C6FC8D95BE7CED289AFC0875F5F306CA3D3ECDA3CE9.mp3
-    // http://localhost:3123/audio/common/correct.mp3
+    // https://localhost:3123/audio/tajweed/ikhfa.mp3
+    // https://localhost:3123/audio/tajweed/tajweed_must_stop_6-36.mp3
+    // https://localhost:3123/audio/duas/1_1.mp3
+    // https://localhost:3123/audio/namesOfAllah/1.mp3
+    // https://localhost:3123/audio/wbw/001_001_001.mp3
+    // https://localhost:3123/audio/memorise/0A5639E55EA4CF708D349C6FC8D95BE7CED289AFC0875F5F306CA3D3ECDA3CE9.mp3
+    // https://localhost:3123/audio/common/correct.mp3
     [EndpointName("GetAudioByType")]
     [EndpointDescription("Get audio mp3 file by type and file name")]
     [EndpointSummary("Get audio mp3 file by type and file name")]

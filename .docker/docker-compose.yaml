@@ -6,7 +6,7 @@
       - "3123:3123"
     environment:
         ASPNETCORE_ENVIRONMENT: Development
-        ASPNETCORE_URLS: http://*:3123
+        ASPNETCORE_URLS: https://*:3123;http://*:3122
     build:
       context: .
       dockerfile: MemQuran.Api/Dockerfile

@@ -9,7 +9,7 @@ namespace MemQuran.Api.Controllers;
 public class SearchController(IStaticFileService staticFileService, ILogger<VersesController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/json/search/en_search.json
+    // https://localhost:3123/json/search/en_search.json
     [HttpGet("/json/search/{fileName}")]
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {

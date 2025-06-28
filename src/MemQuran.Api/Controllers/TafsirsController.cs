@@ -9,7 +9,7 @@ namespace MemQuran.Api.Controllers;
 public class TafsirsController(IStaticFileService staticFileService, ILogger<TafsirsController> logger)
     : Controller
 {
-    // http://localhost:3123/json/tafsirs/tafsir_{surahNumber}_{tafsirId}.json
+    // https://localhost:3123/json/tafsirs/tafsir_{surahNumber}_{tafsirId}.json
     [HttpGet("/json/tafsirs/{fileName}")]
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {

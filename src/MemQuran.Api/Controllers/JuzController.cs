@@ -9,9 +9,9 @@ namespace MemQuran.Api.Controllers;
 public class JuzController(IStaticFileService staticFileService, ILogger<JuzController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/json/juzs/{locale}_juzInfo.json
-    // http://localhost:3123/json/juzs/juz_{juzNumber}.json
-    // http://localhost:3123/json/juzs/juz_wbw_{locale}_{juzNumber}.json
+    // https://localhost:3123/json/juzs/{locale}_juzInfo.json
+    // https://localhost:3123/json/juzs/juz_{juzNumber}.json
+    // https://localhost:3123/json/juzs/juz_wbw_{locale}_{juzNumber}.json
     [HttpGet("/json/juzs/{fileName}")]
     public async Task<IActionResult> GetJuz([FromRoute] string fileName)
     {
@@ -29,7 +29,7 @@ public class JuzController(IStaticFileService staticFileService, ILogger<JuzCont
         return Ok(text);
     }
 
-    // http://localhost:3123/json/juzTranslations/juz_translation_{juzNumber}_{translationId}.json
+    // https://localhost:3123/json/juzTranslations/juz_translation_{juzNumber}_{translationId}.json
     [HttpGet("/json/juzTranslations/{fileName}")]
     public async Task<IActionResult> GetJuzTranslations([FromRoute] string fileName)
     {

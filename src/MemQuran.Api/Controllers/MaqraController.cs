@@ -9,9 +9,9 @@ namespace MemQuran.Api.Controllers;
 public class MaqraController(IStaticFileService staticFileService, ILogger<MaqraController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/json/maqras/{locale}_maqraInfo.json
-    // http://localhost:3123/json/maqras/maqra_{maqraNumber}.json
-    // http://localhost:3123/json/maqras/maqra_wbw_{locale}_{maqraNumber}.json
+    // https://localhost:3123/json/maqras/{locale}_maqraInfo.json
+    // https://localhost:3123/json/maqras/maqra_{maqraNumber}.json
+    // https://localhost:3123/json/maqras/maqra_wbw_{locale}_{maqraNumber}.json
     [HttpGet("/json/maqras/{fileName}")]
     public async Task<IActionResult> GetMaqra([FromRoute] string fileName)
     {
@@ -29,7 +29,7 @@ public class MaqraController(IStaticFileService staticFileService, ILogger<Maqra
         return Ok(text);
     }
 
-    // http://localhost:3123/json/maqraTranslations/maqra_translation_{maqraNumber}_{translationId}.json
+    // https://localhost:3123/json/maqraTranslations/maqra_translation_{maqraNumber}_{translationId}.json
     [HttpGet("/json/maqraTranslations/{fileName}")]
     public async Task<IActionResult> GetMaqraTranslations([FromRoute] string fileName)
     {

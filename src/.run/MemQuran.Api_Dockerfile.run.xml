@@ -13,7 +13,7 @@
             </DockerEnvVarImpl>
             <DockerEnvVarImpl>
               <option name="name" value="ASPNETCORE_URLS" />
-              <option name="value" value="http://*:3123" />
+              <option name="value" value="https://*:3123;http://*:3122" />
             </DockerEnvVarImpl>
           </list>
         </option>

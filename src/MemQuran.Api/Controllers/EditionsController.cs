@@ -9,8 +9,8 @@ namespace MemQuran.Api.Controllers;
 public class EditionsController(IStaticFileService staticFileService, ILogger<VersesController> logger)
     : ControllerBase
 {
-    // http://localhost:3123/json/editions/tafsirEditions.json
-    // http://localhost:3123/json/editions/translationEditions.json
+    // https://localhost:3123/json/editions/tafsirEditions.json
+    // https://localhost:3123/json/editions/translationEditions.json
     [HttpGet("/json/editions/{fileName}")]
     public async Task<IActionResult> Get([FromRoute] string fileName)
     {
