@@ -301,8 +301,8 @@ GET {{BaseUrl}}/api/health
 
 ###
 # group: Health Checks
-# @name Ready Check Endpoint
-GET {{BaseUrl}}/api/health/ready
+# @name Readiness Check Endpoint
+GET {{BaseUrl}}/api/health/readiness
 
 ###
 # group: Health Checks

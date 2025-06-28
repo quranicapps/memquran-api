@@ -12,7 +12,7 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointRouteBuilder MapCustomHealthCheck(
         this IEndpointRouteBuilder endpoints,
         string healthPattern = "/api/health",
-        string servicesPattern = "/api/health/ready")
+        string servicesPattern = "/api/health/readiness")
     {
         ArgumentNullException.ThrowIfNull(endpoints);
 
@@ -26,7 +26,7 @@ public static class EndpointRouteBuilderExtensions
 
         endpoints.MapHealthChecks(servicesPattern, new HealthCheckOptions
         {
-            Predicate = check => check.Tags.Contains("services"),
+            Predicate = check => check.Tags.Contains("readiness"),
             AllowCachingResponses = false,
             ResponseWriter = WriteResponse,
             ResultStatusCodes = GetResultStatusCodes()

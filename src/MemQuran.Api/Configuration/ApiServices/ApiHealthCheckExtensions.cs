@@ -14,11 +14,11 @@ public static class ApiHealthCheckExtensions
         
         // Health Checks and Health Checks UI (https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)
         services.AddHealthChecks()
-            .AddCheck("API Running", () => Healthy(), tags: ["health"])
-            .AddCheck<JsDelivrHealthCheck>("Call JsDelivr", timeout: TimeSpan.FromSeconds(config.HealthCheckTimeoutSeconds), tags: new List<string> { "services", "cdn" })
-            .AddCheck<LocalCdnHealthCheck>("Call Local CDN", timeout: TimeSpan.FromSeconds(config.HealthCheckTimeoutSeconds), tags: new List<string> { "services", "cdn" })
-            .AddUrlGroup(new Uri("http://httpbin.org/status/200"), name: "http connection check", tags: new List<string> { "services", "http", "internet" })
-            .AddUrlGroup(new Uri("https://httpbin.org/status/200"), name: "https connection check", tags: new List<string> { "services", "https", "internet" });
+            .AddCheck("API Running", () => Healthy(), tags: ["health", "local"])
+            .AddCheck<JsDelivrHealthCheck>("Call JsDelivr", timeout: TimeSpan.FromSeconds(config.HealthCheckTimeoutSeconds), tags: new List<string> { "readiness", "external", "cdn" })
+            .AddCheck<LocalCdnHealthCheck>("Call Local CDN", timeout: TimeSpan.FromSeconds(config.HealthCheckTimeoutSeconds), tags: new List<string> { "readiness", "local", "cdn" })
+            .AddUrlGroup(new Uri("http://httpbin.org/status/200"), name: "http connection check", tags: new List<string> { "readiness", "external", "http", "internet" })
+            .AddUrlGroup(new Uri("https://httpbin.org/status/200"), name: "https connection check", tags: new List<string> { "readiness", "external", "https", "internet" });
         
         services.AddHealthChecksUI().AddInMemoryStorage();
 
