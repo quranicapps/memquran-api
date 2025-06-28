@@ -1,80 +1,32 @@
-using System.Diagnostics;
-using MemQuran.Api.Clients.JsDelivr;
-using MemQuran.Api.Clients.Local;
 using MemQuran.Api.Extensions;
-using MemQuran.Api.HealthChecks;
-using MemQuran.Api.Middleware;
-using MemQuran.Api.Services;
 using MemQuran.Api.Settings;
 using MemQuran.Api.Workers;
-using MemQuran.Core.Contracts;
-using MemQuran.Core.Models;
-using MemQuran.Infrastructure.Caching;
-using MemQuran.Infrastructure.Factories;
-using MemQuran.Infrastructure.Services;
-using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Caching.Hybrid;
-using StackExchange.Redis;
-using static Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var logger = LoggerFactory.Create(loggingBuilder => loggingBuilder.AddSimpleConsole(options =>
+{
+    options.SingleLine = true;
+    options.IncludeScopes = true;
+    options.TimestampFormat = "yyyy-MM-dd HH:mm:ss.ffff ";
+}).AddFilter(level => level >= LogLevel.Information)).CreateLogger("Program");
+
+logger.LogInformation("Starting Env: {Env} on port {Port}", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "?", Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "?");
+
 ////////////////////////////
 // Configure Services
-builder.Services.AddProblemDetails(opts => // built-in problem details support
-    opts.CustomizeProblemDetails = ctx =>
-    {
-        if (!ctx.ProblemDetails.Extensions.ContainsKey("traceId"))
-        {
-            var traceId = Activity.Current?.Id ?? ctx.HttpContext.TraceIdentifier;
-            ctx.ProblemDetails.Extensions.Add(new KeyValuePair<string, object?>("traceId", traceId));
-        }
 
-        if (!ctx.ProblemDetails.Extensions.ContainsKey("instance"))
-        {
-            ctx.ProblemDetails.Extensions.Add("instance", $"{ctx.HttpContext.Request.Method} {ctx.HttpContext.Request.Path}");
-        }
-
-        var exception = ctx.HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;
-
-        if (ctx.ProblemDetails.Status != 500) return;
-
-        ctx.ProblemDetails.Detail = "An error occurred in our API. Use the trace id when contacting us.";
-
-        if (builder.Environment.IsProduction()) return;
-
-        if (!ctx.ProblemDetails.Extensions.ContainsKey("errorMessage"))
-        {
-            ctx.ProblemDetails.Extensions.Add("errorMessage", exception?.Message);
-        }
-
-        if (!ctx.ProblemDetails.Extensions.ContainsKey("stackTrace"))
-        {
-            ctx.ProblemDetails.Extensions.Add("stackTrace", exception?.StackTrace);
-        }
-    }
-);
-builder.Services.AddExceptionHandler<ExceptionToProblemDetailsHandler>();
-builder.Services.AddProblemDetails();
+// Exception Handling
+builder.Services.AddExceptionHandling(options => { options.Environment = builder.Environment; });
 
 builder.Services.AddControllers();
 builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin()); });
 
-// Health Checks and Health Checks UI (https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)
-// builder.Services.AddHealthChecks()
-//     .AddCheck("API Running", () => Healthy(), tags: ["health"])
-//     .AddCheck<JsDelivrHealthCheck>("Call JsDelivr", timeout: TimeSpan.FromSeconds(5), tags: new List<string> { "services", "cdn" })
-//     .AddCheck<LocalCdnHealthCheck>("Call Local CDN", timeout: TimeSpan.FromSeconds(5), tags: new List<string> { "services", "cdn" })
-//     .AddUrlGroup(new Uri("http://httpbin.org/status/200"), name: "http connection check", tags: new List<string> { "services", "http", "internet" })
-//     .AddUrlGroup(new Uri("https://httpbin.org/status/200"), name: "https connection check", tags: new List<string> { "services", "https", "internet" });
-// builder.Services.AddHealthChecksUI().AddInMemoryStorage();
+// Health Checks
+builder.Services.AddHealthCheckServices(options => options.HealthCheckTimeoutSeconds = 5);
 
 // Open API / Swagger
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddOpenApi();
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddOpenApiServices(_ => { });
 
 // Configuration
 var contentDeliverySettings = builder.Configuration.GetSection(ContentDeliverySettings.SectionName).Get<ContentDeliverySettings>();
@@ -85,69 +37,22 @@ var clientsSettings = builder.Configuration.GetSection(ClientsSettings.SectionNa
 if (clientsSettings == null) throw new Exception("Could not bind the Clients Settings, please check configuration");
 builder.Services.AddSingleton(clientsSettings);
 
+// This API's Services
+builder.Services.AddServices(options =>
+{
+    options.JsDelivrServiceBaseUrl = clientsSettings.JsDelivrService.BaseUrl;
+    options.JsDelivrServiceDefaultTimeout = clientsSettings.JsDelivrService.DefaultTimeout;
+});
+
 // Caching
-builder.Services.AddSingleton<ICachingProviderFactory, CachingProviderFactory>();
-builder.Services.AddSingleton<ICachingProvider, NullCachingProvider>();
-builder.Services.AddSingleton<ICachingProvider, MemoryCachingProvider>();
-if (contentDeliverySettings.CachingSettings.CacheType == CacheType.Hybrid)
+builder.Services.AddCachingServices(options =>
 {
-    // Caching - Hybrid Cache will use both local in-memory cache and distributed cache (any IDistributedCache implementation, i.e. AddStackExchangeRedisCache)
-    builder.Services.AddStackExchangeRedisCache(options =>
-    {
-        options.Configuration = builder.Configuration.GetConnectionString("Redis");
-        options.InstanceName = "memquranapi:";
-        options.ConfigurationOptions = new ConfigurationOptions
-        {
-            AsyncTimeout = 5000, // 5 seconds
-            SyncTimeout = 5000, // 5 seconds
-            AbortOnConnectFail = false, // Do not throw an exception if the connection fails
-            ConnectTimeout = 5000, // 5 seconds
-        };
-    });
-    builder.Services.AddHybridCache(options =>
-    {
-        options.DefaultEntryOptions = new HybridCacheEntryOptions
-        {
-            Expiration = TimeSpan.FromDays(7), // Distributed cache expiration
-            LocalCacheExpiration = TimeSpan.FromDays(7) // Local cache expiration
-        };
-        options.MaximumPayloadBytes = 1024 * 1024 * 100; // 100 MB
-    });
-    builder.Services.AddSingleton<ICachingProvider, HybridCachingProvider>();
-}
-else
-{
-    // Caching - Memory Cache will use in-memory cache only
-    builder.Services.AddDistributedMemoryCache(options => { options.SizeLimit = long.MaxValue; }); 
-}
+    options.CacheType = contentDeliverySettings.CachingSettings.CacheType;
+    options.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
+});
 
 // Workers
 builder.Services.AddHostedService<LocalFilesCachingWorker>();
-
-// Services
-builder.Services.AddSingleton<IHashingService, HashingService>();
-builder.Services.AddSingleton<IStaticFileService, StaticFileService>();
-builder.Services.AddScoped<JsDelivrDelegatingHandler>();
-builder.Services.AddSingleton<ICdnClient, LocalFileClient>();
-builder.Services.AddHttpClient<ICdnClient, JsDelivrClient>(httpClient =>
-    {
-        httpClient.BaseAddress = new Uri(clientsSettings.JsDelivrService.BaseUrl);
-        httpClient.Timeout = clientsSettings.JsDelivrService.DefaultTimeout;
-    })
-    .AddHttpMessageHandler(() => new JsDelivrDelegatingHandler());
-builder.Services.AddSingleton<ICdnClientFactory, CdnClientFactory>();
-
-var logger = LoggerFactory.Create(loggingBuilder => loggingBuilder
-        .AddSimpleConsole(options =>
-        {
-            options.SingleLine = true;
-            options.IncludeScopes = true;
-            options.TimestampFormat = "yyyy-MM-dd HH:mm:ss.ffff ";
-        })
-        .AddFilter(level => level >= LogLevel.Information))
-    .CreateLogger("Program");
-
-logger.LogInformation("Starting Env: {Env} on port {Port}", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "?", Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "?");
 
 // Host Options
 builder.Services.Configure<HostOptions>(options => { options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore; });
@@ -155,6 +60,7 @@ builder.Services.Configure<HostOptions>(options => { options.BackgroundServiceEx
 
 //////////////////////////
 // Configure App
+
 var app = builder.Build();
 
 app.UseCors(x => x
@@ -166,10 +72,7 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
     app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/openapi/v1.json", "MemQuran API V1");
-    });
+    app.UseSwaggerUI(c => { c.SwaggerEndpoint("/openapi/memquranapi.json", "memquranapi"); });
 }
 
 // app.UseMiddleware<ExceptionMiddleware>(); // Old way: Custom middleware for handling exceptions
@@ -180,7 +83,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Custom Middleware for Health Checks
-// app.MapCustomHealthCheck();
+app.MapCustomHealthCheck();
 app.MapHealthChecksUI(options =>
 {
     options.UIPath = "/health";

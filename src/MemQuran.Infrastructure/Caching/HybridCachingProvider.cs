@@ -9,12 +9,12 @@ public class HybridCachingProvider(HybridCache hybridCache, ILogger<MemoryCachin
 {
     public CacheType Name => CacheType.Hybrid;
 
-    public async Task<string> GetOrCreateStringAsync(string key, Func<CancellationToken, Task<string?>> func, CancellationToken cancellationToken = default)
+    public async Task<string?> GetOrCreateStringAsync(string key, Func<CancellationToken, Task<string?>> func, CancellationToken cancellationToken = default)
     {
-        return await hybridCache.GetOrCreateAsync<string>
+        return await hybridCache.GetOrCreateAsync<string?>
         (
             key, 
-            async ct => await func(ct) ?? throw new InvalidOperationException("CDN returned null for key: " + key), 
+            async ct => await func(ct), 
             cancellationToken: cancellationToken
         );
     }

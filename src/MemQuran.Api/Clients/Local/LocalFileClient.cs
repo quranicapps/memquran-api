@@ -35,7 +35,9 @@ public class LocalFileClient : ICdnClient
 
     public async Task<HttpResponseMessage> GetHealthAsync(CancellationToken cancellationToken = default)
     {
-        return await GetFileContentStringAsync("health.json", cancellationToken) is not null
+        var fileContent = await GetFileContentStringAsync("health.json", cancellationToken);
+        
+        return fileContent is not null
             ? new HttpResponseMessage(HttpStatusCode.OK)
             : new HttpResponseMessage(HttpStatusCode.NotFound)
             {

@@ -14,14 +14,14 @@ public abstract class BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClie
         
         return await GetAsync(request, cancellationToken);
     }
-    
-    protected async Task<HttpResponseMessage> GetAsync(HttpRequestMessage request, CancellationToken cancellationToken = default)
+
+    private async Task<HttpResponseMessage> GetAsync(HttpRequestMessage request, CancellationToken cancellationToken = default)
     {
         HttpResponseMessage response;
 
         try
         {
-            logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), request.RequestUri);
+            logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), $"{httpClient.BaseAddress}{request.RequestUri}");
             response = await httpClient.SendAsync(request, cancellationToken);
         }
         catch (HttpRequestException ex)
@@ -46,7 +46,7 @@ public abstract class BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClie
 
         try
         {
-            logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), request.RequestUri);
+            logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), $"{httpClient.BaseAddress}{request.RequestUri}");
             response = await httpClient.SendAsync(request, cancellationToken);
         }
         catch (HttpRequestException ex)
@@ -71,11 +71,11 @@ public abstract class BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClie
         
         if(response.StatusCode == HttpStatusCode.NotFound)
         {
-            logger.LogWarning("Received 404 Not Found when calling endpoint {RequestUri}", request.RequestUri);
+            logger.LogWarning("Received 404 Not Found when calling endpoint {RequestUri}", $"{httpClient.BaseAddress}{request.RequestUri}");
             return null; // Return empty string for 404 Not Found
         }
 
-        logger.LogError("Received status code {StatusCode} ({StatusCodeInt}) when calling endpoint {RequestUri}", response.StatusCode, (int)response.StatusCode, request.RequestUri);
+        logger.LogError("Received status code {StatusCode} ({StatusCodeInt}) when calling endpoint {RequestUri}", response.StatusCode, (int)response.StatusCode, $"{httpClient.BaseAddress}{request.RequestUri}");
 
 
         throw new HttpServiceException(ServiceName, request, response.StatusCode, responseContent);
@@ -94,7 +94,7 @@ public abstract class BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClie
 
         try
         {
-            logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), request.RequestUri);
+            logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), $"{httpClient.BaseAddress}{request.RequestUri}");
             response = await httpClient.SendAsync(request, cancellationToken);
         }
         catch (HttpRequestException ex)
@@ -118,7 +118,7 @@ public abstract class BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClie
             return await content.ReadAsByteArrayAsync(cancellationToken);
         }
 
-        logger.LogError("Received status code {StatusCode} ({StatusCodeInt}) when calling endpoint {RequestUri}", response.StatusCode, (int)response.StatusCode, request.RequestUri);
+        logger.LogError("Received status code {StatusCode} ({StatusCodeInt}) when calling endpoint {RequestUri}", response.StatusCode, (int)response.StatusCode, $"{httpClient.BaseAddress}{request.RequestUri}");
         
         throw new HttpServiceException(ServiceName, request, response.StatusCode, responseContent);
     }
