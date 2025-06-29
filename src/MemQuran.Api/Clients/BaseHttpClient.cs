@@ -21,7 +21,7 @@ public abstract class BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClie
 
         try
         {
-            logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), $"{httpClient.BaseAddress}{request.RequestUri}");
+            logger.LogDebug("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), $"{httpClient.BaseAddress}{request.RequestUri}");
             response = await httpClient.SendAsync(request, cancellationToken);
         }
         catch (HttpRequestException ex)
@@ -46,7 +46,7 @@ public abstract class BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClie
 
         try
         {
-            logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), $"{httpClient.BaseAddress}{request.RequestUri}");
+            logger.LogDebug("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), $"{httpClient.BaseAddress}{request.RequestUri}");
             response = await httpClient.SendAsync(request, cancellationToken);
         }
         catch (HttpRequestException ex)
@@ -94,7 +94,7 @@ public abstract class BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClie
 
         try
         {
-            logger.LogInformation("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), $"{httpClient.BaseAddress}{request.RequestUri}");
+            logger.LogDebug("{Name}.{Method}: CALLING: {Endpoint}", nameof(BaseHttpClient), nameof(SendAsync), $"{httpClient.BaseAddress}{request.RequestUri}");
             response = await httpClient.SendAsync(request, cancellationToken);
         }
         catch (HttpRequestException ex)

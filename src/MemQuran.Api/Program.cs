@@ -4,12 +4,11 @@ using MemQuran.Api.Workers;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var logger = LoggerFactory.Create(loggingBuilder => loggingBuilder.AddSimpleConsole().AddFilter(level => level >= LogLevel.Information)).CreateLogger("Program");
-
-logger.LogInformation("Starting Env: {Env} on port {Port}", Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "?", Environment.GetEnvironmentVariable("ASPNETCORE_URLS") ?? "?");
 
 ////////////////////////////
 // Configure Services
+
+builder.Logging.AddSimpleConsole().AddSeq(builder.Configuration.GetSection(SeqSettings.SectionName));
 
 // Exception Handling
 builder.Services.AddExceptionHandling(options => { options.Environment = builder.Environment; });
