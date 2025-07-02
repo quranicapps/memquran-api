@@ -1,4 +1,5 @@
 using MemQuran.Api.Extensions;
+using MemQuran.Api.Models;
 using MemQuran.Api.Settings;
 using MemQuran.Api.Workers;
 
@@ -17,7 +18,11 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin()); });
 
 // Health Checks
-builder.Services.AddHealthCheckServices(options => options.HealthCheckTimeoutSeconds = 5);
+builder.Services.AddHealthCheckServices(options =>
+{
+    options.HealthCheckTimeoutSeconds = 5;
+    options.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
+});
 
 // Open API / Swagger
 builder.Services.AddOpenApiServices(_ => { });
@@ -77,7 +82,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Custom Middleware for Health Checks
-app.MapCustomHealthCheck();
+app.MapCustomHealthCheck(Enum.GetValues<HealthCheckTags>().Select(x => x.ToString()).ToArray());
 app.MapHealthChecksUI(options =>
 {
     options.UIPath = "/health";

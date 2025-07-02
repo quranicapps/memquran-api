@@ -1,6 +1,5 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using HealthChecks.UI.Client;
 using HealthChecks.UI.Core;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -11,26 +10,20 @@ public static class EndpointRouteBuilderExtensions
 {
     public static IEndpointRouteBuilder MapCustomHealthCheck(
         this IEndpointRouteBuilder endpoints,
-        string healthPattern = "/api/health",
-        string servicesPattern = "/api/health/readiness")
+        IEnumerable<string> tags)
     {
         ArgumentNullException.ThrowIfNull(endpoints);
 
-        endpoints.MapHealthChecks(healthPattern, new HealthCheckOptions
+        foreach (var tag in tags)
         {
-            Predicate = check => check.Tags.Contains("health"),
-            AllowCachingResponses = false,
-            ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse,
-            ResultStatusCodes = GetResultStatusCodes()
-        });
-
-        endpoints.MapHealthChecks(servicesPattern, new HealthCheckOptions
-        {
-            Predicate = check => check.Tags.Contains("readiness"),
-            AllowCachingResponses = false,
-            ResponseWriter = WriteResponse,
-            ResultStatusCodes = GetResultStatusCodes()
-        });
+            endpoints.MapHealthChecks($"/api/health/{tag}", new HealthCheckOptions
+            {
+                Predicate = check => check.Tags.Contains(tag),
+                AllowCachingResponses = false,
+                ResponseWriter = WriteResponse,
+                ResultStatusCodes = GetResultStatusCodes()
+            });
+        }
 
         return endpoints;
     }
