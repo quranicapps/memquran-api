@@ -2,5 +2,5 @@
 
 public enum HealthCheckTags
 {
-    Unknown = 0, Local, Ping, Cdn, Redis
+    Local, Ping, Cdn, Redis
 }

@@ -32,7 +32,7 @@ public static class ApiHealthCheckExtensions
             setup.SetApiMaxActiveRequests(1);
             
             var tags = Enum.GetValues<HealthCheckTags>().Select(x => x.ToString()).ToList();
-            tags.ForEach(x => setup.AddHealthCheckEndpoint(x, $"https://localhost:3123/api/health/{x}"));
+            tags.ForEach(x => setup.AddHealthCheckEndpoint(x, $"http://localhost:3122/api/health/{x}"));
             
             setup.AddWebhookNotification("Webhook (https://memquran.requestcatcher.com)", uri: "https://memquran.requestcatcher.com/anything",
                 payload: "{ \"message\": \"Webhook report for [[LIVENESS]] Health Check: [[FAILURE]] - Description: [[DESCRIPTIONS]]\"}",

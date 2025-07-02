@@ -31,6 +31,10 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <None Remove="HealthChecks\css\healthchecksui.css" />
+      <Content Include="HealthChecks\css\healthchecksui.css">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
