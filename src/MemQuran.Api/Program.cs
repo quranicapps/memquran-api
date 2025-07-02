@@ -18,10 +18,10 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin()); });
 
 // Health Checks
-builder.Services.AddHealthCheckServices(options =>
+builder.Services.AddHealthCheckServices(config =>
 {
-    options.HealthCheckTimeoutSeconds = 5;
-    options.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
+    config.HealthCheckTimeoutSeconds = 5;
+    config.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
 });
 
 // Open API / Swagger
