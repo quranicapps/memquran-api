@@ -1,7 +1,15 @@
+using FluentValidation;
+using MemQuran.Api.Configuration.ApiServices;
 using MemQuran.Api.Extensions;
+using MemQuran.Api.Messaging;
 using MemQuran.Api.Models;
 using MemQuran.Api.Settings;
+using MemQuran.Api.Settings.Messaging;
+using MemQuran.Api.Validators;
 using MemQuran.Api.Workers;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +17,33 @@ var builder = WebApplication.CreateBuilder(args);
 ////////////////////////////
 // Configure Services
 
-builder.Logging.AddSimpleConsole().AddSeq(builder.Configuration.GetSection(SeqSettings.SectionName));
+// Logging
+builder.Logging
+    .AddOpenTelemetry(options => options.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(builder.Environment.ApplicationName)))
+    .AddSimpleConsole()
+    .AddSeq(builder.Configuration.GetSection(SeqSettings.SectionName));
+
+builder.Services.AddOpenTelemetry()
+    .ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName))
+    .WithTracing(tracing => tracing
+            // .AddHttpClientInstrumentation() //OpenTelemetry.Instrumentation.Http
+            .AddAspNetCoreInstrumentation()
+            .AddOtlpExporter(opt =>
+            {
+                opt.Endpoint = new Uri("http://dockerhost:4317"); // Jaeger
+            })
+            .AddSource(nameof(EvictCacheItemMessageV1))
+        // .AddConsoleExporter()
+    )
+    .WithMetrics(metrics => metrics
+            // .AddHttpClientInstrumentation() //OpenTelemetry.Instrumentation.Http
+            .AddAspNetCoreInstrumentation()
+            .AddOtlpExporter(opt =>
+            {
+                opt.Endpoint = new Uri("http://dockerhost:4317"); // Jaeger
+            })
+        // .AddConsoleExporter()
+    );
 
 // Exception Handling
 builder.Services.AddExceptionHandling(options => { options.Environment = builder.Environment; });
@@ -36,6 +70,14 @@ var clientsSettings = builder.Configuration.GetSection(ClientsSettings.SectionNa
 if (clientsSettings == null) throw new Exception("Could not bind the Clients Settings, please check configuration");
 builder.Services.AddSingleton(clientsSettings);
 
+var awsHostSettings = builder.Configuration.GetSection(AwsHostSettings.SectionName).Get<AwsHostSettings>();
+if (awsHostSettings == null) throw new InvalidOperationException($"{nameof(AwsHostSettings)} is not configured. Please check your appsettings.json or environment variables.");
+new AwsHostSettingsValidator().ValidateAndThrow(awsHostSettings);
+
+var awsConsumerSettings = builder.Configuration.GetSection(AwsConsumerSettings.SectionName).Get<AwsConsumerSettings>();
+if (awsConsumerSettings == null) throw new InvalidOperationException($"{nameof(AwsConsumerSettings)} is not configured. Please check your appsettings.json or environment variables.");
+new AwsConsumerSettingsValidator().ValidateAndThrow(awsConsumerSettings);
+
 // This API's Services
 builder.Services.AddServices(options =>
 {
@@ -50,8 +92,16 @@ builder.Services.AddCachingServices(options =>
     options.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
 });
 
+// Add Topica MessagingPlatform Components
+builder.Services.AddMessagingServices(options =>
+{
+    options.AwsHostSettings = awsHostSettings;
+    options.AwsConsumerSettings = awsConsumerSettings;
+});
+
 // Workers
 builder.Services.AddHostedService<LocalFilesCachingWorker>();
+builder.Services.AddHostedService<WebUpdateWorker>();
 
 // Host Options
 builder.Services.Configure<HostOptions>(options => { options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore; });

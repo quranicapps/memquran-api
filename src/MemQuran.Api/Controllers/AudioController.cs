@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using MemQuran.Api.Models;
 using MemQuran.Core.Contracts;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,8 +19,16 @@ public class AudioController(IStaticFileService staticFileService, ILogger<Audio
     {
         var sw = Stopwatch.StartNew();
 
+        var kvp = new List<KeyValuePair<string, object?>>
+        {
+            new KeyValuePair<string, object?>("reciterId", reciterId),
+            new KeyValuePair<string, object?>("fileName", fileName)
+        };
+        Activity.Current?.AddEvent(new ActivityEvent("Start GetSurahAudioJson", DateTimeOffset.Now, tags: new ActivityTagsCollection(kvp)));
         var text = await staticFileService.GetFileContentStringAsync($"json/audio/{reciterId}/timings/surah/{fileName}");
-
+        kvp.Add(new KeyValuePair<string, object?>("elapsed", sw.Elapsed));
+        Activity.Current?.AddEvent(new ActivityEvent("End GetSurahAudioJson", DateTimeOffset.Now, tags: new ActivityTagsCollection(kvp)));
+        
         if (text is null)
         {
             return NotFound();

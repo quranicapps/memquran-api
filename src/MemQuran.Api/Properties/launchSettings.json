@@ -3,10 +3,9 @@
   "profiles": {
     "MemQuran.Api": {
       "commandName": "Project",
-      "applicationUrl": "https://localhost:3123;http://localhost:3122",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "ASPNETCORE_URLS": "https://*:3123;http://*:3122"
+        "ASPNETCORE_URLS": "https://localhost:3123;http://localhost:3122"
       }
     }
   }

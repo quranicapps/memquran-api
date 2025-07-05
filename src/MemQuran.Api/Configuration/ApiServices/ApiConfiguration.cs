@@ -1,4 +1,5 @@
-﻿using MemQuran.Core.Models;
+﻿using MemQuran.Api.Settings.Messaging;
+using MemQuran.Core.Models;
 
 namespace MemQuran.Api.Configuration.ApiServices;
 
@@ -13,4 +14,7 @@ public class ApiConfiguration
     public int HealthCheckTimeoutSeconds { get; set; }
 
     public IWebHostEnvironment Environment { get; set; } = null!;
+
+    public AwsHostSettings AwsHostSettings { get; set; } = null!;
+    public AwsConsumerSettings AwsConsumerSettings { get; set; } = null!;
 }
