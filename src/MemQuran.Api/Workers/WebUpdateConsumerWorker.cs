@@ -2,7 +2,7 @@
 
 namespace MemQuran.Api.Workers;
 
-public class WebUpdateWorker([FromKeyedServices("WebUpdateConsumer")] IConsumer consumer, ILogger<WebUpdateWorker> logger) : BackgroundService
+public class WebUpdateConsumerWorker([FromKeyedServices("WebUpdateConsumer")] IConsumer consumer, ILogger<WebUpdateConsumerWorker> logger) : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {

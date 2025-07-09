@@ -119,9 +119,11 @@ builder.Services.AddMessagingServices(options =>
     options.AwsConsumerSettings = awsConsumerSettings;
 });
 
+
 // Workers
 builder.Services.AddHostedService<LocalFilesCachingWorker>();
-builder.Services.AddHostedService<WebUpdateWorker>();
+builder.Services.AddHostedService<WebUpdateConsumerWorker>();
+builder.Services.AddHostedService<WebUpdateProducerWorker>();
 
 // Host Options
 builder.Services.Configure<HostOptions>(options => { options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore; });
