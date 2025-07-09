@@ -7,6 +7,7 @@ using MemQuran.Api.Settings;
 using MemQuran.Api.Settings.Messaging;
 using MemQuran.Api.Validators;
 using MemQuran.Api.Workers;
+using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -17,11 +18,35 @@ var builder = WebApplication.CreateBuilder(args);
 ////////////////////////////
 // Configure Services
 
+// Configuration
+var contentDeliverySettings = builder.Configuration.GetSection(ContentDeliverySettings.SectionName).Get<ContentDeliverySettings>();
+if (contentDeliverySettings == null) throw new Exception("Could not bind the Content Delivery Settings, please check configuration");
+builder.Services.AddSingleton(contentDeliverySettings);
+
+var clientsSettings = builder.Configuration.GetSection(ClientsSettings.SectionName).Get<ClientsSettings>();
+if (clientsSettings == null) throw new Exception("Could not bind the Clients Settings, please check configuration");
+builder.Services.AddSingleton(clientsSettings);
+
+var awsHostSettings = builder.Configuration.GetSection(AwsHostSettings.SectionName).Get<AwsHostSettings>();
+if (awsHostSettings == null) throw new InvalidOperationException($"{nameof(AwsHostSettings)} is not configured. Please check your appsettings.json or environment variables.");
+new AwsHostSettingsValidator().ValidateAndThrow(awsHostSettings);
+
+var awsConsumerSettings = builder.Configuration.GetSection(AwsConsumerSettings.SectionName).Get<AwsConsumerSettings>();
+if (awsConsumerSettings == null) throw new InvalidOperationException($"{nameof(AwsConsumerSettings)} is not configured. Please check your appsettings.json or environment variables.");
+new AwsConsumerSettingsValidator().ValidateAndThrow(awsConsumerSettings);
+
+var seqConfigurationSection = builder.Configuration.GetSection(SeqSettings.SectionName);
+var seqSettings = seqConfigurationSection.Get<SeqSettings>();
+if (seqSettings == null) throw new InvalidOperationException($"{nameof(SeqSettings)} is not configured. Please check your appsettings.json or environment variables.");
+
+var jaegerSettings = builder.Configuration.GetSection(JaegerSettings.SectionName).Get<JaegerSettings>();
+if (jaegerSettings == null) throw new InvalidOperationException($"{nameof(JaegerSettings)} is not configured. Please check your appsettings.json or environment variables.");
+
 // Logging
 builder.Logging
     .AddOpenTelemetry(options => options.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(builder.Environment.ApplicationName)))
     .AddSimpleConsole()
-    .AddSeq(builder.Configuration.GetSection(SeqSettings.SectionName));
+    .AddSeq(seqConfigurationSection);
 
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName))
@@ -30,7 +55,13 @@ builder.Services.AddOpenTelemetry()
             .AddAspNetCoreInstrumentation()
             .AddOtlpExporter(opt =>
             {
-                opt.Endpoint = new Uri("http://dockerhost:4317"); // Jaeger
+                // Jaeger
+                opt.Endpoint = new Uri(jaegerSettings.Endpoint);
+                
+                // Seq
+                // opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
+                // opt.Protocol = OtlpExportProtocol.HttpProtobuf;
+                // if(!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
             })
             .AddSource(nameof(EvictCacheItemMessageV1))
         // .AddConsoleExporter()
@@ -40,7 +71,13 @@ builder.Services.AddOpenTelemetry()
             .AddAspNetCoreInstrumentation()
             .AddOtlpExporter(opt =>
             {
-                opt.Endpoint = new Uri("http://dockerhost:4317"); // Jaeger
+                // Jaeger
+                opt.Endpoint = new Uri(jaegerSettings.Endpoint);
+                
+                // Seq
+                // opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
+                // opt.Protocol = OtlpExportProtocol.HttpProtobuf;
+                // if(!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
             })
         // .AddConsoleExporter()
     );
@@ -60,23 +97,6 @@ builder.Services.AddHealthCheckServices(config =>
 
 // Open API / Swagger
 builder.Services.AddOpenApiServices(_ => { });
-
-// Configuration
-var contentDeliverySettings = builder.Configuration.GetSection(ContentDeliverySettings.SectionName).Get<ContentDeliverySettings>();
-if (contentDeliverySettings == null) throw new Exception("Could not bind the Content Delivery Settings, please check configuration");
-builder.Services.AddSingleton(contentDeliverySettings);
-
-var clientsSettings = builder.Configuration.GetSection(ClientsSettings.SectionName).Get<ClientsSettings>();
-if (clientsSettings == null) throw new Exception("Could not bind the Clients Settings, please check configuration");
-builder.Services.AddSingleton(clientsSettings);
-
-var awsHostSettings = builder.Configuration.GetSection(AwsHostSettings.SectionName).Get<AwsHostSettings>();
-if (awsHostSettings == null) throw new InvalidOperationException($"{nameof(AwsHostSettings)} is not configured. Please check your appsettings.json or environment variables.");
-new AwsHostSettingsValidator().ValidateAndThrow(awsHostSettings);
-
-var awsConsumerSettings = builder.Configuration.GetSection(AwsConsumerSettings.SectionName).Get<AwsConsumerSettings>();
-if (awsConsumerSettings == null) throw new InvalidOperationException($"{nameof(AwsConsumerSettings)} is not configured. Please check your appsettings.json or environment variables.");
-new AwsConsumerSettingsValidator().ValidateAndThrow(awsConsumerSettings);
 
 // This API's Services
 builder.Services.AddServices(options =>
