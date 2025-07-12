@@ -18,6 +18,10 @@ var builder = WebApplication.CreateBuilder(args);
 ////////////////////////////
 // Configure Services
 
+// Startup Cancellation Token
+var cts = new CancellationTokenSource();
+var cancellationToken = cts.Token;
+
 // Configuration
 var contentDeliverySettings = builder.Configuration.GetSection(ContentDeliverySettings.SectionName).Get<ContentDeliverySettings>();
 if (contentDeliverySettings == null) throw new Exception("Could not bind the Content Delivery Settings, please check configuration");
@@ -57,7 +61,7 @@ builder.Services.AddOpenTelemetry()
             {
                 // Jaeger
                 opt.Endpoint = new Uri(jaegerSettings.Endpoint);
-                
+
                 // Seq
                 // opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
                 // opt.Protocol = OtlpExportProtocol.HttpProtobuf;
@@ -73,7 +77,7 @@ builder.Services.AddOpenTelemetry()
             {
                 // Jaeger
                 opt.Endpoint = new Uri(jaegerSettings.Endpoint);
-                
+
                 // Seq
                 // opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
                 // opt.Protocol = OtlpExportProtocol.HttpProtobuf;
@@ -117,7 +121,7 @@ builder.Services.AddMessagingServices(options =>
 {
     options.AwsHostSettings = awsHostSettings;
     options.AwsConsumerSettings = awsConsumerSettings;
-});
+}, cancellationToken);
 
 
 // Workers
@@ -163,11 +167,15 @@ app.MapHealthChecksUI(options =>
     options.AddCustomStylesheet("HealthChecks/css/healthchecksui.css");
 });
 
-// Startup when application starts
-// app.Lifetime.ApplicationStarted.Register(() =>
-// {
-//
-// });
+// Application Lifetime - cancellation tokens for application lifetime - graceful shutdown
+var appStartedCancellationToken = app.Lifetime.ApplicationStarted;
+appStartedCancellationToken.Register(() => { });
+
+var appStoppingCancellationToken = app.Lifetime.ApplicationStopping;
+appStoppingCancellationToken.Register(() => { cts.Cancel(); });
+
+var appStoppedCancellationToken = app.Lifetime.ApplicationStopped;
+appStoppedCancellationToken.Register(() => { });
 
 app.Run();
 

@@ -6,7 +6,7 @@ namespace MemQuran.Api.Configuration.ApiServices;
 
 public static class ApiMessagingExtensions
 {
-    public static IServiceCollection AddMessagingServices(this IServiceCollection services, Action<ApiConfiguration> configuration)
+    public static IServiceCollection AddMessagingServices(this IServiceCollection services, Action<ApiConfiguration> configuration, CancellationToken cancellationToken)
     {
         var config = new ApiConfiguration();
         configuration(config);
@@ -44,8 +44,8 @@ public static class ApiMessagingExtensions
                 config.AwsConsumerSettings.WebUpdateQueueSettings.QueueReceiveMaximumNumberOfMessages
             );
 
-        services.AddKeyedSingleton<IConsumer>("WebUpdateConsumer", (_, _) => awsQueueBuilder.BuildConsumerAsync(CancellationToken.None).Result);
-        services.AddKeyedSingleton<IProducer>("WebUpdateProducer", (_, _) => awsQueueBuilder.BuildProducerAsync(CancellationToken.None).Result);
+        services.AddKeyedSingleton<IConsumer>("WebUpdateConsumer", (_, _) => awsQueueBuilder.BuildConsumerAsync(cancellationToken).Result);
+        services.AddKeyedSingleton<IProducer>("WebUpdateProducer", (_, _) => awsQueueBuilder.BuildProducerAsync(cancellationToken).Result);
 
         return services;
     }
