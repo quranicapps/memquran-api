@@ -16,7 +16,7 @@ var builder = WebApplication.CreateBuilder(args);
 ////////////////////////////
 // Configure Services
 
-// Startup Cancellation Token
+// Startup Cancellation Token, cancelled when the app.Lifetime.ApplicationStopping
 var cts = new CancellationTokenSource();
 var cancellationToken = cts.Token;
 
