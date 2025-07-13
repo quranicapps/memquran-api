@@ -4,7 +4,8 @@ using HealthChecks.UI.Core;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace MemQuran.Api.Extensions;
+// ReSharper disable once CheckNamespace
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class EndpointRouteBuilderExtensions
 {

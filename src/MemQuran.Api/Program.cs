@@ -1,6 +1,4 @@
 using FluentValidation;
-using MemQuran.Api.Configuration.ApiServices;
-using MemQuran.Api.Extensions;
 using MemQuran.Api.Messaging;
 using MemQuran.Api.Models;
 using MemQuran.Api.Settings;
@@ -117,7 +115,7 @@ builder.Services.AddCachingServices(options =>
 });
 
 // Add Topica MessagingPlatform Components
-builder.Services.AddMessagingServices(options =>
+await builder.Services.AddMessagingServices(options =>
 {
     options.AwsHostSettings = awsHostSettings;
     options.AwsConsumerSettings = awsConsumerSettings;

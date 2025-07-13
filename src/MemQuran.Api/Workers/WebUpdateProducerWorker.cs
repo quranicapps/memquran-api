@@ -7,9 +7,11 @@ using Topica.Contracts;
 namespace MemQuran.Api.Workers;
 
 public class WebUpdateProducerWorker(
-    Channel<EvictCacheItemRequest> evictCacheItemChannel, 
-    [FromKeyedServices("WebUpdateProducer")] IProducer producer, 
-    ILogger<WebUpdateProducerWorker> logger) : BackgroundService
+    Channel<EvictCacheItemRequest> evictCacheItemChannel,
+    [FromKeyedServices("WebUpdateProducer")]
+    IProducer producer,
+    ILogger<WebUpdateProducerWorker> logger)
+    : BackgroundService
 {
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
@@ -29,18 +31,17 @@ public class WebUpdateProducerWorker(
                 Version = "V1",
                 MessageGroupId = Guid.NewGuid().ToString()
             };
-            
+
             var traceId = request.TraceId;
             var traceState = Activity.Current?.TraceStateString;
-            
+
             var attributes = new Dictionary<string, string>
             {
                 { "traceparent", traceId },
                 { "tracestate", traceState ?? "unknown" }
             };
-            
+
             await producer.ProduceAsync(message, attributes, stoppingToken);
-            logger.LogInformation("***** EvictCacheItem request received: Key: {CacheKey}", request.CacheKey);   
         }
     }
 }

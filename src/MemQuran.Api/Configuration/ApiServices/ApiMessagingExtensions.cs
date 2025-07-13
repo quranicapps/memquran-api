@@ -1,12 +1,14 @@
 ﻿using System.Reflection;
+using MemQuran.Api.Configuration.ApiServices;
 using Topica.Aws.Contracts;
 using Topica.Contracts;
 
-namespace MemQuran.Api.Configuration.ApiServices;
+// ReSharper disable once CheckNamespace
+namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ApiMessagingExtensions
 {
-    public static IServiceCollection AddMessagingServices(this IServiceCollection services, Action<ApiConfiguration> configuration, CancellationToken cancellationToken)
+    public static async Task<IServiceCollection> AddMessagingServices(this IServiceCollection services, Action<ApiConfiguration> configuration, CancellationToken cancellationToken)
     {
         var config = new ApiConfiguration();
         configuration(config);
@@ -44,8 +46,10 @@ public static class ApiMessagingExtensions
                 config.AwsConsumerSettings.WebUpdateQueueSettings.QueueReceiveMaximumNumberOfMessages
             );
 
-        services.AddKeyedSingleton<IConsumer>("WebUpdateConsumer", (_, _) => builder.BuildConsumerAsync(cancellationToken).Result);
-        services.AddKeyedSingleton<IProducer>("WebUpdateProducer", (_, _) => builder.BuildProducerAsync(cancellationToken).Result);
+        var consumer = await builder.BuildConsumerAsync(cancellationToken);
+        var producer = await builder.BuildProducerAsync(cancellationToken);
+        services.AddKeyedSingleton<IConsumer>("WebUpdateConsumer",  (_, _) => consumer);
+        services.AddKeyedSingleton<IProducer>("WebUpdateProducer", (_, _) => producer);
 
         return services;
     }
