@@ -21,7 +21,7 @@ public static class ApiMessagingExtensions
             c.RegionEndpoint = config.AwsHostSettings.RegionEndpoint;
         }, Assembly.GetExecutingAssembly());
 
-        var awsQueueBuilder = services.BuildServiceProvider().GetRequiredService<IAwsQueueCreationBuilder>()
+        var builder = services.BuildServiceProvider().GetRequiredService<IAwsQueueCreationBuilder>()
             .WithWorkerName(config.AwsConsumerSettings.WebUpdateQueueSettings.WorkerName)
             .WithQueueName(config.AwsConsumerSettings.WebUpdateQueueSettings.Source)
             .WithErrorQueueSettings(
@@ -44,8 +44,8 @@ public static class ApiMessagingExtensions
                 config.AwsConsumerSettings.WebUpdateQueueSettings.QueueReceiveMaximumNumberOfMessages
             );
 
-        services.AddKeyedSingleton<IConsumer>("WebUpdateConsumer", (_, _) => awsQueueBuilder.BuildConsumerAsync(cancellationToken).Result);
-        services.AddKeyedSingleton<IProducer>("WebUpdateProducer", (_, _) => awsQueueBuilder.BuildProducerAsync(cancellationToken).Result);
+        services.AddKeyedSingleton<IConsumer>("WebUpdateConsumer", (_, _) => builder.BuildConsumerAsync(cancellationToken).Result);
+        services.AddKeyedSingleton<IProducer>("WebUpdateProducer", (_, _) => builder.BuildProducerAsync(cancellationToken).Result);
 
         return services;
     }

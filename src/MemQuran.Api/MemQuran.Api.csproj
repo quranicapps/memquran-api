@@ -28,7 +28,7 @@
         <PackageReference Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
         <PackageReference Include="Seq.Extensions.Logging" Version="8.0.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
-        <PackageReference Include="topica.aws" Version="0.0.21" />
+        <PackageReference Include="topica.aws" Version="0.0.22" />
     </ItemGroup>
 
     <ItemGroup>
