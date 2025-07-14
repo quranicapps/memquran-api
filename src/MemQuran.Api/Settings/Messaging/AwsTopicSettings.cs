@@ -1,16 +1,18 @@
 ﻿namespace MemQuran.Api.Settings.Messaging;
 
-public class AwsConsumerSettings
+public class AwsTopicSettings
 {
-    public static string SectionName => nameof(AwsConsumerSettings);
+    public static string SectionName => nameof(AwsTopicSettings);
 
-    public AwsTopicSettings WebUpdateQueueSettings { get; init; } = null!;
+    public WebUpdateTopicSettings WebUpdateTopicSettings { get; init; } = null!;
 }
 
-public class AwsTopicSettings
+public class WebUpdateTopicSettings
 {
     public string WorkerName { get; set; } = null!;
     public string Source { get; set; } = null!;
+    public string[] WithSubscribedQueues { get; set; } = null!;
+    public string SubscribeToSource { get; set; } = null!;
     public int? NumberOfInstances { get; set; }
 
     public bool? IsFifoQueue { get; set; }

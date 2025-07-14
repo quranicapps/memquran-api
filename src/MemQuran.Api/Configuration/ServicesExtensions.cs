@@ -5,18 +5,24 @@ using MemQuran.Api.Services;
 using MemQuran.Core.Contracts;
 using MemQuran.Infrastructure.Factories;
 using MemQuran.Infrastructure.Services;
-using MemQuran.Api.Configuration.ApiServices;
 using MemQuran.Api.Models;
 using MemQuran.Infrastructure.Messaging;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
 
-public static class ApiServicesExtensions
+public static class ServicesExtensions
 {
-    public static IServiceCollection AddServices(this IServiceCollection services, Action<ApiConfiguration> configuration)
+    public class ServicesConfiguration
     {
-        var config = new ApiConfiguration();
+        public string JsDelivrServiceBaseUrl { get; set; } = null!;
+        public TimeSpan JsDelivrServiceDefaultTimeout { get; set; }
+    }
+
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public static IServiceCollection AddServices(this IServiceCollection services, Action<ServicesConfiguration> configuration)
+    {
+        var config = new ServicesConfiguration();
         configuration(config);
 
         services.AddSingleton<IHashingService, HashingService>();
@@ -30,7 +36,7 @@ public static class ApiServicesExtensions
             })
             .AddHttpMessageHandler(() => new JsDelivrDelegatingHandler());
         services.AddSingleton<ICdnClientFactory, CdnClientFactory>();
-        
+
         // Add .NET Channels
         var messagingChannel = new MessagingChannel();
         services.AddSingleton<Channel<EvictCacheItemRequest>>(_ => messagingChannel.CreateBounded<EvictCacheItemRequest>());

@@ -5,7 +5,6 @@ using MemQuran.Api.Settings;
 using MemQuran.Api.Settings.Messaging;
 using MemQuran.Api.Validators;
 using MemQuran.Api.Workers;
-using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -29,13 +28,17 @@ var clientsSettings = builder.Configuration.GetSection(ClientsSettings.SectionNa
 if (clientsSettings == null) throw new Exception("Could not bind the Clients Settings, please check configuration");
 builder.Services.AddSingleton(clientsSettings);
 
+var messagingSettings = builder.Configuration.GetSection(MessagingSettings.SectionName).Get<MessagingSettings>();
+if (messagingSettings == null) throw new Exception("Could not bind the Messaging Settings, please check configuration");
+builder.Services.AddSingleton(messagingSettings);
+
 var awsHostSettings = builder.Configuration.GetSection(AwsHostSettings.SectionName).Get<AwsHostSettings>();
 if (awsHostSettings == null) throw new InvalidOperationException($"{nameof(AwsHostSettings)} is not configured. Please check your appsettings.json or environment variables.");
 new AwsHostSettingsValidator().ValidateAndThrow(awsHostSettings);
 
-var awsConsumerSettings = builder.Configuration.GetSection(AwsConsumerSettings.SectionName).Get<AwsConsumerSettings>();
-if (awsConsumerSettings == null) throw new InvalidOperationException($"{nameof(AwsConsumerSettings)} is not configured. Please check your appsettings.json or environment variables.");
-new AwsConsumerSettingsValidator().ValidateAndThrow(awsConsumerSettings);
+var awsTopicSettings = builder.Configuration.GetSection(AwsTopicSettings.SectionName).Get<AwsTopicSettings>();
+if (awsTopicSettings == null) throw new InvalidOperationException($"{nameof(AwsTopicSettings)} is not configured. Please check your appsettings.json or environment variables.");
+new AwsTopicSettingsValidator().ValidateAndThrow(awsTopicSettings);
 
 var seqConfigurationSection = builder.Configuration.GetSection(SeqSettings.SectionName);
 var seqSettings = seqConfigurationSection.Get<SeqSettings>();
@@ -93,12 +96,13 @@ builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy =>
 // Health Checks
 builder.Services.AddHealthCheckServices(config =>
 {
+    config.ContentDeliverySettings = contentDeliverySettings;
     config.HealthCheckTimeoutSeconds = 5;
     config.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
 });
 
 // Open API / Swagger
-builder.Services.AddOpenApiServices(_ => { });
+builder.Services.AddOpenApiServices();
 
 // This API's Services
 builder.Services.AddServices(options =>
@@ -114,18 +118,21 @@ builder.Services.AddCachingServices(options =>
     options.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
 });
 
-// Add Topica MessagingPlatform Components
-await builder.Services.AddMessagingServices(options =>
-{
-    options.AwsHostSettings = awsHostSettings;
-    options.AwsConsumerSettings = awsConsumerSettings;
-}, cancellationToken);
-
-
 // Workers
 builder.Services.AddHostedService<LocalFilesCachingWorker>();
-builder.Services.AddHostedService<WebUpdateConsumerWorker>();
-builder.Services.AddHostedService<WebUpdateProducerWorker>();
+
+if (messagingSettings.AwsEnabled)
+{
+    // Add Topica MessagingPlatform Components
+    await builder.Services.AddMessagingServices(options =>
+    {
+        options.AwsHostSettings = awsHostSettings;
+        options.AwsTopicSettings = awsTopicSettings;
+    }, cancellationToken);
+    
+    builder.Services.AddHostedService<WebUpdateConsumerWorker>();
+    builder.Services.AddHostedService<WebUpdateProducerWorker>();
+}
 
 // Host Options
 builder.Services.Configure<HostOptions>(options => { options.BackgroundServiceExceptionBehavior = BackgroundServiceExceptionBehavior.Ignore; });

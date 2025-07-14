@@ -29,6 +29,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MemQuran", "MemQuran", "{EF
 		..\.docker\docker-compose.yaml = ..\.docker\docker-compose.yaml
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman", "Postman", "{58CC1B37-6453-451F-9EF9-17892EA06813}"
+	ProjectSection(SolutionItems) = preProject
+		..\.postman\MemQuran-API.postman_collection.json = ..\.postman\MemQuran-API.postman_collection.json
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,5 +69,6 @@ Global
 		{A98004E8-FDDF-452E-BD24-4FBB7CD1EA9C} = {D3EE3844-F242-456E-882B-BD14252D2F38}
 		{5816DE00-669F-4FCE-8849-F691D8FC794C} = {28C575A4-96DC-4374-94F6-6988E7261F7B}
 		{EF93C547-F64A-45CE-9DA3-FBCD4A2F3569} = {5816DE00-669F-4FCE-8849-F691D8FC794C}
+		{58CC1B37-6453-451F-9EF9-17892EA06813} = {28C575A4-96DC-4374-94F6-6988E7261F7B}
 	EndGlobalSection
 EndGlobal

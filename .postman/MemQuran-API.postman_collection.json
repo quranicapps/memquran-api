@@ -1,0 +1,1356 @@
+{
+	"info": {
+		"_postman_id": "ad025cc3-535c-4d85-8c1b-236d0bc2d640",
+		"name": "MemQuran-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "575206",
+		"_collection_link": "https://memquran-team.postman.co/workspace/MemQuran~7755e105-7c8e-4b64-943f-f2717c90612d/collection/575206-ad025cc3-535c-4d85-8c1b-236d0bc2d640?action=share&source=collection_link&creator=575206"
+	},
+	"item": [
+		{
+			"name": "Audio",
+			"item": [
+				{
+					"name": "Timings",
+					"item": [
+						{
+							"name": "timings/surah/<ReciterTimingFileName>",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/json/audio/abderahmane-eloosi-1/timings/surah/abderahmane-eloosi-1_timings_surah_1.json",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"json",
+										"audio",
+										"abderahmane-eloosi-1",
+										"timings",
+										"surah",
+										"abderahmane-eloosi-1_timings_surah_1.json"
+									]
+								},
+								"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+							},
+							"response": []
+						},
+						{
+							"name": "timings/juz/<ReciterTimingFileName>",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/json/audio/abdulbaset-mujawwad-2/timings/juz/abdulbaset-mujawwad-2_timings_juz_1.json",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"json",
+										"audio",
+										"abdulbaset-mujawwad-2",
+										"timings",
+										"juz",
+										"abdulbaset-mujawwad-2_timings_juz_1.json"
+									]
+								},
+								"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+							},
+							"response": []
+						},
+						{
+							"name": "timings/page/<ReciterTimingFileName>",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/json/audio/abdulbaset-mujawwad-2/timings/page/abdulbaset-mujawwad-2_timings_page_1.json",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"json",
+										"audio",
+										"abdulbaset-mujawwad-2",
+										"timings",
+										"page",
+										"abdulbaset-mujawwad-2_timings_page_1.json"
+									]
+								},
+								"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+							},
+							"response": []
+						},
+						{
+							"name": "timings/ruku/<ReciterTimingFileName>",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/json/audio/abdulbaset-mujawwad-2/timings/ruku/abdulbaset-mujawwad-2_timings_ruku_1.json",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"json",
+										"audio",
+										"abdulbaset-mujawwad-2",
+										"timings",
+										"ruku",
+										"abdulbaset-mujawwad-2_timings_ruku_1.json"
+									]
+								},
+								"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+							},
+							"response": []
+						},
+						{
+							"name": "timings/maqra/<ReciterTimingFileName>",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{BaseUrl}}/json/audio/abdulbaset-mujawwad-2/timings/maqra/abdulbaset-mujawwad-2_timings_maqra_1.json",
+									"host": [
+										"{{BaseUrl}}"
+									],
+									"path": [
+										"json",
+										"audio",
+										"abdulbaset-mujawwad-2",
+										"timings",
+										"maqra",
+										"abdulbaset-mujawwad-2_timings_maqra_1.json"
+									]
+								},
+								"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Dua",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/audio/duas/1_1.mp3",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"audio",
+								"duas",
+								"1_1.mp3"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+					},
+					"response": []
+				},
+				{
+					"name": "Tajweed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/audio/tajweed/ikhfa.mp3",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"audio",
+								"tajweed",
+								"ikhfa.mp3"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+					},
+					"response": []
+				},
+				{
+					"name": "WBW",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/audio/wbw/001_001_001.mp3",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"audio",
+								"wbw",
+								"001_001_001.mp3"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+					},
+					"response": []
+				},
+				{
+					"name": "Memorise",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/audio/memorise/0A5639E55EA4CF708D349C6FC8D95BE7CED289AFC0875F5F306CA3D3ECDA3CE9.mp3",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"audio",
+								"memorise",
+								"0A5639E55EA4CF708D349C6FC8D95BE7CED289AFC0875F5F306CA3D3ECDA3CE9.mp3"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+					},
+					"response": []
+				},
+				{
+					"name": "Correct Sound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/audio/common/correct.mp3",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"audio",
+								"common",
+								"correct.mp3"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+					},
+					"response": []
+				},
+				{
+					"name": "Incorrect Sound",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/audio/common/incorrect.mp3",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"audio",
+								"common",
+								"incorrect.mp3"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+					},
+					"response": []
+				},
+				{
+					"name": "namesOfAllah",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/audio/namesOfAllah/1.mp3",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"audio",
+								"namesOfAllah",
+								"1.mp3"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Duas",
+			"item": [
+				{
+					"name": "Duas Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/duas/en_duas.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"duas",
+								"en_duas.json"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Editions",
+			"item": [
+				{
+					"name": "tafsirEditions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/editions/tafsirEditions.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"editions",
+								"tafsirEditions.json"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+					},
+					"response": []
+				},
+				{
+					"name": "translationEditions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/editions/translationEditions.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"editions",
+								"translationEditions.json"
+							]
+						},
+						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Images",
+			"item": [
+				{
+					"name": "Tajweed Word",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/images/tajweed/1/1/1.png",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"images",
+								"tajweed",
+								"1",
+								"1",
+								"1.png"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Tajweed Number",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/images/tajweed/1.png",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"images",
+								"tajweed",
+								"1.png"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reciter",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/images/reciters/abdallah-al-matroud-1.png",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"images",
+								"reciters",
+								"abdallah-al-matroud-1.png"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Surahs",
+			"item": [
+				{
+					"name": "Surah Info Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/surahs/en_surahInfo.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"surahs",
+								"en_surahInfo.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Surah Info With Summary Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/surahs/en_surahInfoWithSummary.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"surahs",
+								"en_surahInfoWithSummary.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Surah",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/surahs/surah_1.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"surahs",
+								"surah_1.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Surah Wbw Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/surahs/surah_wbw_en_1.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"surahs",
+								"surah_wbw_en_1.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Surah Translation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/surahTranslations/surah_translation_1_490.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"surahTranslations",
+								"surah_translation_1_490.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Juzs",
+			"item": [
+				{
+					"name": "Juz Info Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/juzs/en_juzInfo.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"juzs",
+								"en_juzInfo.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Juz Info With Summary Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/juzs/en_juzInfoWithSummary.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"juzs",
+								"en_juzInfoWithSummary.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Juz",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/juzs/juz_1.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"juzs",
+								"juz_1.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Juz Wbw Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/juzs/juz_wbw_en_1.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"juzs",
+								"juz_wbw_en_1.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Juz Translation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/juzTranslations/juz_translation_1_490.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"juzTranslations",
+								"juz_translation_1_490.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pages",
+			"item": [
+				{
+					"name": "Page Info Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/pages/en_pageInfo.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"pages",
+								"en_pageInfo.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Page",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/pages/page_1.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"pages",
+								"page_1.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Page Wbw Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/pages/page_wbw_en_1.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"pages",
+								"page_wbw_en_1.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Page Translation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/pageTranslations/page_translation_1_490.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"pageTranslations",
+								"page_translation_1_490.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rukus",
+			"item": [
+				{
+					"name": "Ruku Info Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/rukus/en_rukuInfo.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"rukus",
+								"en_rukuInfo.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ruku",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/rukus/ruku_1.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"rukus",
+								"ruku_1.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ruku Wbw Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/rukus/ruku_wbw_en_1.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"rukus",
+								"ruku_wbw_en_1.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ruku Translation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/rukuTranslations/ruku_translation_1_490.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"rukuTranslations",
+								"ruku_translation_1_490.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Maqra",
+			"item": [
+				{
+					"name": "MaqraInfo Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/maqras/en_maqraInfo.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"maqras",
+								"en_maqraInfo.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Maqraz",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/maqras/maqra_1.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"maqras",
+								"maqra_1.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Maqra Wbw Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/maqras/maqra_wbw_en_1.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"maqras",
+								"maqra_wbw_en_1.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Maqra Translation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/maqraTranslations/maqra_translation_1_490.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"maqraTranslations",
+								"maqra_translation_1_490.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Memorise",
+			"item": [
+				{
+					"name": "Courses Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/memorise/en_courses.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"memorise",
+								"en_courses.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Questions Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/memorise/en_questions_2_3.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"memorise",
+								"en_questions_2_3.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reviews Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/memorise/en_reviews_2_3.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"memorise",
+								"en_reviews_2_3.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "NamesOfAllah",
+			"item": [
+				{
+					"name": "Names Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/namesOfAllah/en_names.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"namesOfAllah",
+								"en_names.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Prophets",
+			"item": [
+				{
+					"name": "Prophets Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/prophets/en_prophets.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"prophets",
+								"en_prophets.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reciters",
+			"item": [
+				{
+					"name": "ReciterInfo Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/reciterInfos/en_abderahmane-eloosi-1.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"reciterInfos",
+								"en_abderahmane-eloosi-1.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reciters Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/reciters/en_reciters.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"reciters",
+								"en_reciters.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Root Words",
+			"item": [
+				{
+					"name": "RoorWords Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/rootWords/en_rootWords.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"rootWords",
+								"en_rootWords.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Search",
+			"item": [
+				{
+					"name": "SearchIndex Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/search/en_search.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"search",
+								"en_search.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tafsirs",
+			"item": [
+				{
+					"name": "Tafsir",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/tafsirs/tafsir_1_14.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"tafsirs",
+								"tafsir_1_14.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Verses",
+			"item": [
+				{
+					"name": "Verses Arabic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/verses/verses.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"verses",
+								"verses.json"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Verses Locale",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BaseUrl}}/json/verses/en_verses.json",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"json",
+								"verses",
+								"en_verses.json"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WebUpdate",
+			"item": [
+				{
+					"name": "EvictCacheItem",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"CacheKey\": \"one\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/WebUpdate/EvictCacheItem",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"WebUpdate",
+								"EvictCacheItem"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check Endpoint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/api/health",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Ready Check Endpoint",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/api/health/ready",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"health",
+						"ready"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health Check UI API",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/healthapi",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"healthapi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Health Json",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/health.json",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"health.json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "OpenAPI",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/openapi/memquranapi.json",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"openapi",
+						"memquranapi.json"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

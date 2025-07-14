@@ -1,16 +1,13 @@
-﻿using MemQuran.Api.Configuration.ApiServices;
-using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi.Models;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
 
-public static class ApiOpenApiExtensions
+public static class OpenApiExtensions
 {
-    public static IServiceCollection AddOpenApiServices(this IServiceCollection services, Action<ApiConfiguration> configuration)
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public static IServiceCollection AddOpenApiServices(this IServiceCollection services)
     {
-        var config = new ApiConfiguration();
-        configuration(config);
-
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         services.AddOpenApi("memquranapi", options =>
         {

@@ -11,7 +11,7 @@ public class LocalFilesCachingWorker(ICachingProviderFactory cachingProviderFact
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        if (contentDeliverySettings.Type != ContentDeliveryType.Local)
+        if (contentDeliverySettings.ContentDeliveryType != ContentDeliveryType.Local)
         {
             logger.LogInformation("Caching is disabled for non local content");
             return;

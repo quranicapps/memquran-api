@@ -1,6 +1,5 @@
 ﻿using MemQuran.Core.Contracts;
 using MemQuran.Infrastructure.Factories;
-using MemQuran.Api.Configuration.ApiServices;
 using MemQuran.Core.Models;
 using MemQuran.Infrastructure.Caching;
 using Microsoft.Extensions.Caching.Hybrid;
@@ -9,11 +8,18 @@ using StackExchange.Redis;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
 
-public static class ApiCachingExtensions
+public static class CachingExtensions
 {
-    public static IServiceCollection AddCachingServices(this IServiceCollection services, Action<ApiConfiguration> configuration)
+    public class CachingConfiguration
     {
-        var config = new ApiConfiguration();
+        public CacheType CacheType { get; set; }
+        public string RedisConnectionString { get; set; } = null!;
+    }
+
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public static IServiceCollection AddCachingServices(this IServiceCollection services, Action<CachingConfiguration> configuration)
+    {
+        var config = new CachingConfiguration();
         configuration(config);
         
         services.AddSingleton<ICachingProviderFactory, CachingProviderFactory>();

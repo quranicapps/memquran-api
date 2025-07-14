@@ -6,6 +6,6 @@ public class ContentDeliverySettings
 {
     public static string SectionName => "ContentDeliverySettings";
     
-    public ContentDeliveryType Type { get; set; }
+    public ContentDeliveryType ContentDeliveryType { get; set; }
     public CachingSettings CachingSettings { get; set; }
 }

@@ -1,16 +1,21 @@
 ﻿using System.Diagnostics;
-using MemQuran.Api.Configuration.ApiServices;
 using MemQuran.Api.Middleware;
 using Microsoft.AspNetCore.Diagnostics;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
 
-public static class ApiExceptionExtensions
+public static class ExceptionExtensions
 {
-    public static IServiceCollection AddExceptionHandling(this IServiceCollection services, Action<ApiConfiguration> configuration)
+    public class ExceptionConfiguration
     {
-        var config = new ApiConfiguration();
+        public IWebHostEnvironment Environment { get; set; } = null!;
+    }
+
+    // ReSharper disable once UnusedMethodReturnValue.Global
+    public static IServiceCollection AddExceptionHandling(this IServiceCollection services, Action<ExceptionConfiguration> configuration)
+    {
+        var config = new ExceptionConfiguration();
         configuration(config);
 
         services.AddProblemDetails(opts => // built-in problem details support

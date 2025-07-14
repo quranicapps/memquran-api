@@ -11,7 +11,7 @@ public class StaticFileService(
     : IStaticFileService
 {
     private readonly ICachingProvider _cachingProvider = cachingProviderFactory.GetCachingProvider(contentDeliverySettings.CachingSettings.CacheType);
-    private readonly ICdnClient _cdnClient = cdnClientFactory.Create(contentDeliverySettings.Type);
+    private readonly ICdnClient _cdnClient = cdnClientFactory.Create(contentDeliverySettings.ContentDeliveryType);
 
     public async Task<string?> GetFileContentStringAsync(string filePath, CancellationToken cancellationToken = default)
     {
