@@ -1,0 +1,31 @@
+# To pull and run locally:
+# docker run -d -p 3123:3123 --env ASPNETCORE_ENVIRONMENT=Development -e ASPNETCORE_URLS=https://*:3123;http://*:3122 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:/https/ --name memquran.api rehmanab/memquran.api:latest
+# docker run -d -p 3123:3123 --env ASPNETCORE_ENVIRONMENT=Production -e ASPNETCORE_URLS=https://*:3123;http://*:3122 -e ASPNETCORE_Kestrel__Certificates__Default__Password="password" -e ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx -v %USERPROFILE%\.aspnet\https:/https/ --name memquran.api rehmanab/memquran.api:latest
+
+name: Docker Build & Push latest (Manual)
+
+on:
+  workflow_dispatch:
+
+env:
+  docker_repository_name: rehmanab
+
+jobs:
+  build-docker-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # all commits, so we can generate version off of tags/commit sha...
+      - uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker image
+        run: |
+          docker build -f ./src/MemQuran.Api/Dockerfile -t ${{ env.docker_repository_name }}/memquran.api:latest src/
+
+      - name: Push Docker image
+        run: |
+          docker push ${{ env.docker_repository_name }}/memquran.api:latest

@@ -34,6 +34,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman", "Postman", "{58CC
 		..\.postman\MemQuran-API.postman_collection.json = ..\.postman\MemQuran-API.postman_collection.json
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GitHub", "GitHub", "{E2C68F49-C938-4FB8-8779-3AD4D7683540}"
+	ProjectSection(SolutionItems) = preProject
+		..\.github\workflows\cd_aci_deploy.yml = ..\.github\workflows\cd_aci_deploy.yml
+		..\.github\workflows\cd_docker_build_push.yml = ..\.github\workflows\cd_docker_build_push.yml
+		..\.github\workflows\ci_main.yml = ..\.github\workflows\ci_main.yml
+		..\.github\workflows\ci_main_tag.yml = ..\.github\workflows\ci_main_tag.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,5 +78,6 @@ Global
 		{5816DE00-669F-4FCE-8849-F691D8FC794C} = {28C575A4-96DC-4374-94F6-6988E7261F7B}
 		{EF93C547-F64A-45CE-9DA3-FBCD4A2F3569} = {5816DE00-669F-4FCE-8849-F691D8FC794C}
 		{58CC1B37-6453-451F-9EF9-17892EA06813} = {28C575A4-96DC-4374-94F6-6988E7261F7B}
+		{E2C68F49-C938-4FB8-8779-3AD4D7683540} = {28C575A4-96DC-4374-94F6-6988E7261F7B}
 	EndGlobalSection
 EndGlobal
