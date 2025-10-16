@@ -2,7 +2,7 @@
     <img alt="MemQuran Logo" src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,h=128,fit=crop/AzG7nVE3kWTvz3Wn/mq1-Ylevj927ykS7xa11.png">
 </div>
 
-# MemQuran API
+# MemQuran API [![Build & Test](https://github.com/quranicapps/memquran-api/actions/workflows/ci_main.yml/badge.svg)](https://github.com/quranicapps/memquran-api/actions/workflows/ci_main.yml)
 
 MemQuran API is a robust service for accessing Quranic resources such as Surahs, Juzs, Audio, Duas, Reciters etc. It is designed to be for local testing that easily integrates into web, mobile, and desktop applications.
 
