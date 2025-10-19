@@ -112,11 +112,13 @@ Please find a Postman collection in the root directory: `.postman/MemQuran-API.p
 1. `https://localhost:3123` Localhost
 2. `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63` jsDelivr CDN (Use this for public access without hosting the API yourself)
 
+> Remember all the json files are in the [QuranStatic JSON source files Repository on GitHub](https://github.com/quranstatic/static), so you can construct the CDN url easily by using `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63` plus the file path you need constructed from the root of the repository, please see examples below.
+
 ### Audio
 
+> Get Surah audio timings for a reciter.
 - **GET `/json/audio/{reciter}/timings/surah/{timings_file}`**
-  Get Surah audio timings for a reciter.
-  Example:
+
 
   - `https://localhost:3123/json/audio/abderahmane-eloosi-1/timings/surah/abderahmane-eloosi-1_timings_surah_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/audio/abderahmane-eloosi-1/timings/surah/abderahmane-eloosi-1_timings_surah_1.json`
@@ -140,9 +142,9 @@ Please find a Postman collection in the root directory: `.postman/MemQuran-API.p
         ...
   ```
 
+  > Get Juz audio timings for a reciter.
 - **GET `/json/audio/{reciter}/timings/juz/{timings_file}`**
-  Get Juz audio timings for a reciter.
-  Example:
+
 
   - `https://localhost:3123/json/audio/abdulbaset-mujawwad-2/timings/juz/abdulbaset-mujawwad-2_timings_juz_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/audio/abdulbaset-mujawwad-2/timings/juz/abdulbaset-mujawwad-2_timings_juz_1.json`
@@ -166,9 +168,10 @@ Please find a Postman collection in the root directory: `.postman/MemQuran-API.p
         ...
   ```
 
+  > Get Page audio timings for a reciter.
 - **GET `/json/audio/{reciter}/timings/page/{timings_file}`**
-  Get Page audio timings for a reciter.
-  Example:
+
+
   - `https://localhost:3123/json/audio/abdulbaset-mujawwad-2/timings/page/abdulbaset-mujawwad-2_timings_page_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/audio/abdulbaset-mujawwad-2/timings/page/abdulbaset-mujawwad-2_timings_page_1.json`
 
@@ -191,9 +194,10 @@ Please find a Postman collection in the root directory: `.postman/MemQuran-API.p
         ...
 ```
 
+> Get Ruku audio timings for a reciter.
 - **GET `/json/audio/{reciter}/timings/ruku/{timings_file}`**
-  Get Ruku audio timings for a reciter.
-  Example:
+
+
   - `https://localhost:3123/json/audio/abdulbaset-mujawwad-2/timings/ruku/abdulbaset-mujawwad-2_timings_ruku_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/audio/abdulbaset-mujawwad-2/timings/ruku/abdulbaset-mujawwad-2_timings_ruku_1.json`
 
@@ -216,9 +220,10 @@ Please find a Postman collection in the root directory: `.postman/MemQuran-API.p
         ...
 ```
 
+> Get Maqra audio timings for a reciter.
 - **GET `/json/audio/{reciter}/timings/maqra/{timings_file}`**
-  Get Maqra audio timings for a reciter.
-  Example:
+
+
   - `https://localhost:3123/json/audio/abdulbaset-mujawwad-2/timings/maqra/abdulbaset-mujawwad-2_timings_maqra_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/audio/abdulbaset-mujawwad-2/timings/maqra/abdulbaset-mujawwad-2_timings_maqra_1.json`
 
@@ -241,9 +246,10 @@ Please find a Postman collection in the root directory: `.postman/MemQuran-API.p
         ...
 ```
 
+> Get Dua audio file.
 - **GET `/audio/duas/{dua_file}`**
-  Get Dua audio file.
-  Example:
+
+
   - `https://localhost:3123/audio/duas/1_1.mp3`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/audio/duas/1_1.mp3`
 
@@ -251,9 +257,10 @@ Please find a Postman collection in the root directory: `.postman/MemQuran-API.p
 Audio File
 ```
 
+> Get Tajweed audio file.
 - **GET `/audio/tajweed/{tajweed_file}`**
-  Get Tajweed audio file.
-  Example:
+
+
   - `https://localhost:3123/audio/tajweed/ikhfa.mp3`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/audio/tajweed/ikhfa.mp3`
 
@@ -261,9 +268,10 @@ Audio File
 Audio File
 ```
 
+> Get Word-by-Word audio file.
 - **GET `/audio/wbw/{wbw_file}`**
-  Get Word-by-Word audio file.
-  Example:
+
+
   - `https://localhost:3123/audio/wbw/001_001_001.mp3`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/audio/wbw/001_001_001.mp3`
 
@@ -271,9 +279,10 @@ Audio File
 Audio File
 ```
 
+> Get Memorise audio file.
 - **GET `/audio/memorise/{memorise_file}`**
-  Get Memorise audio file.
-  Example:
+
+
   - `https://localhost:3123/audio/memorise/0A5639E55EA4CF708D349C6FC8D95BE7CED289AFC0875F5F306CA3D3ECDA3CE9.mp3`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/audio/memorise/0A5639E55EA4CF708D349C6FC8D95BE7CED289AFC0875F5F306CA3D3ECDA3CE9.mp3`
 
@@ -281,9 +290,10 @@ Audio File
 Audio File
 ```
 
+> Get Correct answer sound.
 - **GET `/audio/common/correct.mp3`**
-  Get Correct answer sound.
-  Example:
+
+
   - `https://localhost:3123/audio/common/correct.mp3`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/audio/common/correct.mp3`
 
@@ -291,9 +301,10 @@ Audio File
 Audio File
 ```
 
+> Get Incorrect answer sound.
 - **GET `/audio/common/incorrect.mp3`**
-  Get Incorrect answer sound.
-  Example:
+
+
   - `https://localhost:3123/audio/common/incorrect.mp3`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/audio/common/incorrect.mp3`
 
@@ -301,9 +312,10 @@ Audio File
 Audio File
 ```
 
+> Get Names of Allah audio file.
 - **GET `/audio/namesOfAllah/{number}.mp3`**
-  Get Names of Allah audio file.
-  Example:
+
+
   - `https://localhost:3123/audio/namesOfAllah/1.mp3`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/audio/namesOfAllah/1.mp3`
 
@@ -313,9 +325,10 @@ Audio File
 
 ### Duas
 
+> Get Duas in English locale.
 - **GET `/json/duas/en_duas.json`**
-  Get Duas in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/duas/en_duas.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/duas/en_duas.json`
 
@@ -338,9 +351,10 @@ Audio File
 
 ### Editions
 
+> Get list of Tafsir editions.
 - **GET `/json/editions/tafsirEditions.json`**
-  Get list of Tafsir editions.
-  Example:
+
+
   - `https://localhost:3123/json/editions/tafsirEditions.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/editions/tafsirEditions.json`
 
@@ -361,9 +375,10 @@ Audio File
     ...
 ```
 
+> Get list of Translation editions. 132 is English (Mustafa Khattab Allah Edition).
 - **GET `/json/editions/translationEditions.json`**
-  Get list of Translation editions. 132 is English (Mustafa Khattab Allah Edition)
-  Example:
+
+
   - `https://localhost:3123/json/editions/translationEditions.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/editions/translationEditions.json`
 
@@ -390,9 +405,10 @@ Audio File
 
 ### Images
 
+> Get Tajweed word image.
 - **GET `/images/tajweed/{surah}/{verse}/{word}.png`**
-  Get Tajweed word image.
-  Example:
+
+
   - `https://localhost:3123/images/tajweed/1/1/1.png`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/images/tajweed/1/1/1.png`
 
@@ -400,9 +416,10 @@ Audio File
 Image File
 ```
 
+> Get Tajweed number image.
 - **GET `/images/tajweed/{number}.png`**
-  Get Tajweed number image.
-  Example:
+
+
   - `https://localhost:3123/images/tajweed/1.png`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/images/tajweed/1.png`
 
@@ -410,9 +427,10 @@ Image File
 Image File
 ```
 
+> Get Reciter image.
 - **GET `/images/reciters/{reciter}.png`**
-  Get Reciter image.
-  Example:
+
+
   - `https://localhost:3123/images/reciters/abdallah-al-matroud-1.png`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/images/reciters/abdallah-al-matroud-1.png`
 
@@ -422,9 +440,10 @@ Image File
 
 ### Surahs
 
+> Get Surah info in English locale.
 - **GET `/json/surahs/en_surahInfo.json`**
-  Get Surah info in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/surahs/en_surahInfo.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/surahs/en_surahInfo.json`
 
@@ -472,9 +491,10 @@ Image File
         ...
 ```
 
+> Get Surah info with summary in English locale.
 - **GET `/json/surahs/en_surahInfoWithSummary.json`**
-  Get Surah info with summary in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/surahs/en_surahInfoWithSummary.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/surahs/en_surahInfoWithSummary.json`
 
@@ -506,9 +526,9 @@ Image File
             ...
 ```
 
+> Get the Surah with its data, text and tajweed text.
 - **GET `/json/surahs/surah_{number}.json`**
-  Get the Surah with its data, text and tajweed text.  
-  Example:
+
 
   - `https://localhost:3123/json/surahs/surah_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/surahs/surah_1.json`
@@ -529,9 +549,10 @@ Image File
     ]
   ```
 
+  > Get Surah word-by-word translation in English.
 - **GET `/json/surahs/surah_wbw_en_{number}.json`**
-  Get Surah word-by-word translation in English.
-  Example:
+
+
   - `https://localhost:3123/json/surahs/surah_wbw_en_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/surahs/surah_wbw_en_1.json`
 
@@ -558,9 +579,10 @@ Image File
                     ...
 ```
 
+> Get Surah translation for a specific edition.
 - **GET `/json/surahTranslations/surah_translation_{number}_{edition}.json`**
-  Get Surah translation for a specific edition.
-  Example:
+
+
   - `https://localhost:3123/json/surahTranslations/surah_translation_1_132.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/surahTranslations/surah_translation_1_132.json`
 
@@ -588,9 +610,10 @@ Image File
 
 ### Juzs
 
+> Get Juz info in English locale.
 - **GET `/json/juzs/en_juzInfo.json`**
-  Get Juz info in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/juzs/en_juzInfo.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/juzs/en_juzInfo.json`
 
@@ -618,9 +641,10 @@ Image File
                 ...
 ```
 
+> Get Juz info with summary in English locale.
 - **GET `/json/juzs/en_juzInfoWithSummary.json`**
-  Get Juz info with summary in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/juzs/en_juzInfoWithSummary.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/juzs/en_juzInfoWithSummary.json`
 
@@ -639,9 +663,10 @@ Image File
                 ...
 ```
 
+> Get Juz data.
 - **GET `/json/juzs/juz_{number}.json`**
-  Get Juz data.
-  Example:
+
+
   - `https://localhost:3123/json/juzs/juz_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/juzs/juz_1.json`
 
@@ -660,9 +685,10 @@ Image File
             ...
 ```
 
+> Get Juz word-by-word translation in English.
 - **GET `/json/juzs/juz_wbw_en_{number}.json`**
-  Get Juz word-by-word translation in English.
-  Example:
+
+
   - `https://localhost:3123/json/juzs/juz_wbw_en_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/juzs/juz_wbw_en_1.json`
 
@@ -688,9 +714,10 @@ Image File
                     ...
 ```
 
+> Get Juz translation for a specific edition.
 - **GET `/json/juzTranslations/juz_translation_{number}_{edition}.json`**
-  Get Juz translation for a specific edition.
-  Example:
+
+
   - `https://localhost:3123/json/juzTranslations/juz_translation_1_132.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/juzTranslations/juz_translation_1_132.json`
 
@@ -718,9 +745,10 @@ Image File
 
 ### Pages
 
+> Get Page info in English locale.
 - **GET `/json/pages/en_pageInfo.json`**
-  Get Page info in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/pages/en_pageInfo.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/pages/en_pageInfo.json`
 
@@ -746,9 +774,10 @@ Image File
         ...
 ```
 
+> Get Page data.
 - **GET `/json/pages/page_{number}.json`**
-  Get Page data.
-  Example:
+
+
   - `https://localhost:3123/json/pages/page_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/pages/page_1.json`
 
@@ -769,9 +798,10 @@ Image File
             ...
 ```
 
+> Get Page word-by-word translation in English.
 - **GET `/json/pages/page_wbw_en_{number}.json`**
-  Get Page word-by-word translation in English.
-  Example:
+
+
   - `https://localhost:3123/json/pages/page_wbw_en_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/pages/page_wbw_en_1.json`
 
@@ -798,9 +828,10 @@ Image File
                 ...
 ```
 
+> Get Page translation for a specific edition.
 - **GET `/json/pageTranslations/page_translation_{number}_{edition}.json`**
-  Get Page translation for a specific edition.
-  Example:
+
+
   - `https://localhost:3123/json/pageTranslations/page_translation_1_132.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/pageTranslations/page_translation_1_132.json`
 
@@ -828,9 +859,10 @@ Image File
 
 ### Rukus
 
+> Get Ruku info in English locale.
 - **GET `/json/rukus/en_rukuInfo.json`**
-  Get Ruku info in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/rukus/en_rukuInfo.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/rukus/en_rukuInfo.json`
 
@@ -856,9 +888,10 @@ Image File
         ...
 ```
 
+> Get Ruku data.
 - **GET `/json/rukus/ruku_{number}.json`**
-  Get Ruku data.
-  Example:
+
+
   - `https://localhost:3123/json/rukus/ruku_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/rukus/ruku_1.json`
 
@@ -882,9 +915,10 @@ Image File
             ...
 ```
 
+> Get Ruku word-by-word translation in English.
 - **GET `/json/rukus/ruku_wbw_en_{number}.json`**
-  Get Ruku word-by-word translation in English.
-  Example:
+
+
   - `https://localhost:3123/json/rukus/ruku_wbw_en_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/rukus/ruku_wbw_en_1.json`
 
@@ -911,9 +945,10 @@ Image File
                 ...
 ```
 
+> Get Ruku translation for a specific edition.
 - **GET `/json/rukuTranslations/ruku_translation_{number}_{edition}.json`**
-  Get Ruku translation for a specific edition.
-  Example:
+
+
   - `https://localhost:3123/json/rukuTranslations/ruku_translation_1_132.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/rukuTranslations/ruku_translation_1_132.json`
 
@@ -941,9 +976,10 @@ Image File
 
 ### Maqra
 
+> Get Maqra info in English locale.
 - **GET `/json/maqras/en_maqraInfo.json`**
-  Get Maqra info in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/maqras/en_maqraInfo.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/maqras/en_maqraInfo.json`
 
@@ -970,9 +1006,10 @@ Image File
                 ...
 ```
 
+> Get Maqra data.
 - **GET `/json/maqras/maqra_{number}.json`**
-  Get Maqra data.
-  Example:
+
+
   - `https://localhost:3123/json/maqras/maqra_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/maqras/maqra_1.json`
 
@@ -996,9 +1033,10 @@ Image File
             ...
 ```
 
+> Get Maqra word-by-word translation in English.
 - **GET `/json/maqras/maqra_wbw_en_{number}.json`**
-  Get Maqra word-by-word translation in English.
-  Example:
+
+
   - `https://localhost:3123/json/maqras/maqra_wbw_en_1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/maqras/maqra_wbw_en_1.json`
 
@@ -1025,9 +1063,10 @@ Image File
                 ...
 ```
 
+> Get Maqra translation for a specific edition.
 - **GET `/json/maqraTranslations/maqra_translation_{number}_{edition}.json`**
-  Get Maqra translation for a specific edition.
-  Example:
+
+
   - `https://localhost:3123/json/maqraTranslations/maqra_translation_1_132.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/maqraTranslations/maqra_translation_1_132.json`
 
@@ -1055,9 +1094,10 @@ Image File
 
 ### Memorise
 
+> Get Memorise courses in English locale.
 - **GET `/json/memorise/en_courses.json`**
-  Get Memorise courses in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/memorise/en_courses.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/memorise/en_courses.json`
 
@@ -1083,9 +1123,10 @@ Image File
             ...
 ```
 
+> Get Memorise questions for course 2, lesson 3.
 - **GET `/json/memorise/en_questions_2_3.json`**
-  Get Memorise questions for course 2, lesson 3.
-  Example:
+
+
   - `https://localhost:3123/json/memorise/en_questions_2_3.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/memorise/en_questions_2_3.json`
 
@@ -1112,9 +1153,10 @@ Image File
                 ...
 ```
 
+> Get Memorise reviews for course 2, lesson 3.
 - **GET `/json/memorise/en_reviews_2_3.json`**
-  Get Memorise reviews for course 2, lesson 3.
-  Example:
+
+
   - `https://localhost:3123/json/memorise/en_reviews_2_3.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/memorise/en_reviews_2_3.json`
 
@@ -1143,9 +1185,10 @@ Image File
 
 ### NamesOfAllah
 
+> Get Names of Allah in English locale.
 - **GET `/json/namesOfAllah/en_names.json`**
-  Get Names of Allah in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/namesOfAllah/en_names.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/namesOfAllah/en_names.json`
 
@@ -1174,9 +1217,10 @@ Image File
 
 ### Prophets
 
+> Get Prophets in English locale.
 - **GET `/json/prophets/en_prophets.json`**
-  Get Prophets in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/prophets/en_prophets.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/prophets/en_prophets.json`
 
@@ -1195,9 +1239,10 @@ Image File
 
 ### Reciters
 
+> Get Reciter info in English locale.
 - **GET `/json/reciterInfos/en_{reciter}.json`**
-  Get Reciter info in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/reciterInfos/en_abderahmane-eloosi-1.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/reciterInfos/en_abderahmane-eloosi-1.json`
 
@@ -1211,9 +1256,10 @@ Image File
     ...
 ```
 
+> Get Reciters list in English locale.
 - **GET `/json/reciters/en_reciters.json`**
-  Get Reciters list in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/reciters/en_reciters.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/reciters/en_reciters.json`
 
@@ -1230,9 +1276,10 @@ Image File
 
 ### Root Words
 
+> Get Root Words in English locale.
 - **GET `/json/rootWords/en_rootWords.json`**
-  Get Root Words in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/rootWords/en_rootWords.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/rootWords/en_rootWords.json`
 
@@ -1259,9 +1306,10 @@ Image File
 
 ### Search
 
+> Get Search index in English locale.
 - **GET `/json/search/en_search.json`**
-  Get Search index in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/search/en_search.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/search/en_search.json`
 
@@ -1293,9 +1341,10 @@ Image File
 
 ### Tafsirs
 
+> Get Tafsir for a Surah and edition.
 - **GET `/json/tafsirs/tafsir_{surah}_{edition}.json`**
-  Get Tafsir for a Surah and edition.
-  Example:
+
+
   - `https://localhost:3123/json/tafsirs/tafsir_1_14.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/tafsirs/tafsir_1_14.json`
 
@@ -1321,9 +1370,10 @@ Image File
 
 ### Verses
 
+> Get all verses in Arabic.
 - **GET `/json/verses/verses.json`**
-  Get all verses in Arabic.
-  Example:
+
+
   - `https://localhost:3123/json/verses/verses.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/verses/verses.json`
 
@@ -1336,9 +1386,10 @@ Image File
     ...
 ```
 
+> Get all verses in English locale.
 - **GET `/json/verses/en_verses.json`**
-  Get all verses in English locale.
-  Example:
+
+
   - `https://localhost:3123/json/verses/en_verses.json`
   - `https://cdn.jsdelivr.net/gh/quranstatic/static@v0.0.63/json/verses/en_verses.json`
 
@@ -1355,23 +1406,25 @@ Image File
 
 ### Health & Diagnostics
 
+> Get health status.
 - **GET `/health`**
-  Get health status.
-  Example:
+
+
   - `https://localhost:3123/health`
 
 ### OpenAPI / Swagger
 
+> Get the Swagger UI
 - **GET `/swagger`**
-  Get the Swagger UI
-  Example:
+
 
   - `https://localhost:3123/swagger/index.html`
 
-- **GET `/OpenApi`**
-- `/openapi/memquranapi.json` (spec)
-  Get OpenAPI specification for MemQuran API.
-  Example:
+
+> Get OpenAPI specification for MemQuran API.
+- **GET `/openapi/memquranapi.json`**
+
+
   - `https://localhost:3123/openapi/memquranapi.json`
 
 ---
