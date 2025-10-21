@@ -20,7 +20,7 @@ public class WebUpdateProducerWorker(
             var message = new EvictCacheItemMessageV1
             {
                 Id = Guid.NewGuid(),
-                CacheKey = Guid.NewGuid().ToString(),
+                CacheKey = request.CacheKey,
                 ConversationId = Guid.NewGuid(),
                 EventId = 1,
                 EventName = "evict.cache.item.v1",
@@ -33,7 +33,7 @@ public class WebUpdateProducerWorker(
             };
 
             var traceId = request.TraceId;
-            var traceState = Activity.Current?.TraceStateString;
+            var traceState = request.TraceState ?? Activity.Current?.TraceStateString;
 
             var attributes = new Dictionary<string, string>
             {

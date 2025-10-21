@@ -5,6 +5,7 @@ using MemQuran.Api.Settings;
 using MemQuran.Api.Settings.Messaging;
 using MemQuran.Api.Validators;
 using MemQuran.Api.Workers;
+using OpenTelemetry.Exporter;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -61,12 +62,12 @@ builder.Services.AddOpenTelemetry()
             .AddOtlpExporter(opt =>
             {
                 // Jaeger
-                opt.Endpoint = new Uri(jaegerSettings.Endpoint);
+                // opt.Endpoint = new Uri(jaegerSettings.Endpoint);
 
                 // Seq
-                // opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
-                // opt.Protocol = OtlpExportProtocol.HttpProtobuf;
-                // if(!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
+                opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
+                opt.Protocol = OtlpExportProtocol.HttpProtobuf;
+                if(!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
             })
             .AddSource(nameof(EvictCacheItemMessageV1))
         // .AddConsoleExporter()
