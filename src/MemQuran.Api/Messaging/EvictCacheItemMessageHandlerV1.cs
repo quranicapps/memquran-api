@@ -8,7 +8,7 @@ public class EvictCacheItemMessageHandlerV1(ILogger<EvictCacheItemMessageHandler
 {
     public async Task<bool> HandleAsync(EvictCacheItemMessageV1 source, Dictionary<string, string>? properties)
     {
-        using var activity = ActivityExtensions.GetActivityByTraceId(nameof(EvictCacheItemMessageV1), "ProcessMessageStart", properties, source, new Dictionary<string, string>
+        using var activity = ActivityExtensions.GetActivityFromMessageProperties(nameof(EvictCacheItemMessageV1), $"OT:Process-{nameof(EvictCacheItemMessageV1)}-Start", properties, source, new Dictionary<string, string>
         {
             { "CacheKey", source.CacheKey },
             { "MessageType", nameof(EvictCacheItemMessageV1) },

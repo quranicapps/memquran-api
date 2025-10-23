@@ -13,8 +13,9 @@ public class WebUpdateController(Channel<EvictCacheItemRequest> evictCacheItemCh
     public async Task<IActionResult> EvictCacheItem(EvictCacheItemRequest request, CancellationToken cancellationToken)
     {
         request.SourceIpAddress = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
-        request.TraceId = Activity.Current?.Id ?? HttpContext.TraceIdentifier;
+        request.TraceId = Activity.Current?.Id;
         request.TraceState = Activity.Current?.TraceStateString;
+        request.Baggage = Activity.Current?.Baggage;
         
         await evictCacheItemChannel.Writer.WaitToWriteAsync(cancellationToken);
         evictCacheItemChannel.Writer.TryWrite(request);

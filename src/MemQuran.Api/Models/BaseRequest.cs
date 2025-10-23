@@ -5,4 +5,5 @@ public class BaseRequest
     public string? SourceIpAddress { get; set; }
     public string? TraceId { get; set; }
     public string? TraceState { get; set; }
+    public IEnumerable<KeyValuePair<string, string?>>? Baggage { get; set; }
 }

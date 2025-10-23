@@ -67,9 +67,9 @@ builder.Services.AddOpenTelemetry()
                 // Seq
                 opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
                 opt.Protocol = OtlpExportProtocol.HttpProtobuf;
-                if(!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
+                if (!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
             })
-            .AddSource(nameof(EvictCacheItemMessageV1))
+            .AddSource(nameof(EvictCacheItemMessageV1)) // Should be the name of any activities used in code
         // .AddConsoleExporter()
     )
     .WithMetrics(metrics => metrics
@@ -78,12 +78,12 @@ builder.Services.AddOpenTelemetry()
             .AddOtlpExporter(opt =>
             {
                 // Jaeger
-                opt.Endpoint = new Uri(jaegerSettings.Endpoint);
+                // opt.Endpoint = new Uri(jaegerSettings.Endpoint);
 
                 // Seq
-                // opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
-                // opt.Protocol = OtlpExportProtocol.HttpProtobuf;
-                // if(!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
+                opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
+                opt.Protocol = OtlpExportProtocol.HttpProtobuf;
+                if(!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
             })
         // .AddConsoleExporter()
     );
@@ -130,7 +130,7 @@ if (messagingSettings.AwsEnabled)
         options.AwsHostSettings = awsHostSettings;
         options.AwsTopicSettings = awsTopicSettings;
     }, cancellationToken);
-    
+
     builder.Services.AddHostedService<WebUpdateConsumerWorker>();
     builder.Services.AddHostedService<WebUpdateProducerWorker>();
 }
