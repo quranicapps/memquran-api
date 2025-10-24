@@ -15,6 +15,14 @@
               <option name="name" value="ASPNETCORE_URLS" />
               <option name="value" value="https://*:3123;http://*:3122" />
             </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="ASPNETCORE_Kestrel__Certificates__Default__Path" />
+              <option name="value" value="/https/aspnetapp.pfx" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="ASPNETCORE_Kestrel__Certificates__Default__Password" />
+              <option name="value" value="password" />
+            </DockerEnvVarImpl>
           </list>
         </option>
         <option name="portBindings">
@@ -27,9 +35,17 @@
         </option>
         <option name="showCommandPreview" value="true" />
         <option name="sourceFilePath" value="MemQuran.Api/Dockerfile" />
+        <option name="volumeBindings">
+          <list>
+            <DockerVolumeBindingImpl>
+              <option name="containerPath" value="/https/" />
+              <option name="hostPath" value="C:\Users\atifr\.aspnet\https" />
+            </DockerVolumeBindingImpl>
+          </list>
+        </option>
       </settings>
     </deployment>
-    <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="false" isSslEnabled="false" />
+    <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
     <method v="2" />
   </configuration>
 </component>

@@ -41,7 +41,11 @@ public static class HealthCheckExtensions
 
         if (config.ContentDeliverySettings.CachingSettings.CacheType == CacheType.Hybrid)
         {
-            healthChecksBuilder.AddRedis(config.RedisConnectionString, "Call Redis", timeout: TimeSpan.FromSeconds(config.HealthCheckTimeoutSeconds), tags: [nameof(HealthCheckTags.Redis)]);
+            healthChecksBuilder.AddRedis(config.RedisConnectionString, "Call Redis", timeout: TimeSpan.FromSeconds(config.HealthCheckTimeoutSeconds), tags: [nameof(HealthCheckTags.Cache)]);
+        }
+        else
+        {
+            healthChecksBuilder.AddCheck("Call Redis", () => Degraded("Not enabled"), tags: [nameof(HealthCheckTags.Cache)]);
         }
 
         services.AddHealthChecksUI(setup =>

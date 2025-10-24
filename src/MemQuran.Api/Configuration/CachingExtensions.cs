@@ -21,11 +21,11 @@ public static class CachingExtensions
     {
         var config = new CachingConfiguration();
         configuration(config);
-        
+
         services.AddSingleton<ICachingProviderFactory, CachingProviderFactory>();
         services.AddSingleton<ICachingProvider, NullCachingProvider>();
         services.AddSingleton<ICachingProvider, MemoryCachingProvider>();
-        
+
         if (config.CacheType == CacheType.Hybrid)
         {
             // Caching - Hybrid Cache will use both local in-memory cache and distributed cache (any IDistributedCache implementation, i.e. AddStackExchangeRedisCache)
@@ -57,7 +57,7 @@ public static class CachingExtensions
         else
         {
             // Caching - Memory Cache will use in-memory cache only
-            services.AddDistributedMemoryCache(options => { options.SizeLimit = long.MaxValue; }); 
+            services.AddDistributedMemoryCache(options => { options.SizeLimit = long.MaxValue; });
         }
 
         return services;
