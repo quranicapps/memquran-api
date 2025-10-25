@@ -1,3 +1,4 @@
+using Azure.Identity;
 using FluentValidation;
 using MemQuran.Api.Messaging;
 using MemQuran.Api.Models;
@@ -53,6 +54,17 @@ builder.Logging
     .AddOpenTelemetry(options => options.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(builder.Environment.ApplicationName)))
     .AddSimpleConsole()
     .AddSeq(seqConfigurationSection);
+
+if (builder.Environment.IsStaging() || builder.Environment.IsProduction())
+{
+    builder.Configuration.AddAzureKeyVault(
+        new Uri($"https://{builder.Configuration["AzureKeyVaultName"]}.vault.azure.net/"),
+        new DefaultAzureCredential(new DefaultAzureCredentialOptions
+        {
+            ManagedIdentityClientId = builder.Configuration["AzureUserManagedIdentityClientId"]
+        })
+    );
+}
 
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName))
@@ -149,12 +161,9 @@ app.UseCors(x => x
     .AllowAnyMethod()
     .AllowAnyHeader());
 
-if (app.Environment.IsDevelopment())
-{
-    app.MapOpenApi();
-    app.UseSwagger();
-    app.UseSwaggerUI(c => { c.SwaggerEndpoint("/openapi/memquranapi.json", "memquranapi"); });
-}
+app.MapOpenApi();
+app.UseSwagger();
+app.UseSwaggerUI(c => { c.SwaggerEndpoint("/openapi/memquranapi.json", "memquranapi"); });
 
 // app.UseMiddleware<ExceptionMiddleware>(); // Old way: Custom middleware for handling exceptions
 app.UseExceptionHandler(); // New Way: Use built-in exception handler middleware
