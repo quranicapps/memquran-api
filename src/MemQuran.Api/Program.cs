@@ -13,7 +13,6 @@ using OpenTelemetry.Trace;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 ////////////////////////////
 // Configure Services
 
@@ -22,6 +21,18 @@ var cts = new CancellationTokenSource();
 var cancellationToken = cts.Token;
 
 // Configuration
+
+if (builder.Environment.IsStaging() || builder.Environment.IsProduction())
+{
+    builder.Configuration.AddAzureKeyVault(
+        new Uri($"https://{builder.Configuration["AzureKeyVaultName"]}.vault.azure.net/"),
+        new DefaultAzureCredential(new DefaultAzureCredentialOptions
+        {
+            ManagedIdentityClientId = builder.Configuration["AzureUserManagedIdentityClientId"]
+        })
+    );
+}
+
 var contentDeliverySettings = builder.Configuration.GetSection(ContentDeliverySettings.SectionName).Get<ContentDeliverySettings>();
 if (contentDeliverySettings == null) throw new Exception("Could not bind the Content Delivery Settings, please check configuration");
 builder.Services.AddSingleton(contentDeliverySettings);
@@ -54,17 +65,6 @@ builder.Logging
     .AddOpenTelemetry(options => options.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(builder.Environment.ApplicationName)))
     .AddSimpleConsole()
     .AddSeq(seqConfigurationSection);
-
-if (builder.Environment.IsStaging() || builder.Environment.IsProduction())
-{
-    builder.Configuration.AddAzureKeyVault(
-        new Uri($"https://{builder.Configuration["AzureKeyVaultName"]}.vault.azure.net/"),
-        new DefaultAzureCredential(new DefaultAzureCredentialOptions
-        {
-            ManagedIdentityClientId = builder.Configuration["AzureUserManagedIdentityClientId"]
-        })
-    );
-}
 
 builder.Services.AddOpenTelemetry()
     .ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName))
