@@ -1,8 +1,10 @@
-﻿#  docker-compose -f .docker/docker-compose-memquran-api.yaml -p memquran up -d
+﻿#  docker-compose -f .docker/docker-compose-memquran-api.yaml -p memquran up -d --build --force-recreate
 #  docker-compose -f .docker/docker-compose-memquran-api.yaml -p memquran down
 
 services:
   memquran.api:
+    image: rehmanab/memquran.api:latest
+    pull_policy: never
     build:
       context: ../src
       dockerfile: MemQuran.Api/Dockerfile
