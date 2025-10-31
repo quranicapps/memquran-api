@@ -1,8 +1,14 @@
 ﻿using MemQuran.Api.Settings;
+using MemQuran.Core.Contracts;
+using MemQuran.Core.Models;
+using MemQuran.Infrastructure.Caching;
+using MemQuran.Infrastructure.Factories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using NSubstitute;
 
 namespace MemQuran.Api.Integration.Tests.Shared;
 
@@ -43,10 +49,12 @@ public class CustomApiFactory : WebApplicationFactory<Program>
         builder
             .UseConfiguration(configuration)
             .ConfigureAppConfiguration(configurationBuilder => configurationBuilder.AddJsonFile(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json")));
-
+        
         builder.ConfigureTestServices(services =>
         {
-            // Add services to override the ones in the API 
+            var cachingProviderFactory = Substitute.For<ICachingProviderFactory>();
+            cachingProviderFactory.GetCachingProvider(Arg.Any<CacheType>()).Returns(new NullCachingProvider());
+            services.AddSingleton(cachingProviderFactory);
         });
     }
 }

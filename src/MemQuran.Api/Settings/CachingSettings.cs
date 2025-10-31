@@ -8,4 +8,5 @@ public class CachingSettings
     public bool InitialCachingEnabled { get; set; }
     public bool SlidingExpiration { get; set; }
     public TimeSpan CacheDurationTimeSpan { get; set; }
+    public bool EvictCachingEnabled { get; set; }
 }

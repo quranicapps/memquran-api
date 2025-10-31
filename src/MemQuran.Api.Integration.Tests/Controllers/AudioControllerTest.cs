@@ -10,8 +10,7 @@ using Xunit.Abstractions;
 namespace MemQuran.Api.Integration.Tests.Controllers;
 
 [Trait("Category", "Integration"), Collection(nameof(WireMockCollection))]
-public class AudioControllerTest(CustomApiFactory customApiFactory, ITestOutputHelper testOutputHelper)
-    : IClassFixture<CustomApiFactory>
+public class AudioControllerTest(CustomApiFactory customApiFactory, ITestOutputHelper testOutputHelper) : IClassFixture<CustomApiFactory>
 {
     [Theory]
     [InlineData("/json/audio/SomeReciter/timings/surah/SomeRecitersAudioFile.json")]
@@ -20,11 +19,11 @@ public class AudioControllerTest(CustomApiFactory customApiFactory, ITestOutputH
         var server = customApiFactory.SharedFixture.WireMockServer;
         var appSettingVersion = customApiFactory.ClientsSettings.JsDelivrService.Version;
         server.Given(Request
-            .Create()
-            .WithPath($"/gh/quranstatic/static@{appSettingVersion}/json/audio/*/timings/surah/*")
-            .UsingGet())
+                .Create()
+                .WithPath($"/gh/quranstatic/static@{appSettingVersion}/json/audio/*/timings/surah/*")
+                .UsingGet())
             .RespondWith(Response.Create().WithStatusCode(StatusCodes.Status200OK));
-        
+
         var response = await customApiFactory.Client.GetAsync(url);
 
         Assert.NotNull(response);
@@ -42,7 +41,7 @@ public class AudioControllerTest(CustomApiFactory customApiFactory, ITestOutputH
                 .WithPath($"/gh/quranstatic/static@{appSettingVersion}/json/audio/*/timings/surah/*")
                 .UsingGet())
             .RespondWith(Response.Create().WithStatusCode(StatusCodes.Status404NotFound));
-        
+
         var response = await customApiFactory.Client.GetAsync(url);
 
         Assert.NotNull(response);

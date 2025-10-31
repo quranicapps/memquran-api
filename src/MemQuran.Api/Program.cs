@@ -33,6 +33,10 @@ if (builder.Environment.IsStaging() || builder.Environment.IsProduction())
     );
 }
 
+var healthCheckSettings = builder.Configuration.GetSection(HealthCheckSettings.SectionName).Get<HealthCheckSettings>() ?? throw new Exception("Could not bind the HealthCheck Settings, please check configuration");
+if (healthCheckSettings == null) throw new InvalidOperationException($"{nameof(HealthCheckSettings)} is not configured. Please check your appsettings.json or environment variables.");
+builder.Services.AddSingleton(healthCheckSettings);
+
 var contentDeliverySettings = builder.Configuration.GetSection(ContentDeliverySettings.SectionName).Get<ContentDeliverySettings>();
 if (contentDeliverySettings == null) throw new Exception("Could not bind the Content Delivery Settings, please check configuration");
 builder.Services.AddSingleton(contentDeliverySettings);
@@ -40,10 +44,6 @@ builder.Services.AddSingleton(contentDeliverySettings);
 var clientsSettings = builder.Configuration.GetSection(ClientsSettings.SectionName).Get<ClientsSettings>();
 if (clientsSettings == null) throw new Exception("Could not bind the Clients Settings, please check configuration");
 builder.Services.AddSingleton(clientsSettings);
-
-var messagingSettings = builder.Configuration.GetSection(MessagingSettings.SectionName).Get<MessagingSettings>();
-if (messagingSettings == null) throw new Exception("Could not bind the Messaging Settings, please check configuration");
-builder.Services.AddSingleton(messagingSettings);
 
 var awsHostSettings = builder.Configuration.GetSection(AwsHostSettings.SectionName).Get<AwsHostSettings>();
 if (awsHostSettings == null) throw new InvalidOperationException($"{nameof(AwsHostSettings)} is not configured. Please check your appsettings.json or environment variables.");
@@ -107,11 +107,11 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin()); });
 
 // Health Checks
-builder.Services.AddHealthCheckServices(config =>
+// The tags correspond to the health check groups, which can be used to filter health checks in the UI or when querying the health status. (EndpointRouteBuilderExtensions.cs)
+builder.Services.AddHealthCheckServices(options => 
 {
-    config.ContentDeliverySettings = contentDeliverySettings;
-    config.HealthCheckTimeoutSeconds = 5;
-    config.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
+    options.HealthCheckSettings = healthCheckSettings;
+    options.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
 });
 
 // Open API / Swagger
@@ -128,13 +128,14 @@ builder.Services.AddServices(options =>
 builder.Services.AddCachingServices(options =>
 {
     options.CacheType = contentDeliverySettings.CachingSettings.CacheType;
+    options.CacheDurationTimeSpan = contentDeliverySettings.CachingSettings.CacheDurationTimeSpan;
     options.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
 });
 
 // Workers
 builder.Services.AddHostedService<LocalFilesCachingWorker>();
 
-if (messagingSettings.AwsEnabled)
+if (contentDeliverySettings.CachingSettings.EvictCachingEnabled)
 {
     // Add Topica MessagingPlatform Components
     await builder.Services.AddMessagingServices(options =>
@@ -173,7 +174,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Custom Middleware for Health Checks
-app.MapCustomHealthCheck(Enum.GetValues<HealthCheckTags>().Select(x => x.ToString()).ToArray());
+app.MapCustomHealthCheck(Enum.GetValues<HealthCheckTag>().Select(x => x.ToString()).ToArray());
 app.MapHealthChecksUI(options =>
 {
     options.UIPath = "/health";

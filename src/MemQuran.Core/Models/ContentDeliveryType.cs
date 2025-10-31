@@ -2,5 +2,5 @@
 
 public enum ContentDeliveryType
 {
-    Unknown = 0, Local, JsDelivr
+    Local, JsDelivr
 }

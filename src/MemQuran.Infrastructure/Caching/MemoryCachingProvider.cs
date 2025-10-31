@@ -1,33 +1,25 @@
 using MemQuran.Core.Contracts;
 using MemQuran.Core.Models;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Logging;
+using ZiggyCreatures.Caching.Fusion;
 
 namespace MemQuran.Infrastructure.Caching;
 
-public class MemoryCachingProvider(IDistributedCache distributedCache, ILogger<MemoryCachingProvider> logger) : ICachingProvider
+public class MemoryCachingProvider(IFusionCache cache, ILogger<MemoryCachingProvider> logger) : ICachingProvider
 {
     public CacheType Name => CacheType.Memory;
-    
+
     public async Task<string?> GetOrCreateStringAsync(string key, Func<CancellationToken, Task<string?>> func, CancellationToken cancellationToken = default)
     {
-        var text = await distributedCache.GetStringAsync(key, cancellationToken);
-
-        if (text is not null) return text;
-        
-        logger.LogInformation("***** ({Name}) Cache miss for {Key}", nameof(MemoryCachingProvider), key);
-
-        var item = await func(cancellationToken);
-        
-        if (item is null) return null;
-        
-        await distributedCache.SetStringAsync(key, item, cancellationToken);
-
-        return item;
+        return await cache.GetOrSetAsync<string?>(key, async ct =>
+        {
+            logger.LogInformation("***** ({Name}) Cache miss for {Key}", nameof(MemoryCachingProvider), key);
+            return await func(ct);
+        }, token: cancellationToken);
     }
 
     public async Task SetStringAsync(string key, string value, CancellationToken cancellationToken = default)
     {
-        await distributedCache.SetStringAsync(key, value, cancellationToken);
+        await cache.SetAsync(key, value, token: cancellationToken);
     }
 }
