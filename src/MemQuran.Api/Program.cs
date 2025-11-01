@@ -33,6 +33,10 @@ if (builder.Environment.IsStaging() || builder.Environment.IsProduction())
     );
 }
 
+var healthCheckSettings = builder.Configuration.GetSection(HealthCheckSettings.SectionName).Get<HealthCheckSettings>() ?? throw new Exception("Could not bind the HealthCheck Settings, please check configuration");
+if (healthCheckSettings == null) throw new InvalidOperationException($"{nameof(HealthCheckSettings)} is not configured. Please check your appsettings.json or environment variables.");
+builder.Services.AddSingleton(healthCheckSettings);
+
 var contentDeliverySettings = builder.Configuration.GetSection(ContentDeliverySettings.SectionName).Get<ContentDeliverySettings>();
 if (contentDeliverySettings == null) throw new Exception("Could not bind the Content Delivery Settings, please check configuration");
 builder.Services.AddSingleton(contentDeliverySettings);
@@ -107,11 +111,11 @@ builder.Services.AddControllers();
 builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin()); });
 
 // Health Checks
-builder.Services.AddHealthCheckServices(config =>
+// The tags correspond to the health check groups, which can be used to filter health checks in the UI or when querying the health status. (EndpointRouteBuilderExtensions.cs)
+builder.Services.AddHealthCheckServices(options => 
 {
-    config.ContentDeliverySettings = contentDeliverySettings;
-    config.HealthCheckTimeoutSeconds = 5;
-    config.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
+    options.HealthCheckSettings = healthCheckSettings;
+    options.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
 });
 
 // Open API / Swagger
@@ -173,7 +177,7 @@ app.UseAuthorization();
 app.MapControllers();
 
 // Custom Middleware for Health Checks
-app.MapCustomHealthCheck(Enum.GetValues<HealthCheckTags>().Select(x => x.ToString()).ToArray());
+app.MapCustomHealthCheck(Enum.GetValues<HealthCheckTag>().Select(x => x.ToString()).ToArray());
 app.MapHealthChecksUI(options =>
 {
     options.UIPath = "/health";
