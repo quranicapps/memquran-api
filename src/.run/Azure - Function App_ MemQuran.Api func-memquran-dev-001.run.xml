@@ -1,0 +1,18 @@
+﻿<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Azure - Function App: MemQuran.Api func-memquran-dev-001" type="AzureFunctionAppDeploy">
+    <option name="appServicePlanName" value="ASP-rgmemqurandev001-353a" />
+    <option name="appServicePlanResourceGroupName" value="rg-memquran-dev-001" />
+    <option name="functionAppName" value="func-memquran-dev-001" />
+    <option name="instanceSize" value="0" />
+    <option name="operatingSystem" value="Linux" />
+    <option name="pricingSize" value="FC1" />
+    <option name="pricingTier" value="FlexConsumption" />
+    <option name="projectConfiguration" value="Release" />
+    <option name="projectPlatform" value="Any CPU" />
+    <option name="publishableProjectPath" value="$PROJECT_DIR$/MemQuran.Core/MemQuran.Core.csproj" />
+    <option name="region" value="uksouth" />
+    <option name="resourceGroupName" value="rg-memquran-dev-001" />
+    <option name="subscriptionId" value="2d79f8c4-b688-4d60-9e90-f467727753ad" />
+    <method v="2" />
+  </configuration>
+</component>
