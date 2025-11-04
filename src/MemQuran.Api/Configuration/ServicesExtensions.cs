@@ -40,6 +40,7 @@ public static class ServicesExtensions
         // Add .NET Channels
         var messagingChannel = new MessagingChannel();
         services.AddSingleton<Channel<EvictCacheItemRequest>>(_ => messagingChannel.CreateBounded<EvictCacheItemRequest>());
+        services.AddSingleton<Channel<EvictCacheAllRequest>>(_ => messagingChannel.CreateBounded<EvictCacheAllRequest>());
 
         return services;
     }

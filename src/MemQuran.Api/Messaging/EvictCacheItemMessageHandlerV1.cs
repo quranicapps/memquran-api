@@ -1,10 +1,11 @@
 ﻿using MemQuran.Api.Extensions;
 using Topica.Contracts;
 using Topica.Messages;
+using ZiggyCreatures.Caching.Fusion;
 
 namespace MemQuran.Api.Messaging;
 
-public class EvictCacheItemMessageHandlerV1(ILogger<EvictCacheItemMessageHandlerV1> logger) : IHandler<EvictCacheItemMessageV1>
+public class EvictCacheItemMessageHandlerV1(IFusionCache cache, ILogger<EvictCacheItemMessageHandlerV1> logger) : IHandler<EvictCacheItemMessageV1>
 {
     public async Task<bool> HandleAsync(EvictCacheItemMessageV1 source, Dictionary<string, string>? properties)
     {
@@ -17,8 +18,8 @@ public class EvictCacheItemMessageHandlerV1(ILogger<EvictCacheItemMessageHandler
 
         logger.LogInformation("Handle: {Name} for cache key: {CacheKey}", nameof(EvictCacheItemMessageV1), source.CacheKey);
         
-        // TODO: Implement the logic to evict the cache item based on the CacheKey.
-        // (Currently this is a test to see OpenTelemetry Parent Trace is passed to the handler)
+        await cache.RemoveAsync(source.CacheKey);
+        
         return await Task.FromResult(true);
     }
 
