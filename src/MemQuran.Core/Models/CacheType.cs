@@ -2,5 +2,5 @@
 
 public enum CacheType
 {
-    None, Memory, Hybrid     
+    None, Memory, Distributed, Hybrid     
 }

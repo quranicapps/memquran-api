@@ -5,15 +5,15 @@ using ZiggyCreatures.Caching.Fusion;
 
 namespace MemQuran.Infrastructure.Caching;
 
-public class HybridCachingProvider(IFusionCache cache, ILogger<HybridCachingProvider> logger) : ICachingProvider
+public class DistributedCachingProvider(IFusionCache cache, ILogger<DistributedCachingProvider> logger) : ICachingProvider
 {
-    public CacheType Name => CacheType.Hybrid;
+    public CacheType Name => CacheType.Distributed;
 
     public async Task<string?> GetOrCreateStringAsync(string key, Func<CancellationToken, Task<string?>> func, CancellationToken cancellationToken = default)
     {
         return await cache.GetOrSetAsync<string?>(key, async ct =>
         {
-            logger.LogInformation("***** ({Name}) Cache miss for {Key}", nameof(HybridCachingProvider), key);
+            logger.LogInformation("***** ({Name}) Cache miss for {Key}", nameof(DistributedCachingProvider), key);
             return await func(ct);
         }, token: cancellationToken);
     }

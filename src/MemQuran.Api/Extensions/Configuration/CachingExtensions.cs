@@ -2,9 +2,7 @@
 using MemQuran.Infrastructure.Factories;
 using MemQuran.Core.Models;
 using MemQuran.Infrastructure.Caching;
-using Microsoft.Extensions.Caching.Hybrid;
 using Microsoft.Extensions.Caching.StackExchangeRedis;
-using StackExchange.Redis;
 using ZiggyCreatures.Caching.Fusion;
 using ZiggyCreatures.Caching.Fusion.Backplane.StackExchangeRedis;
 using ZiggyCreatures.Caching.Fusion.Serialization.SystemTextJson;
@@ -30,6 +28,8 @@ public static class CachingExtensions
         services.AddSingleton<ICachingProviderFactory, CachingProviderFactory>();
         services.AddSingleton<ICachingProvider, NullCachingProvider>();
         services.AddSingleton<ICachingProvider, MemoryCachingProvider>();
+        services.AddSingleton<ICachingProvider, HybridCachingProvider>();
+        services.AddSingleton<ICachingProvider, DistributedCachingProvider>();
 
         var fusionCacheBuilder = services.AddFusionCache().WithSerializer(new FusionCacheSystemTextJsonSerializer());
         var fusionCacheOptions = new FusionCacheOptions();
@@ -45,7 +45,7 @@ public static class CachingExtensions
         fusionCacheEntryOptions.FactorySoftTimeout = TimeSpan.FromMilliseconds(100);
         fusionCacheEntryOptions.FactoryHardTimeout = TimeSpan.FromMilliseconds(1500);
 
-        if (config.CacheType == CacheType.Hybrid)
+        if (config.CacheType is CacheType.Hybrid or CacheType.Distributed)
         {
             fusionCacheOptions.DistributedCacheCircuitBreakerDuration = TimeSpan.FromSeconds(2);
             fusionCacheOptions.DistributedCacheSyntheticTimeoutsLogLevel = LogLevel.Debug;
@@ -61,8 +61,12 @@ public static class CachingExtensions
             fusionCacheBuilder
                 .WithDistributedCache(new RedisCache(new RedisCacheOptions { Configuration = config.RedisConnectionString, InstanceName = "memquranapi:" }))
                 .WithBackplane(new RedisBackplane(new RedisBackplaneOptions { Configuration = config.RedisConnectionString }));
+        }
 
-            services.AddSingleton<ICachingProvider, HybridCachingProvider>();
+        if (config.CacheType == CacheType.Distributed)
+        {
+            fusionCacheEntryOptions.SkipMemoryCacheRead = true;
+            fusionCacheEntryOptions.SkipMemoryCacheWrite = true;
         }
 
         fusionCacheBuilder.WithOptions(fusionCacheOptions);
