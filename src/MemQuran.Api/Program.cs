@@ -7,6 +7,7 @@ using MemQuran.Api.Settings.Messaging;
 using MemQuran.Api.Validators;
 using MemQuran.Api.Workers;
 using OpenTelemetry.Exporter;
+using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
@@ -60,6 +61,9 @@ if (seqSettings == null) throw new InvalidOperationException($"{nameof(SeqSettin
 var jaegerSettings = builder.Configuration.GetSection(JaegerSettings.SectionName).Get<JaegerSettings>();
 if (jaegerSettings == null) throw new InvalidOperationException($"{nameof(JaegerSettings)} is not configured. Please check your appsettings.json or environment variables.");
 
+var betterStackSettings = builder.Configuration.GetSection(BetterStackSettings.SectionName).Get<BetterStackSettings>();
+if (betterStackSettings == null) throw new InvalidOperationException($"{nameof(BetterStackSettings)} is not configured. Please check your appsettings.json or environment variables.");
+
 // Logging
 builder.Logging
     .AddOpenTelemetry(options => options.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(builder.Environment.ApplicationName)))
@@ -77,11 +81,17 @@ builder.Services.AddOpenTelemetry()
                 // opt.Endpoint = new Uri(jaegerSettings.Endpoint);
 
                 // Seq
-                opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
+                // opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
+                // opt.Protocol = OtlpExportProtocol.HttpProtobuf;
+                // if (!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
+
+                //BetterStack
+                opt.Endpoint = new Uri($"{betterStackSettings.IngestBaseUrl}/v1/traces");
                 opt.Protocol = OtlpExportProtocol.HttpProtobuf;
-                if (!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
+                opt.Headers = $"Authorization=Bearer {betterStackSettings.BearerToken}";
             })
             .AddSource(nameof(EvictCacheItemMessageV1)) // Should be the name of any activities used in code
+            .AddSource(nameof(EvictCacheAllMessageV1)) // Should be the name of any activities used in code
         // .AddConsoleExporter()
     )
     .WithMetrics(metrics => metrics
@@ -93,12 +103,35 @@ builder.Services.AddOpenTelemetry()
                 // opt.Endpoint = new Uri(jaegerSettings.Endpoint);
 
                 // Seq
-                opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
+                // opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
+                // opt.Protocol = OtlpExportProtocol.HttpProtobuf;
+                // if(!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
+
+                //BetterStack
+                opt.Endpoint = new Uri($"{betterStackSettings.IngestBaseUrl}/v1/metrics");
                 opt.Protocol = OtlpExportProtocol.HttpProtobuf;
-                if(!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
+                opt.Headers = $"Authorization=Bearer {betterStackSettings.BearerToken}";
             })
         // .AddConsoleExporter()
-    );
+    )
+    .WithLogging(logging =>
+    {
+        logging.AddOtlpExporter(opt =>
+        {
+            // Jaeger
+            // opt.Endpoint = new Uri(jaegerSettings.Endpoint);
+
+            // Seq
+            // opt.Endpoint = new Uri(seqSettings.OpenTelemetryLogIngestUrl);
+            // opt.Protocol = OtlpExportProtocol.HttpProtobuf;
+            // if (!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
+
+            //BetterStack
+            opt.Endpoint = new Uri($"{betterStackSettings.IngestBaseUrl}/v1/logs");
+            opt.Protocol = OtlpExportProtocol.HttpProtobuf;
+            opt.Headers = $"Authorization=Bearer {betterStackSettings.BearerToken}";
+        });
+    });
 
 // Exception Handling
 builder.Services.AddExceptionHandling(options => { options.Environment = builder.Environment; });
@@ -108,7 +141,7 @@ builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy =>
 
 // Health Checks
 // The tags correspond to the health check groups, which can be used to filter health checks in the UI or when querying the health status. (EndpointRouteBuilderExtensions.cs)
-builder.Services.AddHealthCheckServices(options => 
+builder.Services.AddHealthCheckServices(options =>
 {
     options.HealthCheckSettings = healthCheckSettings;
     options.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
