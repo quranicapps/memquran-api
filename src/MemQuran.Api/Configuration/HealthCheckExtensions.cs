@@ -42,7 +42,7 @@ public static class HealthCheckExtensions
         if (config.HealthCheckSettings.JsDelivr.Enabled)
         {
             tags.Add(nameof(HealthCheckTag.JsDelivr));
-            healthChecksBuilder.AddCheck<LocalCdnHealthCheck>("Call JsDelivr", timeout: config.HealthCheckSettings.JsDelivr.TimeOut, tags: [nameof(HealthCheckTag.JsDelivr)]);
+            healthChecksBuilder.AddCheck<JsDelivrHealthCheck>("Call JsDelivr", timeout: config.HealthCheckSettings.JsDelivr.TimeOut, tags: [nameof(HealthCheckTag.JsDelivr)]);
         }
 
         if (config.HealthCheckSettings.Redis.Enabled)

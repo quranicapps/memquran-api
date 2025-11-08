@@ -34,6 +34,14 @@ param key_vault_key_values = [
     name: 'AwsHostSettings--ServiceUrl'
     value: ''
   }
+  {
+    name: 'ConnectionStrings--Redis'
+    value: 'XXX'
+  }
+  {
+    name: 'BetterStackSettings--BearerToken'
+    value: 'XXX'
+  }
 ]
 
 @description('Resource Group Name')
