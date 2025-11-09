@@ -1,8 +1,8 @@
 {
   "profiles": {
-    "EvictCache.Worker": {
+    "MemQuran.Api.Caching.Worker": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7053",
+      "commandLineArgs": "--port 7071",
       "launchBrowser": false
     }
   }

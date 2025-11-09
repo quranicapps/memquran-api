@@ -9,7 +9,7 @@
     <option name="pricingTier" value="FlexConsumption" />
     <option name="projectConfiguration" value="Release" />
     <option name="projectPlatform" value="Any CPU" />
-    <option name="publishableProjectPath" value="$PROJECT_DIR$/MemQuran.Core/MemQuran.Core.csproj" />
+    <option name="publishableProjectPath" value="$PROJECT_DIR$/Workers/MemQuran.Api.Caching.Worker/MemQuran.Api.Caching.Worker.csproj" />
     <option name="region" value="uksouth" />
     <option name="resourceGroupName" value="rg-memquran-dev-001" />
     <option name="subscriptionId" value="2d79f8c4-b688-4d60-9e90-f467727753ad" />

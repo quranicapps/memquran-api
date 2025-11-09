@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D3EE3844
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workers", "Workers", "{AF56D1E1-8823-4B4C-82EB-5DE12660D1D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Caching.Worker", "Workers\Caching.Worker\Caching.Worker.csproj", "{6F32851C-A731-4337-AEB5-C723119435A0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemQuran.Api.Caching.Worker", "Workers\MemQuran.Api.Caching.Worker\MemQuran.Api.Caching.Worker.csproj", "{6F32851C-A731-4337-AEB5-C723119435A0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

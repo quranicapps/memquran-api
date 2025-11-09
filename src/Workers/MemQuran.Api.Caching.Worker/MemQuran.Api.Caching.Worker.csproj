@@ -15,6 +15,18 @@
         <PackageReference Include="Microsoft.Azure.Functions.Worker.ApplicationInsights" Version="2.0.0"/>
         <PackageReference Include="Microsoft.Azure.Functions.Worker.Extensions.Http.AspNetCore" Version="2.0.2"/>
         <PackageReference Include="Microsoft.Azure.Functions.Worker.Sdk" Version="2.0.5"/>
+        <PackageReference Include="Azure.Extensions.AspNetCore.Configuration.Secrets" Version="1.4.0" />
+        <PackageReference Include="FluentValidation" Version="12.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.6" />
+        <PackageReference Include="ZiggyCreatures.FusionCache" Version="2.4.0" />
+        <PackageReference Include="ZiggyCreatures.FusionCache.Backplane.StackExchangeRedis" Version="2.4.0" />
+        <PackageReference Include="ZiggyCreatures.FusionCache.OpenTelemetry" Version="2.4.0" />
+        <PackageReference Include="ZiggyCreatures.FusionCache.Serialization.SystemTextJson" Version="2.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\MemQuran.Core\MemQuran.Core.csproj" />
+      <ProjectReference Include="..\..\MemQuran.Infrastructure\MemQuran.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>
