@@ -35,7 +35,7 @@ param key_vault_key_values = [
     value: ''
   }
   {
-    name: 'ConnectionStrings--Redis'
+    name: 'RedisSettings--ConnectionString'
     value: 'XXX'
   }
   {

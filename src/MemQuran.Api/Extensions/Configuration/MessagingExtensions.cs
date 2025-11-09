@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using MemQuran.Api.Settings.Messaging;
+using MemQuran.Api.Settings;
 using Topica.Aws.Contracts;
 using Topica.Contracts;
 
@@ -8,51 +8,51 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class MessagingExtensions
 {
-    public class MessagingConfiguration
+    public class MessagingOptions
     {
         public AwsHostSettings AwsHostSettings { get; set; } = null!;
         public AwsTopicSettings AwsTopicSettings { get; set; } = null!;
     }
     
     // ReSharper disable once UnusedMethodReturnValue.Global
-    public static async Task<IServiceCollection> AddMessagingServices(this IServiceCollection services, Action<MessagingConfiguration> configuration, CancellationToken cancellationToken)
+    public static async Task<IServiceCollection> AddMessagingServices(this IServiceCollection services, Action<MessagingOptions> optionsFactory, CancellationToken cancellationToken)
     {
-        var config = new MessagingConfiguration();
-        configuration(config);
+        var options = new MessagingOptions();
+        optionsFactory(options);
 
         // AWS Messaging Configuration
         services.AddAwsTopica(c =>
         {
-            c.ProfileName = config.AwsHostSettings.ProfileName;
-            c.AccessKey = config.AwsHostSettings.AccessKey;
-            c.SecretKey = config.AwsHostSettings.SecretKey;
-            c.ServiceUrl = config.AwsHostSettings.ServiceUrl;
-            c.RegionEndpoint = config.AwsHostSettings.RegionEndpoint;
+            c.ProfileName = options.AwsHostSettings.ProfileName;
+            c.AccessKey = options.AwsHostSettings.AccessKey;
+            c.SecretKey = options.AwsHostSettings.SecretKey;
+            c.ServiceUrl = options.AwsHostSettings.ServiceUrl;
+            c.RegionEndpoint = options.AwsHostSettings.RegionEndpoint;
         }, Assembly.GetExecutingAssembly());
 
         var builder = services.BuildServiceProvider().GetRequiredService<IAwsTopicCreationBuilder>()
-            .WithWorkerName(config.AwsTopicSettings.WebUpdateTopicSettings.WorkerName)
-            .WithTopicName(config.AwsTopicSettings.WebUpdateTopicSettings.Source)
-            .WithSubscribedQueues(config.AwsTopicSettings.WebUpdateTopicSettings.WithSubscribedQueues)
-            .WithQueueToSubscribeTo(config.AwsTopicSettings.WebUpdateTopicSettings.SubscribeToSource)
+            .WithWorkerName(options.AwsTopicSettings.WebUpdateTopicSettings.WorkerName)
+            .WithTopicName(options.AwsTopicSettings.WebUpdateTopicSettings.Source)
+            .WithSubscribedQueues(options.AwsTopicSettings.WebUpdateTopicSettings.WithSubscribedQueues)
+            .WithQueueToSubscribeTo(options.AwsTopicSettings.WebUpdateTopicSettings.SubscribeToSource)
             .WithErrorQueueSettings(
-                config.AwsTopicSettings.WebUpdateTopicSettings.BuildWithErrorQueue,
-                config.AwsTopicSettings.WebUpdateTopicSettings.ErrorQueueMaxReceiveCount
+                options.AwsTopicSettings.WebUpdateTopicSettings.BuildWithErrorQueue,
+                options.AwsTopicSettings.WebUpdateTopicSettings.ErrorQueueMaxReceiveCount
             )
             .WithFifoSettings(
-                config.AwsTopicSettings.WebUpdateTopicSettings.IsFifoQueue,
-                config.AwsTopicSettings.WebUpdateTopicSettings.IsFifoContentBasedDeduplication
+                options.AwsTopicSettings.WebUpdateTopicSettings.IsFifoQueue,
+                options.AwsTopicSettings.WebUpdateTopicSettings.IsFifoContentBasedDeduplication
             )
             .WithTemporalSettings(
-                config.AwsTopicSettings.WebUpdateTopicSettings.MessageVisibilityTimeoutSeconds,
-                config.AwsTopicSettings.WebUpdateTopicSettings.QueueMessageDelaySeconds,
-                config.AwsTopicSettings.WebUpdateTopicSettings.QueueMessageRetentionPeriodSeconds,
-                config.AwsTopicSettings.WebUpdateTopicSettings.QueueReceiveMessageWaitTimeSeconds
+                options.AwsTopicSettings.WebUpdateTopicSettings.MessageVisibilityTimeoutSeconds,
+                options.AwsTopicSettings.WebUpdateTopicSettings.QueueMessageDelaySeconds,
+                options.AwsTopicSettings.WebUpdateTopicSettings.QueueMessageRetentionPeriodSeconds,
+                options.AwsTopicSettings.WebUpdateTopicSettings.QueueReceiveMessageWaitTimeSeconds
             )
-            .WithQueueSettings(config.AwsTopicSettings.WebUpdateTopicSettings.QueueMaximumMessageSize)
+            .WithQueueSettings(options.AwsTopicSettings.WebUpdateTopicSettings.QueueMaximumMessageSize)
             .WithConsumeSettings(
-                config.AwsTopicSettings.WebUpdateTopicSettings.NumberOfInstances,
-                config.AwsTopicSettings.WebUpdateTopicSettings.QueueReceiveMaximumNumberOfMessages
+                options.AwsTopicSettings.WebUpdateTopicSettings.NumberOfInstances,
+                options.AwsTopicSettings.WebUpdateTopicSettings.QueueReceiveMaximumNumberOfMessages
             );
 
         var consumer = await builder.BuildConsumerAsync(cancellationToken);

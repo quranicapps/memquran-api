@@ -12,7 +12,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class CachingExtensions
 {
-    public class CachingConfiguration
+    public class CachingOptions
     {
         public CacheType CacheType { get; set; }
         public TimeSpan CacheDurationTimeSpan { get; set; }
@@ -20,10 +20,10 @@ public static class CachingExtensions
     }
 
     // ReSharper disable once UnusedMethodReturnValue.Global
-    public static IServiceCollection AddCachingServices(this IServiceCollection services, Action<CachingConfiguration> configuration)
+    public static IServiceCollection AddCachingServices(this IServiceCollection services, Action<CachingOptions> optionsFactory)
     {
-        var config = new CachingConfiguration();
-        configuration(config);
+        var options = new CachingOptions();
+        optionsFactory(options);
 
         services.AddSingleton<ICachingProviderFactory, CachingProviderFactory>();
         services.AddSingleton<ICachingProvider, NullCachingProvider>();
@@ -40,18 +40,18 @@ public static class CachingExtensions
         fusionCacheOptions.FactorySyntheticTimeoutsLogLevel = LogLevel.Debug;
         fusionCacheOptions.FactoryErrorsLogLevel = LogLevel.Error;
         // fusionCacheOptions.CacheKeyPrefix = "memquranapi:";
-        fusionCacheEntryOptions.Duration = config.CacheDurationTimeSpan;
+        fusionCacheEntryOptions.Duration = options.CacheDurationTimeSpan;
         fusionCacheEntryOptions.EagerRefreshThreshold = 0.9f;
         fusionCacheEntryOptions.FactorySoftTimeout = TimeSpan.FromMilliseconds(100);
         fusionCacheEntryOptions.FactoryHardTimeout = TimeSpan.FromMilliseconds(1500);
 
-        if (config.CacheType is CacheType.Hybrid or CacheType.Distributed)
+        if (options.CacheType is CacheType.Hybrid or CacheType.Distributed)
         {
             fusionCacheOptions.DistributedCacheCircuitBreakerDuration = TimeSpan.FromSeconds(2);
             fusionCacheOptions.DistributedCacheSyntheticTimeoutsLogLevel = LogLevel.Debug;
             fusionCacheOptions.DistributedCacheErrorsLogLevel = LogLevel.Error;
             fusionCacheEntryOptions.IsFailSafeEnabled = true;
-            fusionCacheEntryOptions.FailSafeMaxDuration = config.CacheDurationTimeSpan;
+            fusionCacheEntryOptions.FailSafeMaxDuration = options.CacheDurationTimeSpan;
             fusionCacheEntryOptions.FailSafeThrottleDuration = TimeSpan.FromSeconds(30);
             fusionCacheEntryOptions.DistributedCacheSoftTimeout = TimeSpan.FromSeconds(1);
             fusionCacheEntryOptions.DistributedCacheHardTimeout = TimeSpan.FromSeconds(2);
@@ -59,11 +59,11 @@ public static class CachingExtensions
             fusionCacheEntryOptions.JitterMaxDuration = TimeSpan.FromSeconds(2);
 
             fusionCacheBuilder
-                .WithDistributedCache(new RedisCache(new RedisCacheOptions { Configuration = config.RedisConnectionString, InstanceName = "memquranapi:" }))
-                .WithBackplane(new RedisBackplane(new RedisBackplaneOptions { Configuration = config.RedisConnectionString }));
+                .WithDistributedCache(new RedisCache(new RedisCacheOptions { Configuration = options.RedisConnectionString, InstanceName = "memquranapi:" }))
+                .WithBackplane(new RedisBackplane(new RedisBackplaneOptions { Configuration = options.RedisConnectionString }));
         }
 
-        if (config.CacheType == CacheType.Distributed)
+        if (options.CacheType == CacheType.Distributed)
         {
             fusionCacheEntryOptions.SkipMemoryCacheRead = true;
             fusionCacheEntryOptions.SkipMemoryCacheWrite = true;

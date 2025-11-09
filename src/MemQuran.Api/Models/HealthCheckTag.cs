@@ -2,5 +2,5 @@
 
 public enum HealthCheckTag
 {
-    Local, Ping, LocalFiles, JsDelivr, Redis
+    Local, Ping, LocalFiles, Cdn, DistributedCache, Telemetry
 }

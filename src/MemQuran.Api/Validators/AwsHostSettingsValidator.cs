@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using MemQuran.Api.Settings.Messaging;
+using MemQuran.Api.Settings;
 
 namespace MemQuran.Api.Validators;
 

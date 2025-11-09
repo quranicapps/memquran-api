@@ -6,9 +6,11 @@ public class HealthCheckSettings
 {
     public static string SectionName => nameof(HealthCheckSettings);
 
-    public HealthCheckModel LocalFiles { get; set; } = null!;
-    public HealthCheckModel JsDelivr { get; set; } = null!;
-    public HealthCheckModel Redis { get; set; } = null!;
+    public HealthCheckModel Ping { get; init; } = null!;
+    public HealthCheckModel LocalFiles { get; init; } = null!;
+    public HealthCheckModel JsDelivr { get; init; } = null!;
+    public HealthCheckModel Redis { get; init; } = null!;
+    public HealthCheckModel BetterStack { get; init; } = null!;
 }
 
 public class HealthCheckModel

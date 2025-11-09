@@ -1,4 +1,4 @@
-﻿namespace MemQuran.Api.Settings.Messaging;
+﻿namespace MemQuran.Api.Settings;
 
 public class AwsTopicSettings
 {

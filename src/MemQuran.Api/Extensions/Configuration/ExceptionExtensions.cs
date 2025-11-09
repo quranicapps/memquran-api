@@ -7,16 +7,16 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class ExceptionExtensions
 {
-    public class ExceptionConfiguration
+    public class ExceptionOptions
     {
         public IWebHostEnvironment Environment { get; set; } = null!;
     }
 
     // ReSharper disable once UnusedMethodReturnValue.Global
-    public static IServiceCollection AddExceptionHandling(this IServiceCollection services, Action<ExceptionConfiguration> configuration)
+    public static IServiceCollection AddExceptionHandling(this IServiceCollection services, Action<ExceptionOptions> optionsFactory)
     {
-        var config = new ExceptionConfiguration();
-        configuration(config);
+        var options = new ExceptionOptions();
+        optionsFactory(options);
 
         services.AddProblemDetails(opts => // built-in problem details support
             opts.CustomizeProblemDetails = ctx =>
@@ -38,7 +38,7 @@ public static class ExceptionExtensions
 
                 ctx.ProblemDetails.Detail = "An error occurred in our API. Use the trace id when contacting us.";
 
-                if (config.Environment.IsProduction()) return;
+                if (options.Environment.IsProduction()) return;
 
                 if (!ctx.ProblemDetails.Extensions.ContainsKey("errorMessage"))
                 {

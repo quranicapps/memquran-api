@@ -3,7 +3,6 @@ using FluentValidation;
 using MemQuran.Api.Messaging;
 using MemQuran.Api.Models;
 using MemQuran.Api.Settings;
-using MemQuran.Api.Settings.Messaging;
 using MemQuran.Api.Validators;
 using MemQuran.Api.Workers;
 using OpenTelemetry.Exporter;
@@ -46,6 +45,9 @@ var clientsSettings = builder.Configuration.GetSection(ClientsSettings.SectionNa
 if (clientsSettings == null) throw new Exception("Could not bind the Clients Settings, please check configuration");
 builder.Services.AddSingleton(clientsSettings);
 
+var pingSettings = builder.Configuration.GetSection(PingSettings.SectionName).Get<PingSettings>();
+if (pingSettings == null) throw new InvalidOperationException($"{nameof(PingSettings)} is not configured. Please check your appsettings.json or environment variables.");
+
 var awsHostSettings = builder.Configuration.GetSection(AwsHostSettings.SectionName).Get<AwsHostSettings>();
 if (awsHostSettings == null) throw new InvalidOperationException($"{nameof(AwsHostSettings)} is not configured. Please check your appsettings.json or environment variables.");
 new AwsHostSettingsValidator().ValidateAndThrow(awsHostSettings);
@@ -53,6 +55,10 @@ new AwsHostSettingsValidator().ValidateAndThrow(awsHostSettings);
 var awsTopicSettings = builder.Configuration.GetSection(AwsTopicSettings.SectionName).Get<AwsTopicSettings>();
 if (awsTopicSettings == null) throw new InvalidOperationException($"{nameof(AwsTopicSettings)} is not configured. Please check your appsettings.json or environment variables.");
 new AwsTopicSettingsValidator().ValidateAndThrow(awsTopicSettings);
+
+var redisSettings = builder.Configuration.GetSection(RedisSettings.SectionName).Get<RedisSettings>();
+if (redisSettings == null) throw new InvalidOperationException($"{nameof(RedisSettings)} is not configured. Please check your appsettings.json or environment variables.");
+new RedisSettingsValidator().ValidateAndThrow(redisSettings);
 
 var seqConfigurationSection = builder.Configuration.GetSection(SeqSettings.SectionName);
 var seqSettings = seqConfigurationSection.Get<SeqSettings>();
@@ -144,7 +150,8 @@ builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy =>
 builder.Services.AddHealthCheckServices(options =>
 {
     options.HealthCheckSettings = healthCheckSettings;
-    options.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
+    options.PingSettings = pingSettings;
+    options.RedisSettings = redisSettings;
 });
 
 // Open API / Swagger
@@ -153,8 +160,8 @@ builder.Services.AddOpenApiServices();
 // This API's Services
 builder.Services.AddServices(options =>
 {
-    options.JsDelivrServiceBaseUrl = clientsSettings.JsDelivrService.BaseUrl;
-    options.JsDelivrServiceDefaultTimeout = clientsSettings.JsDelivrService.DefaultTimeout;
+    options.ClientSettings = clientsSettings;
+    options.BetterStackSettings = betterStackSettings;
 });
 
 // Caching
@@ -162,7 +169,7 @@ builder.Services.AddCachingServices(options =>
 {
     options.CacheType = contentDeliverySettings.CachingSettings.CacheType;
     options.CacheDurationTimeSpan = contentDeliverySettings.CachingSettings.CacheDurationTimeSpan;
-    options.RedisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
+    options.RedisConnectionString = redisSettings.ConnectionString;
 });
 
 // Workers

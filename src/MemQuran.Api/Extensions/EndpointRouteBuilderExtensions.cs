@@ -1,7 +1,6 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using HealthChecks.UI.Core;
-using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 // ReSharper disable once CheckNamespace
@@ -9,15 +8,13 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class EndpointRouteBuilderExtensions
 {
-    public static IEndpointRouteBuilder MapCustomHealthCheck(
-        this IEndpointRouteBuilder endpoints,
-        IEnumerable<string> tags)
+    public static IEndpointRouteBuilder MapCustomHealthCheck(this IEndpointRouteBuilder endpoints, IEnumerable<string> tags)
     {
         ArgumentNullException.ThrowIfNull(endpoints);
 
         foreach (var tag in tags)
         {
-            endpoints.MapHealthChecks($"/api/health/{tag}", new HealthCheckOptions
+            endpoints.MapHealthChecks($"/api/health/{tag}", new AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions
             {
                 Predicate = check => check.Tags.Contains(tag),
                 AllowCachingResponses = false,
@@ -32,9 +29,9 @@ public static class EndpointRouteBuilderExtensions
     private static async Task WriteResponse(HttpContext context, HealthReport report)
     {
         context.Response.ContentType = "application/json; charset=utf-8";
-        
+
         var uiReport = UIHealthReport.CreateFrom(report);
-        
+
         await context.Response.WriteAsJsonAsync(uiReport, new JsonSerializerOptions
         {
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,

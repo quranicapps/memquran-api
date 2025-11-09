@@ -9,8 +9,8 @@ public class ClientsSettings
 public class ClientSettings
 {
     public bool Enabled { get; set; }
-    public string BaseUrl { get; set; }
-    public string Version { get; set; }
+    public string BaseUrl { get; set; } = null!;
+    public string Version { get; set; } = null!;
     public TimeSpan DefaultTimeout { get; set; }
     public int IncrementalBackoffFactorSeconds { get; set; }
     public string UserName { get; set; }
@@ -23,6 +23,7 @@ public class ClientSettings
     public string GrantType { get; set; }
     public string RefreshToken { get; set; }
     public string AccessToken { get; set; }
+    public string BearerToken { get; set; }
     public string TokenType { get; set; }
     public string RefreshTokenEndpointUrl { get; set; }
     public string RefreshTokenClientId { get; set; }

@@ -6,4 +6,5 @@ public class BetterStackSettings
     
     public string IngestBaseUrl { get; set; } = null!;
     public string BearerToken { get; set; } = null!;
+    public TimeSpan DefaultTimeout { get; set; }
 }
