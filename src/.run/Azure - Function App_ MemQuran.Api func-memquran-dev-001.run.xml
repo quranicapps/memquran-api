@@ -1,6 +1,6 @@
 ﻿<component name="ProjectRunConfigurationManager">
   <configuration default="false" name="Azure - Function App: MemQuran.Api func-memquran-dev-001" type="AzureFunctionAppDeploy">
-    <option name="appServicePlanName" value="ASP-rgmemqurandev001-353a" />
+    <option name="appServicePlanName" value="ASP-rgmemqurandev001-cf91" />
     <option name="appServicePlanResourceGroupName" value="rg-memquran-dev-001" />
     <option name="functionAppName" value="func-memquran-dev-001" />
     <option name="instanceSize" value="0" />

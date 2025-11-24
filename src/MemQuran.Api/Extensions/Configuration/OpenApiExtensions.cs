@@ -1,4 +1,4 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using Microsoft.OpenApi;
 
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
@@ -29,7 +29,7 @@ public static class OpenApiExtensions
 
             options.AddSchemaTransformer((schema, context, cancellationToken) =>
             {
-                if (schema.Type == "decimal")
+                if (schema.Type == JsonSchemaType.Number)
                 {
                     schema.Format = "decimal";
                 }
