@@ -5,6 +5,7 @@ using MemQuran.Api.Models;
 using MemQuran.Api.Settings;
 using MemQuran.Api.Validators;
 using MemQuran.Api.Workers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
@@ -32,6 +33,9 @@ if (builder.Environment.IsStaging() || builder.Environment.IsProduction())
         })
     );
 }
+
+var identityProviderSettings = builder.Configuration.GetSection(IdentityProviderSettings.SectionName).Get<IdentityProviderSettings>();
+if (identityProviderSettings == null) throw new InvalidOperationException($"{nameof(IdentityProviderSettings)} is not configured. Please check your appsettings.json or environment variables.");
 
 var healthCheckSettings = builder.Configuration.GetSection(HealthCheckSettings.SectionName).Get<HealthCheckSettings>() ?? throw new Exception("Could not bind the HealthCheck Settings, please check configuration");
 if (healthCheckSettings == null) throw new InvalidOperationException($"{nameof(HealthCheckSettings)} is not configured. Please check your appsettings.json or environment variables.");
@@ -144,6 +148,18 @@ builder.Services.AddExceptionHandling(options => { options.Environment = builder
 
 builder.Services.AddControllers();
 builder.Services.AddCors(options => { options.AddPolicy("AllowOrigin", policy => policy.AllowAnyOrigin()); });
+
+// Authentication and Authorization
+builder.Services
+    .AddAuthentication(options => { options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; })
+    .AddJwtBearer(options =>
+    {
+        options.Authority = identityProviderSettings.Authority;
+        options.Audience = identityProviderSettings.Audience;
+        options.RequireHttpsMetadata = builder.Environment.IsProduction();
+    });
+// builder.Services.AddAuthorizationBuilder().AddPolicy("default", policy => { policy.AddAuthenticationSchemes() });
+
 
 // Health Checks
 // The tags correspond to the health check groups, which can be used to filter health checks in the UI or when querying the health status. (EndpointRouteBuilderExtensions.cs)
