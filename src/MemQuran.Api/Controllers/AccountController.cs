@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using MemQuran.Api.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MemQuran.Api.Controllers;
@@ -10,6 +11,10 @@ public class AccountController : Controller
     [HttpGet("/user/{userId}")]
     public IActionResult GetUser(string userId)
     {
-        return Ok(userId);
+        return Ok(new UserResponse
+        {
+            UserId = Guid.NewGuid().ToString(),
+            UserName = userId
+        });
     }
 }
