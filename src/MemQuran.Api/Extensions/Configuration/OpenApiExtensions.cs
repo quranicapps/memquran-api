@@ -38,7 +38,6 @@ public static class OpenApiExtensions
             });
         });
         services.AddEndpointsApiExplorer();
-        services.AddSwaggerGen();
 
         return services;
     }

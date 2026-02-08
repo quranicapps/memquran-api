@@ -12,6 +12,7 @@ using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
 using OpenTelemetry.Resources;
 using OpenTelemetry.Trace;
+using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -181,8 +182,8 @@ builder.Services.AddHealthCheckServices(options =>
     options.RedisSettings = redisSettings;
 });
 
-// Open API / Swagger
-builder.Services.AddOpenApiServices();
+// Open API
+builder.Services.AddOpenApi();
 
 // This API's Services
 builder.Services.AddServices(options =>
@@ -229,9 +230,11 @@ app.UseCors(x => x
     .AllowAnyMethod()
     .AllowAnyHeader());
 
-app.MapOpenApi();
-app.UseSwagger();
-app.UseSwaggerUI(c => { c.SwaggerEndpoint("/openapi/memquranapi.json", "memquranapi"); });
+if (app.Environment.IsDevelopment())
+{
+    app.MapOpenApi();
+    app.MapScalarApiReference();
+}
 
 // app.UseMiddleware<ExceptionMiddleware>(); // Old way: Custom middleware for handling exceptions
 app.UseExceptionHandler(); // New Way: Use built-in exception handler middleware
