@@ -6,6 +6,7 @@ using MemQuran.Api.Settings;
 using MemQuran.Api.Validators;
 using MemQuran.Api.Workers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
@@ -33,9 +34,6 @@ if (builder.Environment.IsStaging() || builder.Environment.IsProduction())
         })
     );
 }
-
-var identityProviderSettings = builder.Configuration.GetSection(IdentityProviderSettings.SectionName).Get<IdentityProviderSettings>();
-if (identityProviderSettings == null) throw new InvalidOperationException($"{nameof(IdentityProviderSettings)} is not configured. Please check your appsettings.json or environment variables.");
 
 var healthCheckSettings = builder.Configuration.GetSection(HealthCheckSettings.SectionName).Get<HealthCheckSettings>() ?? throw new Exception("Could not bind the HealthCheck Settings, please check configuration");
 if (healthCheckSettings == null) throw new InvalidOperationException($"{nameof(HealthCheckSettings)} is not configured. Please check your appsettings.json or environment variables.");
@@ -154,9 +152,22 @@ builder.Services
     .AddAuthentication(options => { options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme; })
     .AddJwtBearer(options =>
     {
-        options.Authority = identityProviderSettings.Authority;
-        options.Audience = identityProviderSettings.Audience;
-        options.RequireHttpsMetadata = builder.Environment.IsProduction();
+        // Authority and audience comes from "Authentication" in appsettings, which should be set to the Identity Provider (e.g., Auth0) details
+        // options.Authority = "";
+        // options.Audience = "";
+        // options.RequireHttpsMetadata = builder.Environment.IsProduction();
+
+        // The default JWT Bearer handler will automatically retrieve the OpenID Connect metadata from the authority's well-known endpoint (/.well-known/openid-configuration) to get the signing keys and other details, so we don't need to manually set the TokenValidationParameters unless we have specific custom validation requirements. The default behavior is usually sufficient for standard scenarios.
+        // options.TokenValidationParameters = new TokenValidationParameters
+        // {
+        //     ValidateIssuer = true,
+        //     ValidIssuer = "",
+        //     ValidateAudience = true,
+        //     ValidAudience = "",
+        //     ValidateLifetime = true,
+        //     ValidateIssuerSigningKey = true,
+        //     ClockSkew = TimeSpan.FromMinutes(5)
+        // };
     });
 // builder.Services.AddAuthorizationBuilder().AddPolicy("default", policy => { policy.AddAuthenticationSchemes() });
 
