@@ -57,7 +57,7 @@ You can run this locally for development or even extend it yourself to add more 
 
 - Retrieve surahs and verses with translations and tafsirs
 - Health checks and diagnostics
-- Interactive OpenAPI/Swagger documentation (https://localhost:3123/swagger/index.html)
+- Interactive OpenAPI/Scalar documentation (https://localhost:3123/Scalar/v1)
 - Observability (OpenTelemetry), caching (Redis), and logging (Seq)
 - Access Quranic resources: surahs, rukus, tafsirs, editions, duas, images, search
 
@@ -66,7 +66,7 @@ You can run this locally for development or even extend it yourself to add more 
 ## Tech Stack
 
 - **.NET 9, ASP.NET Core**
-- **Swagger/OpenAPI** for API docs
+- **Scalar/OpenAPI** for API docs
 - **Redis** for hybrid/distributed caching
 - **HealthChecks** and **HealthChecks UI**
 - **OpenTelemetry** (OTLP and console exporters)
@@ -1412,13 +1412,13 @@ Image File
 
   - `https://localhost:3123/health`
 
-### OpenAPI / Swagger
+### OpenAPI / Scalar
 
-> Get the Swagger UI
-- **GET `/swagger`**
+> Get the Scalar UI
+- **GET `/Scalar/v1`**
 
 
-  - `https://localhost:3123/swagger/index.html`
+  - `https://localhost:3123/Scalar/v1`
 
 
 > Get OpenAPI specification for MemQuran API.

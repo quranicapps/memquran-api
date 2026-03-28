@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-        <UserSecretsId>86d42bf8-b0e2-4ba9-a2e8-d5a0158dcbe8</UserSecretsId>
+        <UserSecretsId>memquran-api</UserSecretsId>
         <LangVersion>default</LangVersion>
     </PropertyGroup>
 
