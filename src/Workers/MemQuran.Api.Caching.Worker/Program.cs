@@ -35,8 +35,18 @@ builder.Services
     .AddApplicationInsightsTelemetryWorkerService()
     .ConfigureFunctionsApplicationInsights();
 
-var redisSettings = builder.Configuration.GetSection(RedisSettings.SectionName).Get<RedisSettings>();
-if (redisSettings == null) throw new InvalidOperationException($"{nameof(RedisSettings)} is not configured. Please check your appsettings.json or environment variables.");
+// Get Redis connection string passed from Aspire, if not then use the one in the function config
+RedisSettings? redisSettings;
+var redisConnectionString = builder.Configuration.GetConnectionString("RedisCache");
+if (!string.IsNullOrWhiteSpace(redisConnectionString))
+{
+    redisSettings = new RedisSettings { ConnectionString = redisConnectionString };
+}
+else
+{
+    redisSettings = builder.Configuration.GetSection(RedisSettings.SectionName).Get<RedisSettings>();
+    if (redisSettings == null) throw new InvalidOperationException($"{nameof(RedisSettings)} is not configured. Please check your appsettings.json or environment variables.");
+}
 new RedisSettingsValidator().ValidateAndThrow(redisSettings);
 builder.Services.AddSingleton(redisSettings);
 

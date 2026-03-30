@@ -1,5 +1,6 @@
 ﻿using System.Net;
-using MemQuran.Api.Exceptions;
+using MemQuran.Api.Extensions;
+using MemQuran.Core.Exceptions;
 using MemQuran.Core.Models;
 using MemQuran.Infrastructure.Extensions;
 

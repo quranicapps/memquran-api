@@ -32,7 +32,7 @@
 										"abderahmane-eloosi-1_timings_surah_1.json"
 									]
 								},
-								"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+								"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 							},
 							"response": []
 						},
@@ -55,7 +55,7 @@
 										"abdulbaset-mujawwad-2_timings_juz_1.json"
 									]
 								},
-								"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+								"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 							},
 							"response": []
 						},
@@ -78,7 +78,7 @@
 										"abdulbaset-mujawwad-2_timings_page_1.json"
 									]
 								},
-								"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+								"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 							},
 							"response": []
 						},
@@ -101,7 +101,7 @@
 										"abdulbaset-mujawwad-2_timings_ruku_1.json"
 									]
 								},
-								"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+								"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 							},
 							"response": []
 						},
@@ -124,7 +124,7 @@
 										"abdulbaset-mujawwad-2_timings_maqra_1.json"
 									]
 								},
-								"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+								"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 							},
 							"response": []
 						}
@@ -161,7 +161,7 @@
 								"1_1.mp3"
 							]
 						},
-						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+						"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 					},
 					"response": []
 				},
@@ -196,7 +196,7 @@
 								"ikhfa.mp3"
 							]
 						},
-						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+						"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 					},
 					"response": []
 				},
@@ -231,7 +231,7 @@
 								"001_001_001.mp3"
 							]
 						},
-						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+						"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 					},
 					"response": []
 				},
@@ -266,7 +266,7 @@
 								"0A5639E55EA4CF708D349C6FC8D95BE7CED289AFC0875F5F306CA3D3ECDA3CE9.mp3"
 							]
 						},
-						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+						"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 					},
 					"response": []
 				},
@@ -301,7 +301,7 @@
 								"correct.mp3"
 							]
 						},
-						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+						"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 					},
 					"response": []
 				},
@@ -336,7 +336,7 @@
 								"incorrect.mp3"
 							]
 						},
-						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+						"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 					},
 					"response": []
 				},
@@ -371,7 +371,7 @@
 								"1.mp3"
 							]
 						},
-						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+						"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 					},
 					"response": []
 				}
@@ -396,7 +396,7 @@
 								"en_duas.json"
 							]
 						},
-						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+						"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 					},
 					"response": []
 				}
@@ -421,7 +421,7 @@
 								"tafsirEditions.json"
 							]
 						},
-						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+						"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 					},
 					"response": []
 				},
@@ -441,7 +441,7 @@
 								"translationEditions.json"
 							]
 						},
-						"description": "Generated from cURL: curl --location 'http://dockerhost:3123/json/surahs/en_surahInfo.json'"
+						"description": "Generated from cURL: curl --location 'http://localhost:3123/json/surahs/en_surahInfo.json'"
 					},
 					"response": []
 				}

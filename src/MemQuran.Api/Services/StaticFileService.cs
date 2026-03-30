@@ -1,5 +1,5 @@
-using MemQuran.Api.Settings;
 using MemQuran.Core.Contracts;
+using MemQuran.Core.Settings;
 
 namespace MemQuran.Api.Services;
 

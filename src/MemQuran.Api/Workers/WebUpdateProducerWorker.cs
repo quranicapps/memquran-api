@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Threading.Channels;
-using MemQuran.Api.Messaging;
 using MemQuran.Api.Models;
+using MemQuran.Core.Messaging;
 using Topica.Contracts;
 
 namespace MemQuran.Api.Workers;

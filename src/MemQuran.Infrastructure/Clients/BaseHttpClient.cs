@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text.Json;
 using MemQuran.Core.Exceptions;
+using Microsoft.Extensions.Logging;
 
 namespace MemQuran.Api.Clients;
 

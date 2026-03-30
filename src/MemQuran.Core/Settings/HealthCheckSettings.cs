@@ -1,6 +1,6 @@
-using MemQuran.Api.Models;
+using MemQuran.Core.Models;
 
-namespace MemQuran.Api.Settings;
+namespace MemQuran.Core.Settings;
 
 public class HealthCheckSettings
 {

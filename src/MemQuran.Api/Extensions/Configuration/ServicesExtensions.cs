@@ -8,7 +8,6 @@ using MemQuran.Core.Contracts;
 using MemQuran.Infrastructure.Factories;
 using MemQuran.Infrastructure.Services;
 using MemQuran.Api.Models;
-using MemQuran.Api.Settings;
 using MemQuran.Infrastructure.Messaging;
 
 // ReSharper disable once CheckNamespace
@@ -18,8 +17,8 @@ public static class ServicesExtensions
 {
     public class ServicesOptions
     {
-        public ClientsSettings ClientSettings { get; set; } = null!;
-        public BetterStackSettings BetterStackSettings { get; set; } = null!;
+        public string JsDelivrServiceBaseUrl { get; set; } = null!;
+        public TimeSpan JsDelivrServiceDefaultTimeout { get; set; }
     }
 
     // ReSharper disable once UnusedMethodReturnValue.Global
@@ -34,19 +33,11 @@ public static class ServicesExtensions
         services.AddSingleton<ICdnClient, LocalFileClient>();
         services.AddHttpClient<ICdnClient, JsDelivrClient>(httpClient =>
             {
-                httpClient.BaseAddress = new Uri(options.ClientSettings.JsDelivrService.BaseUrl);
-                httpClient.Timeout = options.ClientSettings.JsDelivrService.DefaultTimeout;
+                httpClient.BaseAddress = new Uri(options.JsDelivrServiceBaseUrl);
+                httpClient.Timeout = options.JsDelivrServiceDefaultTimeout;
             })
             .AddHttpMessageHandler(() => new JsDelivrDelegatingHandler());
         services.AddSingleton<ICdnClientFactory, CdnClientFactory>();
-
-        services.AddHttpClient<ITelemetryClient, BetterStackTelemetryClient>(httpClient =>
-            {
-                httpClient.BaseAddress = new Uri(options.BetterStackSettings.IngestBaseUrl);
-                httpClient.Timeout = options.BetterStackSettings.DefaultTimeout;
-                httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {options.BetterStackSettings.BearerToken}");
-            })
-            .AddHttpMessageHandler(() => new BetterStackDelegatingHandler());
 
         // Add .NET Channels
         var messagingChannel = new MessagingChannel();

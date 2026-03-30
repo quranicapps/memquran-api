@@ -1,6 +1,6 @@
-using MemQuran.Api.Settings;
 using MemQuran.Core.Contracts;
 using MemQuran.Core.Models;
+using MemQuran.Core.Settings;
 
 namespace MemQuran.Api.Clients.JsDelivr;
 

@@ -1,4 +1,4 @@
-﻿namespace MemQuran.Api.Settings;
+﻿namespace MemQuran.Core.Settings;
 
 public class PingSettings
 {

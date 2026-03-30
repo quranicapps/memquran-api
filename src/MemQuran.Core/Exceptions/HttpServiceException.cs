@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace MemQuran.Api.Exceptions;
+namespace MemQuran.Core.Exceptions;
 
 [Serializable]
 public class HttpServiceException : Exception

@@ -1,6 +1,6 @@
-﻿using MemQuran.Api.Settings;
-using MemQuran.Core.Contracts;
+﻿using MemQuran.Core.Contracts;
 using MemQuran.Core.Models;
+using MemQuran.Core.Settings;
 using MemQuran.Infrastructure.Caching;
 using MemQuran.Infrastructure.Factories;
 using Microsoft.AspNetCore.Hosting;

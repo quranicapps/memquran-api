@@ -1,6 +1,6 @@
 ﻿using MemQuran.Api.Extensions;
+using MemQuran.Core.Messaging;
 using Topica.Contracts;
-using Topica.Messages;
 using ZiggyCreatures.Caching.Fusion;
 
 namespace MemQuran.Api.Messaging;
@@ -27,5 +27,3 @@ public class EvictCacheAllMessageHandlerV1(IFusionCache cache, ILogger<EvictCach
         return true;
     }
 }
-
-public class EvictCacheAllMessageV1 : BaseMessage;

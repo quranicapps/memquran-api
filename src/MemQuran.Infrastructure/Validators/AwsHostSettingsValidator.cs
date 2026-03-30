@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using MemQuran.Api.Settings;
+using MemQuran.Core.Settings;
 
-namespace MemQuran.Api.Validators;
+namespace MemQuran.Infrastructure.Validators;
 
 public class AwsHostSettingsValidator : AbstractValidator<AwsHostSettings>
 {

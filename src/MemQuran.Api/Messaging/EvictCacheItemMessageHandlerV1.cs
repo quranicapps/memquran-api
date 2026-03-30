@@ -1,6 +1,6 @@
 ﻿using MemQuran.Api.Extensions;
+using MemQuran.Core.Messaging;
 using Topica.Contracts;
-using Topica.Messages;
 using ZiggyCreatures.Caching.Fusion;
 
 namespace MemQuran.Api.Messaging;
@@ -28,9 +28,4 @@ public class EvictCacheItemMessageHandlerV1(IFusionCache cache, ILogger<EvictCac
         var isValid = !string.IsNullOrWhiteSpace(message.CacheKey);
         return isValid;
     }
-}
-
-public class EvictCacheItemMessageV1 : BaseMessage
-{
-    public string CacheKey { get; init; } = null!;
 }

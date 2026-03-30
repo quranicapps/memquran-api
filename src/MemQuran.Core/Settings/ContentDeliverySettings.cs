@@ -1,6 +1,6 @@
 ﻿using MemQuran.Core.Models;
 
-namespace MemQuran.Api.Settings;
+namespace MemQuran.Core.Settings;
 
 public class ContentDeliverySettings
 {

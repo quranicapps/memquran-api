@@ -1,7 +1,8 @@
 ﻿using HealthChecks.UI.Core;
 using MemQuran.Api.HealthChecks;
 using MemQuran.Api.Models;
-using MemQuran.Api.Settings;
+using MemQuran.Core.Models;
+using MemQuran.Core.Settings;
 using static Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult;
 
 // ReSharper disable once CheckNamespace
@@ -11,7 +12,7 @@ public class HealthCheckOptions
 {
     public HealthCheckSettings HealthCheckSettings { get; set; } = null!;
     public PingSettings PingSettings { get; set; } = null!;
-    public RedisSettings RedisSettings { get; set; } = null!;
+    public string RedisConnectionString { get; set; } = null!;
 }
 
 public static class HealthCheckExtensions
@@ -54,7 +55,7 @@ public static class HealthCheckExtensions
         if (options.HealthCheckSettings.Redis.Enabled)
         {
             tags.Add(nameof(HealthCheckTag.DistributedCache));
-            healthChecksBuilder.AddRedis(options.RedisSettings.ConnectionString, "Call Redis", timeout: options.HealthCheckSettings.Redis.TimeOut, tags: [nameof(HealthCheckTag.DistributedCache)]);
+            healthChecksBuilder.AddRedis(options.RedisConnectionString, "Call Redis", timeout: options.HealthCheckSettings.Redis.TimeOut, tags: [nameof(HealthCheckTag.DistributedCache)]);
         }
         
         if (options.HealthCheckSettings.BetterStack.Enabled)
@@ -71,7 +72,16 @@ public static class HealthCheckExtensions
             setup.MaximumHistoryEntriesPerEndpoint(100);
             setup.SetApiMaxActiveRequests(1);
 
-            tags.Distinct().ToList().ForEach(x => setup.AddHealthCheckEndpoint(x, $"http://localhost:3122/api/health/{x}"));
+            var urls = Environment.GetEnvironmentVariable("ASPNETCORE_URLS")?.Split(';', StringSplitOptions.RemoveEmptyEntries) ?? [];
+            tags.Distinct().ToList().ForEach(tag =>
+            {
+                foreach (var url in urls.Where(x => x.StartsWith("http", StringComparison.OrdinalIgnoreCase)))
+                {
+                    var urlScheme = new Uri(url).Scheme;
+                    if(urlScheme != Uri.UriSchemeHttps) continue;
+                    setup.AddHealthCheckEndpoint($"{tag} ({urlScheme})", $"{url}/api/health/{tag}");
+                }
+            });
 
             setup.AddWebhookNotification("Webhook (https://memquran-api.requestcatcher.com)", uri: "https://memquran.requestcatcher.com/anything",
                 payload: "{ \"message\": \"Webhook report for [[LIVENESS]] Health Check: [[FAILURE]] - Description: [[DESCRIPTIONS]]\"}",

@@ -1,5 +1,5 @@
 ﻿using System.Reflection;
-using MemQuran.Api.Settings;
+using MemQuran.Core.Settings;
 using Topica.Aws.Contracts;
 using Topica.Contracts;
 

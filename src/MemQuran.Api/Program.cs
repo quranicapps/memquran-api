@@ -1,20 +1,19 @@
 using Azure.Identity;
 using FluentValidation;
-using MemQuran.Api.Messaging;
 using MemQuran.Api.Models;
-using MemQuran.Api.Settings;
-using MemQuran.Api.Validators;
 using MemQuran.Api.Workers;
+using MemQuran.Core.Models;
+using MemQuran.Core.Settings;
+using MemQuran.Infrastructure.Validators;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using OpenTelemetry.Exporter;
-using OpenTelemetry.Logs;
-using OpenTelemetry.Metrics;
-using OpenTelemetry.Resources;
-using OpenTelemetry.Trace;
 using Scalar.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+////////////////////////////
+// Aspire ServiceDefaults project
+
+builder.AddServiceDefaults();
 
 ////////////////////////////
 // Configure Services
@@ -59,88 +58,8 @@ var awsTopicSettings = builder.Configuration.GetSection(AwsTopicSettings.Section
 if (awsTopicSettings == null) throw new InvalidOperationException($"{nameof(AwsTopicSettings)} is not configured. Please check your appsettings.json or environment variables.");
 new AwsTopicSettingsValidator().ValidateAndThrow(awsTopicSettings);
 
-var redisSettings = builder.Configuration.GetSection(RedisSettings.SectionName).Get<RedisSettings>();
-if (redisSettings == null) throw new InvalidOperationException($"{nameof(RedisSettings)} is not configured. Please check your appsettings.json or environment variables.");
-new RedisSettingsValidator().ValidateAndThrow(redisSettings);
-
-var seqConfigurationSection = builder.Configuration.GetSection(SeqSettings.SectionName);
-var seqSettings = seqConfigurationSection.Get<SeqSettings>();
-if (seqSettings == null) throw new InvalidOperationException($"{nameof(SeqSettings)} is not configured. Please check your appsettings.json or environment variables.");
-
-var jaegerSettings = builder.Configuration.GetSection(JaegerSettings.SectionName).Get<JaegerSettings>();
-if (jaegerSettings == null) throw new InvalidOperationException($"{nameof(JaegerSettings)} is not configured. Please check your appsettings.json or environment variables.");
-
-var betterStackSettings = builder.Configuration.GetSection(BetterStackSettings.SectionName).Get<BetterStackSettings>();
-if (betterStackSettings == null) throw new InvalidOperationException($"{nameof(BetterStackSettings)} is not configured. Please check your appsettings.json or environment variables.");
-
-// Logging
-builder.Logging
-    .AddOpenTelemetry(options => options.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(builder.Environment.ApplicationName)))
-    .AddSimpleConsole()
-    .AddSeq(seqConfigurationSection);
-
-builder.Services.AddOpenTelemetry()
-    .ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName))
-    .WithTracing(tracing => tracing
-            // .AddHttpClientInstrumentation() //OpenTelemetry.Instrumentation.Http
-            .AddAspNetCoreInstrumentation()
-            .AddOtlpExporter(opt =>
-            {
-                // Jaeger
-                // opt.Endpoint = new Uri(jaegerSettings.Endpoint);
-
-                // Seq
-                // opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
-                // opt.Protocol = OtlpExportProtocol.HttpProtobuf;
-                // if (!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
-
-                //BetterStack
-                opt.Endpoint = new Uri($"{betterStackSettings.IngestBaseUrl}/v1/traces");
-                opt.Protocol = OtlpExportProtocol.HttpProtobuf;
-                opt.Headers = $"Authorization=Bearer {betterStackSettings.BearerToken}";
-            })
-            .AddSource(nameof(EvictCacheItemMessageV1)) // Should be the name of any activities used in code
-            .AddSource(nameof(EvictCacheAllMessageV1)) // Should be the name of any activities used in code
-        // .AddConsoleExporter()
-    )
-    .WithMetrics(metrics => metrics
-            // .AddHttpClientInstrumentation() //OpenTelemetry.Instrumentation.Http
-            .AddAspNetCoreInstrumentation()
-            .AddOtlpExporter(opt =>
-            {
-                // Jaeger
-                // opt.Endpoint = new Uri(jaegerSettings.Endpoint);
-
-                // Seq
-                // opt.Endpoint = new Uri(seqSettings.OpenTelemetryTraceIngestUrl);
-                // opt.Protocol = OtlpExportProtocol.HttpProtobuf;
-                // if(!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
-
-                //BetterStack
-                opt.Endpoint = new Uri($"{betterStackSettings.IngestBaseUrl}/v1/metrics");
-                opt.Protocol = OtlpExportProtocol.HttpProtobuf;
-                opt.Headers = $"Authorization=Bearer {betterStackSettings.BearerToken}";
-            })
-        // .AddConsoleExporter()
-    )
-    .WithLogging(logging =>
-    {
-        logging.AddOtlpExporter(opt =>
-        {
-            // Jaeger
-            // opt.Endpoint = new Uri(jaegerSettings.Endpoint);
-
-            // Seq
-            // opt.Endpoint = new Uri(seqSettings.OpenTelemetryLogIngestUrl);
-            // opt.Protocol = OtlpExportProtocol.HttpProtobuf;
-            // if (!string.IsNullOrWhiteSpace(seqSettings.ApiKey)) opt.Headers = $"X-Seq-ApiKey={seqSettings.ApiKey}";
-
-            //BetterStack
-            opt.Endpoint = new Uri($"{betterStackSettings.IngestBaseUrl}/v1/logs");
-            opt.Protocol = OtlpExportProtocol.HttpProtobuf;
-            opt.Headers = $"Authorization=Bearer {betterStackSettings.BearerToken}";
-        });
-    });
+var redisConnectionString = builder.Configuration.GetConnectionString("RedisCache");
+if (string.IsNullOrWhiteSpace(redisConnectionString)) throw new InvalidOperationException("ConnectionStrings:RedisCache is not configured. Please check your appsettings.json or environment variables.");
 
 // Exception Handling
 builder.Services.AddExceptionHandling(options => { options.Environment = builder.Environment; });
@@ -179,7 +98,7 @@ builder.Services.AddHealthCheckServices(options =>
 {
     options.HealthCheckSettings = healthCheckSettings;
     options.PingSettings = pingSettings;
-    options.RedisSettings = redisSettings;
+    options.RedisConnectionString = redisConnectionString;
 });
 
 // Open API
@@ -188,8 +107,8 @@ builder.Services.AddOpenApi();
 // This API's Services
 builder.Services.AddServices(options =>
 {
-    options.ClientSettings = clientsSettings;
-    options.BetterStackSettings = betterStackSettings;
+    options.JsDelivrServiceBaseUrl = clientsSettings.JsDelivrService.BaseUrl;
+    options.JsDelivrServiceDefaultTimeout = clientsSettings.JsDelivrService.DefaultTimeout;
 });
 
 // Caching
@@ -197,7 +116,7 @@ builder.Services.AddCachingServices(options =>
 {
     options.CacheType = contentDeliverySettings.CachingSettings.CacheType;
     options.CacheDurationTimeSpan = contentDeliverySettings.CachingSettings.CacheDurationTimeSpan;
-    options.RedisConnectionString = redisSettings.ConnectionString;
+    options.RedisConnectionString = redisConnectionString;
 });
 
 // Workers

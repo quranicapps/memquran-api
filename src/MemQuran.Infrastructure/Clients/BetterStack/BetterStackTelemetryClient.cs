@@ -1,5 +1,6 @@
 using System.Text.Json;
 using MemQuran.Core.Contracts;
+using Microsoft.Extensions.Logging;
 
 namespace MemQuran.Api.Clients.BetterStack;
 

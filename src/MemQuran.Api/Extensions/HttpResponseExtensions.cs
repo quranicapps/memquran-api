@@ -7,7 +7,7 @@ using MemQuran.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
-namespace MemQuran.Api.Exceptions;
+namespace MemQuran.Api.Extensions;
 
 public static class HttpResponseExtensions
 {
