@@ -1,6 +1,5 @@
 using Azure.Identity;
 using FluentValidation;
-using MemQuran.Api.Models;
 using MemQuran.Api.Workers;
 using MemQuran.Core.Models;
 using MemQuran.Core.Settings;
@@ -14,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Aspire ServiceDefaults project
 
 builder.AddServiceDefaults();
+var logger = LoggerFactory.Create(loggingBuilder => loggingBuilder.AddSimpleConsole().AddFilter(level => level >= LogLevel.Information)).CreateLogger("Program");
 
 ////////////////////////////
 // Configure Services
@@ -59,7 +59,7 @@ if (awsTopicSettings == null) throw new InvalidOperationException($"{nameof(AwsT
 new AwsTopicSettingsValidator().ValidateAndThrow(awsTopicSettings);
 
 var redisConnectionString = builder.Configuration.GetConnectionString("RedisCache");
-if (string.IsNullOrWhiteSpace(redisConnectionString)) throw new InvalidOperationException("ConnectionStrings:RedisCache is not configured. Please check your appsettings.json or environment variables.");
+if (string.IsNullOrWhiteSpace(redisConnectionString)) logger.LogWarning("ConnectionStrings:RedisCache is not configured, will NOT use Redis. Please check your appsettings.json or environment variables");
 
 // Exception Handling
 builder.Services.AddExceptionHandling(options => { options.Environment = builder.Environment; });

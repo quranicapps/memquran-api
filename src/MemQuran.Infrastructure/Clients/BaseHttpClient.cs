@@ -3,7 +3,7 @@ using System.Text.Json;
 using MemQuran.Core.Exceptions;
 using Microsoft.Extensions.Logging;
 
-namespace MemQuran.Api.Clients;
+namespace MemQuran.Infrastructure.Clients;
 
 public abstract class BaseHttpClient(HttpClient httpClient, ILogger<BaseHttpClient> logger)
 {

@@ -1,4 +1,4 @@
-﻿namespace MemQuran.Api.Clients.BetterStack;
+﻿namespace MemQuran.Infrastructure.Clients.BetterStack;
 
 public class BetterStackDelegatingHandler : DelegatingHandler
 {

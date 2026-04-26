@@ -1,6 +1,5 @@
 ﻿using System.Net.Http.Headers;
 using System.Threading.Channels;
-using MemQuran.Api.Clients.BetterStack;
 using MemQuran.Api.Clients.JsDelivr;
 using MemQuran.Api.Clients.Local;
 using MemQuran.Api.Services;

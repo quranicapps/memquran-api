@@ -16,7 +16,7 @@ public static class CachingExtensions
     {
         public CacheType CacheType { get; set; }
         public TimeSpan CacheDurationTimeSpan { get; set; }
-        public string RedisConnectionString { get; set; } = null!;
+        public string? RedisConnectionString { get; set; } = null!;
     }
 
     // ReSharper disable once UnusedMethodReturnValue.Global
@@ -45,7 +45,7 @@ public static class CachingExtensions
         fusionCacheEntryOptions.FactorySoftTimeout = TimeSpan.FromMilliseconds(100);
         fusionCacheEntryOptions.FactoryHardTimeout = TimeSpan.FromMilliseconds(1500);
 
-        if (options.CacheType is CacheType.Hybrid or CacheType.Distributed)
+        if (!string.IsNullOrWhiteSpace(options.RedisConnectionString) && options.CacheType is CacheType.Hybrid or CacheType.Distributed)
         {
             fusionCacheOptions.DistributedCacheCircuitBreakerDuration = TimeSpan.FromSeconds(2);
             fusionCacheOptions.DistributedCacheSyntheticTimeoutsLogLevel = LogLevel.Debug;
@@ -63,7 +63,7 @@ public static class CachingExtensions
                 .WithBackplane(new RedisBackplane(new RedisBackplaneOptions { Configuration = options.RedisConnectionString }));
         }
 
-        if (options.CacheType == CacheType.Distributed)
+        if (!string.IsNullOrWhiteSpace(options.RedisConnectionString) && options.CacheType == CacheType.Distributed)
         {
             fusionCacheEntryOptions.SkipMemoryCacheRead = true;
             fusionCacheEntryOptions.SkipMemoryCacheWrite = true;

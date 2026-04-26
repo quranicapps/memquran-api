@@ -1,6 +1,5 @@
 ﻿using HealthChecks.UI.Core;
 using MemQuran.Api.HealthChecks;
-using MemQuran.Api.Models;
 using MemQuran.Core.Models;
 using MemQuran.Core.Settings;
 using static Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult;
@@ -12,7 +11,7 @@ public class HealthCheckOptions
 {
     public HealthCheckSettings HealthCheckSettings { get; set; } = null!;
     public PingSettings PingSettings { get; set; } = null!;
-    public string RedisConnectionString { get; set; } = null!;
+    public string? RedisConnectionString { get; set; }
 }
 
 public static class HealthCheckExtensions
@@ -36,7 +35,7 @@ public static class HealthCheckExtensions
             tags.Add(nameof(HealthCheckTag.Ping));
             foreach (var endpoint in options.PingSettings.ExternalEndpoints)
             {
-                healthChecksBuilder.AddUrlGroup(new Uri(endpoint.Url), name: endpoint.Name, timeout: options.PingSettings.Timeout, tags: [nameof(HealthCheckTag.Ping)]);   
+                healthChecksBuilder.AddUrlGroup(new Uri(endpoint.Url), name: endpoint.Name, timeout: options.PingSettings.Timeout, tags: [nameof(HealthCheckTag.Ping)]);
             }
         }
 
@@ -52,12 +51,12 @@ public static class HealthCheckExtensions
             healthChecksBuilder.AddCheck<JsDelivrHealthCheck>("Call JsDelivr", timeout: options.HealthCheckSettings.JsDelivr.TimeOut, tags: [nameof(HealthCheckTag.Cdn)]);
         }
 
-        if (options.HealthCheckSettings.Redis.Enabled)
+        if (options.HealthCheckSettings.Redis.Enabled && !string.IsNullOrEmpty(options.RedisConnectionString))
         {
             tags.Add(nameof(HealthCheckTag.DistributedCache));
             healthChecksBuilder.AddRedis(options.RedisConnectionString, "Call Redis", timeout: options.HealthCheckSettings.Redis.TimeOut, tags: [nameof(HealthCheckTag.DistributedCache)]);
         }
-        
+
         if (options.HealthCheckSettings.BetterStack.Enabled)
         {
             tags.Add(nameof(HealthCheckTag.Telemetry));
@@ -72,16 +71,8 @@ public static class HealthCheckExtensions
             setup.MaximumHistoryEntriesPerEndpoint(100);
             setup.SetApiMaxActiveRequests(1);
 
-            var urls = Environment.GetEnvironmentVariable("ASPNETCORE_URLS")?.Split(';', StringSplitOptions.RemoveEmptyEntries) ?? [];
-            tags.Distinct().ToList().ForEach(tag =>
-            {
-                foreach (var url in urls.Where(x => x.StartsWith("http", StringComparison.OrdinalIgnoreCase)))
-                {
-                    var urlScheme = new Uri(url).Scheme;
-                    if(urlScheme != Uri.UriSchemeHttps) continue;
-                    setup.AddHealthCheckEndpoint($"{tag} ({urlScheme})", $"{url}/api/health/{tag}");
-                }
-            });
+            var httpPorts = Environment.GetEnvironmentVariable("ASPNETCORE_HTTP_PORTS")?.Split(';', StringSplitOptions.RemoveEmptyEntries) ?? [];
+            if (httpPorts.Length > 0) tags.Distinct().ToList().ForEach(tag => { setup.AddHealthCheckEndpoint($"{tag} (HTTP)", $"http://localhost:{httpPorts.First()}/api/health/{tag}"); });
 
             setup.AddWebhookNotification("Webhook (https://memquran-api.requestcatcher.com)", uri: "https://memquran.requestcatcher.com/anything",
                 payload: "{ \"message\": \"Webhook report for [[LIVENESS]] Health Check: [[FAILURE]] - Description: [[DESCRIPTIONS]]\"}",

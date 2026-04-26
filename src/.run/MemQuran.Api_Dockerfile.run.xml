@@ -20,8 +20,12 @@
               <option name="value" value="/https/aspnetapp.pfx" />
             </DockerEnvVarImpl>
             <DockerEnvVarImpl>
-              <option name="name" value="ASPNETCORE_URLS" />
-              <option name="value" value="https://*:3123;http://*:3122" />
+              <option name="name" value="ASPNETCORE_HTTP_PORTS" />
+              <option name="value" value="3122" />
+            </DockerEnvVarImpl>
+            <DockerEnvVarImpl>
+              <option name="name" value="ASPNETCORE_HTTPS_PORTS" />
+              <option name="value" value="3123" />
             </DockerEnvVarImpl>
           </list>
         </option>
@@ -46,7 +50,7 @@
         </option>
       </settings>
     </deployment>
-    <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
+    <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="false" isSslEnabled="false" />
     <method v="2" />
   </configuration>
 </component>

@@ -1,7 +1,8 @@
-using MemQuran.Api.Clients.BetterStack;
+using MemQuran.Api.ServiceDefaults.Common;
 using MemQuran.Core.Contracts;
 using MemQuran.Core.Messaging;
 using MemQuran.Core.Settings;
+using MemQuran.Infrastructure.Clients.BetterStack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Http.Resilience;
@@ -39,7 +40,9 @@ public static class Extensions
             .AddOpenTelemetry(options => options.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(builder.Environment.ApplicationName)))
             .AddSimpleConsole()
             .AddSeq(seqConfigurationSection);
-
+        
+        var logger = LoggerFactory.Create(loggingBuilder => loggingBuilder.AddSimpleConsole().AddFilter(level => level >= LogLevel.Information)).CreateLogger("Program");
+        
         builder.Services.AddOpenTelemetry()
             .ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName))
             .WithTracing(tracing => tracing
@@ -54,7 +57,7 @@ public static class Extensions
                     .AddOtlpExporter(opt =>
                     {
                         // Aspire
-                        opt.Endpoint = new Uri(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"] ?? throw new InvalidOperationException("OTEL_EXPORTER_OTLP_ENDPOINT is not configured. Please check your appsettings.json or environment variables or Aspire startup."));
+                        opt.Endpoint = new Uri(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"] ?? Constants.DefaultOtelExporterOtlpEndpoint);
 
                         // Jaeger
                         // opt.Endpoint = new Uri(jaegerSettings.Endpoint);
@@ -82,7 +85,7 @@ public static class Extensions
                     .AddOtlpExporter(opt =>
                     {
                         // Aspire
-                        opt.Endpoint = new Uri(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"] ?? throw new InvalidOperationException("OTEL_EXPORTER_OTLP_ENDPOINT is not configured. Please check your appsettings.json or environment variables or Aspire startup."));
+                        opt.Endpoint = new Uri(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"] ?? Constants.DefaultOtelExporterOtlpEndpoint);
 
                         // Jaeger
                         // opt.Endpoint = new Uri(jaegerSettings.Endpoint);
@@ -104,7 +107,7 @@ public static class Extensions
                 logging.AddOtlpExporter(opt =>
                 {
                     // Aspire
-                    opt.Endpoint = new Uri(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"] ?? throw new InvalidOperationException("OTEL_EXPORTER_OTLP_ENDPOINT is not configured. Please check your appsettings.json or environment variables or Aspire startup."));
+                    opt.Endpoint = new Uri(builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"] ?? Constants.DefaultOtelExporterOtlpEndpoint);
 
                     // Jaeger
                     // opt.Endpoint = new Uri(jaegerSettings.Endpoint);
