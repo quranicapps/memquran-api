@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/Core/">
+    <Project Path="src/MemQuran.Core/MemQuran.Core.csproj" />
+    <Project Path="src/MemQuran.Infrastructure/MemQuran.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Presentation/">
+    <Project Path="src/MemQuran.Api.AppHost/MemQuran.Api.AppHost.csproj" />
+    <Project Path="src/MemQuran.Api.ServiceDefaults/MemQuran.Api.ServiceDefaults.csproj" />
+    <Project Path="src/MemQuran.Api/MemQuran.Api.csproj" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path=".gitignore" />
+    <File Path="bicepconfig.json" />
+    <File Path="README.md" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="src/MemQuran.Api.Integration.Tests/MemQuran.Api.Integration.Tests.csproj" />
+    <Project Path="src/MemQuran.Api.Unit.Tests/MemQuran.Api.Unit.Tests.csproj" />
+  </Folder>
+  <Folder Name="/Workers/">
+    <Project Path="src/Workers/MemQuran.Api.Caching.Worker/MemQuran.Api.Caching.Worker.csproj" />
+  </Folder>
+</Solution>

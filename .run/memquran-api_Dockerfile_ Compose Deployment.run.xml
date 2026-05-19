@@ -1,4 +1,4 @@
-<component name="ProjectRunConfigurationManager">
+﻿<component name="ProjectRunConfigurationManager">
   <configuration default="false" name="memquran-api/Dockerfile: Compose Deployment" type="docker-deploy" factoryName="dockerfile" server-name="localhost">
     <deployment type="dockerfile">
       <settings>
@@ -19,7 +19,7 @@
           </list>
         </option>
         <option name="showCommandPreview" value="true" />
-        <option name="sourceFilePath" value="memquran-api/Dockerfile" />
+        <option name="sourceFilePath" value="src/MemQuran.Api/Dockerfile" />
       </settings>
     </deployment>
     <EXTENSION ID="com.jetbrains.rider.docker.debug" isFastModeEnabled="true" isSslEnabled="false" />
