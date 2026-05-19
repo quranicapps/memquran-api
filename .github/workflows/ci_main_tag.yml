@@ -21,13 +21,13 @@ jobs:
           dotnet-version: 9.0.x
 
       - name: Restore dependencies
-        run: dotnet restore ./src
+        run: dotnet restore
 
       - name: Build
-        run: dotnet build ./src --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test --filter Category!=Integration ./src --configuration Release --no-build --verbosity normal
+        run: dotnet test --filter Category!=Integration --configuration Release --no-build --verbosity normal
 
       - name: GetVersion
         id: version
