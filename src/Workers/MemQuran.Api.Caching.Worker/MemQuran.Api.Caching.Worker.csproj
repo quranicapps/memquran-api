@@ -6,6 +6,7 @@
         <OutputType>Exe</OutputType>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <UserSecretsId>MemQuran.Api.Caching.Worker</UserSecretsId>
     </PropertyGroup>
 
     <ItemGroup>
