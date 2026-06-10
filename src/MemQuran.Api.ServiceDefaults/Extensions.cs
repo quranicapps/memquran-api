@@ -40,9 +40,9 @@ public static class Extensions
             .AddOpenTelemetry(options => options.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService(builder.Environment.ApplicationName)))
             .AddSimpleConsole()
             .AddSeq(seqConfigurationSection);
-        
+
         var logger = LoggerFactory.Create(loggingBuilder => loggingBuilder.AddSimpleConsole().AddFilter(level => level >= LogLevel.Information)).CreateLogger("Program");
-        
+
         builder.Services.AddOpenTelemetry()
             .ConfigureResource(resource => resource.AddService(builder.Environment.ApplicationName))
             .WithTracing(tracing => tracing
@@ -137,7 +137,8 @@ public static class Extensions
                 httpClient.Timeout = betterStackSettings.DefaultTimeout;
                 httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {betterStackSettings.BearerToken}");
             })
-            .AddHttpMessageHandler(() => new BetterStackDelegatingHandler());
+            .AddHttpMessageHandler(() => new BetterStackDelegatingHandler())
+            .AddStandardResilienceHandler();
 
         // Service Discovery
         builder.Services.AddServiceDiscovery();

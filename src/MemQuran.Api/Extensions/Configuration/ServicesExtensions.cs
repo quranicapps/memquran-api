@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using System.Threading.Channels;
+﻿using System.Threading.Channels;
 using MemQuran.Api.Clients.JsDelivr;
 using MemQuran.Api.Clients.Local;
 using MemQuran.Api.Services;
@@ -35,7 +34,8 @@ public static class ServicesExtensions
                 httpClient.BaseAddress = new Uri(options.JsDelivrServiceBaseUrl);
                 httpClient.Timeout = options.JsDelivrServiceDefaultTimeout;
             })
-            .AddHttpMessageHandler(() => new JsDelivrDelegatingHandler());
+            .AddHttpMessageHandler(() => new JsDelivrDelegatingHandler())
+            .AddStandardResilienceHandler();
         services.AddSingleton<ICdnClientFactory, CdnClientFactory>();
 
         // Add .NET Channels
